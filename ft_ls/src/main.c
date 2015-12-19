@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 16:03:10 by hcherchi          #+#    #+#             */
-/*   Updated: 2015/12/19 14:43:13 by hcherchi         ###   ########.fr       */
+/*   Updated: 2015/12/19 18:27:15 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_ls_dirs(t_args *args)
 		choose_sort(&(args->dirs), args->opt);
 		while (args->dirs)
 		{
-			if (!(args->onlyonedir && args->nofile))
+			if (!(args->onlyonedir && args->nofile) || args->error)
 			{
 				ft_putstr(args->dirs->data->path);
 				ft_putendl(":");

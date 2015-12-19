@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/13 10:17:37 by hcherchi          #+#    #+#             */
-/*   Updated: 2015/12/19 14:56:32 by hcherchi         ###   ########.fr       */
+/*   Updated: 2015/12/19 19:59:19 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	recursive(char *path, t_option *opt)
 
 	l_files = init_files(path, opt);
 	cur = l_files;
-	if (opt->l)
+	if (opt->l && l_files)
 		total_bits(l_files);
 	print_files(l_files, opt);
 	if (opt->rmaj)

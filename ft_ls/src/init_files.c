@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/18 17:49:29 by hcherchi          #+#    #+#             */
-/*   Updated: 2015/12/19 14:56:08 by hcherchi         ###   ########.fr       */
+/*   Updated: 2015/12/19 20:00:02 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,14 @@ t_file	*fill_file(struct stat *stats, t_file *new)
 	new->data->nblink = ft_itoa(stats->st_nlink);
 	new->data->nboct = ft_itoa(stats->st_size);
 	new->data->nb_blocks = stats->st_blocks;
-	new->data->gid = ft_strdup(getgrgid(stats->st_gid)->gr_name);
-	new->data->uid = ft_strdup(getpwuid(stats->st_uid)->pw_name);
+	if (getgrgid(stats->st_gid) == NULL)
+		new->data->gid = ft_strdup("Pute");
+	else
+		new->data->gid = ft_strdup(getgrgid(stats->st_gid)->gr_name);
+	if (getpwuid(stats->st_uid) == NULL)
+		new->data->uid = ft_strdup("Pute bis");
+	else
+		new->data->uid = ft_strdup(getpwuid(stats->st_uid)->pw_name);
 	new->data->time = stats->st_mtime;
 	if (new->data->mod[0] == 'l')
 		new->data->namelk = getlink(new);
@@ -82,7 +88,10 @@ t_file	*init_files(char *path, t_option *opt)
 	l_files = NULL;
 	opening = opendir(path);
 	if (opening == NULL)
+	{
+		ft_error3(path);
 		return (NULL);
+	}
 	while ((info = readdir(opening)) != NULL)
 	{
 		if (opt->a || (!opt->a && info->d_name[0] != '.'))

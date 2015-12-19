@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/18 17:48:52 by hcherchi          #+#    #+#             */
-/*   Updated: 2015/12/19 14:58:20 by hcherchi         ###   ########.fr       */
+/*   Updated: 2015/12/19 20:00:37 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,13 @@ char	*getlink(t_file *file)
 	i = 0;
 	buf_size = 1;
 	buf = (char *)malloc(sizeof(*buf) * buf_size + 1);
-	while ((i = readlink(file->data->name, buf, buf_size)) == buf_size)
+	while ((i = readlink(file->data->path, buf, buf_size)) == buf_size)
 	{
 		buf_size += 1;
 		free(buf);
 		buf = (char *)malloc(sizeof(*buf) * buf_size + 1);
 	}
 	buf[i] = '\0';
+	ft_putstr(buf);
 	return (buf);
 }

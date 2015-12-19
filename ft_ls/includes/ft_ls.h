@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 16:03:56 by hcherchi          #+#    #+#             */
-/*   Updated: 2015/12/19 14:55:54 by hcherchi         ###   ########.fr       */
+/*   Updated: 2015/12/19 18:33:44 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <grp.h>
 # include <time.h>
 # include <string.h>
+# include <errno.h>
 
 typedef struct		s_data
 {
@@ -60,6 +61,7 @@ typedef struct		s_args
 	int				error;
 }					t_args;
 
+void				ft_error3(char *path);
 void				check_file(char *av, t_args *args);
 void				init_args(t_args *args);
 void				print_files(t_file *l_files, t_option *opt);
