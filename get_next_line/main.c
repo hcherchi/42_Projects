@@ -6,16 +6,17 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/06 18:58:45 by hcherchi          #+#    #+#             */
-/*   Updated: 2015/12/14 19:41:06 by hcherchi         ###   ########.fr       */
+/*   Updated: 2015/12/19 15:29:21 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <unistd.h>
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	int fd;
-	char *line;
+	int		fd;
+	char	*line;
 
 	line = NULL;
 	if (argc == 2)
