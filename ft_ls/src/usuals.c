@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   usuals.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgantelm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/14 12:10:25 by bgantelm          #+#    #+#             */
-/*   Updated: 2015/12/14 12:13:33 by bgantelm         ###   ########.fr       */
+/*   Created: 2015/12/18 17:48:52 by hcherchi          #+#    #+#             */
+/*   Updated: 2015/12/19 14:58:20 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-void	ft_putstrsp(char *str)
-{
-	ft_putstr(str);
-	ft_putstr("  ");
-}
 
 void	delone(t_file **l_files)
 {
@@ -31,10 +25,38 @@ void	delone(t_file **l_files)
 	free(todel->data->uid);
 	free(todel->data->nboct);
 	free(todel->data->gid);
-	free(todel->data->time);
 	if (todel->data->namelk)
 		free(todel->data->namelk);
+	free(todel->data);
 	free(todel);
+}
+
+char	*add_path(char *p, char *n)
+{
+	char	*new;
+	int		i;
+
+	i = 0;
+	new = (char *)malloc(sizeof(*new) * (ft_strlen(p) + ft_strlen(n) + 2));
+	if (new == NULL)
+		return (NULL);
+	while (*p)
+	{
+		new[i] = *p++;
+		i++;
+	}
+	if (new[i - 1] != '/')
+	{
+		new[i] = '/';
+		i++;
+	}
+	while (*n)
+	{
+		new[i] = *n++;
+		i++;
+	}
+	new[i] = '\0';
+	return (new);
 }
 
 void	l_filesdel(t_file *l_files)
@@ -57,4 +79,23 @@ int		instr(char *str, char c)
 		i++;
 	}
 	return (0);
+}
+
+char	*getlink(t_file *file)
+{
+	ssize_t	buf_size;
+	char	*buf;
+	int		i;
+
+	i = 0;
+	buf_size = 1;
+	buf = (char *)malloc(sizeof(*buf) * buf_size + 1);
+	while ((i = readlink(file->data->name, buf, buf_size)) == buf_size)
+	{
+		buf_size += 1;
+		free(buf);
+		buf = (char *)malloc(sizeof(*buf) * buf_size + 1);
+	}
+	buf[i] = '\0';
+	return (buf);
 }

@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/13 10:17:37 by hcherchi          #+#    #+#             */
-/*   Updated: 2015/12/14 12:16:21 by bgantelm         ###   ########.fr       */
+/*   Updated: 2015/12/19 14:56:32 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	extend_print(t_file *l_files)
 	t_file *cur;
 
 	cur = l_files;
-	total_bits(cur);
 	while (cur)
 	{
 		ft_putstrsp(cur->data->mod);
@@ -53,8 +52,8 @@ void	extend_print(t_file *l_files)
 		ft_putstrsp(cur->data->uid);
 		ft_putstrsp(cur->data->gid);
 		ft_putstrsp(cur->data->nboct);
-		ft_putstrsp(cur->data->time);
-		ft_putstrsp(cur->data->name);
+		ft_putstrsp(ft_strsub(ctime(&(cur->data->time)), 4, 12));
+		ft_putstr(cur->data->name);
 		if (cur->data->mod[0] == 'l')
 		{
 			ft_putstr(" -> ");
@@ -65,33 +64,36 @@ void	extend_print(t_file *l_files)
 	}
 }
 
-void	print_files(t_file *l_files, char *options)
+void	print_files(t_file *l_files, t_option *opt)
 {
-	if (instr(options, 'l') == 1)
+	if (opt->l)
 		extend_print(l_files);
 	else
 		basic_print(l_files);
 }
 
-void	ft_ls(char *path, char *options)
+void	recursive(char *path, t_option *opt)
 {
-	t_file *l_files;
 	t_file *cur;
+	t_file *l_files;
 
-	l_files = init_files(path, options);
+	l_files = init_files(path, opt);
 	cur = l_files;
-	print_files(l_files, options);
-	if (instr(options, 'R') == 1)
+	if (opt->l)
+		total_bits(l_files);
+	print_files(l_files, opt);
+	if (opt->rmaj)
 	{
 		while (cur)
 		{
-			if (cur->data->mod[0] == 'd' && cur->data->mod[1] == 'r' && ft_strequ(cur->data->name, "..") == 0 && ft_strequ(cur->data->name, ".") == 0)
+			if (cur->data->mod[0] == 'd'
+				&& ft_strequ(cur->data->name, "..") == 0
+				&& ft_strequ(cur->data->name, ".") == 0)
 			{
 				ft_putchar('\n');
 				ft_putstr(cur->data->path);
-				ft_putchar(':');
-				ft_putchar('\n');
-				ft_ls(cur->data->path, options);
+				ft_putstr(":\n");
+				recursive(cur->data->path, opt);
 			}
 			cur = cur->next;
 		}

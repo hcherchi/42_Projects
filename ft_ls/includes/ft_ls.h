@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 16:03:56 by hcherchi          #+#    #+#             */
-/*   Updated: 2015/12/15 12:15:13 by hcherchi         ###   ########.fr       */
+/*   Updated: 2015/12/19 14:55:54 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <grp.h>
 # include <time.h>
 # include <string.h>
-# include <bsd/string.h>
 
 typedef struct		s_data
 {
@@ -32,30 +31,60 @@ typedef struct		s_data
 	char			*nboct;
 	long long		nb_blocks;
 	char			*name;
-	char			*time;
+	time_t			time;
 	char			*namelk;
-}	t_data;
+}					t_data;
 
 typedef struct		s_file
-{	
+{
 	t_data			*data;
 	struct s_file	*next;
-	struct s_file	*prev;
 }					t_file;
-void				ft_error(int i, char c);
-void				print_files(t_file *t_files, char *option);
-void				ft_ls(char *path, char *options);
+
+typedef struct		s_option
+{
+	int	rmaj;
+	int	l;
+	int a;
+	int	r;
+	int	t;
+}					t_option;
+
+typedef struct		s_args
+{
+	t_option		*opt;
+	t_file			*files;
+	t_file			*dirs;
+	int				onlyonedir;
+	int				nofile;
+	int				error;
+}					t_args;
+
+void				check_file(char *av, t_args *args);
+void				init_args(t_args *args);
+void				print_files(t_file *l_files, t_option *opt);
+void				check_options(char *av, t_args *args);
+void				modif_options(char *av, t_args *args);
+void				ft_error(char c);
+void				ft_error2(char *av);
+void				recursive(char *path, t_option *opt);
 void				extend_print(t_file *l_files);
 void				basic_print(t_file *l_files);
 char				*getlink(t_file *file);
-t_file				*init_files(char *path, char *options);
+t_file				*init_files(char *path, t_option *opt);
 void				add_file(t_file **alist, t_file *new);
-t_file				*new_file(struct dirent *info, char *path);
+t_file				*new_file(char *path);
+t_file				*fill_file(struct stat *stats, t_file *new);
 char				*add_path(char *path, char *name);
 void				l_filesdel(t_file *l_files);
 void				delone(t_file **l_files);
 void				ft_putstrsp(char *str);
 int					instr(char *str, char c);
 void				swap_files(t_file *f1, t_file *f2);
-t_file 				*sort_ascii(t_file * l_files);
+void				sort_ascii(t_file *l_files);
+void				reverse(t_file **l_files);
+void				sort_time(t_file *l_files);
+void				choose_sort(t_file **l_files, t_option *opt);
+void				ft_ls_files(t_args *args);
+void				ft_ls_dirs(t_args *args);
 #endif

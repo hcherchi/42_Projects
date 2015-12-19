@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_putstrsp.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/18 17:49:48 by hcherchi          #+#    #+#             */
-/*   Updated: 2015/12/19 14:44:57 by hcherchi         ###   ########.fr       */
+/*   Created: 2015/12/19 14:26:12 by hcherchi          #+#    #+#             */
+/*   Updated: 2015/12/19 14:26:38 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "libft.h"
 
-void	ft_error(char c)
+void	ft_putstrsp(char *str)
 {
-	ft_putstr("ls: illegal option -- ");
-	ft_putchar(c);
-	ft_putstr("\nusage: ls [-Ralrt] [file ...]\n");
-	exit(1);
-}
-
-void	ft_error2(char *av)
-{
-	ft_putstr("ls: ");
-	ft_putstr(av);
-	ft_putstr(": No such file or directory\n");
+	ft_putstr(str);
+	ft_putstr("  ");
 }

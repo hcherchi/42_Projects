@@ -6,63 +6,67 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 16:03:10 by hcherchi          #+#    #+#             */
-/*   Updated: 2015/12/14 18:27:36 by bgantelm         ###   ########.fr       */
+/*   Updated: 2015/12/19 14:43:13 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int main(int ac, char **av)
+void	ft_ls_files(t_args *args)
 {
-	int	i;
-	int	j;
-	char	*str;
-	int	count;
-	int	v;
-
-	v = 0;
-	count= 0;
-	i = 0;
-	j = 1;
-	while (av[j] && j < ac)
+	if (!args->files && !args->dirs && args->error == 0)
+		recursive(".", args->opt);
+	if (args->files)
 	{
-		count = count + ft_strlen(av[j]);
-		j++;
+		args->nofile = 0;
+		choose_sort(&(args->files), args->opt);
+		print_files(args->files, args->opt);
+		if (args->dirs)
+			ft_putchar('\n');
 	}
-	j = 1;
-	str = malloc(sizeof(char *) * count);
-	if (ac == 1)
-		ft_ls(".", "");
-	else if (ac >= 2)
-	{	
-		while (j < ac)
+}
+
+void	ft_ls_dirs(t_args *args)
+{
+	if (args->dirs)
+	{
+		if (args->dirs->next == NULL)
+			args->onlyonedir = 1;
+		choose_sort(&(args->dirs), args->opt);
+		while (args->dirs)
 		{
-			i = 0;
-			while (av[j][i] != '\0')
+			if (!(args->onlyonedir && args->nofile))
 			{
-				if (av[j][i] == '-' && i == 0)
-					i++;
-				else if (av[j][i] != '-' && i == 0)
-					while (av[j][i])
-					{
-						ft_error(1, av[j][i]);
-						i++;
-						exit(1);
-					}
-				if (av[j][i] == 'l' || av[j][i] == 'R' || av[j][i] == 'a' 
-						 || av[j][i] == 'r' || av[j][i] == 't')
-					str[v] = av[j][i];
-				else
-					ft_error(0, av[j][i]);
-				i++;
-				v++;
+				ft_putstr(args->dirs->data->path);
+				ft_putendl(":");
 			}
-			j++;
+			recursive(args->dirs->data->path, args->opt);
+			args->dirs = args->dirs->next;
+			if (args->dirs != NULL)
+				ft_putchar('\n');
 		}
-		str[v] = '\0';
-		ft_union(str);
-		ft_ls(".", str);
-		free(str);
 	}
+}
+
+int		main(int ac, char **av)
+{
+	int		i;
+	t_args	*args;
+
+	args = malloc(sizeof(*args));
+	i = 1;
+	init_args(args);
+	while (i < ac && av[i][0] == '-')
+	{
+		check_options(av[i], args);
+		i++;
+	}
+	while (i < ac)
+	{
+		check_file(av[i], args);
+		i++;
+	}
+	ft_ls_files(args);
+	ft_ls_dirs(args);
 	return (0);
 }
