@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_lenline.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgantelm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/25 14:40:04 by bgantelm          #+#    #+#             */
-/*   Updated: 2015/11/30 11:44:03 by bgantelm         ###   ########.fr       */
+/*   Created: 2015/12/21 18:02:06 by hcherchi          #+#    #+#             */
+/*   Updated: 2015/12/21 18:05:29 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char *))
+int		ft_lenline(char *str)
 {
-	unsigned int	i;
+	int i;
 
 	i = 0;
-	if (s != NULL && f != NULL)
+	while (str[i] != '\n')
 	{
-		while (*s)
-		{
-			(*f)(i, s);
-			i++;
-			s++;
-		}
+		i++;
 	}
+	return (i);
 }

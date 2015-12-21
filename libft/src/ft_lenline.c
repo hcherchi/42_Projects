@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdel.c                                        :+:      :+:    :+:   */
+/*   ft_lenline.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgantelm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/25 18:23:10 by bgantelm          #+#    #+#             */
-/*   Updated: 2015/11/27 14:36:39 by bgantelm         ###   ########.fr       */
+/*   Created: 2015/12/21 18:02:06 by hcherchi          #+#    #+#             */
+/*   Updated: 2015/12/21 18:05:29 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_strdel(char **as)
+int		ft_lenline(char *str)
 {
-	if (as != NULL)
+	int i;
+
+	i = 0;
+	while (str[i] != '\n')
 	{
-		free(*as);
-		*as = NULL;
+		i++;
 	}
+	return (i);
 }
