@@ -1,20 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   GNL.h                                              :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bgantelm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/05 18:40:55 by hcherchi          #+#    #+#             */
-/*   Updated: 2015/12/21 18:54:01 by hcherchi         ###   ########.fr       */
+/*   Created: 2015/11/24 13:53:54 by bgantelm          #+#    #+#             */
+/*   Updated: 2015/11/27 14:30:25 by bgantelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <fcntl.h>
-# include "libft.h"
-# define BUF_SIZE 3
+#include "libft.h"
 
-int		get_next_line(int const fd, char **line);
-#endif
+char	*ft_strcat(char *s1, const char *s2)
+{
+	char	*str1;
+	char	*str2;
+
+	str1 = s1;
+	str2 = (char*)s2;
+	while (*str1)
+	{
+		str1++;
+	}
+	while (*str2)
+	{
+		*str1 = *str2;
+		str1++;
+		str2++;
+	}
+	*str1 = '\0';
+	return (s1);
+}

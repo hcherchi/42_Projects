@@ -1,38 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lenline.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/06 18:58:45 by hcherchi          #+#    #+#             */
-/*   Updated: 2015/12/19 15:29:21 by hcherchi         ###   ########.fr       */
+/*   Created: 2015/12/21 18:02:06 by hcherchi          #+#    #+#             */
+/*   Updated: 2015/12/21 18:05:29 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include <unistd.h>
+#include "libft.h"
 
-int	main(int argc, char **argv)
+int		ft_lenline(char *str)
 {
-	int		fd;
-	char	*line;
+	int i;
 
-	line = NULL;
-	if (argc == 2)
+	i = 0;
+	while (str[i] != '\n')
 	{
-		fd = open(argv[1], O_RDONLY);
-		if (fd == -1)
-			ft_putendl("error");
-		while (get_next_line(fd, &line) == 1)
-			ft_putendl(line);
+		i++;
 	}
-	else if (argc == 1)
-	{
-		while (get_next_line(0, &line) == 1)
-			ft_putendl(line);
-	}
-	else
-		ft_putendl("error");
-	return (0);
+	return (i);
 }

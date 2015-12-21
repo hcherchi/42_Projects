@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   GNL.h                                              :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bgantelm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/05 18:40:55 by hcherchi          #+#    #+#             */
-/*   Updated: 2015/12/21 18:54:01 by hcherchi         ###   ########.fr       */
+/*   Created: 2015/11/24 15:53:13 by bgantelm          #+#    #+#             */
+/*   Updated: 2015/11/27 14:49:53 by bgantelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <fcntl.h>
-# include "libft.h"
-# define BUF_SIZE 3
+#include "libft.h"
 
-int		get_next_line(int const fd, char **line);
-#endif
+char	*ft_strrchr(const char *s, int c)
+{
+	int	len;
+
+	len = ft_strlen((char *)s);
+	while (0 != len && s[len] != (char)c)
+		len--;
+	if (s[len] == (char)c)
+		return ((char *)&s[len]);
+	return (NULL);
+}

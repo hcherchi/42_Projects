@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   GNL.h                                              :+:      :+:    :+:   */
+/*   ft_lstdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bgantelm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/05 18:40:55 by hcherchi          #+#    #+#             */
-/*   Updated: 2015/12/21 18:54:01 by hcherchi         ###   ########.fr       */
+/*   Created: 2015/11/29 15:50:00 by bgantelm          #+#    #+#             */
+/*   Updated: 2015/11/29 16:31:39 by bgantelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <fcntl.h>
-# include "libft.h"
-# define BUF_SIZE 3
+#include "libft.h"
 
-int		get_next_line(int const fd, char **line);
-#endif
+void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
+{
+	t_list	*list;
+
+	while (*alst)
+	{
+		list = (*alst)->next;
+		del((*alst)->content, (*alst)->content_size);
+		free(list);
+		*alst = list;
+	}
+	*alst = NULL;
+}
