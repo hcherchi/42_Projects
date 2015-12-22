@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/05 17:17:56 by hcherchi          #+#    #+#             */
-/*   Updated: 2015/12/22 00:10:41 by hcherchi         ###   ########.fr       */
+/*   Updated: 2015/12/22 16:46:40 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ static void	*ft_realloc(void *buf, size_t count)
 {
 	void *newbuf;
 
-	newbuf = ft_memalloc((count + 1) * BUF_SIZE + 1);
+	newbuf = ft_memalloc((count + 1) * BUFF_SIZE + 1);
 	if (buf)
 	{
 		if (newbuf)
-			ft_memcpy(newbuf, buf, count * BUF_SIZE);
+			ft_memcpy(newbuf, buf, count * BUFF_SIZE);
 		ft_memdel(&buf);
 	}
 	return (newbuf);
@@ -72,21 +72,21 @@ int			get_next_line(const int fd, char **line)
 	static int	i = 0;
 
 	count = 0;
-	buf = (char *)malloc(sizeof(*buf) * BUF_SIZE + 1);
+	buf = (char *)malloc(sizeof(*buf) * BUFF_SIZE + 1);
 	if (buf == NULL)
 		return (-1);
-	while ((ret = read(fd, buf + BUF_SIZE * count, BUF_SIZE)) != 0)
+	while ((ret = read(fd, buf + BUFF_SIZE * count, BUFF_SIZE)) != 0)
 	{
 		if (ret == -1)
 			return (-1);
 		i = 0;
-		if (ret == BUF_SIZE)
+		buf[BUFF_SIZE * count + ret] = '\0';
+		if (ret == BUFF_SIZE)
 		{
 			count++;
 			buf = ft_realloc(buf, count);
 		}
-		buf[BUF_SIZE * count + ret] = '\0';
-		if (fd == 0 && ret < BUF_SIZE)
+		if (fd == 0 && ret < BUFF_SIZE)
 			return (return_value(&line, &buf, &i));
 	}
 	return (return_value(&line, &buf, &i));

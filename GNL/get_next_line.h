@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/05 18:40:55 by hcherchi          #+#    #+#             */
-/*   Updated: 2015/12/22 00:10:35 by hcherchi         ###   ########.fr       */
+/*   Updated: 2015/12/22 16:46:44 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 # include <fcntl.h>
 # include "libft.h"
-# define BUF_SIZE 4096
+# define BUFF_SIZE 8
 
 int		get_next_line(int const fd, char **line);
 #endif
