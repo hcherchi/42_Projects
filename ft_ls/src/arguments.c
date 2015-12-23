@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/18 17:50:00 by hcherchi          #+#    #+#             */
-/*   Updated: 2015/12/22 00:02:43 by hcherchi         ###   ########.fr       */
+/*   Updated: 2015/12/23 10:54:38 by bgantelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	check_options(char *av, t_args *args)
 	while (av[i])
 	{
 		if (av[i] != 'R' && av[i] != 'l' &&
-		av[i] != 'a' && av[i] != 'r' && 
+		av[i] != 'a' && av[i] != 'r' &&
 		av[i] != 't' && av[i] != 'p' && av[i] != 'f' && av[i] != 'g')
 			ft_error(av[i]);
 		i++;

@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/13 10:17:37 by hcherchi          #+#    #+#             */
-/*   Updated: 2015/12/22 00:04:59 by hcherchi         ###   ########.fr       */
+/*   Updated: 2015/12/23 11:44:52 by bgantelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	basic_print(t_file *l_files, t_option *opt)
 	while (cur)
 	{
 		ft_putstr(cur->data->name);
-		if(cur->data->mod[0] == 'd' && opt->p == 1)
+		if (cur->data->mod[0] == 'd' && opt->p == 1)
 			ft_putendl("/");
 		else
 			ft_putchar('\n');
@@ -32,7 +32,7 @@ void	total_bits(t_file *l_files)
 {
 	long long	i;
 	t_file		*cur;
-	char *res;
+	char		*res;
 
 	i = 0;
 	cur = l_files;
@@ -49,8 +49,8 @@ void	total_bits(t_file *l_files)
 
 void	extend_print(t_file *l_files, t_option *opt)
 {
-	t_file *cur;
-	char *time;
+	t_file	*cur;
+	char	*time;
 
 	cur = l_files;
 	while (cur)
@@ -66,11 +66,8 @@ void	extend_print(t_file *l_files, t_option *opt)
 		ft_putstr(cur->data->name);
 		if (cur->data->mod[0] == 'd' && opt->p == 1)
 			ft_putchar('/');
-			if (cur->data->mod[0] == 'l')
-		{
-			ft_putstr(" -> ");
-			ft_putstr(cur->data->namelk);
-		}
+		if (cur->data->mod[0] == 'l')
+			putlink(cur);
 		ft_putchar('\n');
 		free(time);
 		cur = cur->next;
@@ -103,9 +100,7 @@ void	recursive(char *path, t_option *opt)
 				&& ft_strequ(cur->data->name, "..") == 0
 				&& ft_strequ(cur->data->name, ".") == 0)
 			{
-				ft_putchar('\n');
-				ft_putstr(cur->data->path);
-				ft_putstr(":\n");
+				putpath(cur);
 				recursive(cur->data->path, opt);
 			}
 			cur = cur->next;

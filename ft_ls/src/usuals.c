@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/18 17:48:52 by hcherchi          #+#    #+#             */
-/*   Updated: 2015/12/22 00:04:23 by hcherchi         ###   ########.fr       */
+/*   Updated: 2015/12/23 11:00:07 by bgantelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*add_path(char *p, char *n)
 void	l_filesdel(t_file *l_files)
 {
 	t_file *todel;
-	
+
 	while (l_files)
 	{
 		todel = l_files;

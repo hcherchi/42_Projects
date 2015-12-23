@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 16:03:56 by hcherchi          #+#    #+#             */
-/*   Updated: 2015/12/21 22:41:26 by hcherchi         ###   ########.fr       */
+/*   Updated: 2015/12/23 11:45:17 by bgantelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ typedef struct		s_args
 	int				error;
 }					t_args;
 
+void				putlink(t_file *l_files);
+void				putpath(t_file *l_files);
 void				argsdel(t_args *args);
 void				ft_error3(char *path);
 void				check_file(char *av, t_args *args);
