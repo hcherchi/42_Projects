@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arguments.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bgantelm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/18 17:50:00 by hcherchi          #+#    #+#             */
-/*   Updated: 2015/12/23 10:54:38 by bgantelm         ###   ########.fr       */
+/*   Created: 2015/12/23 11:50:11 by bgantelm          #+#    #+#             */
+/*   Updated: 2015/12/23 13:07:57 by bgantelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	init_args(t_args *args)
 	args->opt->r = 0;
 	args->opt->f = 0;
 	args->opt->g = 0;
+	args->opt->h = 0;
 	args->dirs = NULL;
 	args->files = NULL;
 	args->error = 0;
@@ -48,7 +49,8 @@ void	check_options(char *av, t_args *args)
 	{
 		if (av[i] != 'R' && av[i] != 'l' &&
 		av[i] != 'a' && av[i] != 'r' &&
-		av[i] != 't' && av[i] != 'p' && av[i] != 'f' && av[i] != 'g')
+		av[i] != 't' && av[i] != 'p' && av[i] != 'f' && av[i] != 'g' &&
+		av[i] != 'h')
 			ft_error(av[i]);
 		i++;
 	}
@@ -83,6 +85,8 @@ void	modif_options(char *av, t_args *args)
 			args->opt->f = 1;
 		if (av[i] == 'g' && args->opt->g == 0)
 			args->opt->g = 1;
+		if (av[i] == 'h' && args->opt->h == 0)
+			args->opt->h = 1;
 		i++;
 	}
 }

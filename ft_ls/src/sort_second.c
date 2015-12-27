@@ -6,7 +6,7 @@
 /*   By: bgantelm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/23 11:11:45 by bgantelm          #+#    #+#             */
-/*   Updated: 2015/12/23 11:44:28 by bgantelm         ###   ########.fr       */
+/*   Updated: 2015/12/23 13:18:24 by bgantelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,18 @@ void	putlink(t_file *l_files)
 	cur = l_files;
 	ft_putstr(" -> ");
 	ft_putstr(cur->data->namelk);
+}
+
+void	hoption(void)
+{
+	ft_putstr("--R afficher récursivement les sous-répertoires.\n");
+	ft_putstr("--l utiliser un format d’affichage long.\n");
+	ft_putstr("--a inclure les entrées débutant par « . ».\n");
+	ft_putstr("--r inverser l'ordre du tri.\n");
+	ft_putstr("--t trier selon la date de modification.\n");
+	ft_putstr("--p ajouter l’indicateur « / » aux répertoires.\n");
+	ft_putstr("--f ne pas trier, activer les options -aU et");
+	ft_putstr(" désactiver les  options -ls --color.\n");
+	ft_putstr("--g identique à -l mais sans afficher le propriétaire.\n");
+	ft_putstr("--h aide pour les options.\n");
 }

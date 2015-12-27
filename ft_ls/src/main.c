@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bgantelm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/09 16:03:10 by hcherchi          #+#    #+#             */
-/*   Updated: 2015/12/22 00:02:01 by hcherchi         ###   ########.fr       */
+/*   Created: 2015/12/23 11:50:55 by bgantelm          #+#    #+#             */
+/*   Updated: 2015/12/23 13:08:50 by bgantelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,11 @@ int		main(int ac, char **av)
 	{
 		check_options(av[i], args);
 		i++;
+	}
+	if (args->opt->h)
+	{
+		hoption();
+		return (0);
 	}
 	while (i < ac)
 	{

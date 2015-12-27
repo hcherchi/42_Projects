@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 16:03:56 by hcherchi          #+#    #+#             */
-/*   Updated: 2015/12/23 11:45:17 by bgantelm         ###   ########.fr       */
+/*   Updated: 2015/12/23 13:12:27 by bgantelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct		s_option
 	int	p;
 	int	f;
 	int g;
+	int	h;
 }					t_option;
 
 typedef struct		s_args
@@ -63,6 +64,7 @@ typedef struct		s_args
 	int				error;
 }					t_args;
 
+void				hoption(void);
 void				putlink(t_file *l_files);
 void				putpath(t_file *l_files);
 void				argsdel(t_args *args);
