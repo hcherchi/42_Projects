@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgantelm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/23 11:50:42 by bgantelm          #+#    #+#             */
-/*   Updated: 2015/12/23 11:50:45 by bgantelm         ###   ########.fr       */
+/*   Updated: 2015/12/28 17:00:01 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ t_file	*fill_file(struct stat *stats, t_file *new)
 	new->data->nboct = ft_itoa(stats->st_size);
 	new->data->nb_blocks = stats->st_blocks;
 	if (getgrgid(stats->st_gid) == NULL)
-		new->data->gid = ft_strdup("root");
+		new->data->gid = ft_strdup("wheel");
 	else
 		new->data->gid = ft_strdup(getgrgid(stats->st_gid)->gr_name);
 	if (getpwuid(stats->st_uid) == NULL)
-		new->data->uid = ft_strdup("wheel");
+		new->data->uid = ft_strdup("root");
 	else
 		new->data->uid = ft_strdup(getpwuid(stats->st_uid)->pw_name);
 	new->data->time = stats->st_mtime;
