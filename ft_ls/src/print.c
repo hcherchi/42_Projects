@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/23 11:51:07 by bgantelm          #+#    #+#             */
-/*   Updated: 2015/12/28 17:00:24 by hcherchi         ###   ########.fr       */
+/*   Updated: 2015/12/28 20:10:12 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	extend_print(t_file *l_files, t_option *opt)
 	cur = l_files;
 	while (cur)
 	{
+		if (cur->data->mod[0] == '?')
+			return (ft_error3(cur->data->name));
 		time = ft_strsub(ctime(&(cur->data->time)), 4, 12);
 		ft_putstrsp(cur->data->mod);
 		ft_putstrsp(cur->data->nblink);
