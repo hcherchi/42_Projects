@@ -105,25 +105,26 @@ int			readnl(int fd, char **save)
 int			get_next_line(const int fd, char **line)
 {
 	static char	*save = NULL;
+    static char *todel = NULL;
 	int			check;
-	static char	*todel = NULL;
+    int i;
 
 	check = 1;
 	if (!save || !strchr(save, '\n'))
 	{
 		check = readnl(fd, &save);
-		ft_memdel((void **)&todel);
-		if (check != 0)
-			todel = save;
+        todel = save;
 	}
 	if (check == -1)
 		return (-1);
-	if (check == 0)
-		ft_memdel((void **)&save);
-	*line = save;
-	if (find_and_replace(save) == 0)
-		save = NULL;
+    i = find_and_replace(save);
+    *line = ft_strdup(save);
+    if (i == 1)
+        save += ft_strlen(save) + 1;
 	else
-		save += ft_strlen(save) + 1;
+    {
+        free (todel);
+		save = NULL;
+    }
 	return (check);
 }
