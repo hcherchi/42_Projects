@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/05 17:17:56 by hcherchi          #+#    #+#             */
-/*   Updated: 2015/12/28 16:55:17 by hcherchi         ###   ########.fr       */
+/*   Updated: 2015/12/30 13:53:07 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,26 +105,28 @@ int			readnl(int fd, char **save)
 int			get_next_line(const int fd, char **line)
 {
 	static char	*save = NULL;
-    static char *todel = NULL;
+	static char *todel = NULL;
 	int			check;
-    int i;
+	int			i;
 
 	check = 1;
 	if (!save || !strchr(save, '\n'))
 	{
 		check = readnl(fd, &save);
-        todel = save;
+		todel = save;
 	}
 	if (check == -1)
 		return (-1);
-    i = find_and_replace(save);
-    *line = ft_strdup(save);
-    if (i == 1)
-        save += ft_strlen(save) + 1;
-	else
-    {
-        free (todel);
+	if (check == 0)
 		save = NULL;
-    }
+	i = find_and_replace(save);
+	*line = ft_strdup(save);
+	if (i == 1)
+		save += ft_strlen(save) + 1;
+	else
+	{
+		free(todel);
+		save = NULL;
+	}
 	return (check);
 }
