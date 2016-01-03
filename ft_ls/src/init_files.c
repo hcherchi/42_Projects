@@ -37,9 +37,9 @@ t_file	*new_file(char *path)
 
 t_file	*fill_file(struct stat *stats, t_file *new)
 {
-	char	*acl;
-
-	acl = (char *)malloc(sizeof(*acl) * 12);
+	char *acl;
+	
+	acl = ft_strnew(11);
 	strmode(stats->st_mode, acl);
 	new->data->mod = acl;
 	new->data->nblink = ft_itoa(stats->st_nlink);

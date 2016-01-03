@@ -99,9 +99,9 @@ void	check_file(char *av, t_args *args)
 	if (!lstat(av, stats))
 	{
 		if (S_ISDIR(stats->st_mode))
-			add_file(&(args->dirs), new_file(av));
+			add_file(&(args->dirs), new_file(ft_strdup(av)));
 		else if (S_ISREG(stats->st_mode))
-			add_file(&(args->files), new_file(av));
+			add_file(&(args->files), new_file(ft_strdup(av)));
 		else if (S_ISLNK(stats->st_mode))
 		{
 			if (args->opt->l)
