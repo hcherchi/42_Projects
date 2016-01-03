@@ -16,7 +16,7 @@ INC_DIR = includes
 SRC_DIR = src
 OBJ_DIR = obj
 
-SRCS = $(wildcard $(SRC_DIR)/*.c)
+SRCS = src/arguments.c src/print.c src/main.c src/error.c src/init_files.c src/sort_files.c src/sort_second.c src/usuals.c 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 IFLAGS = -I $(INC_DIR) -I libft/includes
