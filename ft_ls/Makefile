@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bgantelm <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2015/12/23 10:53:19 by bgantelm          #+#    #+#              #
-#    Updated: 2015/12/23 11:57:06 by bgantelm         ###   ########.fr        #
+#    Created: 2015/12/23 10:53:19 by hcherchi          #+#    #+#              #
+#    Updated: 2015/12/30 17:39:02 by hcherchi         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -19,7 +19,7 @@ OBJ_DIR = obj
 SRCS = $(wildcard $(SRC_DIR)/*.c)
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-IFLAGS = -I $(INC_DIR)
+IFLAGS = -I $(INC_DIR) -I libft/includes
 FLAGS = -Wall -Werror -Wextra
 
 CC = gcc $(FLAGS)

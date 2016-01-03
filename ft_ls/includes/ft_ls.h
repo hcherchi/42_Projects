@@ -6,13 +6,13 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 16:03:56 by hcherchi          #+#    #+#             */
-/*   Updated: 2015/12/28 17:01:14 by hcherchi         ###   ########.fr       */
+/*   Updated: 2015/12/30 17:39:17 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LS_H
 # define FT_LS_H
-# include "../libft/includes/libft.h"
+# include "libft.h"
 # include <dirent.h>
 # include <sys/stat.h>
 # include <pwd.h>

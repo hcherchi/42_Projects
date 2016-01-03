@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/23 11:50:25 by bgantelm          #+#    #+#             */
-/*   Updated: 2015/12/28 20:03:18 by hcherchi         ###   ########.fr       */
+/*   Created: 2015/12/23 11:50:25 by hcherchi          #+#    #+#             */
+/*   Updated: 2015/12/30 17:35:56 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_error(char c)
 {
 	ft_putstr("ls: illegal option -- ");
 	ft_putchar(c);
-	ft_putstr("\nusage: ls [-Ralrtpfg] [file ...]\n");
+	ft_putstr("\nusage: ls [-Ralrtpfgh] [file ...]\n");
 	exit(1);
 }
 
