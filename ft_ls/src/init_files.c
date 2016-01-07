@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/23 11:50:42 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/01/06 14:06:46 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/01/07 18:02:50 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_file	*new_file(char *path)
 t_file	*fill_file(struct stat *stats, t_file *new)
 {
 	char *acl;
-	
+
 	acl = ft_strnew(11);
 	strmode(stats->st_mode, acl);
 	new->data->mod = acl;
