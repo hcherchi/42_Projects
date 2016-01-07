@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/07 17:32:45 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/01/07 17:57:14 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/01/07 18:39:53 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	select_command(char **av, char ***myenv)
 		if (tablen(av) == 3)
 			ft_setenv(myenv, av[1], av[2]);
 		else
-			ft_putendl("2 arguments needed for setenv");\
+			ft_putendl("2 arguments needed for setenv");
 	}
 	else if (!ft_strcmp(av[0], "unsetenv"))
 		ft_unsetenv(myenv, av);
@@ -42,6 +42,7 @@ void	execute(char **myenv, char **av, char *good_path)
 	if (access(good_path, X_OK) == 0)
 	{
 		execve(good_path, av, myenv);
+		ft_putendl("Not an executable");
 		exit(0);
 	}
 	else

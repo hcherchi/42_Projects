@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/28 18:38:18 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/01/07 18:01:31 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/01/07 18:18:45 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	ft_nbwords(char const *str, char c)
 	count = 0;
 	while (str[i] != '\0')
 	{
-		while (str[i] == c)
+		while (str[i] == c || str[i] == '\t')
 			i++;
 		if (str[i] == '\0')
 			return (count);
@@ -39,7 +39,7 @@ static int	ft_wordsize(char const *str, char c)
 
 	i = 0;
 	size = 0;
-	while (str[i] == c)
+	while (str[i] == c || str[i] == '\t')
 		i++;
 	while (str[i] != c && str[i] != '\0')
 	{
@@ -66,7 +66,7 @@ char		**ft_strsplit(char const *str, char c)
 		return (NULL);
 	while (nbrest > 0)
 	{
-		while (*str == c)
+		while (*str == c || *str == '\t')
 			str++;
 		split[nbcur] = ft_strsub(str, i, ft_wordsize(str, c));
 		str = str + ft_wordsize(str, c);

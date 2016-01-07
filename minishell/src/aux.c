@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/07 17:46:57 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/01/07 17:54:24 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/01/07 18:42:22 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ void	lvlup(char ***myenv)
 	char	*lvl;
 
 	lvl = get_elem(*myenv, "SHLVL=");
+	if (lvl == NULL)
+	{
+		ft_setenv(myenv, "SHLVL", "1");
+		return ;
+	}
 	newlvl = ft_itoa(ft_atoi(lvl) + 1);
 	ft_setenv(myenv, "SHLVL", newlvl);
 	free(lvl);

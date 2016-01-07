@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/07 17:06:49 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/01/07 17:53:22 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/01/07 18:47:07 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,6 @@ int		main(int ac, char **av, char **env)
 
 	if (ac == 1)
 	{
-		if (*env == NULL)
-		{
-			ft_putendl("Environnement destroyed");
-			return (0);
-		}
 		myenv = tab_dup(env);
 		lvlup(&myenv);
 		set_commands(&myenv, av);
