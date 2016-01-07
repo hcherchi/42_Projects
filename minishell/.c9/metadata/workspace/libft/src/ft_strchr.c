@@ -1,0 +1,1 @@
+{"title":"ft_strchr.c","tooltip":"/libft/ft_strchr.c","filter":false,"undoManager":{"mark":-1,"position":-1,"stack":[]},"timestamp":1450179490000,"hash":"ef2aab2cb96d8e885c5414266fd6cae65cb89ee3"}
