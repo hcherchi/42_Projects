@@ -1,1 +1,0 @@
-{"title":"ft_strmapi.c","tooltip":"/libft/ft_strmapi.c","filter":false,"undoManager":{"mark":-1,"position":-1,"stack":[]},"timestamp":1450179491000,"hash":"4073660252ad1accf1df48824471d909b36e9685"}

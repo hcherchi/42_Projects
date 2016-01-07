@@ -1,1 +1,0 @@
-{"title":"ft_striteri.c","tooltip":"/libft/ft_striteri.c","filter":false,"undoManager":{"mark":-1,"position":-1,"stack":[]},"timestamp":1450179490000,"hash":"752a447ad1d57fffdd7e1215607fe1140f60d74a"}

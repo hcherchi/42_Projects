@@ -1,1 +1,0 @@
-{"title":"ft_isprint.c","tooltip":"/libft/ft_isprint.c","filter":false,"undoManager":{"mark":-1,"position":-1,"stack":[]},"timestamp":1450179490000,"hash":"48b931f492c4e87e170925f6fc1bf65080d9a776"}
