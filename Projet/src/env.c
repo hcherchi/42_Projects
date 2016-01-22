@@ -6,7 +6,7 @@
 /*   By: bgantelm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/22 19:01:14 by bgantelm          #+#    #+#             */
-/*   Updated: 2016/01/22 19:02:36 by bgantelm         ###   ########.fr       */
+/*   Updated: 2016/01/22 21:01:53 by bgantelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		ft_env(char ***env, char **args)
 	i_opt = 0;
 	while (args[i] && args[i][0] == '-')
 	{
-		if (!opt_env(&i, &i_opt, env, args))
+		if (!opt_env(&i, env, args))
 			return (-1);
 		i++;
 	}
@@ -31,19 +31,15 @@ int		ft_env(char ***env, char **args)
 			return (-1);
 		i++;
 	}
-	if (i_opt == 1)
-	{
-		*env = newtab(void);
-	}
 	if (!args[i])
 		ft_puttab(*env);
 	return (i);
 }
 
-int		opt_env(int *i, int *i_opt, char ***env, char **args)
+int		opt_env(int *i, char ***env, char **args)
 {
 	if (!ft_strcmp(args[*i], "-i"))
-		*i_opt = 1;
+		*env = newtab();
 	else if (!ft_strcmp(args[*i], "-u"))
 	{
 		if (args[*i + 1] && args[*i + 1][0] != '-')

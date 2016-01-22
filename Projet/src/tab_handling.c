@@ -6,7 +6,7 @@
 /*   By: bgantelm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/22 19:38:02 by bgantelm          #+#    #+#             */
-/*   Updated: 2016/01/22 19:39:08 by bgantelm         ###   ########.fr       */
+/*   Updated: 2016/01/22 21:02:48 by bgantelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,6 @@ char		**newtab(void)
 	char	**newtab;
 
 	newtab = (char **)malloc(sizeof(*newtab) * 1);
-	newtab[0] = ft_strdup("");
+	newtab[0] = NULL;
 	return (newtab);
 }

@@ -6,13 +6,13 @@
 /*   By: bgantelm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/22 19:43:22 by bgantelm          #+#    #+#             */
-/*   Updated: 2016/01/22 19:45:49 by bgantelm         ###   ########.fr       */
+/*   Updated: 2016/01/22 21:48:54 by bgantelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void	enter(size_t *pos, char ***env, t_line **his, t_line **l_line, int *l_p)
+void	enter(t_tools *t, char ***env, t_line **his, t_line **l_line)
 {
 	static int	ret;
 
@@ -20,18 +20,18 @@ void	enter(size_t *pos, char ***env, t_line **his, t_line **l_line, int *l_p)
 	ft_putchar('\n');
 	if ((*l_line)->line[ft_strlen((*l_line)->line) - 1] != '\\' && ret == 1)
 	{
-		send(pos, env, his, l_line, l_p);
+		send(t, env, his, l_line);
 		ret = 0;
 	}
 	else
 	{
 		add_endline(l_line, "");
-		*pos = 0;
+		t->pos = 0;
 		*l_line = (*l_line)->next;
 	}
 }
 
-void	send(size_t *pos, char ***env, t_line **hist, t_line **l_line, int *l_p)
+void	send(t_tools *t, char ***env, t_line **hist, t_line **l_line)
 {
 	char		*final_line;
 	char		*home;
@@ -48,10 +48,10 @@ void	send(size_t *pos, char ***env, t_line **hist, t_line **l_line, int *l_p)
 		list_begin(hist);
 		add_line(hist, final_line);
 	}
-	*pos = 0;
+	t->pos = 0;
 	home = get_elem(*env, "PWD=");
 	prompt(home);
-	*l_p = ft_strlen(home) + 2;
+	t->len_prompt = ft_strlen(home) + 2;
 	*l_line = NULL;
 	add_endline(l_line, "");
 }

@@ -6,7 +6,7 @@
 /*   By: bgantelm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/22 19:21:56 by bgantelm          #+#    #+#             */
-/*   Updated: 2016/01/22 19:22:46 by bgantelm         ###   ########.fr       */
+/*   Updated: 2016/01/22 21:37:57 by bgantelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		main(int ac, char **av, char **env)
 {
 	char	**myenv;
 	char	*home;
-	int		len_prompt;
+	size_t	len_prompt;
 
 	myenv = tab_dup(env);
 	lvlup(&myenv);

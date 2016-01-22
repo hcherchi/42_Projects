@@ -6,7 +6,7 @@
 /*   By: bgantelm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/22 18:54:29 by bgantelm          #+#    #+#             */
-/*   Updated: 2016/01/22 18:54:32 by bgantelm         ###   ########.fr       */
+/*   Updated: 2016/01/22 21:47:51 by bgantelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,15 @@ void	ft_cd(char ***myenv, char **args)
 
 char	*cdsplit(char *split, char *direction)
 {
-	char	*newpath;
+	char		*newpath;
+	struct stat	*stats;
 
+	stats = malloc(sizeof(*stats));
 	newpath = add_path(direction, split, '/');
+	lstat(newpath, stats);
 	if (!ft_strcmp(split, ".."))
 		direction = del_path(direction);
-	else if (!chdir(newpath))
+	else if (S_ISDIR(stats->st_mode) && !access(newpath, X_OK))
 	{
 		if (!(ft_strcmp(split, ".") == 0))
 			direction = newpath;
