@@ -20,11 +20,11 @@ SRCS = $(wildcard $(SRC_DIR)/*.c)
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-IFLAGS = -I $(INC_DIR) -I libft/includes 
+IFLAGS = -I $(INC_DIR) -I libft/includes -I /usr/X11/include 
 FLAGS = -Wall -Werror -Wextra
 
 CC = gcc $(FLAGS)
-LIBFLAGS = -Llibft -lft -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
+LIBFLAGS = -Llibft -lft -L/usr/X11/lib -lmlx -framework OpenGL -framework AppKit
 RM = /bin/rm -f
 
 all: $(LIB_NAME) $(NAME)
