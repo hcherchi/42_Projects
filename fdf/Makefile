@@ -6,7 +6,7 @@
 #    By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/04 18:24:56 by hcherchi          #+#    #+#              #
-#    Updated: 2016/01/24 20:30:35 by hcherchi         ###   ########.fr        #
+#    Updated: 2016/01/25 17:01:09 by hcherchi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,11 +20,11 @@ SRCS = $(wildcard $(SRC_DIR)/*.c)
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-IFLAGS = -I $(INC_DIR) -I libft/includes -I /usr/X11/include 
+IFLAGS = -I $(INC_DIR) -I libft/includes
 FLAGS = -Wall -Werror -Wextra
 
 CC = gcc $(FLAGS)
-LIBFLAGS = -Llibft -lft -L/usr/X11/lib -lmlx -framework OpenGL -framework AppKit
+LIBFLAGS = -Llibft -lft -lmlx -framework OpenGL -framework AppKit
 RM = /bin/rm -f
 
 all: $(LIB_NAME) $(NAME)
