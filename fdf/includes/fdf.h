@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/24 19:45:29 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/01/26 12:25:15 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/01/27 20:39:50 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@
 #include <math.h>
 #include <fcntl.h>
 
+
+typedef	struct	s_point
+{
+	int x;
+	int	y;
+	int z;
+}				t_point;
+
 typedef struct	s_tool
 {
 	void		*mlx_ptr;
@@ -26,15 +34,16 @@ typedef struct	s_tool
 	int			nbcol;
 	int			fd;
 	int			**tab;
-	t_point		**points;
+	t_point		***points;
+	int			hwin;
+	int			wwin;
+	t_point		*wmax;
+	t_point		*wmin;
+	t_point		*hmax;
+	t_point		*hmin;
+	int			zmin;
+	int			zmax;
 }				t_tool;
-
-typedef	struct	s_point
-{
-	int		x;
-	int		y;
-	int		z;
-}				t_point;
 
 void	launch_fdf(t_tool *tools);
 int		check_error(char **split);
