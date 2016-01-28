@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/24 19:45:29 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/01/27 20:39:50 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/01/28 19:55:26 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct	s_tool
 	t_point		*hmin;
 	int			zmin;
 	int			zmax;
+	float		coef_alti;
 }				t_tool;
 
 void	launch_fdf(t_tool *tools);

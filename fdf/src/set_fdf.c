@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 17:51:10 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/01/27 20:59:06 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/01/28 19:55:24 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,13 @@ t_point	*create_point(t_tool *tools,int i, int j)
 {
 	float k;
 	t_point *point;
+	int range;
 
+	range = tools->zmax - tools->zmin;
+	if (range <= 20)
+		tools->coef_alti = 10;
+	else
+		tools->coef_alti = 1.0 / 3.0;
 	point = malloc(sizeof(t_point *));
 	k = (float)(tools->wwin)/ (float)tools->nbcol;
 	point->x = j * k;
@@ -48,7 +54,7 @@ t_point	*create_point(t_tool *tools,int i, int j)
 		point->x += 2560/2 - tools->wmax->x + (tools->wmax->x - tools->wmin->x)/2;
 	}
 	point->z = tools->tab[i][j];
-	point->y -= tools->tab[i][j] / 5;
+	point->y -= tools->tab[i][j] * tools->coef_alti;
 	return (point);
 }
 

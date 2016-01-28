@@ -6,12 +6,12 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/24 19:45:08 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/01/27 19:53:53 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/01/28 19:55:23 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
+#include <stdio.h>
 void	find_win_size(t_tool *tools)
 {
 	float coef;

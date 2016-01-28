@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 17:39:30 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/01/27 20:42:44 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/01/28 17:26:54 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,31 +24,33 @@ void	draw_line(t_point *a, t_point *b, t_tool *tools)
 	int y;
 	int color;
 	int	range;
+	int z;
 	
 	range = tools->zmax - tools->zmin;
-	if (b->z < -10)
+ 	z = (a->z >= b->z) ? b->z : a->z;
+	if (z < -10)
 		color = 0x00003399;
-	else if (b->z < -5)
+	else if (z < -5)
 		color = 0x000066FF;
-	else if (b->z <= 0)
+	else if (z <= 0)
 		color = 0x000099FF;
-	else if (b->z < (range + tools->zmin) / 10)
+	else if (z < (range + tools->zmin) / 10)
 		color = 0x0033CC00;
-	else if (b->z < 2 * (range + tools->zmin)/ 10)
+	else if (z < 2 * (range + tools->zmin)/ 10)
 		color = 0x00009900;
-	else if (b->z < 3 * (range + tools->zmin)/ 10)
+	else if (z < 3 * (range + tools->zmin)/ 10)
 		color = 0x00006600;
-	else if (b->z < 4 * (range + tools->zmin)/ 10)
+	else if (z < 4 * (range + tools->zmin)/ 10)
 		color = 0x00666600;
-	else if (b->z < 5 * (range + tools->zmin) / 10)
+	else if (z < 5 * (range + tools->zmin) / 10)
 		color = 0x00996600;
-	else if (b->z < 6 * (range + tools->zmin) / 10)
+	else if (z < 6 * (range + tools->zmin) / 10)
 		color = 0x00663300;
-	else if (b->z < 7 * (range + tools->zmin) / 10)
+	else if (z < 7 * (range + tools->zmin) / 10)
 		color = 0x00660000;
-	else if (b->z < 8 * (range + tools->zmin) / 10)
+	else if (z < 8 * (range + tools->zmin) / 10)
 		color = 0x00999999;
-	else if (b->z < 9 * (range + tools->zmin) / 10)
+	else if (z < 9 * (range + tools->zmin) / 10)
 		color = 0x00CCCCCC;
 	else
 		color = 0x00FFFFFF;
