@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 13:28:16 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/01/07 17:58:29 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/01/31 19:21:45 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+int					ft_tablen(char **tab);
 int					get_next_line(const int fd, char **line);
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);

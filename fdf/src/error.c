@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/01/31 20:43:58 by hcherchi          #+#    #+#             */
+/*   Updated: 2016/01/31 20:44:01 by hcherchi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 int		check_error(char **split)
@@ -11,7 +23,8 @@ int		check_error(char **split)
 		j = 0;
 		while (split[i][j])
 		{
-			if (!(ft_isdigit(split[i][j]) != 0 || (j == 0 && split[i][j] == '-')))
+			if (!(ft_isdigit(split[i][j]) != 0
+			|| (j == 0 && split[i][j] == '-')))
 				return (-1);
 			j++;
 		}
@@ -22,10 +35,10 @@ int		check_error(char **split)
 
 int		fill_tools(t_tool *tools, char *filename)
 {
-	char *line;
-	int ret;
-	int fd;
-	char **split;
+	char	*line;
+	int		ret;
+	int		fd;
+	char	**split;
 
 	line = NULL;
 	fd = open(filename, O_RDONLY);
@@ -36,10 +49,10 @@ int		fill_tools(t_tool *tools, char *filename)
 		tools->nbline += 1;
 		split = ft_strsplit(line, ' ');
 		if (tools->nbcol == 0)
-			tools->nbcol = tablen(split);
+			tools->nbcol = ft_tablen(split);
 		else
 		{
-			if (tools->nbcol != tablen(split))
+			if (tools->nbcol != ft_tablen(split))
 				return (-1);
 		}
 		if (check_error(split) == -1)
