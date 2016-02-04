@@ -6,7 +6,7 @@
 #    By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/04 18:24:56 by hcherchi          #+#    #+#              #
-#    Updated: 2016/02/02 13:13:56 by hcherchi         ###   ########.fr        #
+#    Updated: 2016/02/04 11:57:07 by hcherchi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ INC_DIR = includes
 SRC_DIR = src
 OBJ_DIR = obj
 
-SRCS = src/main.c
+SRCS = src/main.c src/param.c src/draw.c src/event.c
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
@@ -34,7 +34,7 @@ $(LIB_NAME) :
 
 $(NAME) : $(OBJS)
 	@echo "Make Objects :\033[1;32m DONE !\033[m"
-	@$(CC) -o $@ $^ $(LIBFLAGS)
+	@$(CC) -o $@ $^ $(LIBFLAGS) -O3
 	@echo "Make $(NAME) :\033[1;32m DONE !\033[m"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
