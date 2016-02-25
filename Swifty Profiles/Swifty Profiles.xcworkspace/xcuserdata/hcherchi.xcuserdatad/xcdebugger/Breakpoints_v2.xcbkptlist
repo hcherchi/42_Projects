@@ -10,11 +10,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Swifty Profiles/ProfileViewController.swift"
-            timestampString = "478017948.31725"
+            timestampString = "478068169.041083"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61">
+            startingLineNumber = "121"
+            endingLineNumber = "121"
+            landmarkName = "ProfileViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

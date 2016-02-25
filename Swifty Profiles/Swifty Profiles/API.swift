@@ -18,7 +18,7 @@ class API
     static let uid = "6b119b0e9d3b8dcc85e4b7bdad79a0f60006caec2753e68b18b39a05f6445b06"
     static let secret = "38dccb6398bd6ab9358b3daf19c33000069da0b5f93a4b7a1731a05365f6d71c"
     
-    static func getToken(user : String?)
+    static func getToken(sema :dispatch_semaphore_t!)
     {
         
         let params = ["grant_type" : "client_credentials", "client_id" : API.uid, "client_secret" : API.secret]
@@ -35,7 +35,7 @@ class API
                 do
                 {
                     Globals.token = try Token(JSONDecoder(response.data))
-                    getUser(user)
+                    dispatch_semaphore_signal(sema);
                 }
                 catch
                 {
@@ -49,7 +49,7 @@ class API
         }
     }
     
-    static func getUser(user : String?)
+    static func getUser(user : String?, sema :dispatch_semaphore_t!)
     {
         do
         {
@@ -60,15 +60,11 @@ class API
                 if let error = response.error
                 {
                     print("got an error: \(error)")
-                    return
                 }
                 do
                 {
-                    Globals.usr = try User(JSONDecoder(response.data))
-                }
-                catch
-                {
-                    print("unable to parse the JSON")
+                    Globals.usr = User(JSONDecoder(response.data))
+                    dispatch_semaphore_signal(sema);
                 }
             }
         }

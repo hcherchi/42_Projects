@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		47DFA3AF026ACD5339272F3D /* Pods_Swifty_Profiles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F44AD1EFE3CD5AA959AA97F2 /* Pods_Swifty_Profiles.framework */; };
+		CD4894911C7E4A9B00F709EC /* ProjectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4894901C7E4A9B00F709EC /* ProjectTableViewCell.swift */; };
 		CD6771251C7B9BB4006A1DD5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6771241C7B9BB4006A1DD5 /* AppDelegate.swift */; };
 		CD6771271C7B9BB4006A1DD5 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6771261C7B9BB4006A1DD5 /* SearchViewController.swift */; };
 		CD67712A1C7B9BB4006A1DD5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD6771281C7B9BB4006A1DD5 /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 		CD6771791C7B9E5A006A1DD5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6771711C7B9E5A006A1DD5 /* User.swift */; };
 		CD67717C1C7B9E60006A1DD5 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD67717A1C7B9E60006A1DD5 /* Achievement.swift */; };
 		CD67717D1C7B9E60006A1DD5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD67717B1C7B9E60006A1DD5 /* API.swift */; };
+		CDF4D1EB1C7E717D0051E633 /* SkillTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF4D1EA1C7E717D0051E633 /* SkillTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,7 @@
 /* Begin PBXFileReference section */
 		664E2F5C233D830CEF3F1B4F /* Pods-Swifty Profiles.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swifty Profiles.release.xcconfig"; path = "Pods/Target Support Files/Pods-Swifty Profiles/Pods-Swifty Profiles.release.xcconfig"; sourceTree = "<group>"; };
 		86115DDFFF6DE0B3575929DC /* Pods-Swifty Profiles.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swifty Profiles.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Swifty Profiles/Pods-Swifty Profiles.debug.xcconfig"; sourceTree = "<group>"; };
+		CD4894901C7E4A9B00F709EC /* ProjectTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectTableViewCell.swift; sourceTree = "<group>"; };
 		CD6771211C7B9BB4006A1DD5 /* Swifty Profiles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swifty Profiles.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD6771241C7B9BB4006A1DD5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD6771261C7B9BB4006A1DD5 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -72,6 +75,7 @@
 		CD6771711C7B9E5A006A1DD5 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CD67717A1C7B9E60006A1DD5 /* Achievement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
 		CD67717B1C7B9E60006A1DD5 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		CDF4D1EA1C7E717D0051E633 /* SkillTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillTableViewCell.swift; sourceTree = "<group>"; };
 		F44AD1EFE3CD5AA959AA97F2 /* Pods_Swifty_Profiles.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Swifty_Profiles.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -168,6 +172,8 @@
 			children = (
 				CD6771261C7B9BB4006A1DD5 /* SearchViewController.swift */,
 				CD6771541C7B9D08006A1DD5 /* ProfileViewController.swift */,
+				CDF4D1EA1C7E717D0051E633 /* SkillTableViewCell.swift */,
+				CD4894901C7E4A9B00F709EC /* ProjectTableViewCell.swift */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -175,9 +181,6 @@
 		CD6771531C7B9CB2006A1DD5 /* models */ = {
 			isa = PBXGroup;
 			children = (
-				CD67717A1C7B9E60006A1DD5 /* Achievement.swift */,
-				CD67717B1C7B9E60006A1DD5 /* API.swift */,
-				CD67716A1C7B9E5A006A1DD5 /* Campus.swift */,
 				CD67716B1C7B9E5A006A1DD5 /* Cursus.swift */,
 				CD67716C1C7B9E5A006A1DD5 /* Globals.swift */,
 				CD67716D1C7B9E5A006A1DD5 /* Project.swift */,
@@ -185,6 +188,9 @@
 				CD67716F1C7B9E5A006A1DD5 /* SubCursus.swift */,
 				CD6771701C7B9E5A006A1DD5 /* Token.swift */,
 				CD6771711C7B9E5A006A1DD5 /* User.swift */,
+				CD67717A1C7B9E60006A1DD5 /* Achievement.swift */,
+				CD67717B1C7B9E60006A1DD5 /* API.swift */,
+				CD67716A1C7B9E5A006A1DD5 /* Campus.swift */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -385,6 +391,8 @@
 				CD6771551C7B9D08006A1DD5 /* ProfileViewController.swift in Sources */,
 				CD6771741C7B9E5A006A1DD5 /* Globals.swift in Sources */,
 				CD6771771C7B9E5A006A1DD5 /* SubCursus.swift in Sources */,
+				CDF4D1EB1C7E717D0051E633 /* SkillTableViewCell.swift in Sources */,
+				CD4894911C7E4A9B00F709EC /* ProjectTableViewCell.swift in Sources */,
 				CD67717C1C7B9E60006A1DD5 /* Achievement.swift in Sources */,
 				CD6771271C7B9BB4006A1DD5 /* SearchViewController.swift in Sources */,
 				CD6771731C7B9E5A006A1DD5 /* Cursus.swift in Sources */,

@@ -24,6 +24,7 @@ class User
     var wallet : Int?
     var cursus : [Cursus]?
     var achievements : [Achievement]?
+    var year : String?
     
     init(_ decoder: JSONDecoder)
     {
@@ -37,9 +38,11 @@ class User
         campus =  Campus(decoder["campus"])
         wallet = decoder["wallet"].integer
         location = decoder["location"].string
+        displayname = decoder["displayname"].string
+        year = decoder["pool_year"].string
         if (self.location == nil)
         {
-            self.location = "Unknown"
+            self.location = "Disconnected"
         }
         if let crs = decoder["cursus"].array
         {
