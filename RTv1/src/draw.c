@@ -22,8 +22,10 @@ t_ray  get_ray(t_tool *t, float x, float y)
     ray.D.z = t->cam.upleft.z + t->cam.r_vect.z * t->cam.x_indent * x - t->cam.h_vect.z * t->cam.y_indent * y;
     
     //printf("x_indent = %f / y_indent = %f\n", t->cam.x_indent, t->cam.y_indent);
+    //sleep(1);
     //printf("x = %f / y = %f / z = %f\n",ray.D.x, ray.D.y, ray.D.z);
     vectorNorm(&ray.D);
+    //printf("x = %f / y = %f / z = %f\n",ray.D.x, ray.D.y, ray.D.z);
     return (ray);
 }
 
@@ -40,13 +42,13 @@ void    draw(t_tool *t, float x, float y)
     float coef = 20000;
     
     float red = 0;
-    float green = 0;
-    float blue = 0;
+    float green = 100;
+    float blue = 100;
     
-    sphere.rad = 2;
+    sphere.rad = 100;
     sphere.O.x = 0;
     sphere.O.y = 0;
-    sphere.O.z = -10;
+    sphere.O.z = 300;
     
     cone.O.x = 0;
     cone.O.y = 0;
@@ -68,79 +70,82 @@ void    draw(t_tool *t, float x, float y)
     plan.d = 20;
     
     ray = get_ray(t, x, y);
+    
     if (intersection_sphere(sphere, ray, &coef))
     {
-        // On calcul le point d'impact
-        t_pos Impact;
-        Impact.x = ray.O.x + ray.D.x * coef;
-        Impact.y = ray.O.y + ray.D.y * coef;
-        Impact.z = ray.O.z + ray.D.z * coef;
-        
-        
-        // On calcule la normale sur la sphere
-        t_pos Distance;
-        
-        Distance.x = Impact.x - cyl.vect.O.x;
-        Distance.y = Impact.y - cyl.vect.O.y;
-        Distance.z = Impact.z - cyl.vect.O.z;
-        
-        vectorNorm(&Distance);
-        // la norme
-        float Norme = vectorDot(&Distance,&Distance);
-        float Temp = Norme * Norme;
-        Temp = 1 / sqrt(Temp);
-        Norme = Temp * Norme;
-        
-        
-        if (Norme != 0)
-        {
-            // On calcul la lumière ici ( Modèle de lambert )
-            
-            
-            // Distance entre la lumière et l'impact
-            t_pos RayLightDist;
-            RayLightDist.x = 0 - Impact.x;
-            RayLightDist.y = 0 - Impact.y;
-            RayLightDist.z = 0 - Impact.z;
-            
-            // Produit scalaire
-            float NormeRayDist = vectorDot(&RayLightDist,&RayLightDist);
-            
-            t_pos RayLightDir;
-            
-            // la norme
-            if (NormeRayDist != 0)
-            {
-                RayLightDir.x = RayLightDist.x / Norme;
-                RayLightDir.y = RayLightDist.y / Norme;
-                RayLightDir.z = RayLightDist.z / Norme;
-            }
-            
-            t_pos IntensityLight;
-            IntensityLight = vectorMul(&RayLightDir,&Distance);
-            
-            float lambert = (IntensityLight.x * Norme)+ (IntensityLight.y * Norme)+(IntensityLight.z * Norme);
-            
-            red = (20  * lambert);
-            green = (20 * lambert);
-            blue  = (20  * lambert);
-        
-            if (red < 0)
-                red = 0;
-            if (blue < 0)
-                blue = 0;
-            if (green < 0)
-                green = 0;
-            if (red > 255)
-                red = 255;
-            if (blue > 255)
-                blue = 255;
-            if (green > 255)
-                green = 255;
-            
+//        // On calcul le point d'impact
+//        t_pos Impact;
+//        Impact.x = ray.O.x + ray.D.x * coef;
+//        Impact.y = ray.O.y + ray.D.y * coef;
+//        Impact.z = ray.O.z + ray.D.z * coef;
+//        
+//        //printf("x = %f / y = %f / z = %f\n",Impact.x, Impact.y, Impact.z);
+//        //sleep(1);
+//        
+//        // On calcule la normale sur la sphere
+//        t_pos Distance;
+//        
+//        Distance.x = Impact.x - sphere.O.x;
+//        Distance.y = Impact.y - sphere.O.y;
+//        Distance.z = Impact.z - sphere.O.z;
+//        
+//        vectorNorm(&Distance);
+//        // la norme
+//        float Norme = vectorDot(&Distance,&Distance);
+//        float Temp = Norme * Norme;
+//        Temp = 1 / sqrt(Temp);
+//        Norme = Temp * Norme;
+//        
+//        
+//        if (Norme != 0)
+//        {
+//            // On calcul la lumière ici ( Modèle de lambert )
+//            
+//            
+//            // Distance entre la lumière et l'impact
+//            t_pos RayLightDist;
+//            RayLightDist.x = 0 - Impact.x;
+//            RayLightDist.y = 0 - Impact.y;
+//            RayLightDist.z = 0 - Impact.z;
+//            
+//            // Produit scalaire
+//            float NormeRayDist = vectorDot(&RayLightDist,&RayLightDist);
+//            
+//            t_pos RayLightDir;
+//            
+//            // la norme
+//            if (NormeRayDist != 0)
+//            {
+//                RayLightDir.x = RayLightDist.x / Norme;
+//                RayLightDir.y = RayLightDist.y / Norme;
+//                RayLightDir.z = RayLightDist.z / Norme;
+//            }
+//            
+//            t_pos IntensityLight;
+//            IntensityLight = vectorMul(&RayLightDir,&Distance);
+//            
+//            float lambert = (IntensityLight.x * Norme)+ (IntensityLight.y * Norme)+(IntensityLight.z * Norme);
+//            
+//            red = (120  * lambert);
+//            green = 60 + (100 * lambert);
+//            blue  = 60 + (100  * lambert);
+//        
+//            if (red < 0)
+//                red = 0;
+//            if (blue < 0)
+//                blue = 0;
+//            if (green < 0)
+//                green = 0;
+//            if (red > 255)
+//                red = 255;
+//            if (blue > 255)
+//                blue = 255;
+//            if (green > 255)
+//                green = 255;
+//            
             //printf("%f / %f / %f\n", inter.x, inter.y, inter.z);
             pixel_put_to_image(t, x, y, red, green, blue);
-        }
+        
     }
 }
 

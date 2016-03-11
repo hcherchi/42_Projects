@@ -30,15 +30,15 @@ int     intersection_sphere(t_sphere sphere, t_ray ray, float *coef)
     discr = b * b - 4 * a * c;
     if (discr < 0)
         return 0;
-    float sqrtdiscr = sqrtf(discr);
-    float t0 = (-b + sqrtdiscr)/(2);
-    float t1 = (-b - sqrtdiscr)/(2);
-    if (fabs(t0) > fabs(t1))
-        t0 = t1;
-    if (t0 > 0)
-        return 0;
-    else
-        *coef = t0;
+//    float sqrtdiscr = sqrtf(discr);
+//    float t0 = (-b + sqrtdiscr)/(2);
+//    float t1 = (-b - sqrtdiscr)/(2);
+//    if (fabs(t0) > fabs(t1))
+//        t0 = t1;
+//    if (t0 > 0)
+//        return 0;
+//    else
+        *coef = 0;
     return 1;
 }
 

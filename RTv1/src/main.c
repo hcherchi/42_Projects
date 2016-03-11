@@ -18,7 +18,7 @@ t_tool    *init_param()
     t->mlx_win = mlx_new_window(t->mlx_ptr, t->cam.x_res, t->cam.y_res, "RTv1");
     t->mlx_img = mlx_new_image(t->mlx_ptr, t->cam.x_res, t->cam.y_res);
     
-    t->cam.pos.x = 0;
+    t->cam.pos.x = 0.1;
     t->cam.pos.y = 0;
     t->cam.pos.z = 0;
     
