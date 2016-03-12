@@ -1,31 +1,53 @@
 #include <RTv1.h>
 #include <stdio.h>
 
-void	pixel_put_to_image(t_tool *t, int x, int y, float r, float g, float b)
+t_color find_color(t_tool *t, float k, t_color objcolor, t_color lightcolor)
+{
+    objcolor.r = objcolor.r * t->LumAmb + lightcolor.r * k * 1;
+    objcolor.g = objcolor.g * t->LumAmb + lightcolor.g * k * 1;
+    objcolor.b = objcolor.b * t->LumAmb + lightcolor.b * k * 1;
+    
+    if (objcolor.r < 0)
+        objcolor.r = 0;
+    if (objcolor.b < 0)
+        objcolor.b = 0;
+    if (objcolor.g < 0)
+        objcolor.g = 0;
+    if (objcolor.r > 255)
+        objcolor.r = 255;
+    if (objcolor.b > 255)
+        objcolor.b = 255;
+    if (objcolor.g > 255)
+        objcolor.g = 255;
+    return (objcolor);
+}
+
+void	pixel_put_to_image(t_tool *t, int x, int y, t_color color)
 {
     t->image.data = mlx_get_data_addr(t->mlx_img, &t->image.bpp, &t->image.size_line, &t->image.endian);
-    t->image.data[x * t->image.bpp / 8 + y * t->image.size_line] = (unsigned char)b;
-    t->image.data[x * t->image.bpp / 8 + 1 + y * t->image.size_line] = (unsigned char)g;
-    t->image.data[x * t->image.bpp / 8 + 2 + y * t->image.size_line] = (unsigned char)r;
+    t->image.data[x * t->image.bpp / 8 + y * t->image.size_line] = (unsigned char)color.b;
+    t->image.data[x * t->image.bpp / 8 + 1 + y * t->image.size_line] = (unsigned char)color.g;
+    t->image.data[x * t->image.bpp / 8 + 2 + y * t->image.size_line] = (unsigned char)color.r;
 }
 
 t_ray  get_ray(t_tool *t, float x, float y)
 {
     t_ray  ray;
+    t_pos   B;
     
+    // position de depart du rayon (Camera)
     ray.O.x = t->cam.pos.x;
     ray.O.y = t->cam.pos.y;
     ray.O.z = t->cam.pos.z;
     
-    ray.D.x = t->cam.upleft.x + t->cam.r_vect.x * t->cam.x_indent * x - t->cam.h_vect.x * t->cam.y_indent * y;
-    ray.D.y = t->cam.upleft.y + t->cam.r_vect.y * t->cam.x_indent * x - t->cam.h_vect.y * t->cam.y_indent * y;
-    ray.D.z = t->cam.upleft.z + t->cam.r_vect.z * t->cam.x_indent * x - t->cam.h_vect.z * t->cam.y_indent * y;
+    // calcul de la position d'arrivee du rayon sur le viewplane
+    B.x = t->cam.upleft.x + t->cam.r_vect.x * t->cam.x_indent * x - t->cam.h_vect.x * t->cam.y_indent * y;
+    B.y = t->cam.upleft.y + t->cam.r_vect.y * t->cam.x_indent * x - t->cam.h_vect.y * t->cam.y_indent * y;
+    B.z = t->cam.upleft.z + t->cam.r_vect.z * t->cam.x_indent * x - t->cam.h_vect.z * t->cam.y_indent * y;
     
-    //printf("x_indent = %f / y_indent = %f\n", t->cam.x_indent, t->cam.y_indent);
-    //sleep(1);
-    //printf("x = %f / y = %f / z = %f\n",ray.D.x, ray.D.y, ray.D.z);
-    vectorNorm(&ray.D);
-    //printf("x = %f / y = %f / z = %f\n",ray.D.x, ray.D.y, ray.D.z);
+    // calcul du vecteur directeur du rayon
+    ray.D = vectorSub(&B, &ray.O);
+    vectorNorm(&ray.D); // norme pour avoir taille de vecteur = 1 (vecteur unitaire)
     return (ray);
 }
 
@@ -33,119 +55,68 @@ t_ray  get_ray(t_tool *t, float x, float y)
 void    draw(t_tool *t, float x, float y)
 {
     t_ray  ray;
-    
-    t_cyl cyl;
-    t_cone cone;
     t_sphere sphere;
-    t_plan  plan;
-    
+    t_light light;
+    t_color final_color;
     float coef = 20000;
+    float k;
     
-    float red = 0;
-    float green = 100;
-    float blue = 100;
+    // raypon de la sphere
+    sphere.rad = 1;
     
-    sphere.rad = 100;
+    // centre de la sphere
     sphere.O.x = 0;
     sphere.O.y = 0;
-    sphere.O.z = 300;
+    sphere.O.z = 10;
     
-    cone.O.x = 0;
-    cone.O.y = 0;
-    cone.O.z = -100;
-    cone.h = 20;
-    cone.rad = 10;
+    // couleur de la sphere
+    sphere.color.r = 0;
+    sphere.color.g = 100;
+    sphere.color.b = 100;
     
-    cyl.vect.O.x = 0;
-    cyl.vect.O.y = 0;
-    cyl.vect.O.z = -100;
-    cyl.vect.D.x = 0;
-    cyl.vect.D.y = 1;
-    cyl.vect.D.z = 0;
-    cyl.rad = 15;
+    // position de la lumiere
+    light.O.x = 0;
+    light.O.y = 0;
+    light.O.z = 0;
     
-    plan.a = 0;
-    plan.b = 1;
-    plan.c = 0;
-    plan.d = 20;
+    // couleur de la lumiere (blanche ici)
+    light.color.r = 255;
+    light.color.g = 255;
+    light.color.b = 255;
     
+    // Pour obtenir le rayon avec position de depart et vecteur directeur unitaire
     ray = get_ray(t, x, y);
     
+    // si il y a une intersection avec la sphere
     if (intersection_sphere(sphere, ray, &coef))
     {
-//        // On calcul le point d'impact
-//        t_pos Impact;
-//        Impact.x = ray.O.x + ray.D.x * coef;
-//        Impact.y = ray.O.y + ray.D.y * coef;
-//        Impact.z = ray.O.z + ray.D.z * coef;
-//        
-//        //printf("x = %f / y = %f / z = %f\n",Impact.x, Impact.y, Impact.z);
-//        //sleep(1);
-//        
-//        // On calcule la normale sur la sphere
-//        t_pos Distance;
-//        
-//        Distance.x = Impact.x - sphere.O.x;
-//        Distance.y = Impact.y - sphere.O.y;
-//        Distance.z = Impact.z - sphere.O.z;
-//        
-//        vectorNorm(&Distance);
-//        // la norme
-//        float Norme = vectorDot(&Distance,&Distance);
-//        float Temp = Norme * Norme;
-//        Temp = 1 / sqrt(Temp);
-//        Norme = Temp * Norme;
-//        
-//        
-//        if (Norme != 0)
-//        {
-//            // On calcul la lumière ici ( Modèle de lambert )
-//            
-//            
-//            // Distance entre la lumière et l'impact
-//            t_pos RayLightDist;
-//            RayLightDist.x = 0 - Impact.x;
-//            RayLightDist.y = 0 - Impact.y;
-//            RayLightDist.z = 0 - Impact.z;
-//            
-//            // Produit scalaire
-//            float NormeRayDist = vectorDot(&RayLightDist,&RayLightDist);
-//            
-//            t_pos RayLightDir;
-//            
-//            // la norme
-//            if (NormeRayDist != 0)
-//            {
-//                RayLightDir.x = RayLightDist.x / Norme;
-//                RayLightDir.y = RayLightDist.y / Norme;
-//                RayLightDir.z = RayLightDist.z / Norme;
-//            }
-//            
-//            t_pos IntensityLight;
-//            IntensityLight = vectorMul(&RayLightDir,&Distance);
-//            
-//            float lambert = (IntensityLight.x * Norme)+ (IntensityLight.y * Norme)+(IntensityLight.z * Norme);
-//            
-//            red = (120  * lambert);
-//            green = 60 + (100 * lambert);
-//            blue  = 60 + (100  * lambert);
-//        
-//            if (red < 0)
-//                red = 0;
-//            if (blue < 0)
-//                blue = 0;
-//            if (green < 0)
-//                green = 0;
-//            if (red > 255)
-//                red = 255;
-//            if (blue > 255)
-//                blue = 255;
-//            if (green > 255)
-//                green = 255;
-//            
-            //printf("%f / %f / %f\n", inter.x, inter.y, inter.z);
-            pixel_put_to_image(t, x, y, red, green, blue);
+        t_ray   impact;
+        t_ray   lightray;
         
+        // on calcule les coordonnes du point touché avec Depart rayon + vecteur unitaire rayon * coef;
+        impact.O.x = ray.O.x + ray.D.x * coef;
+        impact.O.y = ray.O.y + ray.D.y * coef;
+        impact.O.z = ray.O.z + ray.D.z * coef;
+        
+        // depart du rayon de lumiere
+        lightray.O.x = light.O.x;
+        lightray.O.y = light.O.y;
+        lightray.O.z = light.O.z;
+        
+        // calcul du vecteur directeur unitaire du rayon de lumiere
+        lightray.D = vectorSub(&impact.O, &lightray.O);
+        vectorNorm(&lightray.D); // norme pour avoir une distance de 1
+        
+        // calcul du vecteur normal a la sphere au point d'impact
+        impact.D = vectorSub(&impact.O, &sphere.vect.O);
+        vectorNorm(&impact.D); // norme pour avoir une distance de 1
+        
+        // calcul de l'angle forme par le rayon de lumiere et la normale qui correspond a un coefficient (0 < k < 1) de luminosité de la sphere
+        k = - vectorDot(&lightray.D, &impact.D);
+        
+        // calcul de la couleur finale grace a la couleur de base de l'objet, de la lumiere, au coefficient de luminosité et au coefficient de lumiere d'ambiance (fixe)
+        final_color = find_color(t, k, plan.color, light.color);
+        pixel_put_to_image(t, x, y, final_color);
     }
 }
 

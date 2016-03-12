@@ -6,6 +6,14 @@
 # include "libft.h"
 #define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
 
+typedef struct s_color
+{
+    float       r;
+    float       g;
+    float       b;
+}               t_color;
+
+
 typedef struct  s_pos
 {
     float       x;
@@ -19,18 +27,26 @@ typedef struct  s_ray
     t_pos       D;
 }               t_ray;
 
+typedef struct s_light
+{
+    t_pos       O;
+    t_color     color;
+}              t_light;
+
 typedef struct  s_plan
 {
     float       a;
     float       b;
     float       c;
     float       d;
+    t_color     color;
 }               t_plan;
 
 typedef struct  s_sphere
 {
     t_pos       O;
     float       rad;
+    t_color     color;
 }               t_sphere;
 
 typedef struct  s_cone
@@ -38,12 +54,14 @@ typedef struct  s_cone
     t_pos       O;
     float       h;
     float       rad;
+    t_color     color;
 }               t_cone;
 
 typedef struct s_cyl
 {
 	t_ray		vect;
-	float		rad;	
+    float		rad;
+    t_color     color;
 }				t_cyl;
 
 typedef struct  s_cam
@@ -77,6 +95,7 @@ typedef struct	s_tool
 	void		*mlx_img;
     t_image     image;
     t_cam       cam;
+    float       LumAmb;
 }				t_tool;
 
 int     intersection_plan(t_plan plan, t_ray ray, float *coef);
@@ -85,7 +104,7 @@ int     intersection_cone(t_cone cone, t_ray ray, float *coef);
 int     intersection_cyl(t_cyl cyl, t_ray ray, float *coef);
 
 
-void	pixel_put_to_image(t_tool *t, int x, int y, float r, float g, float b);
+void	pixel_put_to_image(t_tool *t, int x, int y, t_color color);
 t_ray  get_ray(t_tool *t, float x, float y);
 void    draw(t_tool *t, float x, float y);
 

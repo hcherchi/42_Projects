@@ -7,7 +7,7 @@ int     intersection_plan(t_plan plan, t_ray ray, float *coef)
     
     a = plan.a * ray.D.x + plan.b * ray.D.y + plan.c * ray.D.z;
     b = plan.a * ray.O.x + plan.b * ray.O.y + plan.c * ray.O.z + plan.d;
-    if (-b / a < 0)
+    if (-b / a > 0)
     {
         *coef = -b / a;
         return 1;
@@ -23,22 +23,29 @@ int     intersection_sphere(t_sphere sphere, t_ray ray, float *coef)
     t_pos   dist;
     float   discr;
     
+    // resolution d'une equation du second degre
     a = vectorDot(&ray.D, &ray.D);
     dist = vectorSub(&ray.O, &sphere.O);
     b = 2 * vectorDot(&ray.D, &dist);
     c = vectorDot(&dist, &dist) - (sphere.rad * sphere.rad);
     discr = b * b - 4 * a * c;
+    
+    // pas de solution donc pas d'intersection
     if (discr < 0)
         return 0;
-//    float sqrtdiscr = sqrtf(discr);
-//    float t0 = (-b + sqrtdiscr)/(2);
-//    float t1 = (-b - sqrtdiscr)/(2);
-//    if (fabs(t0) > fabs(t1))
-//        t0 = t1;
-//    if (t0 > 0)
-//        return 0;
-//    else
-        *coef = 0;
+    
+    // calcul des solution
+    float sqrtdiscr = sqrtf(discr);
+    float t0 = (-b + sqrtdiscr)/(2);
+    float t1 = (-b - sqrtdiscr)/(2);
+    
+    // choisi la solution la plus proche
+    if (fabs(t0) > fabs(t1))
+        t0 = t1;
+    if (t0 < 0)
+        return 0;
+    else
+        *coef = t0; //coef prends cette valeur. il represente la distance entre la camera et le point d'impact.
     return 1;
 }
 
@@ -94,7 +101,7 @@ int     intersection_cyl(t_cyl cyl, t_ray ray, float *coef)
     //printf("%f - %f\n", t0, t1);
     if (fabs(t0) > fabs(t1))
         t0 = t1;
-    if (t0 > 0)
+    if (t0 < 0)
         return 0;
     else
         *coef = t0;
