@@ -97,6 +97,8 @@ void	pixel_put_to_image(t_tool *t, int x, int y, t_color color);
 t_ray  get_ray(t_tool *t, float x, float y);
 void    draw(t_tool *t, float x, float y);
 
+void    find_normal(t_ray *impact, t_object *object);
+
 void vectorNorm(t_pos *v);
 t_pos vectorMul(t_pos *v1, t_pos *v2);
 t_pos vectorSub(t_pos *v1, t_pos *v2);

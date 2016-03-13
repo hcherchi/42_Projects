@@ -1,5 +1,5 @@
 #include <RTv1.h>
-
+#include <stdio.h>
 t_object    *intersection(t_object *l_objects, t_ray ray)
 {
     float min;
@@ -102,7 +102,7 @@ float     intersection_cone(t_object *cone, t_ray ray, float *min)
     ft_putchar('\n');
     if (fabs(t0) > fabs(t1))
         t0 = t1;
-    if (t0 > 0)
+    if (t0 < 0)
         return 0;
     else if (t0 < *min)
         *min = t0;
@@ -137,5 +137,6 @@ float     intersection_cyl(t_object *cyl, t_ray ray, float *min)
         return 0;
     else if (t0 < *min)
         *min = t0;
+    printf("%f\n", t0);
     return t0;
 }

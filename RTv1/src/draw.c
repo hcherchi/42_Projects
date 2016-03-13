@@ -58,54 +58,55 @@ void    draw(t_tool *t, float x, float y)
     t_light light;
     t_color final_color;
     t_object *l_objects;
-    t_object *sphere;
-    t_object *sphere2;
+    t_object *cyl;
+    t_object *plan;
     t_object *curObject;
     
     float k;
     
-    sphere = malloc(sizeof(t_object));
+    cyl = malloc(sizeof(t_object));
     
-    sphere2 = malloc(sizeof(t_object));
-    
-    // raypon de la sphere
-    sphere->rad = 1;
-    
-    // centre de la sphere
-    sphere->O.x = 0;
-    sphere->O.y = 0;
-    sphere->O.z = 10;
-    
-    // couleur de la sphere
-    sphere->color.r = 0;
-    sphere->color.g = 100;
-    sphere->color.b = 100;
-    
-    sphere->next = sphere2;
-    sphere->type = SPHERE;
+    plan = malloc(sizeof(t_object));
     
     // raypon de la sphere
-    sphere2->rad = 1;
+    cyl->rad = 0.1;
     
     // centre de la sphere
-    sphere2->O.x = 1;
-    sphere2->O.y = 0;
-    sphere2->O.z = 10;
+    cyl->O.x = 0;
+    cyl->O.y = 0;
+    cyl->O.z = 1;
+    
+    cyl->D.x = 0;
+    cyl->D.y = 1;
+    cyl->D.z = 0;
     
     // couleur de la sphere
-    sphere2->color.r = 100;
-    sphere2->color.g = 0;
-    sphere2->color.b = 0;
+    cyl->color.r = 0;
+    cyl->color.g = 100;
+    cyl->color.b = 100;
     
-    sphere2->next = NULL;
-    sphere2->type = SPHERE;
+    cyl->next = NULL;
+    cyl->type = CYL;
     
-    l_objects = sphere;
+    plan->a = 0;
+    plan->b = 1;
+    plan->c = 0;
+    plan->d = 1;
+    
+    // couleur de la sphere
+    plan->color.r = 200;
+    plan->color.g = 0;
+    plan->color.b = 0;
+    
+    plan->next = NULL;
+    plan->type = PLAN;
+    
+    l_objects = cyl;
     
     // position de la lumiere
     light.O.x = 0;
     light.O.y = 0;
-    light.O.z = 0;
+    light.O.z = -40;
     
     // couleur de la lumiere (blanche ici)
     light.color.r = 255;
@@ -135,8 +136,14 @@ void    draw(t_tool *t, float x, float y)
         lightray.D = vectorSub(&impact.O, &lightray.O);
         vectorNorm(&lightray.D); // norme pour avoir une distance de 1
         
+        
+        
+        
+        
+        
+        
         // calcul du vecteur normal a la sphere au point d'impact
-        impact.D = vectorSub(&impact.O, &curObject->O);
+        find_normal(&impact, curObject);
         vectorNorm(&impact.D); // norme pour avoir une distance de 1
         
         // calcul de l'angle forme par le rayon de lumiere et la normale qui correspond a un coefficient (0 < k < 1) de luminosité de la sphere
