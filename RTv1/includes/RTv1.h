@@ -5,6 +5,10 @@
 # include <math.h>
 # include "libft.h"
 #define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
+#define SPHERE 0
+#define CYL 1
+#define CONE 2
+#define PLAN 3
 
 typedef struct s_color
 {
@@ -13,13 +17,28 @@ typedef struct s_color
     float       b;
 }               t_color;
 
-
 typedef struct  s_pos
 {
     float       x;
     float       y;
     float       z;
 }               t_pos;
+
+typedef struct s_object
+{
+    int         type;
+    float       dist;
+    t_color     color;
+    t_pos       O;
+    t_pos       D;
+    float               rad;
+    float               h;
+    float               a;
+    float               b;
+    float               c;
+    float               d;
+    struct s_object     *next;
+}               t_object;
 
 typedef struct  s_ray
 {
@@ -32,37 +51,6 @@ typedef struct s_light
     t_pos       O;
     t_color     color;
 }              t_light;
-
-typedef struct  s_plan
-{
-    float       a;
-    float       b;
-    float       c;
-    float       d;
-    t_color     color;
-}               t_plan;
-
-typedef struct  s_sphere
-{
-    t_pos       O;
-    float       rad;
-    t_color     color;
-}               t_sphere;
-
-typedef struct  s_cone
-{
-    t_pos       O;
-    float       h;
-    float       rad;
-    t_color     color;
-}               t_cone;
-
-typedef struct s_cyl
-{
-	t_ray		vect;
-    float		rad;
-    t_color     color;
-}				t_cyl;
 
 typedef struct  s_cam
 {
@@ -98,10 +86,11 @@ typedef struct	s_tool
     float       LumAmb;
 }				t_tool;
 
-int     intersection_plan(t_plan plan, t_ray ray, float *coef);
-int     intersection_sphere(t_sphere sphere, t_ray ray, float *coef);
-int     intersection_cone(t_cone cone, t_ray ray, float *coef);
-int     intersection_cyl(t_cyl cyl, t_ray ray, float *coef);
+t_object    *intersection(t_object *l_objects, t_ray ray);
+float     intersection_plan(t_object *plan, t_ray ray, float *coef);
+float     intersection_sphere(t_object *sphere, t_ray ray, float *coef);
+float     intersection_cone(t_object *cone, t_ray ray, float *coef);
+float     intersection_cyl(t_object *cyl, t_ray ray, float *coef);
 
 
 void	pixel_put_to_image(t_tool *t, int x, int y, t_color color);
