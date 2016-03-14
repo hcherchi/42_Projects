@@ -1,25 +1,34 @@
 #include <RTv1.h>
 #include <stdio.h>
 
-t_color find_color(t_tool *t, float k, t_color objcolor, t_color lightcolor)
+void init_color(t_tool *t, t_color objcolor, t_color *final_color)
 {
-    objcolor.r = objcolor.r * t->LumAmb + lightcolor.r * k * 0.5;
-    objcolor.g = objcolor.g * t->LumAmb + lightcolor.g * k * 0.5;
-    objcolor.b = objcolor.b * t->LumAmb + lightcolor.b * k * 0.5;
-    
-    if (objcolor.r < 0)
-        objcolor.r = 0;
-    if (objcolor.b < 0)
-        objcolor.b = 0;
-    if (objcolor.g < 0)
-        objcolor.g = 0;
-    if (objcolor.r > 255)
-        objcolor.r = 255;
-    if (objcolor.b > 255)
-        objcolor.b = 255;
-    if (objcolor.g > 255)
-        objcolor.g = 255;
-    return (objcolor);
+    final_color->r = objcolor.r * t->LumAmb;
+    final_color->g = objcolor.g * t->LumAmb;
+    final_color->b = objcolor.b * t->LumAmb;
+}
+
+void update_color(double k, t_color lightcolor, t_color *final_color, t_color objcolor)
+{
+    final_color->r += (lightcolor.r + objcolor.r) / 2 * k * 0.7;
+    final_color->g += (lightcolor.g + objcolor.g) / 2 * k * 0.7;
+    final_color->b += (lightcolor.b + objcolor.b) / 2 * k * 0.7;
+}
+
+void    normalize_color(t_color *final_color)
+{
+    if (final_color->r < 0)
+        final_color->r = 0;
+    if (final_color->b < 0)
+        final_color->b = 0;
+    if (final_color->g < 0)
+        final_color->g = 0;
+    if (final_color->r > 255)
+        final_color->r = 255;
+    if (final_color->b > 255)
+        final_color->b = 255;
+    if (final_color->g > 255)
+        final_color->g = 255;
 }
 
 void	pixel_put_to_image(t_tool *t, int x, int y, t_color color)
@@ -30,7 +39,7 @@ void	pixel_put_to_image(t_tool *t, int x, int y, t_color color)
     t->image.data[x * t->image.bpp / 8 + 2 + y * t->image.size_line] = (unsigned char)color.r;
 }
 
-t_ray  get_ray(t_tool *t, float x, float y)
+t_ray  get_ray(t_tool *t, double x, double y)
 {
     t_ray  ray;
     t_pos   B;
@@ -52,46 +61,56 @@ t_ray  get_ray(t_tool *t, float x, float y)
 }
 
 
-void    draw(t_tool *t, float x, float y)
+void    draw(t_tool *t, double x, double y)
 {
     t_ray  ray;
-    t_light light;
+    t_light *l_lights;
+    t_light *light;
+    t_light *light2;
     t_color final_color;
     t_object *l_objects;
     t_object *plan;
     t_object *plan2;
     t_object *sphere;
+    t_object *sphere2;
     t_object *curObject;
     t_object *curObject2;
     
-    float k;
+    double k;
     
     plan2 = malloc(sizeof(t_object));
     sphere = malloc(sizeof(t_object));
+    sphere2 = malloc(sizeof(t_object));
     plan = malloc(sizeof(t_object));
     
-    sphere->rad = 1;
-    sphere->O.x = 0;
-    sphere->O.y = 0;
-    sphere->O.z = 10;
+    light = malloc(sizeof(t_light));
+    light2 = malloc(sizeof(t_light));
     
-    sphere->color.r = 150;
-    sphere->color.g = 150;
-    sphere->color.b = 150;
-    
-    sphere->next = NULL;
+    sphere->rad = 0.5;
+    sphere->O.x = -0.4;
+    sphere->O.y = -0.5;
+    sphere->O.z = 5;
+    sphere->color.r = 202;
+    sphere->color.g = 0;
+    sphere->color.b = 20;
     sphere->type = SPHERE;
 
+    sphere2->rad = 0.5;
+    sphere2->O.x = 0.4;
+    sphere2->O.y = -0.5;
+    sphere2->O.z = 4;
+    sphere2->color.r = 0;
+    sphere2->color.g = 0;
+    sphere2->color.b = 0;
+    sphere2->type = SPHERE;
+    
     plan2->a = 0;
     plan2->b = 0;
     plan2->c = -1;
-    plan2->d = 20;
-    
-    plan2->color.r = 0;
-    plan2->color.g = 150;
-    plan2->color.b = 0;
-    
-    plan2->next = sphere;
+    plan2->d = 10;
+    plan2->color.r = 153;
+    plan2->color.g = 255;
+    plan2->color.b = 153;
     plan2->type = PLAN;
 
     
@@ -99,71 +118,72 @@ void    draw(t_tool *t, float x, float y)
     plan->b = 1;
     plan->c = 0;
     plan->d = 1;
-    
-    plan->color.r = 0;
-    plan->color.g = 250;
-    plan->color.b = 250;
-    
-    plan->next = plan2;
+    plan->color.r = 153;
+    plan->color.g = 255;
+    plan->color.b = 153;
     plan->type = PLAN;
     
     l_objects = plan;
+    plan->next = plan2;
+    plan2->next = sphere;
+    sphere->next = sphere2;
+    sphere2->next = NULL;
     
-    // position de la lumiere
-    light.O.x = 2;
-    light.O.y = 1;
-    light.O.z = 0;
+    light->O.x = 3;
+    light->O.y = 1;
+    light->O.z = 7;
+    light->color.r = 255;
+    light->color.g = 255;
+    light->color.b = 255;
+    light->dist = 15;
     
-    // couleur de la lumiere (blanche ici)
-    light.color.r = 255;
-    light.color.g = 255;
-    light.color.b = 255;
+    light2->O.x = -1;
+    light2->O.y = 1;
+    light2->O.z = 3;
+    light2->color.r = 255;
+    light2->color.g = 255;
+    light2->color.b = 255;
+    light2->dist = 15;
     
-    // Pour obtenir le rayon avec position de depart et vecteur directeur unitaire
+    l_lights = light;
+    light->next = light2;
+    light2->next = NULL;
+
     ray = get_ray(t, x, y);
     
-    // si il y a une intersection avec la sphere
     if ((curObject = intersection(l_objects, ray)))
     {
         t_ray   impact;
-        t_ray   lightray;
         
-        // on calcule les coordonnes du point touché avec Depart rayon + vecteur unitaire rayon * coef;
+        init_color(t, curObject->color, &final_color);
+
         impact.O.x = ray.O.x + ray.D.x * curObject->dist;
         impact.O.y = ray.O.y + ray.D.y * curObject->dist;
         impact.O.z = ray.O.z + ray.D.z * curObject->dist;
         
-        // depart du rayon de lumiere
-        lightray.O.x = light.O.x;
-        lightray.O.y = light.O.y;
-        lightray.O.z = light.O.z;
-        
-        // calcul du vecteur directeur unitaire du rayon de lumiere
-        lightray.D = vectorSub(&impact.O, &lightray.O);
-        vectorNorm(&lightray.D); // norme pour avoir une distance de 1
-        
-        if ((curObject2 = intersection(l_objects, lightray)) && curObject2->type == curObject->type)
+        while (l_lights)
         {
-        //calcul du vecteur normal a la sphere au point d'impact
-        find_normal(&impact, curObject);
-        vectorNorm(&impact.D); // norme pour avoir une distance de 1
+            t_ray   lightray;
+
+            lightray.O.x = l_lights->O.x;
+            lightray.O.y = l_lights->O.y;
+            lightray.O.z = l_lights->O.z;
         
-        // calcul de l'angle forme par le rayon de lumiere et la normale qui correspond a un coefficient (0 < k < 1) de luminosité de la sphere
-        k = -vectorDot(&lightray.D, &impact.D);
+            lightray.D = vectorSub(&impact.O, &lightray.O);
+            vectorNorm(&lightray.D);
         
-        
-        // calcul de la couleur finale grace a la couleur de base de l'objet, de la lumiere, au coefficient de luminosité et au coefficient de lumiere d'ambiance (fixe)
-        final_color = find_color(t, k, curObject->color, light.color);
+            if ((curObject2 = intersection(l_objects, lightray)) && curObject2 == curObject)
+            {
+                find_normal(&impact, curObject);
+                vectorNorm(&impact.D);
+                
+                k = MAX(acos(vectorDot(&lightray.D, &impact.D)) - M_PI / 2, 0);
+                k *= MAX(0, (l_lights->dist - curObject->dist) / l_lights->dist);
+                update_color(k, l_lights->color, &final_color, curObject->color);
+            }
+            l_lights = l_lights->next;
         }
-        else
-        {
-//            final_color.r = 0;
-//            final_color.g = 0;
-//            final_color.b = 0;
-            k = 0;
-        }
-        final_color = find_color(t, k, curObject->color, light.color);
+        normalize_color(&final_color);
         pixel_put_to_image(t, x, y, final_color);
     }
 }
-

@@ -11,13 +11,13 @@ t_pos vectorSub(t_pos *v1, t_pos *v2)
 }
 
 /* Multiply two vectors and return the resulting scalar (dot product) */
-float vectorDot(t_pos *v1, t_pos *v2)
+double vectorDot(t_pos *v1, t_pos *v2)
 {
     return v1->x * v2->x + v1->y * v2->y + v1->z * v2->z;
 }
 
 /* Calculate Vector x Scalar and return resulting Vector*/
-t_pos vectorScale(float c, t_pos *v)
+t_pos vectorScale(double c, t_pos *v)
 {
     t_pos result;
     result.x = v->x * c;
@@ -38,7 +38,7 @@ t_pos vectorAdd(t_pos *v1, t_pos *v2)
 
 void vectorNorm(t_pos *v)
 {
-    float tmp;
+    double tmp;
     tmp = 1/sqrt((v->x * v->x) + (v->y * v->y) + (v->z * v->z));
     v->x = v->x * tmp;
     v->y = v->y * tmp;

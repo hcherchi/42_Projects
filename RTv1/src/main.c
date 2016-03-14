@@ -18,7 +18,7 @@ t_tool    *init_param()
     t->mlx_win = mlx_new_window(t->mlx_ptr, t->cam.x_res, t->cam.y_res, "RTv1");
     t->mlx_img = mlx_new_image(t->mlx_ptr, t->cam.x_res, t->cam.y_res);
     
-    t->LumAmb = 0.2;
+    t->LumAmb = 0.1;
     
     // position de la camera
     t->cam.pos.x = 0;
@@ -54,8 +54,8 @@ t_tool    *init_param()
 
 void	run_through(t_tool *t)
 {
-    float x;
-    float y;
+    double x;
+    double y;
     
     y = 0;
     while (y < t->cam.y_res)
