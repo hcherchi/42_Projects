@@ -9,22 +9,24 @@ t_object    *intersection(t_object *l_objects, t_ray ray)
     min = 200000;
     
     
-    ft_putendl("Trouvage des inter");
     while (tmp != NULL)
     {
         if (tmp->type == SPHERE)
+        {
             tmp->dist = intersection_sphere(tmp, ray, &min);
+        }
         else if (tmp->type == CONE)
             tmp->dist = intersection_cone(tmp, ray, &min);
         else if (tmp->type == PLAN)
+        {
             tmp->dist = intersection_plan(tmp, ray, &min);
+        }
         else if (tmp->type == CYL)
             tmp->dist = intersection_cyl(tmp, ray, &min);
         tmp = tmp->next;
     }
     if (min == 200000)
     {
-        ft_putendl("inter pas trouvee");
         return (NULL);
     }
     tmp = l_objects;
@@ -32,7 +34,6 @@ t_object    *intersection(t_object *l_objects, t_ray ray)
     {
         if (tmp->dist == min)
         {
-            ft_putendl("inter trouvee");
             return (tmp);
         }
         tmp = tmp->next;
@@ -73,7 +74,9 @@ float     intersection_sphere(t_object *sphere, t_ray ray,  float *min)
     
     // pas de solution donc pas d'intersection
     if (discr < 0)
+    {
         return 0;
+    }
     
     // calcul des solution
     float sqrtdiscr = sqrtf(discr);
