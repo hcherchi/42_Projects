@@ -1,11 +1,11 @@
 #include <RTv1.h>
 #include <stdio.h>
 
-t_color find_color(t_tool *t, float k, t_color objcolor, t_color lightcolor, float kdist)
+t_color find_color(t_tool *t, float k, t_color objcolor, t_color lightcolor)
 {
-    objcolor.r = objcolor.r * t->LumAmb + lightcolor.r * k * 0.4 * kdist;
-    objcolor.g = objcolor.g * t->LumAmb + lightcolor.g * k * 0.4 * kdist;
-    objcolor.b = objcolor.b * t->LumAmb + lightcolor.b * k * 0.4 * kdist;
+    objcolor.r = objcolor.r * t->LumAmb + lightcolor.r * k * 0.5;
+    objcolor.g = objcolor.g * t->LumAmb + lightcolor.g * k * 0.5;
+    objcolor.b = objcolor.b * t->LumAmb + lightcolor.b * k * 0.5;
     
     if (objcolor.r < 0)
         objcolor.r = 0;
@@ -58,52 +58,59 @@ void    draw(t_tool *t, float x, float y)
     t_light light;
     t_color final_color;
     t_object *l_objects;
-    t_object *cyl;
     t_object *plan;
+    t_object *plan2;
+    t_object *sphere;
     t_object *curObject;
     t_object *curObject2;
     
     float k;
     
-    cyl = malloc(sizeof(t_object));
-    
+    plan2 = malloc(sizeof(t_object));
+    sphere = malloc(sizeof(t_object));
     plan = malloc(sizeof(t_object));
     
-    // raypon de la sphere
-    cyl->rad = 1;
-    // centre de la sphere
-    cyl->O.x = 0;
-    cyl->O.y = 0;
-    cyl->O.z = 10;
-//    cyl->D.x = 0;
-//    cyl->D.y = 1;
-//    cyl->D.z = 0;
+    sphere->rad = 1;
+    sphere->O.x = 0;
+    sphere->O.y = 0;
+    sphere->O.z = 10;
     
-    // couleur de la sphere
-    cyl->color.r = 0;
-    cyl->color.g = 100;
-    cyl->color.b = 100;
+    sphere->color.r = 150;
+    sphere->color.g = 150;
+    sphere->color.b = 150;
     
-    cyl->next = plan;
-    cyl->type = SPHERE;
+    sphere->next = NULL;
+    sphere->type = SPHERE;
+
+    plan2->a = 0;
+    plan2->b = 0;
+    plan2->c = -1;
+    plan2->d = 20;
+    
+    plan2->color.r = 0;
+    plan2->color.g = 150;
+    plan2->color.b = 0;
+    
+    plan2->next = sphere;
+    plan2->type = PLAN;
+
     
     plan->a = 0;
     plan->b = 1;
     plan->c = 0;
     plan->d = 1;
     
-    // couleur de la sphere
-    plan->color.r = 200;
-    plan->color.g = 0;
-    plan->color.b = 0;
+    plan->color.r = 0;
+    plan->color.g = 250;
+    plan->color.b = 250;
     
-    plan->next = NULL;
+    plan->next = plan2;
     plan->type = PLAN;
     
-    l_objects = cyl;
+    l_objects = plan;
     
     // position de la lumiere
-    light.O.x = 1;
+    light.O.x = 2;
     light.O.y = 1;
     light.O.z = 0;
     
@@ -137,25 +144,25 @@ void    draw(t_tool *t, float x, float y)
         
         if ((curObject2 = intersection(l_objects, lightray)) && curObject2->type == curObject->type)
         {
-        // calcul du vecteur normal a la sphere au point d'impact
+        //calcul du vecteur normal a la sphere au point d'impact
         find_normal(&impact, curObject);
         vectorNorm(&impact.D); // norme pour avoir une distance de 1
         
         // calcul de l'angle forme par le rayon de lumiere et la normale qui correspond a un coefficient (0 < k < 1) de luminosité de la sphere
-        k = - (vectorDot(&lightray.D, &impact.D));
-            
-            float kdist;
-        kdist = (60 - curObject->dist) / 60;
+        k = -vectorDot(&lightray.D, &impact.D);
+        
         
         // calcul de la couleur finale grace a la couleur de base de l'objet, de la lumiere, au coefficient de luminosité et au coefficient de lumiere d'ambiance (fixe)
-        final_color = find_color(t, k, curObject->color, light.color, kdist);
+        final_color = find_color(t, k, curObject->color, light.color);
         }
         else
         {
-            final_color.r = 0;
-            final_color.g = 0;
-            final_color.b = 0;
+//            final_color.r = 0;
+//            final_color.g = 0;
+//            final_color.b = 0;
+            k = 0;
         }
+        final_color = find_color(t, k, curObject->color, light.color);
         pixel_put_to_image(t, x, y, final_color);
     }
 }

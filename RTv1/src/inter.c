@@ -47,7 +47,8 @@ float     intersection_plan(t_object *plan, t_ray ray, float *min)
     float b;
     
     a = plan->a * ray.D.x + plan->b * ray.D.y + plan->c * ray.D.z;
-    b = plan->a * ray.O.x + plan->b * ray.O.y + plan->c * ray.O.z + plan->d;
+    b = plan->a * ray.O.x + plan->b * ray.O.y + plan->c *
+    ray.O.z + plan->d;
     if (-b / a > 0)
     {
         if (-b / a < *min)
