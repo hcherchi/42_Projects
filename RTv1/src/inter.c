@@ -6,8 +6,10 @@ t_object    *intersection(t_object *l_objects, t_ray ray)
     t_object *tmp;
     
     tmp = l_objects;
-    min = 20000;
+    min = 200000;
     
+    
+    ft_putendl("Trouvage des inter");
     while (tmp != NULL)
     {
         if (tmp->type == SPHERE)
@@ -20,13 +22,20 @@ t_object    *intersection(t_object *l_objects, t_ray ray)
             tmp->dist = intersection_cyl(tmp, ray, &min);
         tmp = tmp->next;
     }
-    if (min == 20000)
-        return (NULL);
-    while (l_objects != NULL)
+    if (min == 200000)
     {
-        if (l_objects->dist == min)
-            return (l_objects);
-        l_objects = l_objects->next;
+        ft_putendl("inter pas trouvee");
+        return (NULL);
+    }
+    tmp = l_objects;
+    while (tmp != NULL)
+    {
+        if (tmp->dist == min)
+        {
+            ft_putendl("inter trouvee");
+            return (tmp);
+        }
+        tmp = tmp->next;
     }
     return (NULL);
 }
