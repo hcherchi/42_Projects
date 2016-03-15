@@ -9,7 +9,7 @@ t_tool    *init_param()
     
     t->mlx_ptr = mlx_init();
     
-    t->cam.dist = 1;
+    t->cam.dist = 0.5;
     t->cam.W = 1;
     t->cam.H = 0.8;
     t->cam.x_res = 1000;

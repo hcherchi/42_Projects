@@ -81,25 +81,24 @@ void    draw(t_tool *t, double x, double y)
     plan2 = malloc(sizeof(t_object));
     sphere = malloc(sizeof(t_object));
     sphere2 = malloc(sizeof(t_object));
-    plan = malloc(sizeof(t_object));
-    
+    plan = malloc(sizeof(t_object)); 
     light = malloc(sizeof(t_light));
     light2 = malloc(sizeof(t_light));
-    
+
     sphere->rad = 0.5;
     sphere->O.x = -0.4;
     sphere->O.y = -0.5;
-    sphere->O.z = 5;
-    sphere->color.r = 202;
+    sphere->O.z = 4;
+    sphere->color.r = 255;
     sphere->color.g = 0;
-    sphere->color.b = 20;
+    sphere->color.b = 0;
     sphere->type = SPHERE;
 
     sphere2->rad = 0.5;
-    sphere2->O.x = 0.4;
+    sphere2->O.x =  -1;
     sphere2->O.y = -0.5;
     sphere2->O.z = 4;
-    sphere2->color.r = 0;
+    sphere2->color.r = 255;
     sphere2->color.g = 0;
     sphere2->color.b = 0;
     sphere2->type = SPHERE;
@@ -108,7 +107,7 @@ void    draw(t_tool *t, double x, double y)
     plan2->b = 0;
     plan2->c = -1;
     plan2->d = 10;
-    plan2->color.r = 153;
+    plan2->color.r = 23;
     plan2->color.g = 255;
     plan2->color.b = 153;
     plan2->type = PLAN;
@@ -127,7 +126,7 @@ void    draw(t_tool *t, double x, double y)
     plan->next = plan2;
     plan2->next = sphere;
     sphere->next = sphere2;
-    sphere2->next = NULL;
+	sphere2->next = NULL;
     
     light->O.x = 3;
     light->O.y = 1;
@@ -151,10 +150,10 @@ void    draw(t_tool *t, double x, double y)
 
     ray = get_ray(t, x, y);
     
+		
     if ((curObject = intersection(l_objects, ray)))
     {
         t_ray   impact;
-        
         init_color(t, curObject->color, &final_color);
 
         impact.O.x = ray.O.x + ray.D.x * curObject->dist;
@@ -163,7 +162,8 @@ void    draw(t_tool *t, double x, double y)
         while (l_lights)
         {
             t_ray   lightray;
-            
+			t_pos	rayflexion;
+
             lightray.O.x = l_lights->O.x;
             lightray.O.y = l_lights->O.y;
             lightray.O.z = l_lights->O.z;
@@ -171,6 +171,9 @@ void    draw(t_tool *t, double x, double y)
             lightray.D = vectorSub(&impact.O, &lightray.O);
             vectorNorm(&lightray.D);
             
+			rayflexion = rotation(impact,lightray);
+			rayflexion = vectorScale(-1, &rayflexion);
+        
             if ((curObject2 = intersection(l_objects, lightray)) && curObject2 == curObject)
             {
                 find_normal(&impact, curObject);
@@ -180,7 +183,7 @@ void    draw(t_tool *t, double x, double y)
                 
                 //rayflechi.x =
                 k = MAX(acos(vectorDot(&lightray.D, &impact.D)) - M_PI / 2, 0) * MAX(0, (l_lights->dist - curObject->dist) / l_lights->dist);
-                
+				k += pow(MAX(acos(vectorDot(&lightray.D, &rayflexion)), 0), 10);
                 update_color(k, l_lights->color, &final_color, curObject->color);
             }
             l_lights = l_lights->next;
