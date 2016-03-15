@@ -1,6 +1,6 @@
 
-#ifndef FRACTOL_H
-# define FRACTOL_H
+#ifndef RTv1_H
+# define RTv1_H
 # include "mlx.h"
 # include <math.h>
 # include "libft.h"
@@ -109,5 +109,5 @@ t_pos vectorSub(t_pos *v1, t_pos *v2);
 double vectorDot(t_pos *v1, t_pos *v2);
 t_pos vectorScale(double c, t_pos *v);
 t_pos vectorAdd(t_pos *v1, t_pos *v2);
-
+t_pos rotation(t_ray impact, t_ray lightray);
 #endif

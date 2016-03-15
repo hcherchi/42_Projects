@@ -1,6 +1,16 @@
 #include <RTv1.h>
 #include <stdio.h>
 
+t_pos rotation(t_ray impact, t_ray light)
+{
+	t_pos rota_matrice;
+
+	rota_matrice.x = ((1 - cos (M_PI) * pow(impact.D.x,2) + 1) * light.D.x) + ((( 1 - cos(M_PI)) * (impact.D.x * impact.D.y) +(-impact.D.z * sin(M_PI))) * light.D.y) +(((1 - cos(M_PI)) * (impact.D.x * impact.D.z) + (-impact.D.y * sin(M_PI)) *light.D.z));
+	rota_matrice.y = (( 1 - cos(M_PI) * (impact.D.x * impact.D.y) + impact.D.z *(sin(M_PI)) * light.D.x)) + (((1 - cos (M_PI) * pow(impact.D.y,2) + 1)) * light.D.y) + (((1 - cos(M_PI) * (impact.D.y * impact.D.z) + (-impact.D.x *sin(M_PI)) *light.D.z)));
+	rota_matrice.z = (( 1 - cos (M_PI) * (impact.D.x * impact.D.y) + (-impact.D.y * sin(M_PI)) * light.D.x)) + ((1 - cos(M_PI) * (impact.D.y * impact.D.z) + impact.D.x * sin(M_PI) * light.D.y)) + ((1 - cos(M_PI) * pow(impact.D.z,2) + 1 ) * light.D.z);
+	vectorNorm(&rota_matrice);
+	return(rota_matrice);
+}
 t_object    *intersection(t_object *l_objects, t_ray ray)
 {
     double min;
@@ -104,7 +114,6 @@ double     intersection_cone(t_object *cone, t_ray ray, double *min)
     double sqrtdiscr = sqrtf(discr);
     double t0 = (-b + sqrtdiscr)/(2);
     double t1 = (-b - sqrtdiscr)/(2);
-    ft_putchar('\n');
     if (fabs(t0) > fabs(t1))
         t0 = t1;
     if (t0 < 0)
