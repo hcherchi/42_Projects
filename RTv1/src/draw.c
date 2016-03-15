@@ -160,25 +160,27 @@ void    draw(t_tool *t, double x, double y)
         impact.O.x = ray.O.x + ray.D.x * curObject->dist;
         impact.O.y = ray.O.y + ray.D.y * curObject->dist;
         impact.O.z = ray.O.z + ray.D.z * curObject->dist;
-        
         while (l_lights)
         {
             t_ray   lightray;
-
+            
             lightray.O.x = l_lights->O.x;
             lightray.O.y = l_lights->O.y;
             lightray.O.z = l_lights->O.z;
         
             lightray.D = vectorSub(&impact.O, &lightray.O);
             vectorNorm(&lightray.D);
-        
+            
             if ((curObject2 = intersection(l_objects, lightray)) && curObject2 == curObject)
             {
                 find_normal(&impact, curObject);
                 vectorNorm(&impact.D);
                 
-                k = MAX(acos(vectorDot(&lightray.D, &impact.D)) - M_PI / 2, 0);
-                k *= MAX(0, (l_lights->dist - curObject->dist) / l_lights->dist);
+                //t_pos rayreflechi;
+                
+                //rayflechi.x =
+                k = MAX(acos(vectorDot(&lightray.D, &impact.D)) - M_PI / 2, 0) * MAX(0, (l_lights->dist - curObject->dist) / l_lights->dist);
+                
                 update_color(k, l_lights->color, &final_color, curObject->color);
             }
             l_lights = l_lights->next;
