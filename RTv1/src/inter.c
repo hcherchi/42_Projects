@@ -1,13 +1,13 @@
 #include <RTv1.h>
 #include <stdio.h>
 
-t_pos rotation(t_ray impact, t_ray light)
+t_pos rotation(t_pos axe, t_pos vect)
 {
 	t_pos rota_matrice;
 
-	rota_matrice.x = ((1 - cos (M_PI) * pow(impact.D.x,2) + 1) * light.D.x) + ((( 1 - cos(M_PI)) * (impact.D.x * impact.D.y) +(-impact.D.z * sin(M_PI))) * light.D.y) +(((1 - cos(M_PI)) * (impact.D.x * impact.D.z) + (-impact.D.y * sin(M_PI)) *light.D.z));
-	rota_matrice.y = (( 1 - cos(M_PI) * (impact.D.x * impact.D.y) + impact.D.z *(sin(M_PI)) * light.D.x)) + (((1 - cos (M_PI) * pow(impact.D.y,2) + 1)) * light.D.y) + (((1 - cos(M_PI) * (impact.D.y * impact.D.z) + (-impact.D.x *sin(M_PI)) *light.D.z)));
-	rota_matrice.z = (( 1 - cos (M_PI) * (impact.D.x * impact.D.y) + (-impact.D.y * sin(M_PI)) * light.D.x)) + ((1 - cos(M_PI) * (impact.D.y * impact.D.z) + impact.D.x * sin(M_PI) * light.D.y)) + ((1 - cos(M_PI) * pow(impact.D.z,2) + 1 ) * light.D.z);
+	rota_matrice.x = - vect.x + 2 * vect.x * pow(axe.x, 2) + 2 * vect.y * axe.x * axe.y + 2 * vect.z * axe.x * axe.z;
+	rota_matrice.y = - vect.y + 2 * vect.x * axe.x * axe.y + 2 * vect.y * pow(axe.y, 2) + vect.z * 2 * axe.y * axe.z;
+	rota_matrice.z = - vect.z + 2 * vect.x * axe.x * axe.z + 2 * vect.y * axe.y * axe.z + 2 * vect.z * pow(axe.z, 2);
 	vectorNorm(&rota_matrice);
 	return(rota_matrice);
 }

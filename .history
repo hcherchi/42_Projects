@@ -1,0 +1,222 @@
+ls > `ls`
+ls > lol `ls`
+ls
+cat toto
+ls > lol `echo Makefile`
+cat lol
+ls
+exit
+env
+setenv kojthrnio=nverunbv
+setenv hugo lol hugo hehe hugo bg
+eenv
+emnv
+env
+"salut\n"
+echo "salut\n"
+echo 'salut\n'
+echo 'salut'
+echo 'pwd'/salut
+echo pwd/salut
+echo $(PWD)/salut
+echo "$(PWD)"/salut
+echo '$(PWD)'/salut
+echo '$PWD'/salut
+echo '$PWD'
+echo '$PWD'/yo
+echo '$PWD'loerjiouvre
+echo "'$PWD'loerjiouvre"
+echo "loerjiouvre"
+echo "$PWD/salut"
+echo "'$PWD'/salut"
+echo "$PWD"
+echo ""$PWD""
+echo """$PWD"""
+echo ""$PWD"/salut"
+echo '"$PWD"/salut'
+echo "$PWD"/salut
+echo bgrue/salut
+echo $PWD/salut
+echo "$PWD"/salut
+echo "$PWD"
+echo "$PWD"l
+echo "$PWD"
+echo "$PWD"/
+echo "$PWD"
+exit
+ls
+`ls` 1> toto
+`echo ls` 1> toto
+`echo ls` 1>&2
+`echo ls` 1>&- 1>&2
+`echo ls` 1>&-
+`echo ls` 1>&- 2>toto
+`echo ls` 1>&- 2>&-
+`echo ls` 1>&- 2>
+`echo ls` 1>&- 2>&1
+`echo ls` 1>&- 2>&
+`echo ls` 1>&- 2>salut
+`echo ls` 1>&- 2>ierwjierjiogrehjiopverj
+`echo ls` 2>&- 2>ierwjierjiogrehjiopverj
+`echo ls` 1>&- 2>ierwjierjiogrehjiopverj
+`echo ls` 2>&- 2>ierwjierjiogrehjiopverj
+ls
+ls > lol `ls`
+ls
+history
+history -r
+ls > `ls`
+ls > lol `ls`
+ls
+cat toto
+ls > lol `echo Makefile`
+cat lol
+ls
+exit
+env
+setenv kojthrnio=nverunbv
+setenv hugo lol hugo hehe hugo bg
+eenv
+emnv
+env
+"salut\n"
+echo "salut\n"
+echo 'salut\n'
+echo 'salut'
+echo 'pwd'/salut
+echo pwd/salut
+echo $(PWD)/salut
+echo "$(PWD)"/salut
+echo '$(PWD)'/salut
+echo '$PWD'/salut
+echo '$PWD'
+echo '$PWD'/yo
+echo '$PWD'loerjiouvre
+echo "'$PWD'loerjiouvre"
+echo "loerjiouvre"
+echo "$PWD/salut"
+echo "'$PWD'/salut"
+echo "$PWD"
+echo ""$PWD""
+echo """$PWD"""
+echo ""$PWD"/salut"
+echo '"$PWD"/salut'
+echo "$PWD"/salut
+echo bgrue/salut
+echo $PWD/salut
+echo "$PWD"/salut
+echo "$PWD"
+echo "$PWD"l
+echo "$PWD"
+echo "$PWD"/
+echo "$PWD"
+exit
+history
+history -t
+history -p
+history -r
+ls > `ls`
+ls > lol `ls`
+ls
+cat toto
+ls > lol `echo Makefile`
+cat lol
+ls
+exit
+env
+setenv kojthrnio=nverunbv
+setenv hugo lol hugo hehe hugo bg
+eenv
+emnv
+env
+"salut\n"
+echo "salut\n"
+echo 'salut\n'
+echo 'salut'
+echo 'pwd'/salut
+echo pwd/salut
+echo $(PWD)/salut
+echo "$(PWD)"/salut
+echo '$(PWD)'/salut
+echo '$PWD'/salut
+echo '$PWD'
+echo '$PWD'/yo
+echo '$PWD'loerjiouvre
+echo "'$PWD'loerjiouvre"
+echo "loerjiouvre"
+echo "$PWD/salut"
+echo "'$PWD'/salut"
+echo "$PWD"
+echo ""$PWD""
+echo """$PWD"""
+echo ""$PWD"/salut"
+echo '"$PWD"/salut'
+echo "$PWD"/salut
+echo bgrue/salut
+echo $PWD/salut
+echo "$PWD"/salut
+echo "$PWD"
+echo "$PWD"l
+echo "$PWD"
+echo "$PWD"/
+echo "$PWD"
+exit
+ls
+exit
+exec 7>/tmp/foo ; ls >&7 ; cat < 7
+exec
+exit
+ls -l $PWD/Makefile
+ls -l $PWD
+ls -l $PWD/Makefile
+ls -l $PWD/Makefil
+ls -l $PWD/Ma
+ls -l $PWD/
+ls -l $PWD
+ls -l "$PWD"/auteur
+ls -l $PWD
+ls -l $PWD"salut"
+echo $PWD"salut"
+echo $PWD/salut
+exit
+unset PWD
+ls
+env
+unset PATH
+env
+./42sh
+env
+exit
+setenv "bla blab la   " HUGO
+env
+env -i ls
+env -i ./minishell
+ls
+env -i ./42sh
+exit
+ls
+cd 42sh 42
+cd /-
+ls
+chmod 000 srcs
+cd ../42sh/srcs
+env salut > ls
+cd ../42sh/srcs
+ls
+rm 06i~vS
+ls
+rm O6i~vS
+ls
+rm ls
+rm l2
+ls
+cat -e << `echo lol`
+cat -e << "hehe"hoho"haha"
+cat -e << 'hehe"hoho"haha'
+cat -e << echo `echo lol`
+cat << echo -e
+ls
+ls | wc -l > toto ; cat -e << abc | wc -l >> toto; cat -e toto
+cat toto
+ls | wc -l 
+cat -e << abc | wc -l

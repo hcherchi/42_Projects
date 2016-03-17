@@ -40,6 +40,7 @@ typedef struct s_object
     double               c;
     double               d;
     struct s_object     *next;
+    int                 mirror;
 }               t_object;
 
 typedef struct  s_ray
@@ -98,6 +99,7 @@ double     intersection_cyl(t_object *cyl, t_ray ray, double *coef);
 
 
 void	pixel_put_to_image(t_tool *t, int x, int y, t_color color);
+t_color    draw_suite(t_light *l_lights, t_ray ray, t_object *l_objects, t_tool *t);
 t_ray  get_ray(t_tool *t, double x, double y);
 void    draw(t_tool *t, double x, double y);
 
@@ -109,5 +111,6 @@ t_pos vectorSub(t_pos *v1, t_pos *v2);
 double vectorDot(t_pos *v1, t_pos *v2);
 t_pos vectorScale(double c, t_pos *v);
 t_pos vectorAdd(t_pos *v1, t_pos *v2);
-t_pos rotation(t_ray impact, t_ray lightray);
+t_pos vectorCopy(t_pos *v1);
+t_pos rotation(t_pos axe, t_pos vect);
 #endif

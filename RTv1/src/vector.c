@@ -36,6 +36,15 @@ t_pos vectorAdd(t_pos *v1, t_pos *v2)
     return (result);
 }
 
+t_pos vectorCopy(t_pos *v1)
+{
+    t_pos result;
+    result.x = v1->x;
+    result.y = v1->y;
+    result.z = v1->z;
+    return (result);
+}
+
 void vectorNorm(t_pos *v)
 {
     double tmp;
