@@ -44,6 +44,8 @@ void    parse_object(t_tool *tools, int fd)
             object->h = ft_atof(split[1]);
         else if (ft_strstr(line, "shiny:"))
             object->shiny = ft_atof(split[1]);
+        else if (ft_strstr(line, "mirror:"))
+            object->mirror = ft_atof(split[1]);
     }
     add_object(&tools->l_objects, object);
 }

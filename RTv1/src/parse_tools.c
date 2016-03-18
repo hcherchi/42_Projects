@@ -4,6 +4,10 @@ int    object_type(char **split)
 {
     if (!ft_strcmp(split[1], "SPHERE"))
         return 0;
+    else if (!ft_strcmp(split[1], "CYL"))
+        return 1;
+    else if (!ft_strcmp(split[1], "CONE"))
+        return 2;
     else if (!ft_strcmp(split[1], "PLAN"))
         return 3;
     return (0);

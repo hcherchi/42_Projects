@@ -68,6 +68,8 @@ t_color    *draw_suite(t_ray *ray ,t_tool *t)
 
     t_pos   *reflectray;
     t_pos   *invlight;
+    
+    t_ray   *reflect;
     double kdiff;
     double kspec;
     
@@ -79,10 +81,19 @@ t_color    *draw_suite(t_ray *ray ,t_tool *t)
     
     if ((curObject = intersection(t->l_objects, ray)))
     {
+        printf("%d\n", curObject->type);
         impact->O = vectorAdd(ray->O, vectorScale(curObject->dist, ray->D));
         find_normal(impact, curObject);
         vectorNorm(impact->D);
         
+        if (curObject->mirror)
+        {
+            reflect = malloc(sizeof(t_ray));
+            reflect->O = vectorCopy(impact->O);
+            reflect->D = rotation(impact->D, vectorScale(1, ray->D));
+            vectorNorm(reflect->D);
+            return (draw_suite(reflect, t));
+        }
         init_color(t, curObject->color, final_color);
         curLight = t->l_lights;
         while (curLight)
