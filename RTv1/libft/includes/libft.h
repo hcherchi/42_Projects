@@ -88,5 +88,8 @@ int					count_char(char *str, char c);
 int					count_block(char *str, char c);
 char				**ft_supersplit(char const *str, char c, char v);
 char				**ft_strsplitlast(char const *str, char c);
+int     			ft_isblank(char c);
+double				ft_atof(char *str);
+
 
 #endif

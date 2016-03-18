@@ -3,6 +3,7 @@
 # define RTv1_H
 # include "mlx.h"
 # include <math.h>
+#include <fcntl.h>
 # include "libft.h"
 #define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
 #define MAX(X, Y) (((X) > (Y)) ? (X) : (Y))
@@ -11,6 +12,16 @@
 #define CONE 2
 #define PLAN 3
 #define E -0.000001
+
+typedef struct s_equation
+{
+    double      a;
+    double      b;
+    double      c;
+    double      discr;
+    double      t1;
+    double      t0;
+}               t_equation;
 
 typedef struct s_color
 {
@@ -30,47 +41,43 @@ typedef struct s_object
 {
     int         type;
     double       dist;
-    t_color     color;
-    t_pos       O;
-    t_pos       D;
+    t_color     *color;
+    t_pos       *O;
+    t_pos       *D;
     double               rad;
     double               h;
-    double               a;
-    double               b;
-    double               c;
-    double               d;
+    double                shiny;
+    int             mirror;
     struct s_object     *next;
-    int                 mirror;
 }               t_object;
 
 typedef struct  s_ray
 {
-    t_pos       O;
-    t_pos       D;
+    t_pos       *O;
+    t_pos       *D;
 }               t_ray;
 
 typedef struct s_light
 {
-    t_pos       O;
-    t_color     color;
+    t_pos       *O;
+    t_color     *color;
     double      dist;
     struct s_light     *next;
 }              t_light;
 
 typedef struct  s_cam
 {
-    t_pos       pos;
-    t_pos       h_vect;
-    t_pos       r_vect;
-    t_pos       vect;
+    t_pos       *pos;
+    t_pos       *h_vect;
+    t_pos       *r_vect;
+    t_pos       *vect;
     double       dist;
     double       W;
     double       H;
-    t_pos       upleft;
+    t_pos       *upleft;
     double       x_res;
     double       y_res;
-    double       x_indent;
-    double       y_indent;
+    double       indent;
 }               t_cam;
 
 typedef struct  s_image
@@ -86,31 +93,57 @@ typedef struct	s_tool
 	void		*mlx_ptr;
 	void		*mlx_win;
 	void		*mlx_img;
-    t_image     image;
-    t_cam       cam;
+	t_object    *l_objects;
+	t_light     *l_lights;
+    t_image     *image;
+    t_cam       *cam;
     double       LumAmb;
 }				t_tool;
 
-t_object    *intersection(t_object *l_objects, t_ray ray);
-double     intersection_plan(t_object *plan, t_ray ray, double *coef);
-double     intersection_sphere(t_object *sphere, t_ray ray, double *coef);
-double     intersection_cone(t_object *cone, t_ray ray, double *coef);
-double     intersection_cyl(t_object *cyl, t_ray ray, double *coef);
+// INTERSECTIONS
+t_object    *intersection(t_object *l_objects, t_ray *ray);
+double     intersection_plan(t_object *plan, t_ray *ray, double *coef);
+double     intersection_sphere(t_object *sphere, t_ray *ray, double *coef);
+double     intersection_cone(t_object *cone, t_ray *ray, double *coef);
+double     intersection_cyl(t_object *cyl, t_ray *ray, double *coef);
 
 
-void	pixel_put_to_image(t_tool *t, int x, int y, t_color color);
-t_color    draw_suite(t_light *l_lights, t_ray ray, t_object *l_objects, t_tool *t);
-t_ray  get_ray(t_tool *t, double x, double y);
+void	pixel_put_to_image(t_tool *t, int x, int y, t_color *color);
+t_color    *draw_suite(t_ray *ray, t_tool *t);
+t_ray  *get_ray(t_tool *t, double x, double y);
 void    draw(t_tool *t, double x, double y);
 
 void    find_normal(t_ray *impact, t_object *object);
 
+// VECTOR
 void vectorNorm(t_pos *v);
-t_pos vectorMul(t_pos *v1, t_pos *v2);
-t_pos vectorSub(t_pos *v1, t_pos *v2);
+t_pos *vectorSub(t_pos *v1, t_pos *v2);
 double vectorDot(t_pos *v1, t_pos *v2);
-t_pos vectorScale(double c, t_pos *v);
-t_pos vectorAdd(t_pos *v1, t_pos *v2);
-t_pos vectorCopy(t_pos *v1);
-t_pos rotation(t_pos axe, t_pos vect);
+t_pos *vectorScale(double c, t_pos *v);
+t_pos *vectorAdd(t_pos *v1, t_pos *v2);
+t_pos *vectorCopy(t_pos *v1);
+t_pos *vectorNew(double x, double y, double z);
+t_pos *rotation(t_pos *axe, t_pos *vect);
+
+// PARSER
+t_tool      *parser(int fd);
+
+void    parse_light(t_tool *tools, int fd);
+void    parse_object(t_tool *tools, int fd);
+void    parse_camera(t_tool *tools, int fd);
+
+void    add_object(t_object **l_objects, t_object *new);
+void    add_light(t_light **l_lights, t_light *new);
+
+int     object_type(char **split);
+t_pos   *fill_pos(char **split);
+t_color *fill_color(char **split);
+
+// COLOR
+t_color *new_color();
+void init_color(t_tool *t, t_color *objcolor, t_color *final_color);
+void update_color(double k, t_color *lightcolor, t_color *final_color, t_color *objcolor);
+void    normalize_color(t_color *final_color);
+void    add_color(t_color *color1, t_color *color2);
+void    div_color(t_color *color, float n);
 #endif

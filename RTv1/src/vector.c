@@ -1,12 +1,13 @@
 #include <RTv1.h>
 
 /* Subtract two vectors and return the resulting vector */
-t_pos vectorSub(t_pos *v1, t_pos *v2)
+t_pos *vectorSub(t_pos *v1, t_pos *v2)
 {
-    t_pos result;
-    result.x = v1->x - v2->x;
-    result.y = v1->y - v2->y;
-    result.z = v1->z - v2->z;
+    t_pos *result;
+    result = malloc(sizeof(t_pos));
+    result->x = v1->x - v2->x;
+    result->y = v1->y - v2->y;
+    result->z = v1->z - v2->z;
     return (result);
 }
 
@@ -17,31 +18,47 @@ double vectorDot(t_pos *v1, t_pos *v2)
 }
 
 /* Calculate Vector x Scalar and return resulting Vector*/
-t_pos vectorScale(double c, t_pos *v)
+t_pos *vectorScale(double c, t_pos *v)
 {
-    t_pos result;
-    result.x = v->x * c;
-    result.y = v->y * c;
-    result.z = v->z * c;
+    t_pos *result;
+    
+    result = malloc(sizeof(t_pos));
+    result->x = v->x * c;
+    result->y = v->y * c;
+    result->z = v->z * c;
     return (result);
 }
 
 /* Add two vectors and return the resulting vector */
-t_pos vectorAdd(t_pos *v1, t_pos *v2)
+t_pos *vectorAdd(t_pos *v1, t_pos *v2)
 {
-    t_pos result;
-    result.x = v1->x + v2->x;
-    result.y = v1->y + v2->y;
-    result.z = v1->z + v2->z;
+    t_pos *result;
+    
+    result = malloc(sizeof(t_pos));
+    result->x = v1->x + v2->x;
+    result->y = v1->y + v2->y;
+    result->z = v1->z + v2->z;
     return (result);
 }
 
-t_pos vectorCopy(t_pos *v1)
+t_pos *vectorNew(double x, double y, double z)
 {
-    t_pos result;
-    result.x = v1->x;
-    result.y = v1->y;
-    result.z = v1->z;
+    t_pos   *result;
+    result = malloc(sizeof(t_pos));
+    result->x = x;
+    result->y = y;
+    result->z = z;
+    return (result);
+}
+
+t_pos *vectorCopy(t_pos *v1)
+{
+    t_pos *result;
+    
+    result = malloc(sizeof(t_pos));
+    result->x = v1->x;
+    result->y = v1->y;
+    result->z = v1->z;
     return (result);
 }
 
@@ -52,13 +69,4 @@ void vectorNorm(t_pos *v)
     v->x = v->x * tmp;
     v->y = v->y * tmp;
     v->z = v->z * tmp;
-}
-
-t_pos vectorMul(t_pos *v1, t_pos *v2)
-{
-    t_pos v;
-    v.x = v1->x * v2->x;
-    v.y = v1->y * v2->y;
-    v.z = v1->z * v2->z;
-    return (v);
 }
