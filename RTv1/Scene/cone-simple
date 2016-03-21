@@ -1,0 +1,22 @@
+camera
+{
+    pos: 0 0 0
+    res: 1000 800
+}
+
+light
+{
+    pos: -2.9 1.9 0
+    color: 255 255 255
+    dist: 20
+}
+
+object
+{
+    type: CONE
+    rayon: 0.2
+    pos: 0 0 9
+	h: 0.4
+    color: 0 200 200
+	shiny: 1
+}

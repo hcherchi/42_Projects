@@ -1,0 +1,229 @@
+camera
+{
+    pos: 0 0 0
+    res: 1000 800
+}
+
+light
+{
+    pos: 0 -2.9 0
+    color: 255 255 255
+    dist: 20
+}
+
+object
+{
+    type: PLAN
+    dir: 1 0 0
+	h: 4
+    color: 150 250 50
+shiny: 0
+}
+
+object
+{
+    type: PLAN
+    dir: 0 1 0
+	h: 4
+    color: 150 250 50
+shiny: 0
+}
+
+object
+{
+    type: PLAN
+    dir: -1 0 0
+	h: 4
+    color: 150 250 50
+shiny: 0
+}
+
+object
+{
+    type: PLAN
+    dir:  0 -1 0
+	h: 4
+    color: 150 250 50
+shiny: 0
+}
+
+object
+{
+    type: SPHERE
+	rayon: 1
+    pos: 0 0 14
+    color: 255 0 0
+	shiny: 0.5
+}
+
+object
+{
+    type: CONE
+	rayon: 0.2
+    pos: 0 0 14
+	h: 0.4
+    color: 255 150 25
+	shiny: 0.5
+}
+
+object
+{
+    type: SPHERE
+	rayon: 1
+    pos: 0.5 0 14
+    color: 433 123 123
+	shiny: 0.5
+}
+
+object
+{
+    type: SPHERE
+	rayon: 1
+    pos: 1 0 14
+    color: 123 234 123
+	shiny: 0.5
+}
+
+object
+{
+    type: SPHERE
+	rayon: 1
+    pos: 1.5 0 14
+    color: 255 0 255
+	shiny: 0.5
+}
+
+object
+{
+    type: SPHERE
+	rayon: 1
+    pos: 2 0 14
+    color: 255 0 0
+	shiny: 0.5
+}
+
+object
+{
+    type: SPHERE
+	rayon: 1
+    pos: 2.5 0 14
+    color: 432 234 234
+	shiny: 0.5
+}
+
+object
+{
+    type: SPHERE
+	rayon: 1
+    pos: 3 0 14
+    color: 123 123 123
+	shiny: 0.5
+}
+
+object
+{
+    type: SPHERE
+	rayon: 1
+    pos: 3.5 0 14
+    color: 123 23 255
+	shiny: 0.5
+}
+
+object
+{
+    type: SPHERE
+	rayon: 1
+    pos: 4 0 14
+    color: 23 255 23
+	shiny: 0.5
+}
+
+object
+{
+    type: SPHERE
+	rayon: 1
+    pos: 4.5 0 14
+    color: 255 0 0
+	shiny: 0.5
+}
+
+object
+{
+    type: SPHERE
+	rayon: 1
+    pos: -0.5 0 14
+    color: 23 23 143
+	shiny: 0.5
+}
+
+object
+{
+    type: SPHERE
+	rayon: 1
+    pos: -1 0 14
+    color: 255 0 255
+	shiny: 0.5
+}
+
+object
+{
+    type: SPHERE
+	rayon: 1
+    pos: -1.5 0 14
+    color: 255 255 0
+	shiny: 0.5
+}
+
+object
+{
+    type: SPHERE
+	rayon: 1
+    pos: -2 0 14
+    color: 0 0 255
+	shiny: 0.5
+}
+
+object
+{
+    type: SPHERE
+	rayon: 1
+    pos: -2.5 0 14
+    color: 0 255 0
+	shiny: 0.5
+}
+
+object
+{
+    type: SPHERE
+	rayon: 1
+    pos: -3 0 14
+    color: 255 0 0
+	shiny: 0.5
+}
+
+object
+{
+    type: SPHERE
+	rayon: 1
+    pos: -3.5 0 14
+    color: 32 155 43
+	shiny: 0.5
+}
+
+object
+{
+    type: SPHERE
+	rayon: 1
+    pos: -4 0 14
+    color: 255 255 255
+	shiny: 0.5
+}
+
+object
+{
+    type: SPHERE
+	rayon: 1
+    pos: -4.5 0 14
+    color: 15 15 15
+	shiny: 0.5
+}

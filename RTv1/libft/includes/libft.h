@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 13:28:16 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/01/31 19:21:45 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/03/21 11:23:21 by fhenri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ char				**ft_supersplit(char const *str, char c, char v);
 char				**ft_strsplitlast(char const *str, char c);
 int     			ft_isblank(char c);
 double				ft_atof(char *str);
-
+int					str_digit(char *str);
+char				*ft_itof(int nbr);
 
 #endif
