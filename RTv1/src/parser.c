@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: bgantelm <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/21 11:16:37 by bgantelm          #+#    #+#             */
-/*   Updated: 2016/03/21 12:00:26 by bgantelm         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <Rtv1.h>
 
 void	parse_camera(t_tool *tools, int fd)
@@ -35,6 +23,18 @@ void	parse_camera(t_tool *tools, int fd)
 			tools->cam->x_res = ft_atoi(split[1]);
 			tools->cam->y_res = ft_atoi(split[2]);
 		}
+        else if (ft_strstr(line, "lumAmb:"))
+        {
+            if (ft_tablen(split) != 2)
+                 ft_error(7);
+            tools->LumAmb = ft_atof(split[1]);
+        }
+        else if (ft_strstr(line, "vect:"))
+        {
+            tools->cam->vect = fill_pos(split);
+            tools->cam->vect->y = 0;
+            vectorNorm(tools->cam->vect);
+        }
 		else if (ft_strcmp(line, "{"))
 			ft_error(1);
 	}
@@ -114,6 +114,12 @@ void	parse_light(t_tool *tools, int fd)
 				ft_error(2);
 			light->dist = ft_atof(split[1]);
 		}
+        else if (ft_strstr(line, "LumDiff:"))
+        {
+            if (ft_tablen(split) != 2)
+                ft_error(7);
+            light->LumDiff = ft_atof(split[1]);
+        }
 		else if (ft_strcmp(line, "{"))
 			ft_error(3);
 	}

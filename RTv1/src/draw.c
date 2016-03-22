@@ -7,14 +7,14 @@ void	pixel_put_to_image(t_tool *t, int x, int y, t_color *color)
     t->image->data[x * t->image->bpp / 8 + 2 + y * t->image->size_line] = (unsigned char)color->r;
 }
 
-t_ray   *get_ray(t_tool *t, double x, double y)
+t_ray   *get_ray(t_tool *t, float x, float y)
 {
     t_ray   *ray;
     t_pos   *B;
     
     ray = malloc(sizeof(t_ray));
     ray->O = malloc(sizeof(t_pos));
-    B  = malloc(sizeof(t_pos));
+    B = malloc(sizeof(t_pos));
     ray->O->x = t->cam->pos->x;
     ray->O->y = t->cam->pos->y;
     ray->O->z = t->cam->pos->z;
@@ -28,11 +28,11 @@ t_ray   *get_ray(t_tool *t, double x, double y)
     return (ray);
 }
 
-void    draw(t_tool *t, double x, double y)
+void    draw(t_tool *t, int x, int y)
 {
 	t_ray *ray;
-    double x0;
-    double y0;
+    float x0;
+    float y0;
     t_color *final_color;
     t_color *curColor;
     

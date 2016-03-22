@@ -11,9 +11,9 @@ t_ray   *get_lightray(t_ray *impact, t_light *curLight)
     return (lightray);
 }
 
-double  get_kdiff(t_ray *lightray, t_ray *impact)
+float  get_kdiff(t_ray *lightray, t_ray *impact)
 {
-    double  kdiff;
+    float  kdiff;
     t_pos   *invlight;
     
     invlight = vectorScale(-1, lightray->D);
@@ -21,9 +21,9 @@ double  get_kdiff(t_ray *lightray, t_ray *impact)
     return (kdiff);
 }
 
-double  get_kspec(t_ray *lightray, t_ray *impact)
+float  get_kspec(t_ray *lightray, t_ray *impact)
 {
-    double kspec;
+    float kspec;
     t_pos   *invlight;
     t_pos *reflectray;
     
@@ -51,17 +51,17 @@ void    illuminate(t_tool *t, t_object *curObject, t_ray *impact, t_color *final
             k.diff = get_kdiff(lightray, impact);
             if (k.diff >= 0)
             {
-                update_color(k.diff * k.dist, curLight->color, final_color, curObject->color);
+                update_color(k.diff * k.dist * curLight->LumDiff, curLight->color, final_color, curObject->color);
                 k.spec = get_kspec(lightray, impact);
                 if (k.spec >= 0)
-                    update_color(pow(k.spec, 20) * k.dist * curObject->shiny , curLight->color, final_color, curObject->color);
+                    update_color(pow(k.spec, 20) * k.dist * curObject->shiny * curLight->LumDiff, curLight->color, final_color, curObject->color);
             }
         }
         curLight = curLight->next;
     }
 }
 
-void	update_color(double k, t_color *lightco, t_color *f_c, t_color *objcol)
+void	update_color(float k, t_color *lightco, t_color *f_c, t_color *objcol)
 {
     f_c->r += (lightco->r + 3 * objcol->r) / 4 * k;
     f_c->g += (lightco->g + 3 * objcol->g) / 4 * k;

@@ -6,7 +6,7 @@
 #    By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/04 18:24:56 by hcherchi          #+#    #+#              #
-#    Updated: 2016/03/21 15:04:11 by hcherchi         ###   ########.fr        #
+#    Updated: 2016/03/21 17:35:50 by hcherchi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ INC_DIR = includes
 SRC_DIR = src
 OBJ_DIR = obj
 
-SRCS = src/main.c src/parse_tools.c src/parser.c src/draw.c src/inter.c src/normal.c src/vector.c src/color.c src/error.c src/init.c src/vector2.c src/illuminate.c
+SRCS = src/main.c src/parse_tools.c src/parser.c src/draw.c src/inter.c src/normal.c src/vector.c src/color.c src/error.c src/init.c src/vector2.c src/illuminate.c src/key.c
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 

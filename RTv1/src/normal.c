@@ -14,9 +14,12 @@ t_ray *get_normal(t_object *object, t_ray *ray)
         impact->D = vectorCopy(object->D);
     else if (object->type == CONE)
     {
+        float k;
+        
+        k = pow(object->rad / object->h, 2);
         impact->D = malloc(sizeof(t_pos));
         impact->D->x = impact->O->x - object->O->x;
-       impact->D->y = 0;
+       impact->D->y = k * object->O->y - k *impact->O->y;
        impact->D->z = impact->O->z - object->O->z;
     }
     else if (object->type == CYL)

@@ -1,10 +1,20 @@
 #include <Rtv1.h>
 
+void    update_cam(t_tool *t)
+{
+    t->cam->h_vect = vectorNew(0, 1, 0);
+    t->cam->r_vect = vectorNew(t->cam->vect->z, 0, -1 * t->cam->vect->x);
+    vectorNorm(t->cam->r_vect);
+    t->cam->upleft = malloc(sizeof(t_pos));
+    t->cam->upleft->x = t->cam->pos->x + t->cam->vect->x * t->cam->dist + t->cam->h_vect->x * (t->cam->H / 2) - t->cam->r_vect->x * (t->cam->W / 2);
+    t->cam->upleft->y = t->cam->pos->y + t->cam->vect->y * t->cam->dist + t->cam->h_vect->y * (t->cam->H / 2) - t->cam->r_vect->y * (t->cam->W / 2);
+    t->cam->upleft->z = t->cam->pos->z + t->cam->vect->z * t->cam->dist + t->cam->h_vect->z * (t->cam->H / 2) - t->cam->r_vect->z * (t->cam->W / 2);
+}
+
 void    init_param(t_tool *t)
 {
 
 	t->mlx_ptr = mlx_init();
-	t->LumAmb = 0.2;
 	t->cam->indent = 0.001;
 	t->cam->dist = 1;
 	t->cam->W = t->cam->x_res * t->cam->indent;
@@ -15,23 +25,15 @@ void    init_param(t_tool *t)
 
 	t->image = malloc(sizeof(t_image));
 	t->image->data = mlx_get_data_addr(t->mlx_img, &t->image->bpp, &t->image->size_line, &t->image->endian);
-
-	t->cam->vect = vectorNew(0, 0, 1);
-	t->cam->h_vect = vectorNew(0, 1, 0);
-	t->cam->r_vect = vectorNew(1, 0, 0);
-
-	t->cam->upleft = malloc(sizeof(t_pos));
-	t->cam->upleft->x = t->cam->pos->x + t->cam->vect->x * t->cam->dist + t->cam->h_vect->x * (t->cam->H / 2) - t->cam->r_vect->x * (t->cam->W / 2);
-	t->cam->upleft->y = t->cam->pos->y + t->cam->vect->y * t->cam->dist + t->cam->h_vect->y * (t->cam->H / 2) - t->cam->r_vect->y * (t->cam->W / 2);
-	t->cam->upleft->z = t->cam->pos->z + t->cam->vect->z * t->cam->dist + t->cam->h_vect->z * (t->cam->H / 2) - t->cam->r_vect->z * (t->cam->W / 2);
 }
 
 
 void	run_through(t_tool *t)
 {
-    double x;
-    double y;
+    int x;
+    int y;
     
+    update_cam(t);
     y = 0;
     while (y < t->cam->y_res)
     {
@@ -65,6 +67,7 @@ int		main(int argc, char **argv)
 	tools = parser(fd);
 	init_param(tools);
 	run_through(tools);
+    mlx_key_hook(tools->mlx_win, event, tools);
 	mlx_loop(tools->mlx_ptr);
 	return (0);
 }

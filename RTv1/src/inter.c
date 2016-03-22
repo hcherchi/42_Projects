@@ -12,55 +12,66 @@ t_pos *rotation(t_pos *axe, t_pos *vect)
 	return(rota_matrice);
 }
 
-t_object    *intersection(t_object *l_objects, t_ray *ray)
+float   minimum(t_object *l_objects)
 {
-	double min;
-	t_object *tmp;
-	t_object *tmp2;
+    float min;
+    
+    min = 200000;
+    while (l_objects != NULL)
+    {
+        if (l_objects->dist != -1 && l_objects->dist < min)
+            min = l_objects->dist;
+        l_objects = l_objects->next;
+    }
+    return (min);
+}
 
+t_object   *intersection(t_object *l_objects, t_ray *ray)
+{
+	t_object *tmp;
+    float min;
+ 
 	tmp = l_objects;
-	tmp2 = l_objects;
-	min = 200000;
 	while (tmp != NULL)
 	{
 		if (tmp->type == SPHERE)
-			tmp->dist = intersection_sphere(tmp, ray, &min);
+			tmp->dist = intersection_sphere(tmp, ray);
 		else if (tmp->type == CONE)
-			tmp->dist = intersection_cone(tmp, ray, &min);
+			tmp->dist = intersection_cone(tmp, ray);
 		else if (tmp->type == PLAN)
-			tmp->dist = intersection_plan(tmp, ray, &min);
+			tmp->dist = intersection_plan(tmp, ray);
 		else if (tmp->type == CYL)
-			tmp->dist = intersection_cyl(tmp, ray, &min);
+			tmp->dist = intersection_cyl(tmp, ray);
 		tmp = tmp->next;
 	}
-	if (min == 200000)
-		return (NULL);
-	while (tmp2 != NULL)
+    tmp = l_objects;
+    min = minimum(tmp);
+    if (min == 200000)
+        return (NULL);
+	while (tmp != NULL)
 	{
-		if (tmp2->dist == min)
-			return (tmp2);
-		tmp2 = tmp2->next;
+		if (tmp->dist == min)
+			return (tmp);
+		tmp = tmp->next;
 	}
+    ft_putendl("PROBLEM");
+    exit(0);
 	return (NULL);
 }
 
-double     intersection_plan(t_object *plan, t_ray *ray, double *min)
+float     intersection_plan(t_object *plan, t_ray *ray)
 {
-	double a;
-	double b;
+	float a;
+	float b;
 
 	a = plan->D->x * ray->D->x + plan->D->y * ray->D->y + plan->D->z * ray->D->z;
 	b = plan->D->x * ray->O->x + plan->D->y * ray->O->y + plan->D->z * ray->O->z + plan->h;
 	if (-b / a > E)
-	{
-		if (-b / a < *min)
-			*min = -b /  a;
 		return (-b / a);
-	}
-	return 0;
+	return -1;
 }
 
-double     intersection_sphere(t_object *sphere, t_ray *ray,  double *min)
+float     intersection_sphere(t_object *sphere, t_ray *ray)
 {
 	t_equation  param;
 	t_pos   *dist;
@@ -70,24 +81,20 @@ double     intersection_sphere(t_object *sphere, t_ray *ray,  double *min)
 	param.b = 2 * vectorDot(ray->D, dist);
 	param.c = vectorDot(dist, dist) - (sphere->rad * sphere->rad);
 	param.discr = param.b * param.b - 4 * param.a * param.c;
-
 	if (param.discr < E)
-		return 0;
-
+		return -1;
 	param.t0 = (-param.b + sqrtf(param.discr))/(2 * param.a);
 	param.t1 = (-param.b - sqrtf(param.discr))/(2 * param.a);
 	if (fabs(param.t0) > fabs(param.t1))
 		param.t0 = param.t1;
 	if (param.t0 < 0)
-		return 0;
-	else if (param.t0 < *min)
-		*min = param.t0;
+		return -1;
 	return (param.t0);
 }
 
-double     intersection_cone(t_object *cone, t_ray *ray, double *min)
+float     intersection_cone(t_object *cone, t_ray *ray)
 {
-	double   k;
+	float   k;
 	t_equation param;
 
 	k = pow(cone->rad / cone->h, 2);
@@ -96,21 +103,19 @@ double     intersection_cone(t_object *cone, t_ray *ray, double *min)
 	param.c = pow((ray->O->x - cone->O->x), 2) + pow((ray->O->z - cone->O->z), 2) - pow((ray->O->y - cone->O->y), 2) * k;
 	param.discr = param.b * param.b - 4 * param.a * param.c;
 	if (param.discr < E)
-		return 0;
+		return -1;
 	param.t0 = (-param.b + sqrtf(param.discr))/(2 * param.a);
 	param.t1 = (-param.b - sqrtf(param.discr))/(2 * param.a);
 	if (fabs(param.t0) > fabs(param.t1))
 		param.t0 = param.t1;
 	if (param.t0 < 0)
-		return 0;
-	else if (param.t0 < *min)
-		*min = param.t0;
+		return -1;
 	return param.t0;
 }
-double     intersection_cyl(t_object *cyl, t_ray *ray, double *min)
+float     intersection_cyl(t_object *cyl, t_ray *ray)
 {
 	t_equation param;
-	double   k;
+	float   k;
 
 	k = pow(cyl->D->x, 2) + pow(cyl->D->y, 2) + pow(cyl->D->z, 2);
 	param.a = vectorDot(ray->D, ray->D) - (pow(cyl->D->x * ray->D->x + cyl->D->y * ray->D->y + cyl->D->z * ray->D->z, 2) / k);
@@ -118,14 +123,12 @@ double     intersection_cyl(t_object *cyl, t_ray *ray, double *min)
 	param.c =  (ray->O->x - cyl->O->x) * (ray->O->x - cyl->O->x) + (ray->O->y - cyl->O->y) * (ray->O->y - cyl->O->y) + (ray->O->z - cyl->O->z) * (ray->O->z - cyl->O->z) - (cyl->rad * cyl->rad) - (pow(cyl->D->x * (ray->O->x - cyl->O->x) + cyl->D->y * (ray->O->y - cyl->O->y) + cyl->D->z * (ray->O->z - cyl->O->z), 2) / k);
 	param.discr = param.b * param.b - 4 * param.a * param.c;
 	if (param.discr < E)
-		return 0;
+		return -1;
 	param.t0 = (-param.b + sqrtf(param.discr))/(2 * param.a);
 	param.t1 = (-param.b - sqrtf(param.discr))/(2 * param.a);
 	if (fabs(param.t0) > fabs(param.t1))
 		param.t0 = param.t1;
 	if (param.t0 < 0)
-		return 0;
-	else if (param.t0 < *min)
-		*min = param.t0;
+		return -1;
 	return param.t0;
 }

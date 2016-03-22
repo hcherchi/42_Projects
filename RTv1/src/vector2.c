@@ -1,6 +1,6 @@
 #include <Rtv1.h>
 
-t_pos *vectorNew(double x, double y, double z)
+t_pos *vectorNew(float x, float y, float z)
 {
     t_pos   *result;
     result = malloc(sizeof(t_pos));
@@ -23,7 +23,7 @@ t_pos *vectorCopy(t_pos *v1)
 
 void vectorNorm(t_pos *v)
 {
-    double tmp;
+    float tmp;
     tmp = 1/sqrt((v->x * v->x) + (v->y * v->y) + (v->z * v->z));
     v->x = v->x * tmp;
     v->y = v->y * tmp;
