@@ -2,13 +2,13 @@ camera
 {
 	pos: 0 0 0
 	res: 1000 800
-	lumAmb: 0.2
+	lumAmb: 0.05
 	vect: 0 0 1
 }
 
 light
 {
-	pos: 2 -0.9 2
+	pos: 2 0.9 2
 	color: 255 255 255
 	dist: 20
 	LumDiff: 0.6
@@ -16,7 +16,7 @@ light
 
 light
 {
-	pos: -2 0.9 4
+	pos: -2 0.9 2
 	color: 255 255 255
 	dist: 20
 	LumDiff: 0.6

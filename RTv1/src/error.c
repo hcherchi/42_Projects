@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 17:14:11 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/03/22 17:16:47 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/03/23 18:24:33 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	ft_error(int i)
 {
 	if (i == 1)
-		ft_putstr("Error, bad argument in camera. use just pos and res.\n");
+		ft_putstr("Error in camera. use pos, res, lumAmb, and vect only.\n");
 	else if (i == 2)
 		ft_putstr("Error, arguments need numbers.\n");
 	else if (i == 3)
 	{
 		ft_putstr("Error, bad argument in light. ");
-		ft_putstr("use just pos color and dist.\n");
+		ft_putstr("use just pos color, LumDiff and dist.\n");
 	}
 	else if (i == 4)
 	{

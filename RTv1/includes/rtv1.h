@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 14:56:14 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/03/23 15:12:54 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/03/23 15:57:15 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,8 +154,11 @@ t_pos				*rotation(t_pos *axe, t_pos *vect);
 
 t_tool				*parser(int fd);
 void				parse_light(t_tool *tools, int fd);
+void				parse_light2(t_light *light, char **split, char *line);
 void				parse_object(t_tool *tools, int fd);
+void				parse_object2(t_object *object, char **split, char *line);
 void				parse_camera(t_tool *tools, int fd);
+void				parse_camera2(t_tool *tools, char **split, char *line);
 void				add_object(t_object **l_objects, t_object *new);
 void				add_light(t_light **l_lights, t_light *new);
 int					object_type(char **split);

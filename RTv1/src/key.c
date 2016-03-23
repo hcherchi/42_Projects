@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 17:38:33 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/03/23 14:24:20 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/03/23 16:10:03 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ void	change_pos(int keycode, t_tool *t)
 		if (keycode == 123)
 		{
 			t->cam->vect = vectornew(1, 0, 0);
-			t->cam->pos = vectornew(-5, 0, 3);
+			t->cam->pos = vectornew(-5, 0, 4);
 		}
 		else if (keycode == 124)
 		{
 			t->cam->vect = vectornew(-1, 0, 0);
-			t->cam->pos = vectornew(5, 0, 3);
+			t->cam->pos = vectornew(5, 0, 4);
 		}
 		else if (keycode == 125)
 		{
