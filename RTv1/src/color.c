@@ -1,10 +1,22 @@
-#include <Rtv1.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   color.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/03/22 16:59:53 by hcherchi          #+#    #+#             */
+/*   Updated: 2016/03/23 12:46:18 by hcherchi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <rtv1.h>
 
 void	init_color(t_tool *t, t_color *objcolor, t_color *final_color)
 {
-	final_color->r = objcolor->r * t->LumAmb;
-	final_color->g = objcolor->g * t->LumAmb;
-	final_color->b = objcolor->b * t->LumAmb;
+	final_color->r = objcolor->r * t->lumamb;
+	final_color->g = objcolor->g * t->lumamb;
+	final_color->b = objcolor->b * t->lumamb;
 }
 
 void	normalize_color(t_color *final_color)

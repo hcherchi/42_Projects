@@ -1,34 +1,72 @@
-#include <Rtv1.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   normal.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/03/23 12:52:17 by hcherchi          #+#    #+#             */
+/*   Updated: 2016/03/23 13:15:26 by hcherchi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// REVOIR LES FONCTIONS DE NORMALE
+#include <rtv1.h>
 
-t_ray *get_normal(t_object *object, t_ray *ray)
+t_ray	*get_normal(t_object *object, t_ray *ray)
 {
-    t_ray *impact;
-    
-    impact = malloc(sizeof(t_ray));
-    impact->O = vectorAdd(ray->O, vectorScale(object->dist, ray->D));
-    if (object->type == SPHERE)
-        impact->D = vectorSub(impact->O , object->O);
-    else if (object->type == PLAN)
-        impact->D = vectorCopy(object->D);
-    else if (object->type == CONE)
-    {
-        float k;
-        
-        k = pow(object->rad / object->h, 2);
-        impact->D = malloc(sizeof(t_pos));
-        impact->D->x = impact->O->x - object->O->x;
-       impact->D->y = k * object->O->y - k *impact->O->y;
-       impact->D->z = impact->O->z - object->O->z;
-    }
-    else if (object->type == CYL)
-    {
-        impact->D = malloc(sizeof(t_pos));
-        impact->D->x = 2 * (impact->O->x - object->O->x) - (2 * object->D->x * (object->D->x * (impact->O->x - object->O->x) + object->D->z * (impact->O->z - object->O->z) + object->D->y * (impact->O->y - object->O->y))) / (pow(object->D->z, 2) + pow(object->D->y, 2) + pow(object->D->x, 2));
-        impact->D->y = 2 * (impact->O->y - object->O->y) - (2 * object->D->y * (object->D->x * (impact->O->x - object->O->x) + object->D->z * (impact->O->z - object->O->z) + object->D->y * (impact->O->y - object->O->y))) / (pow(object->D->z, 2) + pow(object->D->y, 2) + pow(object->D->x, 2));
-        impact->D->z = 2 * (impact->O->z - object->O->z) - (2 * object->D->z * (object->D->x * (impact->O->x - object->O->x) + object->D->z * (impact->O->z - object->O->z) + object->D->y * (impact->O->y - object->O->y))) / (pow(object->D->z, 2) + pow(object->D->y, 2) + pow(object->D->x, 2));
-    }
-    vectorNorm(impact->D);
-    return (impact);
+	t_ray	*impact;
+	float	k;
+
+	impact = malloc(sizeof(t_ray));
+	impact->o = vectoradd(ray->o, vectorscale(object->dist, ray->d));
+	if (object->type == SPHERE)
+		impact->d = vectorsub(impact->o, object->o);
+	else if (object->type == PLAN)
+		impact->d = vectorcopy(object->d);
+	else if (object->type == CONE)
+	{
+		k = pow(object->rad / object->h, 2);
+		impact->d = malloc(sizeof(t_pos));
+		impact->d->x = impact->o->x - object->o->x;
+		impact->d->y = k * object->o->y - k * impact->o->y;
+		impact->d->z = impact->o->z - object->o->z;
+	}
+	else if (object->type == CYL)
+		get_cyl_normal(impact, object);
+	vectornorm(impact->d);
+	return (impact);
+}
+
+float	minimum(t_object *l_objects)
+{
+	float	min;
+
+	min = 200000;
+	while (l_objects != NULL)
+	{
+		if (l_objects->dist != -1 && l_objects->dist < min)
+			min = l_objects->dist;
+		l_objects = l_objects->next;
+	}
+	return (min);
+}
+
+void	get_cyl_normal(t_ray *impact, t_object *object)
+{
+	impact->d = malloc(sizeof(t_pos));
+	impact->d->x = 2 * (impact->o->x - object->o->x) - (2 * object->d->x
+	* (object->d->x * (impact->o->x - object->o->x) + object->d->z
+	* (impact->o->z - object->o->z) + object->d->y * (impact->o->y
+	- object->o->y))) / (pow(object->d->z, 2) + pow(object->d->y, 2)
+	+ pow(object->d->x, 2));
+	impact->d->y = 2 * (impact->o->y - object->o->y) - (2 * object->d->y
+	* (object->d->x * (impact->o->x - object->o->x) + object->d->z
+	* (impact->o->z - object->o->z) + object->d->y * (impact->o->y
+	- object->o->y))) / (pow(object->d->z, 2) + pow(object->d->y, 2)
+	+ pow(object->d->x, 2));
+	impact->d->z = 2 * (impact->o->z - object->o->z) - (2 * object->d->z
+	* (object->d->x * (impact->o->x - object->o->x) + object->d->z
+	* (impact->o->z - object->o->z) + object->d->y * (impact->o->y
+	- object->o->y))) / (pow(object->d->z, 2) + pow(object->d->y, 2)
+	+ pow(object->d->x, 2));
 }

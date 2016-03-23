@@ -194,7 +194,7 @@ object
 {
     type: SPHERE
     rayon: 0.4
-    pos: 1 0.6 6
+    pos: 1 0.5 6
     color: 250 250 250
 	shiny: 0.5
 }

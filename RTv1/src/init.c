@@ -1,4 +1,16 @@
-#include <Rtv1.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/03/22 17:20:40 by hcherchi          #+#    #+#             */
+/*   Updated: 2016/03/22 17:20:58 by hcherchi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <rtv1.h>
 
 void	init_camera(t_tool *tools)
 {
@@ -12,11 +24,11 @@ void	init_camera(t_tool *tools)
 
 void	init_light(t_light *light)
 {
-	light->O = malloc(sizeof(t_pos));
+	light->o = malloc(sizeof(t_pos));
 	light->color = malloc(sizeof(t_color));
-	light->O->x = 0;
-	light->O->y = 0;
-	light->O->z = 0;
+	light->o->x = 0;
+	light->o->y = 0;
+	light->o->z = 0;
 	light->color->r = 0;
 	light->color->g = 0;
 	light->color->b = 0;
@@ -25,15 +37,15 @@ void	init_light(t_light *light)
 
 void	init_object(t_object *object)
 {
-	object->O = malloc(sizeof(t_pos));
-	object->D = malloc(sizeof(t_pos));
+	object->o = malloc(sizeof(t_pos));
+	object->d = malloc(sizeof(t_pos));
 	object->color = malloc(sizeof(t_color));
-	object->O->x = 0;
-	object->O->y = 0;
-	object->O->z = 0;
-	object->D->x = 0;
-	object->D->y = 0;
-	object->D->z = 0;
+	object->o->x = 0;
+	object->o->y = 0;
+	object->o->z = 0;
+	object->d->x = 0;
+	object->d->y = 0;
+	object->d->z = 0;
 	object->color->r = 0;
 	object->color->g = 0;
 	object->color->b = 0;

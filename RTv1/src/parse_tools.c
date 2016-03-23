@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_tools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgantelm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/21 11:48:18 by bgantelm          #+#    #+#             */
-/*   Updated: 2016/03/21 12:00:11 by bgantelm         ###   ########.fr       */
+/*   Created: 2016/03/23 12:40:40 by hcherchi          #+#    #+#             */
+/*   Updated: 2016/03/23 14:25:32 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <Rtv1.h>
+#include <rtv1.h>
 
 int		object_type(char **split)
 {

@@ -1,4 +1,16 @@
-#include <Rtv1.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/03/23 12:43:23 by hcherchi          #+#    #+#             */
+/*   Updated: 2016/03/23 14:25:18 by hcherchi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <rtv1.h>
 
 void	parse_camera(t_tool *tools, int fd)
 {
@@ -23,18 +35,18 @@ void	parse_camera(t_tool *tools, int fd)
 			tools->cam->x_res = ft_atoi(split[1]);
 			tools->cam->y_res = ft_atoi(split[2]);
 		}
-        else if (ft_strstr(line, "lumAmb:"))
-        {
-            if (ft_tablen(split) != 2)
-                 ft_error(7);
-            tools->LumAmb = ft_atof(split[1]);
-        }
-        else if (ft_strstr(line, "vect:"))
-        {
-            tools->cam->vect = fill_pos(split);
-            tools->cam->vect->y = 0;
-            vectorNorm(tools->cam->vect);
-        }
+		else if (ft_strstr(line, "lumAmb:"))
+		{
+			if (ft_tablen(split) != 2)
+				ft_error(7);
+			tools->lumamb = ft_atof(split[1]);
+		}
+		else if (ft_strstr(line, "vect:"))
+		{
+			tools->cam->vect = fill_pos(split);
+			tools->cam->vect->y = 0;
+			vectornorm(tools->cam->vect);
+		}
 		else if (ft_strcmp(line, "{"))
 			ft_error(1);
 	}
@@ -55,9 +67,9 @@ void	parse_object(t_tool *tools, int fd)
 		if (ft_strstr(line, "type:"))
 			object->type = object_type(split);
 		else if (ft_strstr(line, "pos:"))
-			object->O = fill_pos(split);
+			object->o = fill_pos(split);
 		else if (ft_strstr(line, "dir:"))
-			object->D = fill_pos(split);
+			object->d = fill_pos(split);
 		else if (ft_strstr(line, "rayon:"))
 		{
 			if (ft_tablen(split) != 2)
@@ -103,7 +115,7 @@ void	parse_light(t_tool *tools, int fd)
 	{
 		split = ft_strsplit(line, ' ');
 		if (ft_strstr(line, "pos:"))
-			light->O = fill_pos(split);
+			light->o = fill_pos(split);
 		else if (ft_strstr(line, "color:"))
 			light->color = fill_color(split);
 		else if (ft_strstr(line, "dist:"))
@@ -114,12 +126,12 @@ void	parse_light(t_tool *tools, int fd)
 				ft_error(2);
 			light->dist = ft_atof(split[1]);
 		}
-        else if (ft_strstr(line, "LumDiff:"))
-        {
-            if (ft_tablen(split) != 2)
-                ft_error(7);
-            light->LumDiff = ft_atof(split[1]);
-        }
+		else if (ft_strstr(line, "LumDiff:"))
+		{
+			if (ft_tablen(split) != 2)
+				ft_error(7);
+			light->lumdiff = ft_atof(split[1]);
+		}
 		else if (ft_strcmp(line, "{"))
 			ft_error(3);
 	}
