@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 19:00:23 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/01/31 19:26:40 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/03/23 21:56:08 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@ int		ft_tablen(char **tab)
 	int i;
 
 	i = 0;
-	while (tab[i])
-		i++;
-	return (i);
+	if (tab)
+	{
+		while (tab[i])
+			i++;
+		return (i);
+	}
+	return (0);
 }

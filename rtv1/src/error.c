@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 17:14:11 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/03/23 18:24:33 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/03/23 20:15:52 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,7 @@ void	ft_error(int i)
 		ft_putstr("Error, bad numbers of argument.\n");
 	else if (i == 8)
 		ft_putstr("Error, window can not be negative.\n");
+	else if (i == 9)
+		ft_putstr("Error, use a valid file instead.\n");
 	exit(0);
 }

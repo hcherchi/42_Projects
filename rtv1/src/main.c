@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 12:36:23 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/03/23 14:24:40 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/03/23 20:22:18 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,8 @@ int		main(int argc, char **argv)
 		return (1);
 	}
 	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-	{
-		ft_putendl("Error, file can't be open");
-		return (1);
-	}
-	tools = parser(fd);
+	tools = malloc(sizeof(t_tool));
+	parser(fd, tools);
 	init_param(tools);
 	run_through(tools);
 	mlx_key_hook(tools->mlx_win, event, tools);

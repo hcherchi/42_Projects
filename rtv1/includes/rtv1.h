@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 14:56:14 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/03/23 15:57:15 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/03/23 20:20:46 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ t_pos				*vectorcopy(t_pos *v1);
 t_pos				*vectornew(float x, float y, float z);
 t_pos				*rotation(t_pos *axe, t_pos *vect);
 
-t_tool				*parser(int fd);
+void				parser(int fd, t_tool *tools);
 void				parse_light(t_tool *tools, int fd);
 void				parse_light2(t_light *light, char **split, char *line);
 void				parse_object(t_tool *tools, int fd);

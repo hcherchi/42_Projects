@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 12:43:23 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/03/23 18:23:27 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/03/23 20:22:30 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	parse_camera(t_tool *tools, int fd)
 	char	**split;
 	char	*line;
 
+	tools->lumamb = 0.1;
 	tools->cam = malloc(sizeof(t_cam));
 	init_camera(tools);
 	while (get_next_line(fd, &line) > 0 && ft_strcmp(line, "}"))
@@ -114,17 +115,16 @@ void	parse_object(t_tool *tools, int fd)
 	add_object(&tools->l_objects, object);
 }
 
-t_tool	*parser(int fd)
+void	parser(int fd, t_tool *tools)
 {
-	t_tool	*tools;
 	char	*line;
 	int		c;
+	int		ret;
 
 	c = 0;
-	tools = malloc(sizeof(*tools));
 	tools->l_objects = NULL;
 	tools->l_lights = NULL;
-	while (get_next_line(fd, &line) != 0)
+	while ((ret = get_next_line(fd, &line)) > 0)
 	{
 		if (!ft_strcmp(line, "camera"))
 		{
@@ -136,7 +136,8 @@ t_tool	*parser(int fd)
 		else if (!ft_strcmp(line, "object"))
 			parse_object(tools, fd);
 	}
+	if (ret == -1)
+		ft_error(9);
 	if (c != 1)
 		ft_error(6);
-	return (tools);
 }
