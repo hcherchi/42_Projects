@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 12:52:17 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/03/23 13:15:26 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/03/26 11:45:20 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_ray	*get_normal(t_object *object, t_ray *ray)
 {
 	t_ray	*impact;
-	float	k;
+	double	k;
 
 	impact = malloc(sizeof(t_ray));
 	impact->o = vectoradd(ray->o, vectorscale(object->dist, ray->d));
@@ -37,9 +37,9 @@ t_ray	*get_normal(t_object *object, t_ray *ray)
 	return (impact);
 }
 
-float	minimum(t_object *l_objects)
+double	minimum(t_object *l_objects)
 {
-	float	min;
+	double	min;
 
 	min = 200000;
 	while (l_objects != NULL)

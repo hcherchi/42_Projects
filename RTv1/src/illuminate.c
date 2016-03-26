@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 17:00:15 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/03/23 14:27:05 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/03/26 11:44:58 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ t_ray	*get_lightray(t_ray *impact, t_light *light)
 	return (lightray);
 }
 
-float	get_kdiff(t_ray *lightray, t_ray *impact, float kdist, float intens)
+double	get_kdiff(t_ray *lightray, t_ray *impact, double kdist, double intens)
 {
-	float	kdiff;
+	double	kdiff;
 	t_pos	*invlight;
 
 	invlight = vectorscale(-1, lightray->d);
@@ -34,9 +34,9 @@ float	get_kdiff(t_ray *lightray, t_ray *impact, float kdist, float intens)
 	return (kdiff * kdist * intens);
 }
 
-float	get_kspec(t_ray *lightray, t_ray *impact, float kdist, float intens)
+double	get_kspec(t_ray *lightray, t_ray *impact, double kdist, double intens)
 {
-	float	kspec;
+	double	kspec;
 	t_pos	*invlight;
 	t_pos	*reflectray;
 
@@ -77,7 +77,7 @@ void	illuminate(t_tool *t, t_object *obj, t_ray *imp, t_color *f_color)
 	}
 }
 
-void	update_color(float k, t_color *lightco, t_color *f_c, t_color *objcol)
+void	update_color(double k, t_color *lightco, t_color *f_c, t_color *objcol)
 {
 	f_c->r += (lightco->r + 3 * objcol->r) / 4 * k;
 	f_c->g += (lightco->g + 3 * objcol->g) / 4 * k;

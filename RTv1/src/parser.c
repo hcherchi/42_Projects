@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 12:43:23 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/03/23 20:22:30 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/03/26 11:45:29 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,14 @@ void	parse_object(t_tool *tools, int fd)
 				ft_error(2);
 			object->rad = ft_atof(split[1]);
 		}
+        else if (ft_strstr(line, "mirror:"))
+        {
+            if (ft_tablen(split) != 2)
+                ft_error(7);
+            if (str_digit(split[1]))
+                ft_error(2);
+            object->mirror = ft_atof(split[1]);
+        }
 		else
 			parse_object2(object, split, line);
 	}

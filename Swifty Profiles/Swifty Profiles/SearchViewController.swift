@@ -29,7 +29,7 @@ class SearchViewController: UIViewController
             }
             else
             {
-                i++;
+                i += 1;
             }
         }
     }

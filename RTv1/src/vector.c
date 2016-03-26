@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 12:44:59 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/03/23 14:23:17 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/03/26 11:45:37 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ t_pos	*vectorsub(t_pos *v1, t_pos *v2)
 	return (result);
 }
 
-float	vectordot(t_pos *v1, t_pos *v2)
+double	vectordot(t_pos *v1, t_pos *v2)
 {
 	return (v1->x * v2->x + v1->y * v2->y + v1->z * v2->z);
 }
 
-t_pos	*vectorscale(float c, t_pos *v)
+t_pos	*vectorscale(double c, t_pos *v)
 {
 	t_pos	*result;
 

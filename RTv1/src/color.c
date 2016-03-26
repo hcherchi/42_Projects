@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 16:59:53 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/03/23 12:46:18 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/03/26 11:44:47 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	add_color(t_color *color1, t_color *color2)
 	color1->b += color2->b;
 }
 
-void	div_color(t_color *color, float n)
+void	div_color(t_color *color, double n)
 {
 	color->r /= n;
 	color->g /= n;

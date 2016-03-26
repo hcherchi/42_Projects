@@ -6,13 +6,13 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 13:25:57 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/03/23 14:25:59 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/03/26 11:45:43 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <rtv1.h>
 
-t_pos	*vectornew(float x, float y, float z)
+t_pos	*vectornew(double x, double y, double z)
 {
 	t_pos	*result;
 
@@ -36,7 +36,7 @@ t_pos	*vectorcopy(t_pos *v1)
 
 void	vectornorm(t_pos *v)
 {
-	float	tmp;
+	double	tmp;
 
 	tmp = 1 / sqrt((v->x * v->x) + (v->y * v->y) + (v->z * v->z));
 	v->x = v->x * tmp;

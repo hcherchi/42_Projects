@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 17:16:59 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/03/23 14:29:33 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/03/26 11:44:50 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		pixel_put_to_image(t_tool *t, int x, int y, t_color *color)
 		+ 2 + y * t->image->size_line] = (unsigned char)color->r;
 }
 
-t_ray		*get_ray(t_tool *t, float x, float y)
+t_ray		*get_ray(t_tool *t, double x, double y)
 {
 	t_ray	*ray;
 	t_pos	*tmp;
@@ -47,8 +47,8 @@ t_ray		*get_ray(t_tool *t, float x, float y)
 void		draw(t_tool *t, int x, int y)
 {
 	t_ray	*ray;
-	float	x0;
-	float	y0;
+	double	x0;
+	double	y0;
 	t_color	*final_color;
 	t_color	*color;
 
@@ -59,6 +59,7 @@ void		draw(t_tool *t, int x, int y)
 		y0 = y;
 		while (y0 <= y + 0.5)
 		{
+            t->depth = 0;
 			ray = get_ray(t, x0, y0);
 			color = get_color(ray, t);
 			add_color(final_color, color);
@@ -76,7 +77,7 @@ void		draw(t_tool *t, int x, int y)
 t_object	*intersection(t_object *l_objects, t_ray *ray)
 {
 	t_object	*tmp;
-	float		min;
+	double		min;
 
 	fill_dist(l_objects, ray);
 	tmp = l_objects;
@@ -103,6 +104,13 @@ t_color		*get_color(t_ray *ray, t_tool *t)
 	{
 		init_color(t, object->color, final_color);
 		impact = get_normal(object, ray);
+		if (object->mirror && t->depth < 10)
+		{
+            t->depth += 1;
+            ray->o = vectorcopy(impact->o);
+            ray->d = vectoradd(vectorscale(-2 * vectordot(ray->d, impact->d), impact->d), ray->d);
+            return (get_color(ray, t));
+		}
 		illuminate(t, object, impact, final_color);
 		clean_ray(impact);
 	}

@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 17:21:04 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/03/23 14:40:15 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/03/26 11:45:05 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void	fill_dist(t_object *l_objects, t_ray *ray)
 	}
 }
 
-float	intersection_plan(t_object *plan, t_ray *ray)
+double	intersection_plan(t_object *plan, t_ray *ray)
 {
-	float	a;
-	float	b;
+	double	a;
+	double	b;
 
 	a = plan->d->x * ray->d->x + plan->d->y * ray->d->y
 		+ plan->d->z * ray->d->z;
@@ -45,7 +45,7 @@ float	intersection_plan(t_object *plan, t_ray *ray)
 	return (-1);
 }
 
-float	intersection_sphere(t_object *sphere, t_ray *ray)
+double	intersection_sphere(t_object *sphere, t_ray *ray)
 {
 	t_equation	param;
 	t_pos		*dist;
@@ -61,14 +61,14 @@ float	intersection_sphere(t_object *sphere, t_ray *ray)
 	param.t1 = (-param.b - sqrtf(param.discr)) / (2 * param.a);
 	if (fabs(param.t0) > fabs(param.t1))
 		param.t0 = param.t1;
-	if (param.t0 < 0)
+	if (param.t0 < E)
 		return (-1);
 	return (param.t0);
 }
 
-float	intersection_cone(t_object *cone, t_ray *ray)
+double	intersection_cone(t_object *cone, t_ray *ray)
 {
-	float		k;
+	double		k;
 	t_equation	param;
 
 	k = pow(cone->rad / cone->h, 2);
@@ -86,15 +86,15 @@ float	intersection_cone(t_object *cone, t_ray *ray)
 	param.t1 = (-param.b - sqrtf(param.discr)) / (2 * param.a);
 	if (fabs(param.t0) > fabs(param.t1))
 		param.t0 = param.t1;
-	if (param.t0 < 0)
+	if (param.t0 < E)
 		return (-1);
 	return (param.t0);
 }
 
-float	intersection_cyl(t_object *cyl, t_ray *ray)
+double	intersection_cyl(t_object *cyl, t_ray *ray)
 {
 	t_equation	param;
-	float		k;
+	double		k;
 	t_pos		*tmp;
 
 	tmp = vectorsub(ray->o, cyl->o);
@@ -115,7 +115,7 @@ float	intersection_cyl(t_object *cyl, t_ray *ray)
 	param.t1 = (-param.b - sqrtf(param.discr)) / (2 * param.a);
 	if (fabs(param.t0) > fabs(param.t1))
 		param.t0 = param.t1;
-	if (param.t0 < 0)
+	if (param.t0 < E)
 		return (-1);
 	return (param.t0);
 }

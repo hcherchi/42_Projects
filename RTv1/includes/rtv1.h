@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 14:56:14 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/03/23 20:20:46 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/03/26 11:46:17 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,23 @@
 # define CYL 1
 # define CONE 2
 # define PLAN 3
-# define E -0.00001
+# define E 0.00000001
 
 typedef struct		s_k
 {
-	float			spec;
-	float			diff;
-	float			dist;
+	double			spec;
+	double			diff;
+	double			dist;
 }					t_k;
 
 typedef struct		s_equation
 {
-	float			a;
-	float			b;
-	float			c;
-	float			discr;
-	float			t1;
-	float			t0;
+	double			a;
+	double			b;
+	double			c;
+	double			discr;
+	double			t1;
+	double			t0;
 }					t_equation;
 
 typedef struct		s_color
@@ -50,21 +50,22 @@ typedef struct		s_color
 
 typedef struct		s_pos
 {
-	float			x;
-	float			y;
-	float			z;
+	double			x;
+	double			y;
+	double			z;
 }					t_pos;
 
 typedef struct		s_object
 {
 	int				type;
-	float			dist;
+	double			dist;
 	t_color			*color;
 	t_pos			*o;
 	t_pos			*d;
-	float			rad;
-	float			h;
-	float			shiny;
+	double			rad;
+	double			h;
+	double			shiny;
+    double          mirror;
 	struct s_object	*next;
 }					t_object;
 
@@ -78,8 +79,8 @@ typedef struct		s_light
 {
 	t_pos			*o;
 	t_color			*color;
-	float			dist;
-	float			lumdiff;
+	double			dist;
+	double			lumdiff;
 	struct s_light	*next;
 }					t_light;
 
@@ -89,13 +90,13 @@ typedef struct		s_cam
 	t_pos			*h_vect;
 	t_pos			*r_vect;
 	t_pos			*vect;
-	float			dist;
-	float			w;
-	float			h;
+	double			dist;
+	double			w;
+	double			h;
 	t_pos			*upleft;
 	int				x_res;
 	int				y_res;
-	float			indent;
+	double			indent;
 }					t_cam;
 
 typedef struct		s_image
@@ -115,41 +116,42 @@ typedef struct		s_tool
 	t_light			*l_lights;
 	t_image			*image;
 	t_cam			*cam;
-	float			lumamb;
+	double			lumamb;
+    int             depth;
 }					t_tool;
 
-float				minimum(t_object *l_objects);
+double				minimum(t_object *l_objects);
 void				fill_dist(t_object *l_objects, t_ray *ray);
 t_object			*intersection(t_object *l_objects, t_ray *ray);
-float				intersection_plan(t_object *plan, t_ray *ray);
-float				intersection_sphere(t_object *sphere, t_ray *ray);
-float				intersection_cone(t_object *cone, t_ray *ray);
-float				intersection_cyl(t_object *cyl, t_ray *ray);
+double				intersection_plan(t_object *plan, t_ray *ray);
+double				intersection_sphere(t_object *sphere, t_ray *ray);
+double				intersection_cone(t_object *cone, t_ray *ray);
+double				intersection_cyl(t_object *cyl, t_ray *ray);
 
 void				draw(t_tool *t, int x, int y);
-t_ray				*get_ray(t_tool *t, float x, float y);
+t_ray				*get_ray(t_tool *t, double x, double y);
 t_color				*get_color(t_ray *ray, t_tool *t);
 t_ray				*get_normal(t_object *object, t_ray *ray);
 void				get_cyl_normal(t_ray *impact, t_object *object);
 t_ray				*get_lightray(t_ray *impact, t_light *light);
 void				illuminate(t_tool *t, t_object *object, t_ray *impact,
 					t_color *final_color);
-float				get_kspec(t_ray *lightray, t_ray *impact, float kdist,
-					float intens);
-float				get_kdiff(t_ray *lightray, t_ray *impact, float kdist,
-					float intens);
-void				update_color(float k, t_color *lightcolor,
+double				get_kspec(t_ray *lightray, t_ray *impact, double kdist,
+					double intens);
+double				get_kdiff(t_ray *lightray, t_ray *impact, double kdist,
+					double intens);
+void				update_color(double k, t_color *lightcolor,
 					t_color *final_color, t_color *objcolor);
 void				pixel_put_to_image(t_tool *t, int x, int y,
 					t_color *color);
 
 void				vectornorm(t_pos *v);
 t_pos				*vectorsub(t_pos *v1, t_pos *v2);
-float				vectordot(t_pos *v1, t_pos *v2);
-t_pos				*vectorscale(float c, t_pos *v);
+double				vectordot(t_pos *v1, t_pos *v2);
+t_pos				*vectorscale(double c, t_pos *v);
 t_pos				*vectoradd(t_pos *v1, t_pos *v2);
 t_pos				*vectorcopy(t_pos *v1);
-t_pos				*vectornew(float x, float y, float z);
+t_pos				*vectornew(double x, double y, double z);
 t_pos				*rotation(t_pos *axe, t_pos *vect);
 
 void				parser(int fd, t_tool *tools);
@@ -169,7 +171,7 @@ t_color				*new_color();
 void				init_color(t_tool *t, t_color *objcolor, t_color *f_color);
 void				normalize_color(t_color *final_color);
 void				add_color(t_color *color1, t_color *color2);
-void				div_color(t_color *color, float n);
+void				div_color(t_color *color, double n);
 
 void				ft_error(int i);
 void				init_camera(t_tool *tools);

@@ -102,7 +102,7 @@ class ProfileViewController: UIViewController
     {
         if tableView == self.myprojects
         {
-            let cell: ProjectTableViewCell = self.myprojects.dequeueReusableCellWithIdentifier:forIndexPath:("projectCell", forIndexPath: indexPath) as! ProjectTableViewCell
+            let cell: ProjectTableViewCell = self.myprojects.dequeueReusableCellWithIdentifier("projectCell", forIndexPath: indexPath) as! ProjectTableViewCell
             cell.mark.text = Globals.usr?.cursus?[0].projects?[indexPath.row].final_mark?.description
             cell.mark.textColor = (Globals.usr?.cursus?[0].projects?[indexPath.row].final_mark > 80) ? UIColor.greenColor() : UIColor.redColor()
             cell.projectname.text = Globals.usr?.cursus?[0].projects?[indexPath.row].name
@@ -110,7 +110,7 @@ class ProfileViewController: UIViewController
         }
         else
         {
-            let cell: SkillTableViewCell = self.myskills.dequeueReusableCellWithIdentifier:forIndexPath:("skillCell", forIndexPath: indexPath) as! SkillTableViewCell
+            let cell: SkillTableViewCell = self.myskills.dequeueReusableCellWithIdentifier("skillCell", forIndexPath: indexPath) as! SkillTableViewCell
             let f: Float = (Globals.usr?.cursus?[0].skills?[indexPath.row].level)!
             cell.skillname.text = (Globals.usr?.cursus?[0].skills?[indexPath.row].name)!
             cell.skilllevel.text = (Globals.usr?.cursus?[0].skills?[indexPath.row].level?.description)! + "%"
