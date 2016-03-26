@@ -49,6 +49,17 @@ void	div_color(t_color *color, double n)
 	color->b /= n;
 }
 
+t_colors    *new_colors(void)
+{
+    t_colors *colors;
+    
+    colors = malloc(sizeof(t_colors));
+    colors->refract = NULL;
+    colors->reflect = NULL;
+    colors->base = NULL;
+    return (colors);
+}
+
 t_color	*new_color(void)
 {
 	t_color *color;

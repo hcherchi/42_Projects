@@ -117,6 +117,22 @@ void	parse_object(t_tool *tools, int fd)
                 ft_error(2);
             object->mirror = ft_atof(split[1]);
         }
+        else if (ft_strstr(line, "refract:"))
+        {
+            if (ft_tablen(split) != 2)
+                ft_error(7);
+            if (str_digit(split[1]))
+                ft_error(2);
+            object->refract = ft_atof(split[1]);
+        }
+        else if (ft_strstr(line, "transp:"))
+        {
+            if (ft_tablen(split) != 2)
+                ft_error(7);
+            if (str_digit(split[1]))
+                ft_error(2);
+            object->transp = ft_atof(split[1]);
+        }
 		else
 			parse_object2(object, split, line);
 	}

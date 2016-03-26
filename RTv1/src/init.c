@@ -57,5 +57,8 @@ void	init_object(t_object *object)
 	object->type = SPHERE;
 	object->rad = 0.5;
 	object->h = 1;
-	object->shiny = 1;
+	object->shiny = 0;
+    object->refract = 1.02;
+    object->mirror = 0;
+    object->transp = 0;
 }

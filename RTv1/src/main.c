@@ -68,6 +68,7 @@ int		main(int argc, char **argv)
 
 	if (argc != 2)
 	{
+        ft_putnbr(argc);
 		ft_putendl("Bad number of arguments");
 		return (1);
 	}

@@ -59,7 +59,7 @@ double	intersection_sphere(t_object *sphere, t_ray *ray)
 		return (-1);
 	param.t0 = (-param.b + sqrtf(param.discr)) / (2 * param.a);
 	param.t1 = (-param.b - sqrtf(param.discr)) / (2 * param.a);
-	if (fabs(param.t0) > fabs(param.t1))
+	if (param.t0 > param.t1)
 		param.t0 = param.t1;
 	if (param.t0 < E)
 		return (-1);
@@ -84,7 +84,7 @@ double	intersection_cone(t_object *cone, t_ray *ray)
 		return (-1);
 	param.t0 = (-param.b + sqrtf(param.discr)) / (2 * param.a);
 	param.t1 = (-param.b - sqrtf(param.discr)) / (2 * param.a);
-	if (fabs(param.t0) > fabs(param.t1))
+	if (param.t0 > param.t1)
 		param.t0 = param.t1;
 	if (param.t0 < E)
 		return (-1);
@@ -113,7 +113,7 @@ double	intersection_cyl(t_object *cyl, t_ray *ray)
 		return (-1);
 	param.t0 = (-param.b + sqrtf(param.discr)) / (2 * param.a);
 	param.t1 = (-param.b - sqrtf(param.discr)) / (2 * param.a);
-	if (fabs(param.t0) > fabs(param.t1))
+	if (param.t0 > param.t1)
 		param.t0 = param.t1;
 	if (param.t0 < E)
 		return (-1);

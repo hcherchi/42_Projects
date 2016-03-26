@@ -93,27 +93,61 @@ t_object	*intersection(t_object *l_objects, t_ray *ray)
 	return (NULL);
 }
 
+t_color     *get_final_color(t_colors   *colors, t_object *object)
+{
+    t_color *final_color;
+    
+    if (object == NULL)
+        return (colors->base);
+    final_color = new_color();
+    if (colors->reflect)
+    {
+        div_color(colors->reflect, 1 / object->mirror);
+        add_color(final_color, colors->reflect);
+    }
+    if (colors->refract)
+    {
+        div_color(colors->refract, 1 / object->transp);
+        add_color(final_color, colors->refract);
+    }
+    div_color(colors->base, 1 / (1 - object->mirror - object->transp));
+    add_color(final_color, colors->base);
+    return (final_color);
+}
+
 t_color		*get_color(t_ray *ray, t_tool *t)
 {
 	t_object	*object;
 	t_color		*final_color;
 	t_ray		*impact;
+    t_ray       *reflect;
+    t_colors    *colors;
 
-	final_color = new_color();
+    colors = new_colors();
+	colors->base = new_color();
 	if ((object = intersection(t->l_objects, ray)))
 	{
-		init_color(t, object->color, final_color);
+		init_color(t, object->color, colors->base);
 		impact = get_normal(object, ray);
 		if (object->mirror && t->depth < 10)
 		{
             t->depth += 1;
-            ray->o = vectorcopy(impact->o);
-            ray->d = vectoradd(vectorscale(-2 * vectordot(ray->d, impact->d), impact->d), ray->d);
-            return (get_color(ray, t));
+            reflect = malloc(sizeof(t_ray));
+            reflect->o = vectorcopy(impact->o);
+            reflect->d = vectoradd(vectorscale(-2 * vectordot(ray->d, impact->d), impact->d), ray->d);
+            colors->reflect = get_color(reflect, t);
 		}
-		illuminate(t, object, impact, final_color);
+        if (object->transp)
+        {
+            ray->o = vectorcopy(impact->o);
+            ray->d = vectorscale(-1, ray->d);
+            ray->d = vectorsub(vectorscale(1 / object->refract * vectordot(impact->d, ray->d) - sqrtf(1 - (pow(1 / object->refract, 2) * (1 - pow(vectordot(impact->d, ray->d), 2)))), impact->d), vectorscale(1 / object->refract, ray->d));
+            colors->refract = get_color(ray, t);
+        }
+		illuminate(t, object, impact, colors->base);
 		clean_ray(impact);
 	}
-	clean_ray(ray);
+	//clean_ray(ray);
+    final_color = get_final_color(colors, object);
 	return (final_color);
 }

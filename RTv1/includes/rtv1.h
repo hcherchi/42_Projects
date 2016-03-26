@@ -22,7 +22,7 @@
 # define CYL 1
 # define CONE 2
 # define PLAN 3
-# define E 0.00000001
+# define E 0.0001
 
 typedef struct		s_k
 {
@@ -48,6 +48,13 @@ typedef struct		s_color
 	int				b;
 }					t_color;
 
+typedef struct      s_colors
+{
+    t_color         *reflect;
+    t_color         *base;
+    t_color         *refract;
+}                   t_colors;
+
 typedef struct		s_pos
 {
 	double			x;
@@ -66,6 +73,8 @@ typedef struct		s_object
 	double			h;
 	double			shiny;
     double          mirror;
+    double          transp;
+    double          refract;
 	struct s_object	*next;
 }					t_object;
 
@@ -131,6 +140,7 @@ double				intersection_cyl(t_object *cyl, t_ray *ray);
 void				draw(t_tool *t, int x, int y);
 t_ray				*get_ray(t_tool *t, double x, double y);
 t_color				*get_color(t_ray *ray, t_tool *t);
+t_color     *get_final_color(t_colors   *colors, t_object *object);
 t_ray				*get_normal(t_object *object, t_ray *ray);
 void				get_cyl_normal(t_ray *impact, t_object *object);
 t_ray				*get_lightray(t_ray *impact, t_light *light);
@@ -168,6 +178,7 @@ t_pos				*fill_pos(char **split);
 t_color				*fill_color(char **split);
 
 t_color				*new_color();
+t_colors            *new_colors();
 void				init_color(t_tool *t, t_color *objcolor, t_color *f_color);
 void				normalize_color(t_color *final_color);
 void				add_color(t_color *color1, t_color *color2);

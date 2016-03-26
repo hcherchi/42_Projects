@@ -29,7 +29,6 @@ object
 	h: 6
     color: 255 255 255
 	shiny: 0
-	mirror: 0
 }
 
 object
@@ -39,7 +38,6 @@ object
 	h: 1
     color: 255 255 255
 	shiny: 0
-	mirror: 0
 }
 
 object
@@ -51,7 +49,6 @@ object
 	h: 2
     color: 0 255 255
 	shiny: 1
-	mirror: 0
 }
 
 object
@@ -63,7 +60,6 @@ object
 	h: 2
     color: 50 250 155
 	shiny: 1
-	mirror: 0
 }
 
 object
@@ -75,7 +71,7 @@ object
 	h: 2
     color: 150 255 55
 	shiny: 1
-	mirror: 1
+	transp: 0.6
 }
 
 object
@@ -87,5 +83,4 @@ object
 	h: 2
     color: 255 200 255
 	shiny: 1
-	mirror: 0
 }
