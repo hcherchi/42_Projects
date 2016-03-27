@@ -61,4 +61,5 @@ void	init_object(t_object *object)
     object->refract = 1.02;
     object->mirror = 0;
     object->transp = 0;
+    object->texture = 0;
 }

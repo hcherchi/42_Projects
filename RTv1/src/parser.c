@@ -133,6 +133,14 @@ void	parse_object(t_tool *tools, int fd)
                 ft_error(2);
             object->transp = ft_atof(split[1]);
         }
+        else if (ft_strstr(line, "texture:"))
+        {
+            if (ft_tablen(split) != 2)
+                ft_error(7);
+            if (str_digit(split[1]))
+                ft_error(2);
+            object->texture = ft_atof(split[1]);
+        }
 		else
 			parse_object2(object, split, line);
 	}

@@ -25,9 +25,9 @@ void	clean_ray(t_ray *ray)
 void	clean_tools(t_tool *tools)
 {
 	free(tools->image->data);
-	free(tools->image);
 	free(tools->mlx_ptr);
-	free(tools->mlx_img);
+	free(tools->image->mlx_img);
+    free(tools->image);
 	free(tools->mlx_win);
 	clean_cam(tools->cam);
 	clean_obj(tools->l_objects);

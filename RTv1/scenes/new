@@ -24,6 +24,7 @@ object
 	color: 200 200 200
 	mirror: 0.2
 	shiny: 0
+	texture: 1
 }
 
 object

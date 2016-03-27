@@ -75,6 +75,7 @@ typedef struct		s_object
     double          mirror;
     double          transp;
     double          refract;
+    double          texture;
 	struct s_object	*next;
 }					t_object;
 
@@ -110,20 +111,23 @@ typedef struct		s_cam
 
 typedef struct		s_image
 {
+    void			*mlx_img;
 	int				endian;
 	int				size_line;
 	int				bpp;
 	char			*data;
+    int             width;
+    int             height;
 }					t_image;
 
 typedef struct		s_tool
 {
 	void			*mlx_ptr;
 	void			*mlx_win;
-	void			*mlx_img;
 	t_object		*l_objects;
 	t_light			*l_lights;
 	t_image			*image;
+    t_image         *texture;
 	t_cam			*cam;
 	double			lumamb;
     int             depth;
@@ -141,6 +145,7 @@ void				draw(t_tool *t, int x, int y);
 t_ray				*get_ray(t_tool *t, double x, double y);
 t_color				*get_color(t_ray *ray, t_tool *t);
 t_color     *get_final_color(t_colors   *colors, t_object *object);
+t_color     *get_texture_color(t_pos *impact, t_tool *t);
 t_ray				*get_normal(t_object *object, t_ray *ray);
 void				get_cyl_normal(t_ray *impact, t_object *object);
 t_ray				*get_lightray(t_ray *impact, t_light *light);

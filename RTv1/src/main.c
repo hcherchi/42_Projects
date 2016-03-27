@@ -35,10 +35,10 @@ void	init_param(t_tool *t)
 	t->cam->h = t->cam->y_res * t->cam->indent;
 	t->mlx_win = mlx_new_window(t->mlx_ptr, t->cam->x_res,
 	t->cam->y_res, "RTv1");
-	t->mlx_img = mlx_new_image(t->mlx_ptr, t->cam->x_res, t->cam->y_res);
-	t->image = malloc(sizeof(t_image));
-	t->image->data = mlx_get_data_addr(t->mlx_img, &t->image->bpp,
-	&t->image->size_line, &t->image->endian);
+    t->image = malloc(sizeof(t_image));
+    t->image->mlx_img = mlx_new_image(t->mlx_ptr, t->cam->x_res, t->cam->y_res);
+    t->image->data = mlx_get_data_addr(t->image->mlx_img, &t->image->bpp,
+                                       &t->image->size_line, &t->image->endian);
 }
 
 void	run_through(t_tool *t)
@@ -58,7 +58,14 @@ void	run_through(t_tool *t)
 		}
 		y += 1;
 	}
-	mlx_put_image_to_window(t->mlx_ptr, t->mlx_win, t->mlx_img, 0, 0);
+	mlx_put_image_to_window(t->mlx_ptr, t->mlx_win, t->image->mlx_img, 0, 0);
+}
+
+void    init_texture(t_tool *e)
+{
+    e->texture = malloc(sizeof(t_image));
+    e->texture->mlx_img = mlx_xpm_file_to_image(e->mlx_ptr, "textures/tiles.xpm", &e->texture->width, &e->texture->height);
+    e->texture->data = mlx_get_data_addr(e->texture->mlx_img, &e->texture->bpp, &e->texture->size_line, &e->texture->endian);
 }
 
 int		main(int argc, char **argv)
@@ -76,6 +83,7 @@ int		main(int argc, char **argv)
 	tools = malloc(sizeof(t_tool));
 	parser(fd, tools);
 	init_param(tools);
+    init_texture(tools);
 	run_through(tools);
 	mlx_key_hook(tools->mlx_win, event, tools);
 	mlx_loop(tools->mlx_ptr);
