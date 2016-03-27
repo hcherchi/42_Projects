@@ -59,13 +59,13 @@ void	illuminate(t_tool *t, t_object *obj, t_ray *imp, t_color *f_color)
 	while (light)
 	{
 		lightray = get_lightray(imp, light);
-		if ((obj2 = intersection(t->l_objects, lightray)) && obj2 == obj)
+		if ((obj2 = intersection(t->l_objects, lightray)) && (obj2 == obj))
 		{
 			k.dist = MAX((light->dist - obj->dist) / light->dist, 0);
 			k.diff = get_kdiff(lightray, imp, k.dist, light->lumdiff);
 			if (k.diff >= 0)
 			{
-				update_color(k.diff, light->color, f_color, obj->color);
+				update_color(k.diff , light->color, f_color, obj->color);
 				k.spec = get_kspec(lightray, imp, k.dist, light->lumdiff);
 				if (k.spec >= 0)
 					update_color(k.spec * obj->shiny,
