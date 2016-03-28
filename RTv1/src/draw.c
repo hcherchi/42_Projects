@@ -116,51 +116,48 @@ t_color     *get_final_color(t_colors   *colors, t_object *object)
     return (final_color);
 }
 
-int             get_color_2_0(char *data, int x, int y)
-{
-    int color;
-    int c;
-    
-    c = (y * 64 + x) * 4;
-    color = data[c];
-    color += data[c + 1] * 256;
-    color += data[c + 2] * 256 * 256;
-    return (color);
-}
-
-t_color *    pixel_to_image(unsigned long color)
+t_color *    extract_color(t_tool *t, int x, int y)
 {
     t_color *c;
+    int color;
+    unsigned int lcolor;
     
+    color = t->texture->data[x * t->texture->bpp / 8 + y * t->texture->size_line];
+    color += t->texture->data[x * t->texture->bpp / 8 + 1 + y * t->texture->size_line] * 256;
+    color += t->texture->data[x * t->texture->bpp / 8 + 2 + y * t->texture->size_line] * 256 * 256;
+    lcolor = mlx_get_color_value(t->mlx_ptr, color);
     c = new_color();
-    c->r = ((color & 0xFF0000) >> 16);
-    c->g = ((color & 0xFF00) >> 8);
-    c->b = ((color & 0xFF));
+    c->r = ((lcolor & 0xFF0000) >> 16);
+    c->g = ((lcolor & 0xFF00) >> 8);
+    c->b = ((lcolor & 0xFF));
     return (c);
 }
 
-t_color     *get_texture_color(t_pos *impact, t_tool *t)
+t_color     *get_texture_color(t_object *object, t_pos *impact, t_tool *t)
 {
     double x;
     double y;
     t_color *color;
-    double  tmp;
-    int     div;
-    
-    x = impact->x / 0.01;
-    y = -impact->z / 0.01;
-    
-    tmp = y / t->texture->height;
-    div = floor(tmp);
-    y = (tmp - div) * t->texture->height;
-//    if (div % 2 != 0)
-//    {
-//        x += (t->texture->width / 4);
-//    }
-    tmp = x / t->texture->width;
-    div = floor(tmp);
-    x = (tmp - div) * t->texture->height;
-    color = pixel_to_image((unsigned long)get_color_2_0(t->texture->data, x, y));
+//    double  tmp;
+//    int     div;
+//    
+//    x = impact->x / 0.002;
+//    y = -impact->z / 0.002;
+//    
+//    tmp = y / t->texture->height;
+//    div = floor(tmp);
+//    y = (tmp - div) * t->texture->height;
+////    if (div % 2 != 0)
+////    {
+////        x += (t->texture->width / 2);
+////    }
+//    tmp = x / t->texture->width;
+//    div = floor(tmp);
+//    x = (tmp - div) * t->texture->height;
+    y = asin(impact->z / object->rad);
+    x = acos((impact->x / object->rad ) / acos(y));
+    printf("%f, %f\n", x, y);
+    color = extract_color(t, x, y);
     return (color);
 }
 
@@ -179,7 +176,7 @@ t_color		*get_color(t_ray *ray, t_tool *t)
         impact = get_normal(object, ray);
         if (object->texture == 1)
         {
-            object->color = get_texture_color(impact->o, t);
+            object->color = get_texture_color(object, impact->o, t);
         }
 		init_color(t, object->color, colors->base);
 		if (object->mirror && t->depth < 10)

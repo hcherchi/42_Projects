@@ -24,7 +24,6 @@ object
 	color: 200 200 200
 	mirror: 0.2
 	shiny: 0
-	texture: 1
 }
 
 object
@@ -34,9 +33,7 @@ object
 	dir: 0 1 0
 	color: 0 200 200
 	rayon: 0.5
-	mirror: 0.3
-	shiny: 1
-	transp: 0
+	texture: 1
 }
 
 object

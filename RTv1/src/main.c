@@ -64,7 +64,7 @@ void	run_through(t_tool *t)
 void    init_texture(t_tool *e)
 {
     e->texture = malloc(sizeof(t_image));
-    e->texture->mlx_img = mlx_xpm_file_to_image(e->mlx_ptr, "textures/tiles.xpm", &e->texture->width, &e->texture->height);
+    e->texture->mlx_img = mlx_xpm_file_to_image(e->mlx_ptr, "textures/grass.xpm", &e->texture->width, &e->texture->height);
     e->texture->data = mlx_get_data_addr(e->texture->mlx_img, &e->texture->bpp, &e->texture->size_line, &e->texture->endian);
 }
 
