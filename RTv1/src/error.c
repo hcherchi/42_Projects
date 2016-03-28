@@ -15,13 +15,13 @@
 void	ft_error(int i)
 {
 	if (i == 1)
-		ft_putstr("Error in camera. use pos, res, lumAmb, and vect only.\n");
+		ft_putstr("Error in camera. use pos, res, lumamb, and vect only.\n");
 	else if (i == 2)
 		ft_putstr("Error, arguments need numbers.\n");
 	else if (i == 3)
 	{
 		ft_putstr("Error, bad argument in light. ");
-		ft_putstr("use just pos color, LumDiff and dist.\n");
+		ft_putstr("use just pos color, lumdiff and dist.\n");
 	}
 	else if (i == 4)
 	{
@@ -38,5 +38,7 @@ void	ft_error(int i)
 		ft_putstr("Error, window can not be negative.\n");
 	else if (i == 9)
 		ft_putstr("Error, use a valid file instead.\n");
+    else if (i == 10)
+        ft_putstr("Error, texture file not valid.\n");
 	exit(0);
 }

@@ -37,20 +37,6 @@ t_ray	*get_normal(t_object *object, t_ray *ray)
 	return (impact);
 }
 
-double	minimum(t_object *l_objects)
-{
-	double	min;
-
-	min = 200000;
-	while (l_objects != NULL)
-	{
-		if (l_objects->dist != -1 && l_objects->dist < min)
-			min = l_objects->dist;
-		l_objects = l_objects->next;
-	}
-	return (min);
-}
-
 void	get_cyl_normal(t_ray *impact, t_object *object)
 {
 	impact->d = malloc(sizeof(t_pos));

@@ -12,74 +12,81 @@
 
 #include <rtv1.h>
 
-t_ray	*get_lightray(t_ray *impact, t_light *light)
-{
-	t_ray	*lightray;
-
-	lightray = malloc(sizeof(t_ray));
-	lightray->o = vectorcopy(light->o);
-	lightray->d = vectorsub(impact->o, lightray->o);
-	vectornorm(lightray->d);
-	return (lightray);
-}
-
-double	get_kdiff(t_ray *lightray, t_ray *impact, double kdist, double intens)
+double	get_kdiff(t_ray *lightray, t_ray *impact, double lumdiff)
 {
 	double	kdiff;
-	t_pos	*invlight;
-
-	invlight = vectorscale(-1, lightray->d);
-	kdiff = vectordot(invlight, impact->d);
-	free(invlight);
-	return (kdiff * kdist * intens);
+    t_pos	*invlight;
+    
+    invlight = vectorscale(-1, lightray->d);
+    kdiff = vectordot(invlight, impact->d);
+    free(invlight);
+	return (kdiff * lumdiff);
 }
 
-double	get_kspec(t_ray *lightray, t_ray *impact, double kdist, double intens)
+double	get_kspec(t_ray *lightray, t_ray *impact, double lumdiff)
 {
-	double	kspec;
-	t_pos	*invlight;
-	t_pos	*reflectray;
-
-	invlight = vectorscale(-1, lightray->d);
-	reflectray = rotation(impact->d, invlight);
-	vectornorm(reflectray);
-	kspec = vectordot(invlight, reflectray);
-	free(invlight);
-	return (pow(kspec, 21) * kdist * intens);
+    double	kspec;
+    t_pos	*invlight;
+    t_pos	*reflectray;
+    
+    invlight = vectorscale(-1, lightray->d);
+    reflectray = vectoradd(vectorscale(-2 * vectordot(lightray->d, impact->d), impact->d), lightray->d);
+    vectornorm(reflectray);
+    kspec = vectordot(invlight, reflectray);
+    free(invlight);
+    return (pow(kspec, 21) * lumdiff);
 }
 
-void	illuminate(t_tool *t, t_object *obj, t_ray *imp, t_color *f_color)
+double  get_ray_intens(t_tool *t, t_ray *lightray, t_object *obj)
+{
+    t_object *curobj;
+    double  intens;
+    
+    intens = 1;
+    curobj = t->l_objects;
+    fill_dist(t->l_objects, lightray);
+    while (curobj)
+    {
+        if (curobj->dist != -1 && curobj->dist < obj->dist)
+            intens -= (1 - curobj->transp);
+        curobj = curobj->next;
+    }
+    return (intens);
+}
+
+t_color     *get_base_color(t_tool *t, t_object *obj, t_ray *impact)
 {
 	t_light		*light;
-	t_ray		*lightray;
-	t_object	*obj2;
-	t_k			k;
+    t_ray		*lightray;
+    double		kspec;
+    double       kdiff;
+    t_color *base_color;
+    double      intens;
 
+    if (obj->texture)
+        obj->color = get_texture_color(obj, impact, t);
+    base_color = init_lumamb(t, obj->color);
 	light = t->l_lights;
 	while (light)
-	{
-		lightray = get_lightray(imp, light);
-		if ((obj2 = intersection(t->l_objects, lightray)) && (obj2 == obj))
-		{
-			k.dist = MAX((light->dist - obj->dist) / light->dist, 0);
-			k.diff = get_kdiff(lightray, imp, k.dist, light->lumdiff);
-			if (k.diff >= 0)
-			{
-				update_color(k.diff , light->color, f_color, obj->color);
-				k.spec = get_kspec(lightray, imp, k.dist, light->lumdiff);
-				if (k.spec >= 0)
-					update_color(k.spec * obj->shiny,
-							light->color, f_color, obj->color);
-			}
-		}
-		clean_ray(lightray);
-		light = light->next;
-	}
+    {
+        lightray = get_lightray(impact, light);
+        intens = get_ray_intens(t, lightray, obj);
+        kdiff = get_kdiff(lightray, impact, intens * light->lumdiff);
+        if (kdiff >= 0)
+        {
+            update_color(kdiff , light->color, base_color, obj->color);
+            kspec = get_kspec(lightray, impact, intens * light->lumdiff);
+            if (kspec >= 0)
+                update_color(kspec * obj->shiny, light->color, base_color, obj->color);
+        }
+        light = light->next;
+    }
+    return (base_color);
 }
 
-void	update_color(double k, t_color *lightco, t_color *f_c, t_color *objcol)
+void	update_color(double k, t_color *lightcolor, t_color *color, t_color *objcolor)
 {
-	f_c->r += (lightco->r + 3 * objcol->r) / 4 * k;
-	f_c->g += (lightco->g + 3 * objcol->g) / 4 * k;
-	f_c->b += (lightco->b + 3 * objcol->b) / 4 * k;
+	color->r += (lightcolor->r + 3 * objcolor->r) / 4 * k;
+	color->g += (lightcolor->g + 3 * objcolor->g) / 4 * k;
+	color->b += (lightcolor->b + 3 * objcolor->b) / 4 * k;
 }

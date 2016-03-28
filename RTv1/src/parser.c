@@ -14,7 +14,7 @@
 
 void	parse_camera2(t_tool *tools, char **split, char *line)
 {
-	if (ft_strstr(line, "lumAmb:"))
+	if (ft_strstr(line, "lumamb:"))
 	{
 		if (ft_tablen(split) != 2)
 			ft_error(7);
@@ -137,7 +137,7 @@ void	parse_object(t_tool *tools, int fd)
         {
             if (ft_tablen(split) != 2)
                 ft_error(7);
-            object->texture = init_texture(split[1], tools);
+            object->texture = fill_texture(split[1], tools);
         }
 		else
 			parse_object2(object, split, line);

@@ -43,18 +43,3 @@ void	vectornorm(t_pos *v)
 	v->y = v->y * tmp;
 	v->z = v->z * tmp;
 }
-
-t_pos	*rotation(t_pos *axe, t_pos *vect)
-{
-	t_pos	*rota_matrice;
-
-	rota_matrice = malloc(sizeof(t_pos));
-	rota_matrice->x = -vect->x + 2 * vect->x * pow(axe->x, 2)
-	+ 2 * vect->y * axe->x * axe->y + 2 * vect->z * axe->x * axe->z;
-	rota_matrice->y = -vect->y + 2 * vect->x * axe->x * axe->y
-	+ 2 * vect->y * pow(axe->y, 2) + vect->z * 2 * axe->y * axe->z;
-	rota_matrice->z = -vect->z + 2 * vect->x * axe->x * axe->z
-	+ 2 * vect->y * axe->y * axe->z + 2 * vect->z * pow(axe->z, 2);
-	vectornorm(rota_matrice);
-	return (rota_matrice);
-}

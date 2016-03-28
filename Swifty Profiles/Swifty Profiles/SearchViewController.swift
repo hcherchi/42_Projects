@@ -18,6 +18,13 @@ class SearchViewController: UIViewController
         super.viewDidLoad()
     }
     
+    /**
+     Lorem ipsum dolor sit amet.
+     
+     - parameter bar: Consectetur adipisicing elit.
+     
+     - returns: Sed do eiusmod tempor.
+     */
     func cleanCursus()
     {
         var i = 0

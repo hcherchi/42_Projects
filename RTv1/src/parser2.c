@@ -26,7 +26,7 @@ void	parse_light2(t_light *light, char **split, char *line)
 			ft_error(2);
 		light->dist = ft_atof(split[1]);
 	}
-	else if (ft_strstr(line, "LumDiff:"))
+	else if (ft_strstr(line, "lumdiff:"))
 	{
 		if (ft_tablen(split) != 2)
 			ft_error(7);

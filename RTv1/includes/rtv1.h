@@ -24,13 +24,6 @@
 # define PLAN 3
 # define E 0.0001
 
-typedef struct		s_k
-{
-	double			spec;
-	double			diff;
-	double			dist;
-}					t_k;
-
 typedef struct		s_equation
 {
 	double			a;
@@ -129,6 +122,7 @@ typedef struct		s_tool
 	t_object		*l_objects;
 	t_light			*l_lights;
 	t_image			*image;
+    t_image         *sky;
 	t_cam			*cam;
 	double			lumamb;
     int             depth;
@@ -143,23 +137,25 @@ double				intersection_cone(t_object *cone, t_ray *ray);
 double				intersection_cyl(t_object *cyl, t_ray *ray);
 
 void				draw(t_tool *t, int x, int y);
-t_ray				*get_ray(t_tool *t, double x, double y);
+void				pixel_put_to_image(t_tool *t, int x, int y, t_color *color);
 t_color				*get_color(t_ray *ray, t_tool *t);
-t_color     *get_final_color(t_colors   *colors, t_object *object);
-t_color     *get_texture_color(t_object *object, t_ray *impact, t_tool *t);
+t_color             *get_base_color(t_tool *t, t_object *obj, t_ray *impact);
+t_color             *get_final_color(t_colors   *colors, t_object *object);
+t_color             *get_texture_color(t_object *object, t_ray *impact, t_tool *t);
+t_color *    extract_color(t_tool *t, t_image *texture, int x, int y);
+
 t_ray				*get_normal(t_object *object, t_ray *ray);
 void				get_cyl_normal(t_ray *impact, t_object *object);
+
+t_color				*init_lumamb(t_tool *t, t_color *objcolor);
+double				get_kspec(t_ray *lightray, t_ray *impact, double intens);
+double				get_kdiff(t_ray *lightray, t_ray *impact, double intens);
+void				update_color(double k, t_color *lightcolor, t_color *final_color, t_color *objcolor);
+
 t_ray				*get_lightray(t_ray *impact, t_light *light);
-void				illuminate(t_tool *t, t_object *object, t_ray *impact,
-					t_color *final_color);
-double				get_kspec(t_ray *lightray, t_ray *impact, double kdist,
-					double intens);
-double				get_kdiff(t_ray *lightray, t_ray *impact, double kdist,
-					double intens);
-void				update_color(double k, t_color *lightcolor,
-					t_color *final_color, t_color *objcolor);
-void				pixel_put_to_image(t_tool *t, int x, int y,
-					t_color *color);
+t_ray				*get_ray(t_tool *t, double x, double y);
+t_ray               *get_reflectray(t_ray *ray, t_tool *t, t_ray *impact);
+t_ray               *get_refractray(t_ray *ray, t_ray *impact, t_object *object);
 
 void				vectornorm(t_pos *v);
 t_pos				*vectorsub(t_pos *v1, t_pos *v2);
@@ -182,11 +178,10 @@ void				add_light(t_light **l_lights, t_light *new);
 int					object_type(char **split);
 t_pos				*fill_pos(char **split);
 t_color				*fill_color(char **split);
-t_image     *init_texture(char *file, t_tool *tools);
+t_image             *fill_texture(char *file, t_tool *tools);
 
 t_color				*new_color();
 t_colors            *new_colors();
-void				init_color(t_tool *t, t_color *objcolor, t_color *f_color);
 void				normalize_color(t_color *final_color);
 void				add_color(t_color *color1, t_color *color2);
 void				div_color(t_color *color, double n);

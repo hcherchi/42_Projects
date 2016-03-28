@@ -12,11 +12,15 @@
 
 #include <rtv1.h>
 
-void	init_color(t_tool *t, t_color *objcolor, t_color *final_color)
+t_color     *init_lumamb(t_tool *t, t_color *objcolor)
 {
-	final_color->r = objcolor->r * t->lumamb;
-	final_color->g = objcolor->g * t->lumamb;
-	final_color->b = objcolor->b * t->lumamb;
+    t_color *base_color;
+    
+    base_color = malloc(sizeof(t_color));
+    base_color->r = objcolor->r * t->lumamb;
+    base_color->g = objcolor->g * t->lumamb;
+    base_color->b = objcolor->b * t->lumamb;
+    return (base_color);
 }
 
 void	normalize_color(t_color *final_color)
