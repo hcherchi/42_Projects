@@ -182,6 +182,7 @@ void				add_light(t_light **l_lights, t_light *new);
 int					object_type(char **split);
 t_pos				*fill_pos(char **split);
 t_color				*fill_color(char **split);
+t_image     *init_texture(char *file, t_tool *tools);
 
 t_color				*new_color();
 t_colors            *new_colors();

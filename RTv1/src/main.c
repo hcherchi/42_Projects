@@ -28,7 +28,6 @@ void	update_cam(t_tool *t)
 
 void	init_param(t_tool *t)
 {
-	t->mlx_ptr = mlx_init();
 	t->cam->indent = 0.001;
 	t->cam->dist = 1;
 	t->cam->w = t->cam->x_res * t->cam->indent;
@@ -61,15 +60,6 @@ void	run_through(t_tool *t)
 	mlx_put_image_to_window(t->mlx_ptr, t->mlx_win, t->image->mlx_img, 0, 0);
 }
 
-void    init_texture(t_tool *e)
-{
-ft_putendl("2");
-//   e->l_objects->texture = malloc(sizeof(t_image));
-ft_putendl("3");
-    e->l_objects->texture->mlx_img = mlx_xpm_file_to_image(e->mlx_ptr, e->l_objects->texture->texture, &e->l_objects->texture->width, &e->l_objects->texture->height);
-ft_putendl("4");
-    e->l_objects->texture->data = mlx_get_data_addr(e->l_objects->texture->mlx_img, &e->l_objects->texture->bpp, &e->l_objects->texture->size_line, &e->l_objects->texture->endian);
-}
 
 int		main(int argc, char **argv)
 {
@@ -84,13 +74,9 @@ int		main(int argc, char **argv)
 	}
 	fd = open(argv[1], O_RDONLY);
 	tools = malloc(sizeof(t_tool));
+    tools->mlx_ptr = mlx_init();
 	parser(fd, tools);
 	init_param(tools);
-	ft_putendl(tools->l_objects->texture->texture);
-	if (tools->l_objects->texture->texture)
-	{
-		init_texture(tools);
-	}
 	run_through(tools);
 	mlx_key_hook(tools->mlx_win, event, tools);
 	mlx_loop(tools->mlx_ptr);

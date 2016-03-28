@@ -116,15 +116,15 @@ t_color     *get_final_color(t_colors   *colors, t_object *object)
     return (final_color);
 }
 
-t_color *    extract_color(t_tool *t, int x, int y)
+t_color *    extract_color(t_tool *t, t_object *object, int x, int y)
 {
     t_color *c;
     int color;
     unsigned int lcolor;
     
-    color = t->l_objects->texture->data[x * t->l_objects->texture->bpp / 8 + y * t->l_objects->texture->size_line];
-    color += t->l_objects->texture->data[x * t->l_objects->texture->bpp / 8 + 1 + y * t->l_objects->texture->size_line] * 256;
-    color += t->l_objects->texture->data[x * t->l_objects->texture->bpp / 8 + 2 + y * t->l_objects->texture->size_line] * 256 * 256;
+    color = object->texture->data[x * object->texture->bpp / 8 + y * object->texture->size_line];
+    color += object->texture->data[x * object->texture->bpp / 8 + 1 + y * object->texture->size_line] * 256;
+    color += object->texture->data[x * object->texture->bpp / 8 + 2 + y * object->texture->size_line] * 256 * 256;
     lcolor = mlx_get_color_value(t->mlx_ptr, color);
     c = new_color();
     c->r = ((lcolor & 0xFF0000) >> 16);
@@ -162,7 +162,7 @@ t_color     *get_texture_color(t_object *object, t_ray *impact, t_tool *t)
 		x = (0.5 + (atan2(impact->d->z, impact->d->x) / (2 * M_PI))) * object->texture->width;
 		y = (0.5 - asin(impact->d->y) / M_PI) * object->texture->height;
 	}
-    color = extract_color(t, x, y);
+    color = extract_color(t, object, x, y);
     return (color);
 }
 
@@ -179,7 +179,7 @@ t_color		*get_color(t_ray *ray, t_tool *t)
 	if ((object = intersection(t->l_objects, ray)))
 	{
         impact = get_normal(object, ray);
-        if (object->texture->texture)
+        if (object->texture)
         {
             object->color = get_texture_color(object, impact, t);
         }

@@ -45,7 +45,7 @@ void	init_object(t_object *object)
 	object->o = malloc(sizeof(t_pos));
 	object->d = malloc(sizeof(t_pos));
 	object->color = malloc(sizeof(t_color));
-	object->texture = malloc(sizeof(t_image));
+	object->texture = NULL;
 	object->o->x = 0;
 	object->o->y = 0;
 	object->o->z = 3;
@@ -62,5 +62,4 @@ void	init_object(t_object *object)
     object->refract = 1.02;
     object->mirror = 0;
     object->transp = 0;
-    object->texture->texture = NULL;
 }

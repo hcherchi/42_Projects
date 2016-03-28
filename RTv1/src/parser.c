@@ -137,7 +137,7 @@ void	parse_object(t_tool *tools, int fd)
         {
             if (ft_tablen(split) != 2)
                 ft_error(7);
-            object->texture->texture = ft_strdup(split[1]);
+            object->texture = init_texture(split[1], tools);
         }
 		else
 			parse_object2(object, split, line);

@@ -12,6 +12,17 @@
 
 #include <rtv1.h>
 
+t_image     *init_texture(char *file, t_tool *t)
+{
+    t_image *texture;
+    
+    texture = malloc(sizeof(t_image));
+    texture->texture = ft_strdup(file);
+    texture->mlx_img = mlx_xpm_file_to_image(t->mlx_ptr, texture->texture, &texture->width, &texture->height);
+    texture->data = mlx_get_data_addr(texture->mlx_img, &texture->bpp, &texture->size_line, &texture->endian);
+    return (texture);
+}
+
 int		object_type(char **split)
 {
 	if (ft_tablen(split) != 2)

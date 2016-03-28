@@ -34,6 +34,7 @@ object
 	dir: 0 1 0
 	color: 0 200 200
 	rayon: 0.5
+	texture: textures/world.xpm
 }
 
 object
