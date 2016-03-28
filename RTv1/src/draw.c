@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 17:16:59 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/03/26 11:44:50 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/03/28 12:36:19 by bgantelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,9 +122,9 @@ t_color *    extract_color(t_tool *t, int x, int y)
     int color;
     unsigned int lcolor;
     
-    color = t->texture->data[x * t->texture->bpp / 8 + y * t->texture->size_line];
-    color += t->texture->data[x * t->texture->bpp / 8 + 1 + y * t->texture->size_line] * 256;
-    color += t->texture->data[x * t->texture->bpp / 8 + 2 + y * t->texture->size_line] * 256 * 256;
+    color = t->l_objects->texture->data[x * t->l_objects->texture->bpp / 8 + y * t->l_objects->texture->size_line];
+    color += t->l_objects->texture->data[x * t->l_objects->texture->bpp / 8 + 1 + y * t->l_objects->texture->size_line] * 256;
+    color += t->l_objects->texture->data[x * t->l_objects->texture->bpp / 8 + 2 + y * t->l_objects->texture->size_line] * 256 * 256;
     lcolor = mlx_get_color_value(t->mlx_ptr, color);
     c = new_color();
     c->r = ((lcolor & 0xFF0000) >> 16);
@@ -133,30 +133,35 @@ t_color *    extract_color(t_tool *t, int x, int y)
     return (c);
 }
 
-t_color     *get_texture_color(t_object *object, t_pos *impact, t_tool *t)
+t_color     *get_texture_color(t_object *object, t_ray *impact, t_tool *t)
 {
     double x;
     double y;
     t_color *color;
-//    double  tmp;
-//    int     div;
-//    
-//    x = impact->x / 0.002;
-//    y = -impact->z / 0.002;
-//    
-//    tmp = y / t->texture->height;
-//    div = floor(tmp);
-//    y = (tmp - div) * t->texture->height;
-////    if (div % 2 != 0)
-////    {
-////        x += (t->texture->width / 2);
-////    }
-//    tmp = x / t->texture->width;
-//    div = floor(tmp);
-//    x = (tmp - div) * t->texture->height;
-    y = asin(impact->z / object->rad);
-    x = acos((impact->x / object->rad ) / acos(y));
-    printf("%f, %f\n", x, y);
+    double  tmp;
+    int     div;
+    
+	if (object->type == PLAN)
+	{
+		x = impact->o->x / 0.002;
+		y = -impact->o->z / 0.002;
+		
+		tmp = y / object->texture->height;
+		div = floor(tmp);
+		y = (tmp - div) * object->texture->height;
+		if (div % 2 != 0)
+		{
+			x += (object->texture->width / 2);
+		}
+		tmp = x / object->texture->width;
+		div = floor(tmp);
+		x = (tmp - div) * object->texture->height;
+	}
+	if (object->type == SPHERE)
+	{
+		x = (0.5 + (atan2(impact->d->z, impact->d->x) / (2 * M_PI))) * object->texture->width;
+		y = (0.5 - asin(impact->d->y) / M_PI) * object->texture->height;
+	}
     color = extract_color(t, x, y);
     return (color);
 }
@@ -174,9 +179,9 @@ t_color		*get_color(t_ray *ray, t_tool *t)
 	if ((object = intersection(t->l_objects, ray)))
 	{
         impact = get_normal(object, ray);
-        if (object->texture == 1)
+        if (object->texture->texture)
         {
-            object->color = get_texture_color(object, impact->o, t);
+            object->color = get_texture_color(object, impact, t);
         }
 		init_color(t, object->color, colors->base);
 		if (object->mirror && t->depth < 10)

@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 12:43:23 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/03/26 11:45:29 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/03/28 12:02:17 by bgantelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,9 +137,7 @@ void	parse_object(t_tool *tools, int fd)
         {
             if (ft_tablen(split) != 2)
                 ft_error(7);
-            if (str_digit(split[1]))
-                ft_error(2);
-            object->texture = ft_atof(split[1]);
+            object->texture->texture = ft_strdup(split[1]);
         }
 		else
 			parse_object2(object, split, line);

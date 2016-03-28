@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 12:36:23 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/03/26 11:45:15 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/03/28 12:24:01 by bgantelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,12 @@ void	run_through(t_tool *t)
 
 void    init_texture(t_tool *e)
 {
-    e->texture = malloc(sizeof(t_image));
-    e->texture->mlx_img = mlx_xpm_file_to_image(e->mlx_ptr, "textures/grass.xpm", &e->texture->width, &e->texture->height);
-    e->texture->data = mlx_get_data_addr(e->texture->mlx_img, &e->texture->bpp, &e->texture->size_line, &e->texture->endian);
+ft_putendl("2");
+//   e->l_objects->texture = malloc(sizeof(t_image));
+ft_putendl("3");
+    e->l_objects->texture->mlx_img = mlx_xpm_file_to_image(e->mlx_ptr, e->l_objects->texture->texture, &e->l_objects->texture->width, &e->l_objects->texture->height);
+ft_putendl("4");
+    e->l_objects->texture->data = mlx_get_data_addr(e->l_objects->texture->mlx_img, &e->l_objects->texture->bpp, &e->l_objects->texture->size_line, &e->l_objects->texture->endian);
 }
 
 int		main(int argc, char **argv)
@@ -83,7 +86,11 @@ int		main(int argc, char **argv)
 	tools = malloc(sizeof(t_tool));
 	parser(fd, tools);
 	init_param(tools);
-    init_texture(tools);
+	ft_putendl(tools->l_objects->texture->texture);
+	if (tools->l_objects->texture->texture)
+	{
+		init_texture(tools);
+	}
 	run_through(tools);
 	mlx_key_hook(tools->mlx_win, event, tools);
 	mlx_loop(tools->mlx_ptr);
