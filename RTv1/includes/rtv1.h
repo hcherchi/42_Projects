@@ -22,6 +22,9 @@
 # define CYL 1
 # define CONE 2
 # define PLAN 3
+# define SPOT 4
+# define SUN  5
+# define LIGHTPLAN 6
 # define E 0.0001
 
 typedef struct		s_equation
@@ -93,10 +96,13 @@ typedef struct		s_ray
 
 typedef struct		s_light
 {
+    int             type;
 	t_pos			*o;
+    t_pos           *d;
 	t_color			*color;
-	double			dist;
 	double			lumdiff;
+    double          angle;
+    double          h;
 	struct s_light	*next;
 }					t_light;
 
@@ -131,7 +137,7 @@ typedef struct		s_tool
 double				minimum(t_object *l_objects);
 void				fill_dist(t_object *l_objects, t_ray *ray);
 t_object			*intersection(t_object *l_objects, t_ray *ray);
-double				intersection_plan(t_object *plan, t_ray *ray);
+double				intersection_plan(t_pos *dir, double h, t_pos *oray, t_pos *dray);
 double				intersection_sphere(t_object *sphere, t_ray *ray);
 double				intersection_cone(t_object *cone, t_ray *ray);
 double				intersection_cyl(t_object *cyl, t_ray *ray);
@@ -140,7 +146,7 @@ void				draw(t_tool *t, int x, int y);
 void				pixel_put_to_image(t_tool *t, int x, int y, t_color *color);
 t_color				*get_color(t_ray *ray, t_tool *t);
 t_color             *get_base_color(t_tool *t, t_object *obj, t_ray *impact);
-t_color             *get_final_color(t_colors   *colors, t_object *object);
+t_color             *get_final_color(t_colors   *colors, t_object *object, t_color *flash);
 t_color             *get_texture_color(t_object *object, t_ray *impact, t_tool *t);
 t_color *    extract_color(t_tool *t, t_image *texture, int x, int y);
 
@@ -168,14 +174,12 @@ t_pos				*rotation(t_pos *axe, t_pos *vect);
 
 void				parser(int fd, t_tool *tools);
 void				parse_light(t_tool *tools, int fd);
-void				parse_light2(t_light *light, char **split, char *line);
 void				parse_object(t_tool *tools, int fd);
-void				parse_object2(t_object *object, char **split, char *line);
 void				parse_camera(t_tool *tools, int fd);
-void				parse_camera2(t_tool *tools, char **split, char *line);
 void				add_object(t_object **l_objects, t_object *new);
 void				add_light(t_light **l_lights, t_light *new);
 int					object_type(char **split);
+int                 light_type(char **split);
 t_pos				*fill_pos(char **split);
 t_color				*fill_color(char **split);
 t_image             *fill_texture(char *file, t_tool *tools);

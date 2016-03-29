@@ -69,15 +69,17 @@ t_color     *get_base_color(t_tool *t, t_object *obj, t_ray *impact)
 	light = t->l_lights;
 	while (light)
     {
-        lightray = get_lightray(impact, light);
-        intens = get_ray_intens(t, lightray, obj);
-        kdiff = get_kdiff(lightray, impact, intens * light->lumdiff);
-        if (kdiff >= 0)
+        if ((lightray = get_lightray(impact, light)))
         {
-            update_color(kdiff , light->color, base_color, obj->color);
-            kspec = get_kspec(lightray, impact, intens * light->lumdiff);
-            if (kspec >= 0)
-                update_color(kspec * obj->shiny, light->color, base_color, obj->color);
+            intens = get_ray_intens(t, lightray, obj);
+            kdiff = get_kdiff(lightray, impact, intens * light->lumdiff);
+            if (kdiff >= 0)
+            {
+                update_color(kdiff , light->color, base_color, obj->color);
+                kspec = get_kspec(lightray, impact, intens * light->lumdiff);
+                if (kspec >= 0)
+                    update_color(kspec * obj->shiny, light->color, base_color, obj->color);
+            }
         }
         light = light->next;
     }

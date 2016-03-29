@@ -3,11 +3,27 @@
 t_ray	*get_lightray(t_ray *impact, t_light *light)
 {
     t_ray	*lightray;
+    float   dist;
     
     lightray = malloc(sizeof(t_ray));
-    lightray->o = vectorcopy(light->o);
-    lightray->d = vectorsub(impact->o, lightray->o);
+    if (light->type == SUN || light->type == SPOT)
+    {
+        lightray->o = vectorcopy(light->o);
+        lightray->d = vectorsub(impact->o, lightray->o);
+    }
+    else if (light->type == LIGHTPLAN)
+    {
+        lightray->d = vectorcopy(light->d);
+        if ((dist = intersection_plan(light->d, light->h, impact->o, vectorscale(-1, lightray->d))) != -1)
+        {
+            lightray->o = vectoradd(impact->o, vectorscale(dist, vectorscale(-1, lightray->d)));
+        }
+        else
+            return (NULL);
+    }
     vectornorm(lightray->d);
+    if (light->type == SPOT && acos(vectordot(lightray->d, light->d)) > light->angle)
+        return (NULL);
     return (lightray);
 }
 

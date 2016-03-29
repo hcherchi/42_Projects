@@ -53,7 +53,7 @@ void		draw(t_tool *t, int x, int y)
 	free(final_color);
 }
 
-t_color     *get_final_color(t_colors   *colors, t_object *object)
+t_color     *get_final_color(t_colors   *colors, t_object *object, t_color *flash)
 {
     t_color *final_color;
     
@@ -72,6 +72,7 @@ t_color     *get_final_color(t_colors   *colors, t_object *object)
     }
     div_color(colors->base, 1 / (1 - object->mirror - object->transp));
     add_color(final_color, colors->base);
+    add_color(final_color, flash);
     return (final_color);
 }
 
@@ -89,12 +90,37 @@ t_color     *get_sky_color(t_ray *ray, t_tool *t)
     return (extract_color(t, t->sky, x, y));
 }
 
+t_color     *get_flash(t_ray *ray, t_tool *t)
+{
+    t_light     *light;
+    t_color     *flash;
+    t_pos       *flashray;
+    double      angle;
+    
+    flash = new_color();
+    light = t->l_lights;
+    while (light)
+    {
+        flashray = vectorsub(ray->o, light->o);
+        vectornorm(flashray);
+        angle = vectordot(flashray, ray->d);
+        if (angle > sqrt(3) / 2)
+        {
+            add_color(flash, light->color);
+        }
+        light = light->next;
+    }
+    return (flash);
+}
+
 t_color		*get_color(t_ray *ray, t_tool *t)
 {
 	t_object	*object;
 	t_ray		*impact;
     t_colors    *colors;
-
+    t_color     *flash;
+    
+    flash = get_flash(ray, t);
     colors = new_colors();
 	if ((object = intersection(t->l_objects, ray)))
 	{
@@ -104,7 +130,7 @@ t_color		*get_color(t_ray *ray, t_tool *t)
             colors->reflect = get_color(get_reflectray(ray, t, impact), t);
         if (object->transp)
             colors->refract = get_color(get_refractray(ray, impact, object), t);
-        return (get_final_color(colors, object));
+        return (get_final_color(colors, object, flash));
 	}
     else
         return (new_color());

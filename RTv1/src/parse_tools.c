@@ -42,6 +42,21 @@ int		object_type(char **split)
 	return (0);
 }
 
+int		light_type(char **split)
+{
+    if (ft_tablen(split) != 2)
+        ft_error(7);
+    if (!ft_strcmp(split[1], "SUN"))
+        return (SUN);
+    else if (!ft_strcmp(split[1], "LIGHTPLAN"))
+        return (LIGHTPLAN);
+    else if (!ft_strcmp(split[1], "SPOT"))
+        return (SPOT);
+    else
+        ft_error(5);
+    return (0);
+}
+
 t_color	*fill_color(char **split)
 {
 	t_color	*color;

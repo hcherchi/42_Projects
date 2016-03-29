@@ -1,12 +1,15 @@
 camera
 {
 	pos: 0 0 -5
-	lumamb: 0.3
+	lumamb: 0.2
 }
 
 light
 {
-	pos: 1 1 0
+	type: SUN
+	pos: 0 1 4
+	dir: 0 -1 -1
+	h: 10
 	lumdiff: 0.8
 }
 
@@ -46,11 +49,10 @@ object
 	type: SPHERE
 	pos: -1 -0.5 5
 	dir: 0 1 0
-	color: 200 0 0
+	color: 0 220 220
 	rayon: 0.5
-	mirror: 0
+	mirror: 0.7
 	shiny: 0.7
-	transp: 1
 	refract: 1.5
 }
 

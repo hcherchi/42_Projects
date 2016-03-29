@@ -12,24 +12,6 @@
 
 #include <rtv1.h>
 
-void	parse_camera2(t_tool *tools, char **split, char *line)
-{
-	if (ft_strstr(line, "lumamb:"))
-	{
-		if (ft_tablen(split) != 2)
-			ft_error(7);
-		tools->lumamb = ft_atof(split[1]);
-	}
-	else if (ft_strstr(line, "vect:"))
-	{
-		tools->cam->vect = fill_pos(split);
-		tools->cam->vect->y = 0;
-		vectornorm(tools->cam->vect);
-	}
-	else if (ft_strcmp(line, "{"))
-		ft_error(1);
-}
-
 void	parse_camera(t_tool *tools, int fd)
 {
 	char	**split;
@@ -54,37 +36,21 @@ void	parse_camera(t_tool *tools, int fd)
 			tools->cam->x_res = ft_atoi(split[1]);
 			tools->cam->y_res = ft_atoi(split[2]);
 		}
-		else
-			parse_camera2(tools, split, line);
+        else if (ft_strstr(line, "lumamb:"))
+        {
+            if (ft_tablen(split) != 2)
+                ft_error(7);
+            tools->lumamb = ft_atof(split[1]);
+        }
+        else if (ft_strstr(line, "vect:"))
+        {
+            tools->cam->vect = fill_pos(split);
+            tools->cam->vect->y = 0;
+            vectornorm(tools->cam->vect);
+        }
+        else if (ft_strcmp(line, "{"))
+            ft_error(1);
 	}
-}
-
-void	parse_object2(t_object *object, char **split, char *line)
-{
-	if (ft_strstr(line, "pos:"))
-		object->o = fill_pos(split);
-	else if (ft_strstr(line, "dir:"))
-		object->d = fill_pos(split);
-	else if (ft_strstr(line, "color:"))
-		object->color = fill_color(split);
-	else if (ft_strstr(line, "h:"))
-	{
-		if (ft_tablen(split) != 2)
-			ft_error(7);
-		if (str_digit(split[1]))
-			ft_error(2);
-		object->h = ft_atof(split[1]);
-	}
-	else if (ft_strstr(line, "shiny:"))
-	{
-		if (ft_tablen(split) != 2)
-			ft_error(7);
-		if (str_digit(split[1]))
-			ft_error(2);
-		object->shiny = ft_atof(split[1]);
-	}
-	else if (ft_strcmp(line, "{"))
-		ft_error(4);
 }
 
 void	parse_object(t_tool *tools, int fd)
@@ -139,9 +105,32 @@ void	parse_object(t_tool *tools, int fd)
                 ft_error(7);
             object->texture = fill_texture(split[1], tools);
         }
-		else
-			parse_object2(object, split, line);
+        else if (ft_strstr(line, "pos:"))
+            object->o = fill_pos(split);
+        else if (ft_strstr(line, "dir:"))
+            object->d = fill_pos(split);
+        else if (ft_strstr(line, "color:"))
+            object->color = fill_color(split);
+        else if (ft_strstr(line, "h:"))
+        {
+            if (ft_tablen(split) != 2)
+                ft_error(7);
+            if (str_digit(split[1]))
+                ft_error(2);
+            object->h = ft_atof(split[1]);
+        }
+        else if (ft_strstr(line, "shiny:"))
+        {
+            if (ft_tablen(split) != 2)
+                ft_error(7);
+            if (str_digit(split[1]))
+                ft_error(2);
+            object->shiny = ft_atof(split[1]);
+        }
+        else if (ft_strcmp(line, "{"))
+            ft_error(4);
 	}
+    vectornorm(object->d);
 	add_object(&tools->l_objects, object);
 }
 

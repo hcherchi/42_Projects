@@ -24,22 +24,22 @@ void	fill_dist(t_object *l_objects, t_ray *ray)
 		else if (tmp->type == CONE)
 			tmp->dist = intersection_cone(tmp, ray);
 		else if (tmp->type == PLAN)
-			tmp->dist = intersection_plan(tmp, ray);
+			tmp->dist = intersection_plan(tmp->d, tmp->h, ray->o, ray->d);
 		else if (tmp->type == CYL)
 			tmp->dist = intersection_cyl(tmp, ray);
 		tmp = tmp->next;
 	}
 }
 
-double	intersection_plan(t_object *plan, t_ray *ray)
+double	intersection_plan(t_pos *d, double h, t_pos *oray, t_pos *dray)
 {
 	double	a;
 	double	b;
 
-	a = plan->d->x * ray->d->x + plan->d->y * ray->d->y
-		+ plan->d->z * ray->d->z;
-	b = plan->d->x * ray->o->x + plan->d->y * ray->o->y
-		+ plan->d->z * ray->o->z + plan->h;
+	a = d->x * dray->x + d->y * dray->y
+		+ d->z * dray->z;
+	b = d->x * oray->x + d->y * oray->y
+		+ d->z * oray->z + h;
 	if (-b / a > E)
 		return (-b / a);
 	return (-1);

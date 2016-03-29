@@ -29,14 +29,20 @@ void	init_camera(t_tool *tools)
 void	init_light(t_light *light)
 {
 	light->o = malloc(sizeof(t_pos));
+    light->d = malloc(sizeof(t_pos));
 	light->color = malloc(sizeof(t_color));
+    light->type = SUN;
 	light->o->x = 1;
 	light->o->y = 1;
 	light->o->z = 0;
+    light->d->x = 0;
+    light->d->y = -1;
+    light->d->z = 0;
+    light->h = 10;
+    light->angle = M_PI / 6;
 	light->color->r = 255;
 	light->color->g = 255;
 	light->color->b = 255;
-	light->dist = 20;
 	light->lumdiff = 1;
 }
 
