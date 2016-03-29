@@ -1,4 +1,5 @@
 #include <rtv1.h>
+#include <stdio.h>
 
 t_color     *get_sky_color(t_ray *ray, t_tool *t)
 {
@@ -28,6 +29,7 @@ t_color     *get_flash(t_ray *ray, t_tool *t)
         flashray = vectorsub(ray->o, light->o);
         vectornorm(flashray);
         angle = vectordot(flashray, ray->d);
+        printf("%f\n", angle);
         if (angle > sqrt(3) / 2)
         {
             flash = add_color(flash, light->color);

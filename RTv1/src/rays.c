@@ -22,8 +22,10 @@ t_ray	*get_lightray(t_ray *impact, t_light *light)
             return (NULL);
     }
     vectornorm(lightray->d);
-    if (light->type == SPOT && acos(vectordot(lightray->d, light->d)) > light->angle)
+    if (light->type == SPOT && vectordot(lightray->d, light->d) < light->angle)
+    {
         return (NULL);
+    }
     return (lightray);
 }
 

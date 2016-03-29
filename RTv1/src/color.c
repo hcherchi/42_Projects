@@ -31,33 +31,33 @@ t_color	*add_color(t_color *color1, t_color *color2)
 {
 	t_color	*color;
 
-	color = color1;
-	color->r += color2->r;
-	color->g += color2->g;
-	color->b += color2->b;
+	color = new_color();
+	color->r = color1->r + color2->r;
+	color->g = color1->g + color2->g;
+	color->b = color1->b + color2->b;
 	return (color);
 }
 
 t_color	*div_color(t_color *color, double n)
 {
-	t_color	*color2;
-	
-	color2 = color;
-	color2->r /= n;
-	color2->g /= n;
-	color2->b /= n;
-	return (color2);
+    t_color	*color1;
+    
+    color1 = new_color();
+    color1->r = color->r / n;
+    color1->g = color->g / n;
+	color1->b = color->b / n;
+	return (color1);
 }
 
 t_color	*mult_color(t_color *color, double n)
 {
-	t_color	*color2;
-
-	color2 = color;
-	color2->r *= n;
-	color2->g *= n;
-	color2->b *= n;
-	return (color2);
+    t_color	*color1;
+    
+    color1 = new_color();
+	color1->r = color->r * n;
+	color1->g = color->g * n;
+	color1->b = color->b * n;
+	return (color1);
 }
 
 t_colors    *new_colors(void)
