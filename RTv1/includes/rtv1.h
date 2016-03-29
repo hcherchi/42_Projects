@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 14:56:14 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/03/28 12:34:00 by bgantelm         ###   ########.fr       */
+/*   Updated: 2016/03/29 15:54:50 by bgantelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,8 +187,9 @@ t_image             *fill_texture(char *file, t_tool *tools);
 t_color				*new_color();
 t_colors            *new_colors();
 void				normalize_color(t_color *final_color);
-void				add_color(t_color *color1, t_color *color2);
-void				div_color(t_color *color, double n);
+t_color				*add_color(t_color *color1, t_color *color2);
+t_color				*div_color(t_color *color, double n);
+t_color				*mult_color(t_color *color, double n);
 
 void				ft_error(int i);
 void				init_camera(t_tool *tools);

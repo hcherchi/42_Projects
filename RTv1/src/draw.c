@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 17:16:59 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/03/28 12:36:19 by bgantelm         ###   ########.fr       */
+/*   Updated: 2016/03/29 16:15:09 by bgantelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ void		draw(t_tool *t, int x, int y)
             t->depth = 0;
 			ray = get_ray(t, x0, y0);
 			color = get_color(ray, t);
-			add_color(final_color, color);
+			final_color = add_color(final_color, color);
 			free(color);
 			y0 += 0.5;
 		}
 		x0 += 0.5;
 	}
-	div_color(final_color, 4);
+	final_color = div_color(final_color, 4);
 	normalize_color(final_color);
 	pixel_put_to_image(t, x, y, final_color);
 	free(final_color);
@@ -61,22 +61,17 @@ void		draw(t_tool *t, int x, int y)
 t_color     *get_final_color(t_colors   *colors, t_object *object)
 {
     t_color *final_color;
-    
+	double	kbase;
+
+	kbase = 1 - object->mirror - object->transp;
     if (object == NULL)
         return (colors->base);
     final_color = new_color();
     if (colors->reflect)
-    {
-        div_color(colors->reflect, 1 / object->mirror);
-        add_color(final_color, colors->reflect);
-    }
+        final_color = add_color(final_color, mult_color(colors->reflect, object->mirror));
     if (colors->refract)
-    {
-        div_color(colors->refract, 1 / object->transp);
-        add_color(final_color, colors->refract);
-    }
-    div_color(colors->base, 1 / (1 - object->mirror - object->transp));
-    add_color(final_color, colors->base);
+        final_color = add_color(final_color, mult_color(colors->refract, object->transp));
+    final_color = add_color(final_color, mult_color(colors->base, kbase));
     return (final_color);
 }
 

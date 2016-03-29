@@ -30,7 +30,7 @@ t_color     *get_flash(t_ray *ray, t_tool *t)
         angle = vectordot(flashray, ray->d);
         if (angle > sqrt(3) / 2)
         {
-            add_color(flash, light->color);
+            flash = add_color(flash, light->color);
         }
         light = light->next;
     }

@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 16:59:53 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/03/26 11:44:47 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/03/29 16:06:45 by bgantelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,37 @@ void	normalize_color(t_color *final_color)
 		final_color->g = 255;
 }
 
-void	add_color(t_color *color1, t_color *color2)
+t_color	*add_color(t_color *color1, t_color *color2)
 {
-	color1->r += color2->r;
-	color1->g += color2->g;
-	color1->b += color2->b;
+	t_color	*color;
+
+	color = color1;
+	color->r += color2->r;
+	color->g += color2->g;
+	color->b += color2->b;
+	return (color);
 }
 
-void	div_color(t_color *color, double n)
+t_color	*div_color(t_color *color, double n)
 {
-	color->r /= n;
-	color->g /= n;
-	color->b /= n;
+	t_color	*color2;
+	
+	color2 = color;
+	color2->r /= n;
+	color2->g /= n;
+	color2->b /= n;
+	return (color2);
+}
+
+t_color	*mult_color(t_color *color, double n)
+{
+	t_color	*color2;
+
+	color2 = color;
+	color2->r *= n;
+	color2->g *= n;
+	color2->b *= n;
+	return (color2);
 }
 
 t_colors    *new_colors(void)
