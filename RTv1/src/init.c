@@ -12,6 +12,7 @@ void	init_camera(t_tool *tools)
 	tools->cam->vect->x = 0;
 	tools->cam->vect->y = 0;
 	tools->cam->vect->z = 1;
+	tools->sky = NULL;
 }
 
 void	init_light(t_light *light)

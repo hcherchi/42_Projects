@@ -96,5 +96,10 @@ t_color		*get_color(t_ray *ray, t_tool *t)
         return (get_final_color(colors, object));
 	}
     else
-        return (get_sky_color(ray, t));
+	{
+		if (t->sky)
+			return (get_sky_color(ray, t));
+		else
+			return (new_color());
+	}
 }

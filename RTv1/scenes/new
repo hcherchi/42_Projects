@@ -1,16 +1,17 @@
 camera
 {
 	pos: 0 0 -5
-	lumamb: 0.2
+	lumamb: 0.3
+	skybox: textures/sky.xpm
 }
 
 light
 {
-	type: SUN
+	type: LIGHTPLAN
 	pos: 0 1 4
-	dir: 0 -1 -1
-	h: 10
-	lumdiff: 0.8
+	dir: 0 -1 0
+	h: 20
+	lumdiff: 1
 }
 
 object

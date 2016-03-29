@@ -26,7 +26,6 @@ void	init_param(t_tool *t)
     t->image->mlx_img = mlx_new_image(t->mlx_ptr, t->cam->x_res, t->cam->y_res);
     t->image->data = mlx_get_data_addr(t->image->mlx_img, &t->image->bpp,
                                        &t->image->size_line, &t->image->endian);
-    t->sky = fill_texture("textures/sky.xpm", t);
 }
 
 void	run_through(t_tool *t)

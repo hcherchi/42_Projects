@@ -36,6 +36,12 @@ void	parse_camera(t_tool *tools, int fd)
             tools->cam->vect->y = 0;
             vectornorm(tools->cam->vect);
         }
+		else if (ft_strstr(line, "skybox:"))
+		{
+			if (ft_tablen(split) != 2)
+				ft_error(7);
+			tools->sky = fill_texture(split[1], tools);
+		}
         else if (ft_strcmp(line, "{"))
             ft_error(1);
 	}
