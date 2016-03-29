@@ -80,6 +80,20 @@ t_color     *get_final_color(t_colors   *colors, t_object *object)
     return (final_color);
 }
 
+t_color     *get_sky_color(t_ray *ray, t_tool *t)
+{
+    t_pos *impact;
+    double      x;
+    double      y;
+    
+    impact = malloc(sizeof(t_pos));
+    impact = vectoradd(ray->o, vectorscale(100, ray->d));
+    vectornorm(impact);
+    x = (0.5 + (atan2(impact->z, impact->x) / (2 * M_PI))) * t->sky->width;
+    y = (0.5 - asin(impact->y) / M_PI) * t->sky->height;
+    return (extract_color(t, t->sky, x, y));
+}
+
 // RECUPER LES 3 COULEURS : BASE REFLETEE REFRACTEE
 
 t_color		*get_color(t_ray *ray, t_tool *t)
@@ -100,5 +114,5 @@ t_color		*get_color(t_ray *ray, t_tool *t)
         return (get_final_color(colors, object));
 	}
     else
-        return (new_color());
+        return (get_sky_color(ray, t));
 }
