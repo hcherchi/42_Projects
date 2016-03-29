@@ -146,7 +146,7 @@ void				draw(t_tool *t, int x, int y);
 void				pixel_put_to_image(t_tool *t, int x, int y, t_color *color);
 t_color				*get_color(t_ray *ray, t_tool *t);
 t_color             *get_base_color(t_tool *t, t_object *obj, t_ray *impact);
-t_color             *get_final_color(t_colors   *colors, t_object *object, t_color *flash);
+t_color             *get_final_color(t_colors   *colors, t_object *object);
 t_color             *get_texture_color(t_object *object, t_ray *impact, t_tool *t);
 t_color *    extract_color(t_tool *t, t_image *texture, int x, int y);
 

@@ -23,6 +23,8 @@ void		pixel_put_to_image(t_tool *t, int x, int y, t_color *color)
 		+ 2 + y * t->image->size_line] = (unsigned char)color->r;
 }
 
+// ANTI ALIASING ET POSE D'UN PIXEL
+
 void		draw(t_tool *t, int x, int y)
 {
 	t_ray	*ray;
@@ -53,7 +55,10 @@ void		draw(t_tool *t, int x, int y)
 	free(final_color);
 }
 
-t_color     *get_final_color(t_colors   *colors, t_object *object, t_color *flash)
+// A REFAIRE GRAVE
+// MELANGE LES 3 COULEURS SELON LEUR COEFICIENT
+
+t_color     *get_final_color(t_colors   *colors, t_object *object)
 {
     t_color *final_color;
     
@@ -72,55 +77,17 @@ t_color     *get_final_color(t_colors   *colors, t_object *object, t_color *flas
     }
     div_color(colors->base, 1 / (1 - object->mirror - object->transp));
     add_color(final_color, colors->base);
-    add_color(final_color, flash);
     return (final_color);
 }
 
-t_color     *get_sky_color(t_ray *ray, t_tool *t)
-{
-    t_pos *impact;
-    double      x;
-    double      y;
-    
-    impact = malloc(sizeof(t_pos));
-    impact = vectoradd(ray->o, vectorscale(100, ray->d));
-    vectornorm(impact);
-    x = (0.5 + (atan2(impact->z, impact->x) / (2 * M_PI))) * t->sky->width;
-    y = (0.5 - asin(impact->y) / M_PI) * t->sky->height;
-    return (extract_color(t, t->sky, x, y));
-}
-
-t_color     *get_flash(t_ray *ray, t_tool *t)
-{
-    t_light     *light;
-    t_color     *flash;
-    t_pos       *flashray;
-    double      angle;
-    
-    flash = new_color();
-    light = t->l_lights;
-    while (light)
-    {
-        flashray = vectorsub(ray->o, light->o);
-        vectornorm(flashray);
-        angle = vectordot(flashray, ray->d);
-        if (angle > sqrt(3) / 2)
-        {
-            add_color(flash, light->color);
-        }
-        light = light->next;
-    }
-    return (flash);
-}
+// RECUPER LES 3 COULEURS : BASE REFLETEE REFRACTEE
 
 t_color		*get_color(t_ray *ray, t_tool *t)
 {
 	t_object	*object;
 	t_ray		*impact;
     t_colors    *colors;
-    t_color     *flash;
     
-    flash = get_flash(ray, t);
     colors = new_colors();
 	if ((object = intersection(t->l_objects, ray)))
 	{
@@ -130,7 +97,7 @@ t_color		*get_color(t_ray *ray, t_tool *t)
             colors->reflect = get_color(get_reflectray(ray, t, impact), t);
         if (object->transp)
             colors->refract = get_color(get_refractray(ray, impact, object), t);
-        return (get_final_color(colors, object, flash));
+        return (get_final_color(colors, object));
 	}
     else
         return (new_color());

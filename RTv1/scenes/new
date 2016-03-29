@@ -15,17 +15,6 @@ light
 
 object
 {
-	type: PLAN
-	dir: 0 1 0
-	h: 1
-	mirror: 0
-	shiny: 0.4
-	texture: textures/parquet.xpm
-	mirror: 0.2
-}
-
-object
-{
 	type: SPHERE
 	pos: 0 -0.5 3
 	dir: 0 1 0

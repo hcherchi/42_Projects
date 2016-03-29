@@ -1,0 +1,38 @@
+#include <rtv1.h>
+
+t_color     *get_sky_color(t_ray *ray, t_tool *t)
+{
+    t_pos *impact;
+    double      x;
+    double      y;
+    
+    impact = malloc(sizeof(t_pos));
+    impact = vectoradd(ray->o, vectorscale(100, ray->d));
+    vectornorm(impact);
+    x = (0.5 + (atan2(impact->z, impact->x) / (2 * M_PI))) * t->sky->width;
+    y = (0.5 - asin(impact->y) / M_PI) * t->sky->height;
+    return (extract_color(t, t->sky, x, y));
+}
+
+t_color     *get_flash(t_ray *ray, t_tool *t)
+{
+    t_light     *light;
+    t_color     *flash;
+    t_pos       *flashray;
+    double      angle;
+    
+    flash = new_color();
+    light = t->l_lights;
+    while (light)
+    {
+        flashray = vectorsub(ray->o, light->o);
+        vectornorm(flashray);
+        angle = vectordot(flashray, ray->d);
+        if (angle > sqrt(3) / 2)
+        {
+            add_color(flash, light->color);
+        }
+        light = light->next;
+    }
+    return (flash);
+}
