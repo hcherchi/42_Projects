@@ -2,6 +2,8 @@
 
 void	ft_error(int i)
 {
+    if (i == 0)
+        ft_putstr("Error, bad number of arguments.\n");
 	if (i == 1)
 		ft_putstr("Error in camera. use pos, res, lumamb, and vect only.\n");
 	else if (i == 2)

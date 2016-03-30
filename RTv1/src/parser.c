@@ -6,13 +6,16 @@ void	parse_camera(t_tool *tools, int fd)
 	char	*line;
 
 	tools->lumamb = 0.1;
-	tools->cam = malloc(sizeof(t_cam));
-	init_camera(tools);
+    tools->x_res = 1000;
+    tools->y_res = 800;
+    tools->sky = NULL;
+    tools->vect = NULL;
+    tools->pos = NULL;
 	while (get_next_line(fd, &line) > 0 && ft_strcmp(line, "}"))
 	{
 		split = ft_strsplit(line, ' ');
 		if (ft_strstr(line, "pos:"))
-			tools->cam->pos = fill_pos(split);
+			tools->pos = fill_pos(split);
 		else if (ft_strstr(line, "res:"))
 		{
 			if (ft_tablen(split) != 3)
@@ -21,8 +24,8 @@ void	parse_camera(t_tool *tools, int fd)
 				ft_error(2);
 			if (ft_atoi(split[1]) < 0 || ft_atoi(split[2]) < 0)
 				ft_error(8);
-			tools->cam->x_res = ft_atoi(split[1]);
-			tools->cam->y_res = ft_atoi(split[2]);
+			tools->x_res = ft_atoi(split[1]);
+			tools->y_res = ft_atoi(split[2]);
 		}
         else if (ft_strstr(line, "lumamb:"))
         {
@@ -32,9 +35,7 @@ void	parse_camera(t_tool *tools, int fd)
         }
         else if (ft_strstr(line, "vect:"))
         {
-            tools->cam->vect = fill_pos(split);
-            tools->cam->vect->y = 0;
-            vectornorm(tools->cam->vect);
+            tools->vect = fill_pos(split);
         }
 		else if (ft_strstr(line, "skybox:"))
 		{
@@ -135,6 +136,7 @@ void	parser(int fd, t_tool *tools)
 	int		ret;
 
 	c = 0;
+    tools->mlx_ptr = mlx_init();
 	tools->l_objects = NULL;
 	tools->l_lights = NULL;
 	while ((ret = get_next_line(fd, &line)) > 0)

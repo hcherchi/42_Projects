@@ -1,20 +1,5 @@
 #include <rtv1.h>
 
-void	init_camera(t_tool *tools)
-{
-	tools->cam->pos = malloc(sizeof(t_pos));
-	tools->cam->pos->x = 0;
-	tools->cam->pos->y = 0;
-	tools->cam->pos->z = 0;
-	tools->cam->x_res = 1000;
-	tools->cam->y_res = 800;
-	tools->cam->vect = malloc(sizeof(t_pos));
-	tools->cam->vect->x = 0;
-	tools->cam->vect->y = 0;
-	tools->cam->vect->z = 1;
-	tools->sky = NULL;
-}
-
 void	init_light(t_light *light)
 {
 	light->o = malloc(sizeof(t_pos));

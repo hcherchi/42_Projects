@@ -38,3 +38,27 @@ t_color     *get_flash(t_ray *ray, t_tool *t)
     }
     return (flash);
 }
+
+t_color     *get_flash(t_ray *ray, t_tool *t)
+{
+    t_light     *light;
+    t_color     *flash;
+    t_pos       *flashray;
+    double      angle;
+    
+    flash = new_color();
+    light = t->l_lights;
+    while (light)
+    {
+        if (light->type == SUN)
+        {
+            flashray = vectorsub(light->o, ray->o);
+            vectornorm(flashray);
+            angle = vectordot(flashray, ray->d);
+            if (angle > 0)
+                flash = add_color(flash, mult_color(light->color, pow(angle, 10)));
+        }
+        light = light->next;
+    }
+    return (flash);
+}

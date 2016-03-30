@@ -112,13 +112,8 @@ typedef struct		s_cam
 	t_pos			*h_vect;
 	t_pos			*r_vect;
 	t_pos			*vect;
-	double			dist;
-	double			w;
-	double			h;
 	t_pos			*upleft;
-	int				x_res;
-	int				y_res;
-	double			indent;
+    int             nb;
 }					t_cam;
 
 typedef struct		s_tool
@@ -130,10 +125,21 @@ typedef struct		s_tool
 	t_image			*image;
     t_image         *sky;
 	t_cam			*cam;
+    t_cam           **upcams;
+    t_cam           **middlecams;
 	double			lumamb;
     int             depth;
+    double			dist;
+    double			w;
+    double			h;
+    int				x_res;
+    int				y_res;
+    double			indent;
+    t_pos           *pos;
+    t_pos           *vect;
 }					t_tool;
 
+// INTERSECTIONS
 double				minimum(t_object *l_objects);
 void				fill_dist(t_object *l_objects, t_ray *ray);
 t_object			*intersection(t_object *l_objects, t_ray *ray);
@@ -142,27 +148,36 @@ double				intersection_sphere(t_object *sphere, t_ray *ray);
 double				intersection_cone(t_object *cone, t_ray *ray);
 double				intersection_cyl(t_object *cyl, t_ray *ray);
 
+// DRAW
 void				draw(t_tool *t, int x, int y);
 void				pixel_put_to_image(t_tool *t, int x, int y, t_color *color);
+
+// GET COLOR
 t_color				*get_color(t_ray *ray, t_tool *t);
 t_color             *get_base_color(t_tool *t, t_object *obj, t_ray *impact);
 t_color             *get_final_color(t_colors   *colors, t_object *object);
-t_color             *get_texture_color(t_object *object, t_ray *impact, t_tool *t);
-t_color *    extract_color(t_tool *t, t_image *texture, int x, int y);
 
+// TEXTURES
+t_color             *get_texture_color(t_object *object, t_ray *impact, t_tool *t);
+t_color             *extract_color(t_tool *t, t_image *texture, int x, int y);
+
+// NORMAL
 t_ray				*get_normal(t_object *object, t_ray *ray);
 void				get_cyl_normal(t_ray *impact, t_object *object);
 
+// LUMINOSITY
 t_color				*init_lumamb(t_tool *t, t_color *objcolor);
 double				get_kspec(t_ray *lightray, t_ray *impact, double intens);
 double				get_kdiff(t_ray *lightray, t_ray *impact, double intens);
 void				update_color(double k, t_color *lightcolor, t_color *final_color, t_color *objcolor);
 
+// RAYS
 t_ray				*get_lightray(t_ray *impact, t_light *light);
 t_ray				*get_ray(t_tool *t, double x, double y);
 t_ray               *get_reflectray(t_ray *ray, t_tool *t, t_ray *impact);
 t_ray               *get_refractray(t_ray *ray, t_ray *impact, t_object *object);
 
+// VECTOR TOOLS
 void				vectornorm(t_pos *v);
 t_pos				*vectorsub(t_pos *v1, t_pos *v2);
 double				vectordot(t_pos *v1, t_pos *v2);
@@ -172,10 +187,13 @@ t_pos				*vectorcopy(t_pos *v1);
 t_pos				*vectornew(double x, double y, double z);
 t_pos				*rotation(t_pos *axe, t_pos *vect);
 
+// PARSER
 void				parser(int fd, t_tool *tools);
 void				parse_light(t_tool *tools, int fd);
 void				parse_object(t_tool *tools, int fd);
 void				parse_camera(t_tool *tools, int fd);
+void				init_light(t_light *light);
+void				init_object(t_object *object);
 void				add_object(t_object **l_objects, t_object *new);
 void				add_light(t_light **l_lights, t_light *new);
 int					object_type(char **split);
@@ -184,6 +202,7 @@ t_pos				*fill_pos(char **split);
 t_color				*fill_color(char **split);
 t_image             *fill_texture(char *file, t_tool *tools);
 
+// COLOR TOOLS
 t_color				*new_color();
 t_colors            *new_colors();
 void				normalize_color(t_color *final_color);
@@ -191,16 +210,15 @@ t_color				*add_color(t_color *color1, t_color *color2);
 t_color				*div_color(t_color *color, double n);
 t_color				*mult_color(t_color *color, double n);
 
+// LAUNCH
 void				ft_error(int i);
-void				init_camera(t_tool *tools);
-void				init_light(t_light *light);
-void				init_object(t_object *object);
-void				update_cam(t_tool *t);
 void				run_through(t_tool *t);
 void				init_param(t_tool *t);
+t_cam               *new_cam(t_pos *pos, t_pos *vect, t_tool *t, int nb);
+void                init_cams(t_tool *t);
 int					event(int keycode, t_tool *t);
-void				change_pos(int keycode, t_tool *t);
 
+// CLEANING
 void				clean_ray(t_ray *ray);
 void				clean_obj(t_object *l_objects);
 void				clean_lights(t_light *l_lights);

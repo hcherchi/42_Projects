@@ -40,12 +40,11 @@ t_ray		*get_ray(t_tool *t, double x, double y)
     ray->o->x = t->cam->pos->x;
     ray->o->y = t->cam->pos->y;
     ray->o->z = t->cam->pos->z;
-    tmp->x = t->cam->upleft->x + t->cam->r_vect->x * t->cam->indent * x
-    - t->cam->h_vect->x * t->cam->indent * y;
-    tmp->y = t->cam->upleft->y + t->cam->r_vect->y * t->cam->indent * x
-    - t->cam->h_vect->y * t->cam->indent * y;
-    tmp->z = t->cam->upleft->z + t->cam->r_vect->z * t->cam->indent * x
-    - t->cam->h_vect->z * t->cam->indent * y;
+    tmp->x = t->cam->upleft->x + t->cam->r_vect->x * t->indent * x - t->cam->h_vect->x * t->indent * y;
+    tmp->y = t->cam->upleft->y + t->cam->r_vect->y * t->indent * x
+    - t->cam->h_vect->y * t->indent * y;
+    tmp->z = t->cam->upleft->z + t->cam->r_vect->z * t->indent * x
+    - t->cam->h_vect->z * t->indent * y;
     ray->d = vectorsub(tmp, ray->o);
     vectornorm(ray->d);
     return (ray);

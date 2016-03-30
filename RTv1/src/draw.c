@@ -43,9 +43,6 @@ void		draw(t_tool *t, int x, int y)
 	free(final_color);
 }
 
-// A REFAIRE GRAVE
-// MELANGE LES 3 COULEURS SELON LEUR COEFICIENT
-
 t_color     *get_final_color(t_colors   *colors, t_object *object)
 {
     t_color *final_color;
@@ -77,29 +74,7 @@ t_color     *get_sky_color(t_ray *ray, t_tool *t)
     return (extract_color(t, t->sky, x, y));
 }
 
-t_color     *get_flash(t_ray *ray, t_tool *t)
-{
-    t_light     *light;
-    t_color     *flash;
-    t_pos       *flashray;
-    double      angle;
-    
-    flash = new_color();
-    light = t->l_lights;
-    while (light)
-    {
-        if (light->type == SUN)
-        {
-            flashray = vectorsub(light->o, ray->o);
-            vectornorm(flashray);
-            angle = vectordot(flashray, ray->d);
-            if (angle > 0)
-                flash = add_color(flash, mult_color(light->color, pow(angle, 10)));
-        }
-        light = light->next;
-    }
-    return (flash);
-}
+
 
 // RECUPER LES 3 COULEURS : BASE REFLETEE REFRACTEE
 
@@ -108,9 +83,7 @@ t_color		*get_color(t_ray *ray, t_tool *t)
 	t_object	*object;
 	t_ray		*impact;
     t_colors    *colors;
-    t_color     *flash;
-    
-    flash = get_flash(ray, t);
+
     colors = new_colors();
 	if ((object = intersection(t->l_objects, ray)))
 	{
@@ -120,13 +93,13 @@ t_color		*get_color(t_ray *ray, t_tool *t)
             colors->reflect = get_color(get_reflectray(ray, t, impact), t);
         if (object->transp)
             colors->refract = get_color(get_refractray(ray, impact, object), t);
-        return (add_color(get_final_color(colors, object), flash));
+        return (get_final_color(colors, object));
 	}
     else
 	{
 		if (t->sky)
-			return (add_color(get_sky_color(ray, t), flash));
+			return (get_sky_color(ray, t));
 		else
-			return (add_color(new_color(), flash));
+			return (new_color());
 	}
 }
