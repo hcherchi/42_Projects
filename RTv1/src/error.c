@@ -1,34 +1,19 @@
 #include <rtv1.h>
 
-void	ft_error(int i)
+void	ft_error(t_tool * tools)
 {
-    if (i == 0)
-        ft_putstr("Error, bad number of arguments.\n");
-	if (i == 1)
-		ft_putstr("Error in camera. use pos, res, lumamb, and vect only.\n");
-	else if (i == 2)
-		ft_putstr("Error, arguments need numbers.\n");
-	else if (i == 3)
-	{
-		ft_putstr("Error, bad argument in light. ");
-		ft_putstr("use just pos color, lumdiff and dist.\n");
-	}
-	else if (i == 4)
-	{
-		ft_putstr("Error, bad argument in object, ");
-		ft_putstr("use just type, pos, dir, rayon, color, h et shiny.\n");
-	}
-	else if (i == 5)
-		ft_putstr("Error, bad type of object.\n");
-	else if (i == 6)
-		ft_putstr("Error, you need one and only one camera.\n");
-	else if (i == 7)
-		ft_putstr("Error, bad numbers of argument.\n");
-	else if (i == 8)
-		ft_putstr("Error, window can not be negative.\n");
-	else if (i == 9)
-		ft_putstr("Error, use a valid file instead.\n");
-    else if (i == 10)
-        ft_putstr("Error, texture file not valid.\n");
-	exit(0);
+    tools->error = 1;
+}
+
+void affiche_error(t_tool *t)
+{
+    t_image *texture;
+    
+    mlx_clear_window(t->mlx_ptr, t->mlx_win);
+    texture = malloc(sizeof(t_image));
+    texture->mlx_img = mlx_xpm_file_to_image(t->mlx_ptr, "textures/error.xpm", &texture->width, &texture->height);
+    texture->data = mlx_get_data_addr(texture->mlx_img, &texture->bpp, &texture->size_line, &texture->endian);
+    mlx_put_image_to_window(t->mlx_ptr, t->mlx_win, texture->mlx_img, 250, 125);
+    mlx_string_put(t->mlx_ptr, t->mlx_win, 100, 100, 0x00CC6600, "Presse Dellet to go back" );
+    free(texture);
 }

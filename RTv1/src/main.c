@@ -4,15 +4,21 @@
 
 void	init_param(t_tool *t)
 {
+    t->screen_shot = 0;
+    t->yes = 0;
+    t->go_back = 0;
 	t->indent = 0.001;
     t->w = t->x_res * t->indent;
     t->h = t->y_res * t->indent;
 	t->dist = t->w / (2 * tan((60 / 2) * (M_PI / 180)));
-	t->mlx_win = mlx_new_window(t->mlx_ptr, t->x_res, t->y_res, "RTv1");
-    t->image = malloc(sizeof(t_image));
-    t->image->mlx_img = mlx_new_image(t->mlx_ptr, t->x_res, t->y_res);
-    t->image->data = mlx_get_data_addr(t->image->mlx_img, &t->image->bpp,
+    if (t->first == 0)
+    {
+        t->mlx_win = mlx_new_window(t->mlx_ptr, t->x_res, t->y_res, "RTv1");
+        t->image = malloc(sizeof(t_image));
+        t->image->mlx_img = mlx_new_image(t->mlx_ptr, t->x_res, t->y_res);
+        t->image->data = mlx_get_data_addr(t->image->mlx_img, &t->image->bpp,
                                        &t->image->size_line, &t->image->endian);
+    }
     t->sky = fill_texture("textures/sky.xpm", t);
 }
 
@@ -32,7 +38,13 @@ void run_through(t_tool *t)
 		}
 		y += 1;
 	}
-	mlx_put_image_to_window(t->mlx_ptr, t->mlx_win, t ->image->mlx_img, 0, 0);
+    if (t->screen_shot == 0)
+        mlx_put_image_to_window(t->mlx_ptr, t->mlx_win, t->image->mlx_img, 0, 0);
+    else
+        screen_shot(t);
+    mlx_string_put(t->mlx_ptr, t->mlx_win, 50, 25, 0x009933FF, "Use arrow key-bind to move");
+    mlx_string_put(t->mlx_ptr, t->mlx_win, 50, 50, 0x009933FF, "Use 'P' to take a picture");
+    mlx_string_put(t->mlx_ptr, t->mlx_win, 50, 75, 0x009933FF, "Use 'DELETE' to go back menu");
 }
 
 t_cam *new_cam(t_pos *pos, t_pos *vect, t_tool *t, int nb)
@@ -84,19 +96,18 @@ void    init_cams(t_tool *t)
     t->cam = t->middlecams[5];
 }
 
-int		main(int argc, char **argv)
+int		main(void)
 {
-	int		fd;
 	t_tool	*tools;
 
-	if (argc != 2)
-		ft_error(0);
-	fd = open(argv[1], O_RDONLY);
     tools = malloc(sizeof(t_tool));
-	parser(fd, tools);
+    tools->first = 0;
+    tools->error = 0;
+    tools->which_menu = 0;
+	parser(open("scenes/new", O_RDONLY), tools);
 	init_param(tools);
     init_cams(tools);
-	run_through(tools);
+    loading(tools);
 	mlx_key_hook(tools->mlx_win, event, tools);
 	mlx_loop(tools->mlx_ptr);
 	return (0);

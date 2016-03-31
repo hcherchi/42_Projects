@@ -3,12 +3,18 @@
 
 void		pixel_put_to_image(t_tool *t, int x, int y, t_color *color)
 {
-	t->image->data[x * t->image->bpp / 8
-		+ y * t->image->size_line] = (unsigned char)color->b;
-	t->image->data[x * t->image->bpp / 8
-		+ 1 + y * t->image->size_line] = (unsigned char)color->g;
-	t->image->data[x * t->image->bpp / 8
-		+ 2 + y * t->image->size_line] = (unsigned char)color->r;
+    if(t->screen_shot == 0)
+    {
+        t->image->data[x * t->image->bpp / 8 + y * t->image->size_line] = (unsigned char)color->b;
+        t->image->data[x * t->image->bpp / 8 + 1 + y * t->image->size_line] = (unsigned char)color->g;
+        t->image->data[x * t->image->bpp / 8 + 2 + y * t->image->size_line] = (unsigned char)color->r;
+    }
+    else
+    {
+        t->image->screen[(x + y * t->x_res)*3 + 0] = (unsigned char) color->r;
+        t->image->screen[(x + y * t->x_res)*3 + 1] = (unsigned char) color->g;
+        t->image->screen[(x + y * t->x_res)*3 + 2] = (unsigned char) color->b;
+    }
 }
 
 // ANTI ALIASING ET POSE D'UN PIXEL

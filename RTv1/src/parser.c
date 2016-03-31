@@ -17,36 +17,36 @@ void	parse_camera(t_tool *tools, int fd)
 	{
 		split = ft_strsplit(line, ' ');
 		if (ft_strstr(line, "pos:"))
-			tools->pos = fill_pos(split);
+			tools->pos = fill_pos(split, tools);
 		else if (ft_strstr(line, "res:"))
 		{
 			if (ft_tablen(split) != 3)
-				ft_error(7);
+				ft_error(tools);
 			if (str_digit(split[1]) || str_digit(split[2]))
-				ft_error(2);
+				ft_error(tools);
 			if (ft_atoi(split[1]) < 0 || ft_atoi(split[2]) < 0)
-				ft_error(8);
+				ft_error(tools);
 			tools->x_res = ft_atoi(split[1]);
 			tools->y_res = ft_atoi(split[2]);
 		}
         else if (ft_strstr(line, "lumamb:"))
         {
             if (ft_tablen(split) != 2)
-                ft_error(7);
+                ft_error(tools);
             tools->lumamb = ft_atof(split[1]);
         }
         else if (ft_strstr(line, "vect:"))
         {
-            tools->vect = fill_pos(split);
+            tools->vect = fill_pos(split, tools);
         }
 		else if (ft_strstr(line, "skybox:"))
 		{
 			if (ft_tablen(split) != 2)
-				ft_error(7);
+				ft_error(tools);
 			tools->sky = fill_texture(split[1], tools);
 		}
         else if (ft_strcmp(line, "{"))
-            ft_error(1);
+            ft_error(tools);
         clean_tab(split);
         free(line);
 	}
@@ -64,78 +64,78 @@ void	parse_object(t_tool *tools, int fd)
 	{
 		split = ft_strsplit(line, ' ');
 		if (ft_strstr(line, "type:"))
-			object->type = object_type(split);
+			object->type = object_type(split, tools);
 		else if (ft_strstr(line, "rayon:"))
 		{
 			if (ft_tablen(split) != 2)
-				ft_error(7);
+				ft_error(tools);
 			if (str_digit(split[1]))
-				ft_error(2);
+				ft_error(tools);
 			object->rad = ft_atof(split[1]);
 		}
         else if (ft_strstr(line, "mirror:"))
         {
             if (ft_tablen(split) != 2)
-                ft_error(7);
+                ft_error(tools);
             if (str_digit(split[1]))
-                ft_error(2);
+                ft_error(tools);
             object->mirror = ft_atof(split[1]);
         }
         else if (ft_strstr(line, "refract:"))
         {
             if (ft_tablen(split) != 2)
-                ft_error(7);
+                ft_error(tools);
             if (str_digit(split[1]))
-                ft_error(2);
+                ft_error(tools);
             object->refract = ft_atof(split[1]);
         }
         else if (ft_strstr(line, "transp:"))
         {
             if (ft_tablen(split) != 2)
-                ft_error(7);
+                ft_error(tools);
             if (str_digit(split[1]))
-                ft_error(2);
+                ft_error(tools);
             object->transp = ft_atof(split[1]);
         }
         else if (ft_strstr(line, "texture:"))
         {
             if (ft_tablen(split) != 2)
-                ft_error(7);
+                ft_error(tools);
             object->texture = fill_texture(split[1], tools);
         }
         else if (ft_strstr(line, "pos:"))
         {
             free(object->o);
-            object->o = fill_pos(split);
+            object->o = fill_pos(split, tools);
         }
         else if (ft_strstr(line, "dir:"))
         {
             free(object->d);
-            object->d = fill_pos(split);
+            object->d = fill_pos(split, tools);
         }
         else if (ft_strstr(line, "color:"))
         {
             free(object->color);
-            object->color = fill_color(split);
+            object->color = fill_color(split, tools);
         }
         else if (ft_strstr(line, "h:"))
         {
             if (ft_tablen(split) != 2)
-                ft_error(7);
+                ft_error(tools);
             if (str_digit(split[1]))
-                ft_error(2);
+                ft_error(tools);
             object->h = ft_atof(split[1]);
         }
         else if (ft_strstr(line, "shiny:"))
         {
             if (ft_tablen(split) != 2)
-                ft_error(7);
+                ft_error(tools);
             if (str_digit(split[1]))
-                ft_error(2);
+                ft_error(tools);
             object->shiny = ft_atof(split[1]);
         }
         else if (ft_strcmp(line, "{"))
-            ft_error(4);
+            ft_error(tools);
         clean_tab(split);
         free(line);
 	}
@@ -173,7 +173,7 @@ void	parser(int fd, t_tool *tools)
         }
 	}
 	if (ret == -1)
-		ft_error(9);
+		ft_error(tools);
 	if (c != 1)
-		ft_error(6);
+		ft_error(tools);
 }

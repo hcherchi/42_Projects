@@ -14,46 +14,46 @@ void	parse_light(t_tool *tools, int fd)
         if (ft_strstr(line, "pos:"))
         {
             free(light->o);
-            light->o = fill_pos(split);
+            light->o = fill_pos(split, tools);
         }
         else if (ft_strstr(line, "dir:"))
         {
             free(light->d);
-            light->d = fill_pos(split);
+            light->d = fill_pos(split, tools);
         }
         else if (ft_strstr(line, "color:"))
         {
             free(light->color);
-            light->color = fill_color(split);
+            light->color = fill_color(split, tools);
         }
         else if (ft_strstr(line, "lumdiff:"))
         {
             if (ft_tablen(split) != 2)
-                ft_error(7);
+                ft_error(tools);
             if (str_digit(split[1]))
-                ft_error(2);
+                ft_error(tools);
             light->lumdiff = ft_atof(split[1]);
         }
         else if (ft_strstr(line, "h:"))
         {
             if (ft_tablen(split) != 2)
-                ft_error(7);
+                ft_error(tools);
             if (str_digit(split[1]))
-                ft_error(2);
+                ft_error(tools);
             light->h = ft_atof(split[1]);
         }
         else if (ft_strstr(line, "angle:"))
         {
             if (ft_tablen(split) != 2)
-                ft_error(7);
+                ft_error(tools);
             if (str_digit(split[1]))
-                ft_error(2);
+                ft_error(tools);
             light->angle = ft_atof(split[1]);
         }
         else if (ft_strstr(line, "type:"))
-            light->type = light_type(split);
+            light->type = light_type(split, tools);
         else if (ft_strcmp(line, "{"))
-            ft_error(3);
+            ft_error(tools);
         clean_tab(split);
         free(line);
 	}

@@ -62,7 +62,8 @@ typedef struct		s_image
 {
 	char			*texture;
     void			*mlx_img;
-	int				endian;
+	unsigned char	*screen;
+    int				endian;
 	int				size_line;
 	int				bpp;
 	char			*data;
@@ -137,6 +138,13 @@ typedef struct		s_tool
     double			indent;
     t_pos           *pos;
     t_pos           *vect;
+    
+    int				screen_shot;
+    int				first;
+    int				which_menu;
+    int				yes;
+    int				go_back;
+    int				error;
 }					t_tool;
 
 // INTERSECTIONS
@@ -195,10 +203,10 @@ void				init_light(t_light *light);
 void				init_object(t_object *object);
 void				add_object(t_object **l_objects, t_object *new);
 void				add_light(t_light **l_lights, t_light *new);
-int					object_type(char **split);
-int                 light_type(char **split);
-t_pos				*fill_pos(char **split);
-t_color				*fill_color(char **split);
+int					object_type(char **split, t_tool *t);
+int                 light_type(char **split, t_tool *t);
+t_pos				*fill_pos(char **split, t_tool *t);
+t_color				*fill_color(char **split, t_tool *t);
 t_image             *fill_texture(char *file, t_tool *tools);
 
 // COLOR TOOLS
@@ -210,7 +218,7 @@ t_color				*div_color(t_color *color, double n);
 t_color				*mult_color(t_color *color, double n);
 
 // LAUNCH
-void				ft_error(int i);
+void				ft_error(t_tool *t);
 void				run_through(t_tool *t);
 void				init_param(t_tool *t);
 t_cam               *new_cam(t_pos *pos, t_pos *vect, t_tool *t, int nb);
@@ -227,5 +235,15 @@ void                clean_colors(t_colors *colors);
 void                clean_cams(t_cam **cams, int nb);
 void                clean_image(t_image *image);
 void                clean_tab(char **tab);
+
+// LOADING
+void				build_screen(t_tool *t);
+void				screen_shot(t_tool *t);
+void				init_param(t_tool *t);
+void				info_group(t_tool *t);
+void				loading(t_tool *t);
+void				info_screen(t_tool *t);
+void				affiche_error(t_tool *t);
+void                test(t_tool *tools);
 
 #endif

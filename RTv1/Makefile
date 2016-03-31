@@ -6,7 +6,7 @@
 #    By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/04 18:24:56 by hcherchi          #+#    #+#              #
-#    Updated: 2016/03/28 17:50:26 by hcherchi         ###   ########.fr        #
+#    Updated: 2016/03/31 19:07:54 by fhenri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,7 @@ INC_DIR = includes
 SRC_DIR = src
 OBJ_DIR = obj
 
-SRCS = src/main.c src/parse_tools.c src/parser.c src/draw.c src/inter.c src/normal.c src/vector.c src/color.c src/error.c src/init.c src/vector2.c src/illuminate.c src/key.c src/clean.c src/parser2.c src/rays.c src/inter2.c src/texture.c
-
+SRCS = src/main.c src/parse_tools.c src/parser.c src/draw.c src/inter.c src/normal.c src/vector.c src/color.c src/error.c src/init.c src/vector2.c src/illuminate.c src/key.c src/clean.c src/parser2.c src/rays.c src/inter2.c src/texture.c src/loading.c
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 IFLAGS = -I $(INC_DIR) -I libft/includes
