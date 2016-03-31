@@ -1,5 +1,7 @@
 #include <rtv1.h>
 
+
+// PAS JOJO
 t_ray	*get_lightray(t_ray *impact, t_light *light)
 {
     t_ray	*lightray;
@@ -15,15 +17,18 @@ t_ray	*get_lightray(t_ray *impact, t_light *light)
     {
         lightray->d = vectorcopy(light->d);
         if ((dist = intersection_plan(light->d, light->h, impact->o, vectorscale(-1, lightray->d))) != -1)
-        {
             lightray->o = vectoradd(impact->o, vectorscale(dist, vectorscale(-1, lightray->d)));
-        }
         else
+        {
+            free(lightray->d);
+            free(lightray);
             return (NULL);
+        }
     }
     vectornorm(lightray->d);
     if (light->type == SPOT && vectordot(lightray->d, light->d) < light->angle)
     {
+        clean_ray(lightray);
         return (NULL);
     }
     return (lightray);
@@ -41,11 +46,10 @@ t_ray		*get_ray(t_tool *t, double x, double y)
     ray->o->y = t->cam->pos->y;
     ray->o->z = t->cam->pos->z;
     tmp->x = t->cam->upleft->x + t->cam->r_vect->x * t->indent * x - t->cam->h_vect->x * t->indent * y;
-    tmp->y = t->cam->upleft->y + t->cam->r_vect->y * t->indent * x
-    - t->cam->h_vect->y * t->indent * y;
-    tmp->z = t->cam->upleft->z + t->cam->r_vect->z * t->indent * x
-    - t->cam->h_vect->z * t->indent * y;
+    tmp->y = t->cam->upleft->y + t->cam->r_vect->y * t->indent * x - t->cam->h_vect->y * t->indent * y;
+    tmp->z = t->cam->upleft->z + t->cam->r_vect->z * t->indent * x - t->cam->h_vect->z * t->indent * y;
     ray->d = vectorsub(tmp, ray->o);
+    free(tmp);
     vectornorm(ray->d);
     return (ray);
 }

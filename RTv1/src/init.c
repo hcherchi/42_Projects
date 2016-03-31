@@ -18,6 +18,7 @@ void	init_light(t_light *light)
 	light->color->g = 255;
 	light->color->b = 255;
 	light->lumdiff = 1;
+    light->next = NULL;
 }
 
 void	init_object(t_object *object)
@@ -42,4 +43,5 @@ void	init_object(t_object *object)
     object->refract = 1.02;
     object->mirror = 0;
     object->transp = 0;
+    object->next = NULL;
 }

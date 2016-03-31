@@ -12,31 +12,8 @@ t_color     *get_sky_color(t_ray *ray, t_tool *t)
     vectornorm(impact);
     x = (0.5 + (atan2(impact->z, impact->x) / (2 * M_PI))) * t->sky->width;
     y = (0.5 - asin(impact->y) / M_PI) * t->sky->height;
+    free(impact);
     return (extract_color(t, t->sky, x, y));
-}
-
-t_color     *get_flash(t_ray *ray, t_tool *t)
-{
-    t_light     *light;
-    t_color     *flash;
-    t_pos       *flashray;
-    double      angle;
-    
-    flash = new_color();
-    light = t->l_lights;
-    while (light)
-    {
-        flashray = vectorsub(ray->o, light->o);
-        vectornorm(flashray);
-        angle = vectordot(flashray, ray->d);
-        printf("%f\n", angle);
-        if (angle > sqrt(3) / 2)
-        {
-            flash = add_color(flash, light->color);
-        }
-        light = light->next;
-    }
-    return (flash);
 }
 
 t_color     *get_flash(t_ray *ray, t_tool *t)

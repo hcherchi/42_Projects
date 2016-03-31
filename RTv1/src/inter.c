@@ -42,6 +42,7 @@ double	intersection_sphere(t_object *sphere, t_ray *ray)
 	param.a = vectordot(ray->d, ray->d);
 	param.b = 2 * vectordot(ray->d, dist);
 	param.c = vectordot(dist, dist) - (sphere->rad * sphere->rad);
+    free(dist);
 	param.discr = param.b * param.b - 4 * param.a * param.c;
 	if (param.discr < E)
 		return (-1);
@@ -54,6 +55,7 @@ double	intersection_sphere(t_object *sphere, t_ray *ray)
 	return (param.t0);
 }
 
+// A REVOIR POUR LA ROTATION
 double	intersection_cone(t_object *cone, t_ray *ray)
 {
 	double		k;
@@ -96,6 +98,7 @@ double	intersection_cyl(t_object *cyl, t_ray *ray)
 	param.c = tmp->x * tmp->x + tmp->y * tmp->y + tmp->z * tmp->z - (cyl->rad
 	* cyl->rad) - (pow(cyl->d->x * tmp->x + cyl->d->y * tmp->y
 	+ cyl->d->z * tmp->z, 2) / k);
+    free(tmp);
 	param.discr = param.b * param.b - 4 * param.a * param.c;
 	if (param.discr < E)
 		return (-1);

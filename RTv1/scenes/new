@@ -1,7 +1,7 @@
 camera
 {
 	lumamb: 0.3
-res: 2500 1400
+res: 800 600
 }
 
 light
@@ -11,16 +11,6 @@ light
 	dir: -1 -1 0
 	lumdiff: 0.7
 	angle: 0.95
-}
-
-object
-{
-	type: PLAN
-	dir: 0 1 0
-	h: 1
-	texture: textures/parquet.xpm
-	shiny: 0.2
-	mirror: 0.2
 }
 
 object

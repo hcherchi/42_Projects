@@ -1,5 +1,7 @@
 #include <rtv1.h>
 
+
+// FONCTION A RAJOUTER POUR REMPLACER TOUS LES TEST TABLEN ET STRDIGIT.
 void	parse_camera(t_tool *tools, int fd)
 {
 	char	**split;
@@ -45,6 +47,8 @@ void	parse_camera(t_tool *tools, int fd)
 		}
         else if (ft_strcmp(line, "{"))
             ft_error(1);
+        clean_tab(split);
+        free(line);
 	}
 }
 
@@ -55,7 +59,6 @@ void	parse_object(t_tool *tools, int fd)
 	char		**split;
 
 	object = malloc(sizeof(*object));
-	object->next = NULL;
 	init_object(object);
 	while (get_next_line(fd, &line) != 0 && ft_strcmp(line, "}"))
 	{
@@ -101,11 +104,20 @@ void	parse_object(t_tool *tools, int fd)
             object->texture = fill_texture(split[1], tools);
         }
         else if (ft_strstr(line, "pos:"))
+        {
+            free(object->o);
             object->o = fill_pos(split);
+        }
         else if (ft_strstr(line, "dir:"))
+        {
+            free(object->d);
             object->d = fill_pos(split);
+        }
         else if (ft_strstr(line, "color:"))
+        {
+            free(object->color);
             object->color = fill_color(split);
+        }
         else if (ft_strstr(line, "h:"))
         {
             if (ft_tablen(split) != 2)
@@ -124,6 +136,8 @@ void	parse_object(t_tool *tools, int fd)
         }
         else if (ft_strcmp(line, "{"))
             ft_error(4);
+        clean_tab(split);
+        free(line);
 	}
     vectornorm(object->d);
 	add_object(&tools->l_objects, object);
@@ -137,19 +151,26 @@ void	parser(int fd, t_tool *tools)
 
 	c = 0;
     tools->mlx_ptr = mlx_init();
-	tools->l_objects = NULL;
-	tools->l_lights = NULL;
+    tools->l_objects = NULL;
+    tools->l_lights = NULL;
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
 		if (!ft_strcmp(line, "camera"))
 		{
 			c++;
+            free(line);
 			parse_camera(tools, fd);
 		}
 		else if (!ft_strcmp(line, "light"))
+        {
+            free(line);
 			parse_light(tools, fd);
+        }
 		else if (!ft_strcmp(line, "object"))
+        {
+            free(line);
 			parse_object(tools, fd);
+        }
 	}
 	if (ret == -1)
 		ft_error(9);

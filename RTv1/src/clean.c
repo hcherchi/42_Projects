@@ -3,23 +3,50 @@
 void	clean_ray(t_ray *ray)
 {
 	free(ray->o);
-	free(ray->d);
-	ray->o = NULL;
-	ray->d = NULL;
+    free(ray->d);
 	free(ray);
-	ray = NULL;
 }
 
 void	clean_tools(t_tool *tools)
 {
-	free(tools->image->data);
 	free(tools->mlx_ptr);
-	free(tools->image->mlx_img);
-    free(tools->image);
 	free(tools->mlx_win);
-	clean_cam(tools->cam);
+    if (tools->sky)
+        clean_image(tools->sky);
+    clean_image(tools->image);
 	clean_obj(tools->l_objects);
 	clean_lights(tools->l_lights);
+    clean_cams(tools->upcams, 5);
+    clean_cams(tools->middlecams, 6);
+}
+
+void    clean_image(t_image *image)
+{
+    free(image->data);
+    free(image->mlx_img);
+    if (image->texture)
+        free(image->texture);
+    free(image);
+}
+
+void    clean_colors(t_colors *colors)
+{
+    free(colors->base);
+    free(colors->refract);
+    free(colors->reflect);
+    free(colors);
+}
+
+void    clean_cams(t_cam **cams, int nb)
+{
+    int i;
+
+    i = 0;
+    while (i < nb)
+    {
+        clean_cam(cams[i]);
+        i++;
+    }
 }
 
 void	clean_cam(t_cam *cam)
@@ -42,6 +69,7 @@ void	clean_lights(t_light *l_lights)
 		l_lights = l_lights->next;
 		free(tmp->color);
 		free(tmp->o);
+        free(tmp->d);
 		free(tmp);
 	}
 }
@@ -57,6 +85,24 @@ void	clean_obj(t_object *l_objects)
 		free(tmp->color);
 		free(tmp->o);
 		free(tmp->d);
+        if (tmp->texture)
+            clean_image(tmp->texture);
 		free(tmp);
 	}
+}
+
+void    clean_tab(char **tab)
+{
+    int i;
+    
+    i = 0;
+    if (tab)
+    {
+        while (tab[i])
+        {
+            free(tab[i]);
+            i++;
+        }
+        free(tab);
+    }
 }

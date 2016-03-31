@@ -1,5 +1,6 @@
 #include <rtv1.h>
 #include <stdio.h>
+#include <pthread.h>
 
 void	init_param(t_tool *t)
 {
@@ -12,9 +13,10 @@ void	init_param(t_tool *t)
     t->image->mlx_img = mlx_new_image(t->mlx_ptr, t->x_res, t->y_res);
     t->image->data = mlx_get_data_addr(t->image->mlx_img, &t->image->bpp,
                                        &t->image->size_line, &t->image->endian);
+    t->sky = fill_texture("textures/sky.xpm", t);
 }
 
-void	run_through(t_tool *t)
+void run_through(t_tool *t)
 {
 	int x;
 	int y;
@@ -30,7 +32,7 @@ void	run_through(t_tool *t)
 		}
 		y += 1;
 	}
-	mlx_put_image_to_window(t->mlx_ptr, t->mlx_win, t->image->mlx_img, 0, 0);
+	mlx_put_image_to_window(t->mlx_ptr, t->mlx_win, t ->image->mlx_img, 0, 0);
 }
 
 t_cam *new_cam(t_pos *pos, t_pos *vect, t_tool *t, int nb)
@@ -69,18 +71,16 @@ void    init_cams(t_tool *t)
     t->middlecams[2] = new_cam(vectornew(5, 0, 0), vectornew(-1, 0, 0), t, 2);
     t->middlecams[3] = new_cam(vectornew(0, 0, 5), vectornew(0, 0, -1), t, 3);
     t->middlecams[4] = new_cam(vectornew(0, 5, 0), vectornew(0, -1, 0), t, 4);
-    
-    t->upcams = malloc(sizeof(t_cam*) * 5);
-    t->upcams[0] = new_cam(vectornew(0, 5, -5), vectornew(0, -1, 1), t, 0);
-    t->upcams[1] = new_cam(vectornew(-5, 5, 0), vectornew(1, -1, 0), t, 1);
-    t->upcams[2] = new_cam(vectornew(5, 5, 0), vectornew(-1, -1, 0), t, 2);
-    t->upcams[3] = new_cam(vectornew(0, 5, 5), vectornew(0, -1, -1), t, 3);
-    t->upcams[4] = new_cam(vectornew(0, 10, 0), vectornew(0, -1, 0), t, 4);
-    
     if (t->pos && t->vect)
         t->middlecams[5] = new_cam(t->pos, t->vect, t, 5);
     else
-        t->middlecams[5] = t->upcams[0];
+        t->middlecams[5] = new_cam(vectornew(0, 5, -5), vectornew(0, -1, 1), t, 5);
+    t->upcams = malloc(sizeof(t_cam*) * 5);
+    t->upcams[0] = new_cam(vectornew(0, 2.5, -5), vectornew(0, -1, 2), t, 0);
+    t->upcams[1] = new_cam(vectornew(-5, 2.5, 0), vectornew(2, -1, 0), t, 1);
+    t->upcams[2] = new_cam(vectornew(5, 2.5, 0), vectornew(-2, -1, 0), t, 2);
+    t->upcams[3] = new_cam(vectornew(0, 2.5, 5), vectornew(0, -1, -2), t, 3);
+    t->upcams[4] = new_cam(vectornew(0, 10, 0), vectornew(0, -1, 0), t, 4);
     t->cam = t->middlecams[5];
 }
 

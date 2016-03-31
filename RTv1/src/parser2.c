@@ -7,17 +7,25 @@ void	parse_light(t_tool *tools, int fd)
 	t_light	*light;
 
 	light = malloc(sizeof(*light));
-	light->next = NULL;
 	init_light(light);
 	while (get_next_line(fd, &line) > 0 && !ft_strstr(line, "}"))
 	{
 		split = ft_strsplit(line, ' ');
         if (ft_strstr(line, "pos:"))
+        {
+            free(light->o);
             light->o = fill_pos(split);
+        }
         else if (ft_strstr(line, "dir:"))
+        {
+            free(light->d);
             light->d = fill_pos(split);
+        }
         else if (ft_strstr(line, "color:"))
+        {
+            free(light->color);
             light->color = fill_color(split);
+        }
         else if (ft_strstr(line, "lumdiff:"))
         {
             if (ft_tablen(split) != 2)
@@ -46,6 +54,8 @@ void	parse_light(t_tool *tools, int fd)
             light->type = light_type(split);
         else if (ft_strcmp(line, "{"))
             ft_error(3);
+        clean_tab(split);
+        free(line);
 	}
     vectornorm(light->d);
 	add_light(&tools->l_lights, light);

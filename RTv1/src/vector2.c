@@ -1,10 +1,5 @@
 #include <rtv1.h>
 
-//t_pos   *rotation(t_pos *vect, t_pos *axe)
-//{
-//    
-//}
-
 t_pos	*vectornew(double x, double y, double z)
 {
 	t_pos	*result;

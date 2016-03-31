@@ -18,10 +18,10 @@ void		draw(t_tool *t, int x, int y)
 	t_ray	*ray;
 	double	x0;
 	double	y0;
-	t_color	*final_color;
+	t_color	*moy_color;
 	t_color	*color;
 
-	final_color = new_color();
+	moy_color = new_color();
 	x0 = x;
 	while (x0 <= x + 0.5)
 	{
@@ -31,16 +31,16 @@ void		draw(t_tool *t, int x, int y)
             t->depth = 0;
 			ray = get_ray(t, x0, y0);
 			color = get_color(ray, t);
-			final_color = add_color(final_color, color);
+			moy_color = add_color(moy_color, color);
 			free(color);
 			y0 += 0.5;
 		}
 		x0 += 0.5;
 	}
-	final_color = div_color(final_color, 4);
-	normalize_color(final_color);
-	pixel_put_to_image(t, x, y, final_color);
-	free(final_color);
+	moy_color = div_color(moy_color, 4);
+	normalize_color(moy_color);
+	pixel_put_to_image(t, x, y, moy_color);
+	free(moy_color);
 }
 
 t_color     *get_final_color(t_colors   *colors, t_object *object)
@@ -49,14 +49,13 @@ t_color     *get_final_color(t_colors   *colors, t_object *object)
 	double	kbase;
 
 	kbase = 1 - object->mirror - object->transp;
-    if (object == NULL)
-        return (colors->base);
     final_color = new_color();
     if (colors->reflect)
         final_color = add_color(final_color, mult_color(colors->reflect, object->mirror));
     if (colors->refract)
         final_color = add_color(final_color, mult_color(colors->refract, object->transp));
     final_color = add_color(final_color, mult_color(colors->base, kbase));
+    clean_colors(colors);
     return (final_color);
 }
 
@@ -71,10 +70,9 @@ t_color     *get_sky_color(t_ray *ray, t_tool *t)
     vectornorm(impact);
     x = (0.5 + (atan2(impact->z, impact->x) / (2 * M_PI))) * t->sky->width;
     y = (0.5 - asin(impact->y) / M_PI) * t->sky->height;
+    free(impact);
     return (extract_color(t, t->sky, x, y));
 }
-
-
 
 // RECUPER LES 3 COULEURS : BASE REFLETEE REFRACTEE
 
@@ -83,23 +81,28 @@ t_color		*get_color(t_ray *ray, t_tool *t)
 	t_object	*object;
 	t_ray		*impact;
     t_colors    *colors;
+    t_color     *final_color;
 
-    colors = new_colors();
 	if ((object = intersection(t->l_objects, ray)))
 	{
+        colors = new_colors();
         impact = get_normal(object, ray);
         colors->base = get_base_color(t, object, impact);
-		if (object->mirror && t->depth < 10)
+		if (object->mirror && t->depth < 4)
             colors->reflect = get_color(get_reflectray(ray, t, impact), t);
         if (object->transp)
             colors->refract = get_color(get_refractray(ray, impact, object), t);
-        return (get_final_color(colors, object));
+        clean_ray(impact);
+        final_color = get_final_color(colors, object);
+        return (final_color);
 	}
     else
-	{
-		if (t->sky)
-			return (get_sky_color(ray, t));
-		else
-			return (new_color());
-	}
+    {
+        if (t->sky)
+            final_color = get_sky_color(ray, t);
+        else
+            final_color = new_color();
+    }
+    clean_ray(ray);
+    return (final_color);
 }

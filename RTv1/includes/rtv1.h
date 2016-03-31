@@ -166,7 +166,6 @@ t_ray				*get_normal(t_object *object, t_ray *ray);
 void				get_cyl_normal(t_ray *impact, t_object *object);
 
 // LUMINOSITY
-t_color				*init_lumamb(t_tool *t, t_color *objcolor);
 double				get_kspec(t_ray *lightray, t_ray *impact, double intens);
 double				get_kdiff(t_ray *lightray, t_ray *impact, double intens);
 void				update_color(double k, t_color *lightcolor, t_color *final_color, t_color *objcolor);
@@ -224,5 +223,9 @@ void				clean_obj(t_object *l_objects);
 void				clean_lights(t_light *l_lights);
 void				clean_cam(t_cam *cam);
 void				clean_tools(t_tool *tools);
+void                clean_colors(t_colors *colors);
+void                clean_cams(t_cam **cams, int nb);
+void                clean_image(t_image *image);
+void                clean_tab(char **tab);
 
 #endif

@@ -1,5 +1,6 @@
 #include <rtv1.h>
 
+// A REVOIR AUSSI 
 t_ray	*get_normal(t_object *object, t_ray *ray)
 {
 	t_ray	*impact;

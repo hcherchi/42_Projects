@@ -22,6 +22,7 @@ double	get_kspec(t_ray *lightray, t_ray *impact, double lumdiff)
     vectornorm(reflectray);
     kspec = vectordot(invlight, reflectray);
     free(invlight);
+    free(reflectray);
     return (pow(kspec, 21) * lumdiff);
 }
 
@@ -32,7 +33,7 @@ double  get_ray_intens(t_tool *t, t_ray *lightray, t_object *obj)
     
     intens = 1;
     curobj = t->l_objects;
-    fill_dist(t->l_objects, lightray);
+    fill_dist(curobj, lightray);
     while (curobj)
     {
         if (curobj->dist != -1 && curobj->dist < obj->dist)
@@ -42,6 +43,8 @@ double  get_ray_intens(t_tool *t, t_ray *lightray, t_object *obj)
     return (intens);
 }
 
+
+// A REDUIRE
 t_color     *get_base_color(t_tool *t, t_object *obj, t_ray *impact)
 {
 	t_light		*light;
@@ -53,7 +56,7 @@ t_color     *get_base_color(t_tool *t, t_object *obj, t_ray *impact)
 
     if (obj->texture)
         obj->color = get_texture_color(obj, impact, t);
-    base_color = init_lumamb(t, obj->color);
+    base_color = mult_color(obj->color, t->lumamb);
 	light = t->l_lights;
 	while (light)
     {
@@ -71,6 +74,8 @@ t_color     *get_base_color(t_tool *t, t_object *obj, t_ray *impact)
         }
         light = light->next;
     }
+    if (obj->texture)
+        free(obj->color);
     return (base_color);
 }
 
