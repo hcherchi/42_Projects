@@ -32,7 +32,7 @@ double  get_ray_intens(t_tool *t, t_ray *lightray, t_object *obj)
     double  intens;
     
     intens = 1;
-    curobj = t->l_objects;
+    curobj = t->rt->l_objects;
     fill_dist(curobj, lightray);
     while (curobj)
     {
@@ -56,8 +56,8 @@ t_color     *get_base_color(t_tool *t, t_object *obj, t_ray *impact)
 
     if (obj->texture)
         obj->color = get_texture_color(obj, impact, t);
-    base_color = mult_color(obj->color, t->lumamb);
-	light = t->l_lights;
+    base_color = mult_color(obj->color, t->rt->lumamb);
+	light = t->rt->l_lights;
 	while (light)
     {
         if ((lightray = get_lightray(impact, light)))

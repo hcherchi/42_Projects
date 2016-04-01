@@ -42,12 +42,12 @@ t_ray		*get_ray(t_tool *t, double x, double y)
     ray = malloc(sizeof(t_ray));
     ray->o = malloc(sizeof(t_pos));
     tmp = malloc(sizeof(t_pos));
-    ray->o->x = t->cam->pos->x;
-    ray->o->y = t->cam->pos->y;
-    ray->o->z = t->cam->pos->z;
-    tmp->x = t->cam->upleft->x + t->cam->r_vect->x * t->indent * x - t->cam->h_vect->x * t->indent * y;
-    tmp->y = t->cam->upleft->y + t->cam->r_vect->y * t->indent * x - t->cam->h_vect->y * t->indent * y;
-    tmp->z = t->cam->upleft->z + t->cam->r_vect->z * t->indent * x - t->cam->h_vect->z * t->indent * y;
+    ray->o->x = t->rt->cam->pos->x;
+    ray->o->y = t->rt->cam->pos->y;
+    ray->o->z = t->rt->cam->pos->z;
+    tmp->x = t->rt->cam->upleft->x + t->rt->cam->r_vect->x * t->rt->indent * x - t->rt->cam->h_vect->x * t->rt->indent * y;
+    tmp->y = t->rt->cam->upleft->y + t->rt->cam->r_vect->y * t->rt->indent * x - t->rt->cam->h_vect->y * t->rt->indent * y;
+    tmp->z = t->rt->cam->upleft->z + t->rt->cam->r_vect->z * t->rt->indent * x - t->rt->cam->h_vect->z * t->rt->indent * y;
     ray->d = vectorsub(tmp, ray->o);
     free(tmp);
     vectornorm(ray->d);
@@ -58,7 +58,7 @@ t_ray       *get_reflectray(t_ray *ray, t_tool *t, t_ray *impact)
 {
     t_ray *reflect;
     
-    t->depth += 1;
+    t->rt->depth += 1;
     reflect = malloc(sizeof(t_ray));
     reflect->o = vectorcopy(impact->o);
     reflect->d = vectoradd(vectorscale(-2 * vectordot(ray->d, impact->d), impact->d), ray->d);

@@ -1,5 +1,21 @@
 #include <rtv1.h>
 
+void    clean_tools(t_tool *tools)
+{
+    clean_menu(tools->m);
+    if (tools->rt)
+        clean_rt(tools->rt);
+    free(tools->mlx_ptr);
+    free(tools);
+}
+
+void    clean_menu(t_menu *m)
+{
+    free(m->mlx_win);
+    clean_image(m->bg);
+    free(m);
+}
+
 void	clean_ray(t_ray *ray)
 {
 	free(ray->o);
@@ -7,17 +23,16 @@ void	clean_ray(t_ray *ray)
 	free(ray);
 }
 
-void	clean_tools(t_tool *tools)
+void	clean_rt(t_rt *rt)
 {
-	free(tools->mlx_ptr);
-	free(tools->mlx_win);
-    if (tools->sky)
-        clean_image(tools->sky);
-    clean_image(tools->image);
-	clean_obj(tools->l_objects);
-	clean_lights(tools->l_lights);
-    clean_cams(tools->upcams, 5);
-    clean_cams(tools->middlecams, 6);
+	free(rt->mlx_win);
+    if (rt->sky)
+        clean_image(rt->sky);
+    clean_image(rt->image);
+	clean_obj(rt->l_objects);
+	clean_lights(rt->l_lights);
+    clean_cams(rt->upcams, 5);
+    clean_cams(rt->middlecams, 6);
 }
 
 void    clean_image(t_image *image)
@@ -26,6 +41,8 @@ void    clean_image(t_image *image)
     free(image->mlx_img);
     if (image->texture)
         free(image->texture);
+    if (image->screen)
+        free(image->screen);
     free(image);
 }
 

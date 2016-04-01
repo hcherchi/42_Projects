@@ -20,11 +20,11 @@ SRCS = src/main.c src/draw.c src/event.c
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-IFLAGS = -I $(INC_DIR) -I libft/includes
+IFLAGS = -I $(INC_DIR) -I libft/includes -I ~/minilibx_macos
 FLAGS = -Wall -Werror -Wextra
 
 CC = gcc $(FLAGS)
-LIBFLAGS = -Llibft -lft -lmlx -framework OpenGL -framework AppKit
+LIBFLAGS = -Llibft -L ~/minilibx_macos -lft -lmlx -framework OpenGL -framework AppKit
 RM = /bin/rm -f
 
 all: $(LIB_NAME) $(NAME)

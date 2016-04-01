@@ -124,10 +124,6 @@ typedef struct      s_menu
     int             x_res;
     int             y_res;
     int             menu;
-    int             go_back;
-    int             yes;
-    int             first;
-    int             screenshot;
 }                   t_menu;
 
 typedef struct      s_rt
@@ -151,6 +147,7 @@ typedef struct      s_rt
     t_pos           *pos;
     t_pos           *vect;
     int             error;
+    int             screenshot;
 }                   t_rt;
 
 typedef struct		s_tool
@@ -217,10 +214,10 @@ void				init_light(t_light *light);
 void				init_object(t_object *object);
 void				add_object(t_object **l_objects, t_object *new);
 void				add_light(t_light **l_lights, t_light *new);
-int					object_type(char **split, t_tool *t);
-int                 light_type(char **split, t_tool *t);
-t_pos				*fill_pos(char **split, t_tool *t);
-t_color				*fill_color(char **split, t_tool *t);
+int					object_type(char **split);
+int                 light_type(char **split);
+t_pos				*fill_pos(char **split);
+t_color				*fill_color(char **split);
 t_image             *fill_texture(char *file, t_tool *tools);
 
 // COLOR TOOLS
@@ -232,9 +229,9 @@ t_color				*div_color(t_color *color, double n);
 t_color				*mult_color(t_color *color, double n);
 
 // LAUNCH
-void				ft_error(t_tool *t);
+void				ft_error();
 void				run_through(t_tool *t);
-void                launch(char *scene);
+void                launch(char *scene, t_tool *tools);
 void				init_param(t_tool *t);
 t_cam               *new_cam(t_pos *pos, t_pos *vect, t_tool *t, int nb);
 void                init_cams(t_tool *t);
@@ -250,15 +247,13 @@ void                clean_colors(t_colors *colors);
 void                clean_cams(t_cam **cams, int nb);
 void                clean_image(t_image *image);
 void                clean_tab(char **tab);
+void                clean_menu(t_menu *m);
+void                clean_rt(t_rt *rt);
 
 // MENU
-void				build_screen(t_menu *t);
-void				screen_shot(t_menu *t);
-void				info_group(t_menu *t);
-void				loading(t_menu *t);
-void				info_screen(t_menu *t);
-void				affiche_error(t_menu *t);
-void                test(t_menu *tools);
-int		menu_event(int keycode, t_menu *t);
-
+void print_scene_menu(t_tool *t);
+void print_build_menu(t_tool *t);
+void print_group_menu(t_tool *t);
+void print_start_menu(t_tool *t);
+int		menu_event(int keycode, t_tool *t);
 #endif

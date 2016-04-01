@@ -2,17 +2,17 @@
 
 void		pixel_put_to_image(t_tool *t, int x, int y, t_color *color)
 {
-    if(t->screen_shot == 0)
+    if(t->rt->screenshot == 0)
     {
-        t->image->data[x * t->image->bpp / 8 + y * t->image->size_line] = (unsigned char)color->b;
-        t->image->data[x * t->image->bpp / 8 + 1 + y * t->image->size_line] = (unsigned char)color->g;
-        t->image->data[x * t->image->bpp / 8 + 2 + y * t->image->size_line] = (unsigned char)color->r;
+        t->rt->image->data[x * t->rt->image->bpp / 8 + y * t->rt->image->size_line] = (unsigned char)color->b;
+        t->rt->image->data[x * t->rt->image->bpp / 8 + 1 + y * t->rt->image->size_line] = (unsigned char)color->g;
+        t->rt->image->data[x * t->rt->image->bpp / 8 + 2 + y * t->rt->image->size_line] = (unsigned char)color->r;
     }
     else
     {
-        t->image->screen[(x + y * t->x_res)*3 + 0] = (unsigned char) color->r;
-        t->image->screen[(x + y * t->x_res)*3 + 1] = (unsigned char) color->g;
-        t->image->screen[(x + y * t->x_res)*3 + 2] = (unsigned char) color->b;
+        t->rt->image->screen[(x + y * t->rt->x_res)*3 + 0] = (unsigned char) color->r;
+        t->rt->image->screen[(x + y * t->rt->x_res)*3 + 1] = (unsigned char) color->g;
+        t->rt->image->screen[(x + y * t->rt->x_res)*3 + 2] = (unsigned char) color->b;
     }
 }
 
@@ -33,7 +33,7 @@ void		draw(t_tool *t, int x, int y)
 		y0 = y;
 		while (y0 <= y + 0.5)
 		{
-            t->depth = 0;
+            t->rt->depth = 0;
 			ray = get_ray(t, x0, y0);
 			color = get_color(ray, t);
 			moy_color = add_color(moy_color, color);
@@ -73,10 +73,10 @@ t_color     *get_sky_color(t_ray *ray, t_tool *t)
     impact = malloc(sizeof(t_pos));
     impact = vectoradd(ray->o, vectorscale(100, ray->d));
     vectornorm(impact);
-    x = (0.5 + (atan2(impact->z, impact->x) / (2 * M_PI))) * t->sky->width;
-    y = (0.5 - asin(impact->y) / M_PI) * t->sky->height;
+    x = (0.5 + (atan2(impact->z, impact->x) / (2 * M_PI))) * t->rt->sky->width;
+    y = (0.5 - asin(impact->y) / M_PI) * t->rt->sky->height;
     free(impact);
-    return (extract_color(t, t->sky, x, y));
+    return (extract_color(t, t->rt->sky, x, y));
 }
 
 t_color     *get_flash(t_ray *ray, t_tool *t)
@@ -87,7 +87,7 @@ t_color     *get_flash(t_ray *ray, t_tool *t)
     double      angle;
     
     flash = new_color();
-    light = t->l_lights;
+    light = t->rt->l_lights;
     while (light)
     {
         if (light->type == SUN || light->type == SPOT)
@@ -114,12 +114,12 @@ t_color		*get_color(t_ray *ray, t_tool *t)
     t_colors    *colors;
     t_color     *final_color;
 
-	if ((object = intersection(t->l_objects, ray)))
+	if ((object = intersection(t->rt->l_objects, ray)))
 	{
         colors = new_colors();
         impact = get_normal(object, ray);
         colors->base = get_base_color(t, object, impact);
-		if (object->mirror && t->depth < 4)
+		if (object->mirror && t->rt->depth < 4)
             colors->reflect = get_color(get_reflectray(ray, t, impact), t);
         if (object->transp)
             colors->refract = get_color(get_refractray(ray, impact, object), t);
@@ -129,7 +129,7 @@ t_color		*get_color(t_ray *ray, t_tool *t)
 	}
     else
     {
-        if (t->sky)
+        if (t->rt->sky)
             final_color = get_sky_color(ray, t);
         else
             final_color = new_color();
