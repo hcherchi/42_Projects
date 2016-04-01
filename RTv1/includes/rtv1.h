@@ -117,18 +117,30 @@ typedef struct		s_cam
     int             nb;
 }					t_cam;
 
-typedef struct		s_tool
+typedef struct      s_menu
 {
-	void			*mlx_ptr;
-	void			*mlx_win;
-	t_object		*l_objects;
-	t_light			*l_lights;
-	t_image			*image;
+    void            *mlx_win;
+    t_image         *bg;
+    int             x_res;
+    int             y_res;
+    int             menu;
+    int             go_back;
+    int             yes;
+    int             first;
+    int             screenshot;
+}                   t_menu;
+
+typedef struct      s_rt
+{
+    void			*mlx_win;
+    t_object		*l_objects;
+    t_light			*l_lights;
+    t_image			*image;
     t_image         *sky;
-	t_cam			*cam;
+    t_cam			*cam;
     t_cam           **upcams;
     t_cam           **middlecams;
-	double			lumamb;
+    double			lumamb;
     int             depth;
     double			dist;
     double			w;
@@ -138,13 +150,14 @@ typedef struct		s_tool
     double			indent;
     t_pos           *pos;
     t_pos           *vect;
-    
-    int				screen_shot;
-    int				first;
-    int				which_menu;
-    int				yes;
-    int				go_back;
-    int				error;
+    int             error;
+}                   t_rt;
+
+typedef struct		s_tool
+{
+    void            *mlx_ptr;
+    t_rt            *rt;
+    t_menu          *m;
 }					t_tool;
 
 // INTERSECTIONS
@@ -177,6 +190,7 @@ void				get_cyl_normal(t_ray *impact, t_object *object);
 double				get_kspec(t_ray *lightray, t_ray *impact, double intens);
 double				get_kdiff(t_ray *lightray, t_ray *impact, double intens);
 void				update_color(double k, t_color *lightcolor, t_color *final_color, t_color *objcolor);
+t_color     *get_flash(t_ray *ray, t_tool *t);
 
 // RAYS
 t_ray				*get_lightray(t_ray *impact, t_light *light);
@@ -220,10 +234,11 @@ t_color				*mult_color(t_color *color, double n);
 // LAUNCH
 void				ft_error(t_tool *t);
 void				run_through(t_tool *t);
+void                launch(char *scene);
 void				init_param(t_tool *t);
 t_cam               *new_cam(t_pos *pos, t_pos *vect, t_tool *t, int nb);
 void                init_cams(t_tool *t);
-int					event(int keycode, t_tool *t);
+int					rt_event(int keycode, t_tool *t);
 
 // CLEANING
 void				clean_ray(t_ray *ray);
@@ -236,14 +251,14 @@ void                clean_cams(t_cam **cams, int nb);
 void                clean_image(t_image *image);
 void                clean_tab(char **tab);
 
-// LOADING
-void				build_screen(t_tool *t);
-void				screen_shot(t_tool *t);
-void				init_param(t_tool *t);
-void				info_group(t_tool *t);
-void				loading(t_tool *t);
-void				info_screen(t_tool *t);
-void				affiche_error(t_tool *t);
-void                test(t_tool *tools);
+// MENU
+void				build_screen(t_menu *t);
+void				screen_shot(t_menu *t);
+void				info_group(t_menu *t);
+void				loading(t_menu *t);
+void				info_screen(t_menu *t);
+void				affiche_error(t_menu *t);
+void                test(t_menu *tools);
+int		menu_event(int keycode, t_menu *t);
 
 #endif

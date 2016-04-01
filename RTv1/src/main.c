@@ -1,51 +1,55 @@
 #include <rtv1.h>
-#include <stdio.h>
-#include <pthread.h>
 
 void	init_param(t_tool *t)
 {
-    t->screen_shot = 0;
-    t->yes = 0;
-    t->go_back = 0;
 	t->indent = 0.001;
     t->w = t->x_res * t->indent;
     t->h = t->y_res * t->indent;
 	t->dist = t->w / (2 * tan((60 / 2) * (M_PI / 180)));
-    if (t->first == 0)
-    {
-        t->mlx_win = mlx_new_window(t->mlx_ptr, t->x_res, t->y_res, "RTv1");
-        t->image = malloc(sizeof(t_image));
-        t->image->mlx_img = mlx_new_image(t->mlx_ptr, t->x_res, t->y_res);
-        t->image->data = mlx_get_data_addr(t->image->mlx_img, &t->image->bpp,
+    t->mlx_win = mlx_new_window(mlx_ptr, t->x_res, t->y_res, "RTv1");
+    t->image = malloc(sizeof(t_image));
+    t->image->mlx_img = mlx_new_image(mlx_ptr, t->x_res, t->y_res);
+    t->image->data = mlx_get_data_addr(t->image->mlx_img, &t->image->bpp,
                                        &t->image->size_line, &t->image->endian);
-        t->image->texture = NULL;
-    }
-    t->sky = fill_texture("textures/sky.xpm", t);
+    t->image->texture = NULL;
+    t->sky = NULL;
 }
 
-void run_through(t_tool *t)
+void    launch(char *scene)
+{
+    t_tool	*tools;
+    
+    tools = malloc(sizeof(t_tool));
+    parser(open(scene, O_RDONLY), tools);
+    init_param(tools);
+    init_cams(tools);
+    run_through(tools);
+}
+
+void run_through(t_tool *tools)
 {
 	int x;
 	int y;
-
+    
 	y = 0;
-	while (y < t->y_res)
+	while (y < tools->y_res)
 	{
 		x = 0;
-		while (x < t->x_res)
+		while (x < tools->x_res)
 		{
-			draw(t, x, y);
+			draw(tools, x, y);
 			x += 1;
 		}
 		y += 1;
 	}
-    if (t->screen_shot == 0)
-        mlx_put_image_to_window(t->mlx_ptr, t->mlx_win, t->image->mlx_img, 0, 0);
-    else
-        screen_shot(t);
-    mlx_string_put(t->mlx_ptr, t->mlx_win, 50, 25, 0x009933FF, "Use arrow key-bind to move");
-    mlx_string_put(t->mlx_ptr, t->mlx_win, 50, 50, 0x009933FF, "Use 'P' to take a picture");
-    mlx_string_put(t->mlx_ptr, t->mlx_win, 50, 75, 0x009933FF, "Use 'DELETE' to go back menu");
+    //if (t->screen_shot == 0)
+        mlx_put_image_to_window(mlx_ptr, tools->mlx_win, tools->image->mlx_img, 0, 0);
+//    else
+//        screen_shot(t);
+    mlx_string_put(mlx_ptr, tools->mlx_win, 50, 25, 0x009933FF, "2 - 4 - 5 - 6 - 8 and arrows to change CAMERA");
+    mlx_string_put(mlx_ptr, tools->mlx_win, 50, 50, 0x009933FF, "P : SCREENSHOT");
+    mlx_string_put(mlx_ptr, tools->mlx_win, 50, 75, 0x009933FF, "Press 'DELETE' to go back to the menu");
+    mlx_key_hook(tools->mlx_win, rt_event, tools);
 }
 
 t_cam *new_cam(t_pos *pos, t_pos *vect, t_tool *t, int nb)
@@ -99,17 +103,19 @@ void    init_cams(t_tool *t)
 
 int		main(void)
 {
-	t_tool	*tools;
-
-    tools = malloc(sizeof(t_tool));
-    tools->first = 0;
-    tools->error = 0;
-    tools->which_menu = 0;
-	parser(open("scenes/new", O_RDONLY), tools);
-	init_param(tools);
-    init_cams(tools);
+    t_tool *tools;
+  
+    tools->mlx_ptr = mlx_init();
+    tools->m = malloc(sizeof(t_menu));
+    tools->m->x_res = 600;
+    tools->m->y_res = 600;
+    tools->m->mlx_win = mlx_new_window(tools->mlx_ptr, tools->m->x_res, tools->m->y_res, "RT");
+    tools->m->bg = malloc(sizeof(t_image));
+    tools->m->bg->mlx_img = mlx_xpm_file_to_image(tools->mlx_ptr, "textures/blue_background.xpm", &tools->m->bg->width, &tools->m->bg->height);
+    tools->m->bg->data = mlx_get_data_addr(tools->m->bg->mlx_img, &tools->m->bg->bpp, &tools->m->bg->size_line, &tools->m->bg->endian);
+    tools->m->bg->screen = NULL;
     loading(tools);
-	mlx_key_hook(tools->mlx_win, event, tools);
+	mlx_key_hook(tools->m->mlx_win, menu_event, tools);
 	mlx_loop(tools->mlx_ptr);
 	return (0);
 }

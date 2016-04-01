@@ -150,7 +150,6 @@ void	parser(int fd, t_tool *tools)
 	int		ret;
 
 	c = 0;
-    tools->mlx_ptr = mlx_init();
     tools->l_objects = NULL;
     tools->l_lights = NULL;
 	while ((ret = get_next_line(fd, &line)) > 0)

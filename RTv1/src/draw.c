@@ -90,14 +90,16 @@ t_color     *get_flash(t_ray *ray, t_tool *t)
     light = t->l_lights;
     while (light)
     {
-        if (light->type == SUN)
+        if (light->type == SUN || light->type == SPOT)
         {
             flashray = vectorsub(light->o, ray->o);
             vectornorm(flashray);
-            angle = vectordot(flashray, ray->d);
-            if (angle > 0)
-                flash = add_color(flash, mult_color(light->color, pow(angle, 10)));
         }
+        else if (light->type == LIGHTPLAN)
+            flashray = vectorscale(-1, light->d);
+        angle = vectordot(flashray, ray->d);
+        if (angle > 0 && ((light->type == SPOT && vectordot(vectorscale(-1, flashray), light->d) > light->angle) || light->type != SPOT))
+            flash = add_color(flash, mult_color(light->color, pow(angle, 10)));
         light = light->next;
     }
     return (flash);

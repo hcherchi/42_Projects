@@ -1,13 +1,15 @@
 camera
 {
 	lumamb: 0.3
-res: 800 600
+	res: 800 600
 }
 
 light
 {
-	type: SUN
-	pos: 0 -3 0
+	type: SPOT
+	pos: 0 1 3
+	dir: 0 -1 -1
+	h: 10 
 	lumdiff: 0.7
 }
 
