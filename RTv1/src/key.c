@@ -43,20 +43,6 @@ void	menu_1(int keycode, t_tool *t)
 
 void	menu_2(int keycode, t_tool *t)
 {
-    if (keycode == 0)
-    {
-        mlx_clear_window(t->mlx_ptr, t->mlx_win);
-        t->first = 1;
-        t->which_menu = 3;
-        parser(open("scenes/jail", O_RDONLY), t);
-        if (t->error == 0)
-        {
-            init_param(t);
-            run_through(t);
-        }
-        else
-            t->which_menu = 5;
-    }
     if (keycode == 1)
     {
         mlx_clear_window(t->mlx_ptr, t->mlx_win);
@@ -70,21 +56,6 @@ void	menu_2(int keycode, t_tool *t)
         }
         else
             t->which_menu = 5;
-    }
-    if (keycode == 2)
-    {
-        mlx_clear_window(t->mlx_ptr, t->mlx_win);
-        t->first = 1;
-        t->which_menu = 3;
-        parser(open("scenes/all", O_RDONLY), t);
-        if (t->error == 0)
-        {
-            init_param(t);
-            run_through(t);
-        }
-        else
-            t->which_menu = 5;
-        
     }
     if (keycode == 3)
     {

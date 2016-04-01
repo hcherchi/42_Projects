@@ -6,9 +6,8 @@ res: 800 600
 
 light
 {
-	type: LIGHTPLAN
-	dir: 0 -1 0
-	h: 5
+	type: SUN
+	pos: 0 -3 0
 	lumdiff: 0.7
 }
 

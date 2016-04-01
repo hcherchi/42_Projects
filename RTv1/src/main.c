@@ -18,6 +18,7 @@ void	init_param(t_tool *t)
         t->image->mlx_img = mlx_new_image(t->mlx_ptr, t->x_res, t->y_res);
         t->image->data = mlx_get_data_addr(t->image->mlx_img, &t->image->bpp,
                                        &t->image->size_line, &t->image->endian);
+        t->image->texture = NULL;
     }
     t->sky = fill_texture("textures/sky.xpm", t);
 }

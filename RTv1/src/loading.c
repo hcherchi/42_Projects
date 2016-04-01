@@ -69,7 +69,6 @@ void loading(t_tool *t)
     texture = malloc(sizeof(t_image));
     texture->mlx_img = mlx_xpm_file_to_image(t->mlx_ptr, "textures/blue_background.xpm", &texture->width, &texture->height);
     texture->data = mlx_get_data_addr(texture->mlx_img, &texture->bpp, &texture->size_line, &texture->endian);
-    ft_putendl("TARACE");
     mlx_put_image_to_window(t->mlx_ptr, t->mlx_win, texture->mlx_img, -100, -100);
     mlx_string_put(t->mlx_ptr, t->mlx_win, t->y_res/2 -20, t->x_res/2 -100, 0x00CCCCCC, "Welcome to  RT:");
     mlx_string_put(t->mlx_ptr, t->mlx_win, t->y_res/2 -20, t->x_res/2 -50, 0x0099FF00, "presse ENTER to start");
