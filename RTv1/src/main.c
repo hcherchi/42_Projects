@@ -2,7 +2,7 @@
 
 void    init_menu(t_tool *tools)
 {
-    tools->m->x_res = 600;
+    tools->m->x_res = 800;
     tools->m->y_res = 600;
     tools->m->mlx_win = mlx_new_window(tools->mlx_ptr, tools->m->x_res, tools->m->y_res, "RT");
     tools->m->bg = malloc(sizeof(t_image));

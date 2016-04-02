@@ -12,6 +12,7 @@ void    launch(char *scene, t_tool *tools)
 void	init_param(t_tool *t)
 {
     t->rt->indent = 0.001;
+    t->rt->screenshot = 0;
     t->rt->w = t->rt->x_res * t->rt->indent;
     t->rt->h = t->rt->y_res * t->rt->indent;
     t->rt->dist = t->rt->w / (2 * tan((60 / 2) * (M_PI / 180)));

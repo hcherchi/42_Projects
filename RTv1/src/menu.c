@@ -47,5 +47,4 @@ void print_start_menu(t_tool *t)
     mlx_string_put(t->mlx_ptr, t->m->mlx_win, t->m->y_res/2 -20, t->m->x_res/2 +70, 0x0099FF00, "3 : VIDEO");
     mlx_string_put(t->mlx_ptr, t->m->mlx_win, 50, 50, 0x00FF9966, "Version 1.2.8");
     t->m->menu = 0;
-    ft_putendl("Yo");
 }
