@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+		<title>Calc</title>
+		<style>
+		body
+		{
+			display: flex;
+			justify-content: center;
+			padding: 10%;
+		}
+		#left, #right, #op, #launch
+		{
+			margin: 5px;
+		}
+		</style>
+		<script   src="https://code.jquery.com/jquery-2.2.3.js"   integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4="   crossorigin="anonymous"></script>
+	</head>
+	<body>
+	<input id="left" />
+	<select id="op">
+		<option value="+">+</option>
+		<option value="-">-</option>
+		<option value="*">*</option>
+		<option value="/">/</option>
+		<option value="%">%</option>
+	</select>
+	<input id="right" />
+	<input id="launch" type="submit" value="Try me!"/>
+	<script>
+	setInterval(function()
+	{
+		alert('Please, use me...');
+	}, 30000);
+
+	var left = $('#left');
+	var right = $('#right');
+	var op = $('#op');
+	var launch = $('#launch');
+
+	launch.on("click", go);
+	function check(lval, rval)
+	{
+		if (isNaN(lval) || isNaN(rval) || rval < 0 || lval < 0)
+			return (false);
+		else
+			return (true);
+	};
+
+	function checkbyzero(rval, opval)
+	{
+		if (rval == 0 && (opval == '%' || opval == '/'))
+			return (false);
+		else
+			return (true);
+	};
+
+	function write(text)
+	{
+		alert(text);
+		console.log(text);
+	}
+
+	function go()
+	{
+		lval = parseInt(left.val());
+		rval = parseInt(right.val());
+		opval = op.val(); 
+		if (check(lval, rval) == true)
+		{
+			if (checkbyzero(rval, opval) == true)
+				write(eval(lval + opval + rval));
+			else
+				write('It’s over 9000!');
+		}
+		else
+			write('Error :(');
+	};
+	
+	</script>
+	</body>
+</html>

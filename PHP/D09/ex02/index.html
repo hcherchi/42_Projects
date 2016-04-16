@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+		<title>Todo</title>
+		<style>
+			body
+			{
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				padding: 5%;
+				text-align: center;
+			}
+			#ft_list
+			{
+				width: 300px;
+				display: flex;
+				flex-direction: column;
+				word-wrap: break-word;
+				justify-content: center;
+				margin: 10px;
+			}
+			#add, h1
+			{
+				margin: 10px;
+				color: rgb(0, 100, 100);
+				font-size: 3.5em;
+			}
+			.case
+			{
+				margin: 10px;
+				background-color: rgb(0, 100, 100);
+				border-radius: 10px;
+				padding: 5px;
+				color: white;
+			}
+		</style>
+	</head>
+	<body onload="getCookies()">
+		<h1 id="title" >To-do list</h1>
+		<input onclick="getTxt()" id="add" type="submit" value="New"/>
+		<div id="ft_list">
+		</div>
+		<script type="text/javascript" src="todo.js"></script>
+	</body>
+</html>

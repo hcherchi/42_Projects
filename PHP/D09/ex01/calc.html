@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+		<title>Calc</title>
+		<style>
+		body
+		{
+			display: flex;
+			justify-content: center;
+			padding: 10%;
+		}
+		#left, #right, #op, #launch
+		{
+			margin: 5px;
+		}
+		</style>
+	</head>
+	<body>
+	<input id="left" />
+	<select id="op">
+		<option value="+">+</option>
+		<option value="-">-</option>
+		<option value="*">*</option>
+		<option value="/">/</option>
+		<option value="%">%</option>
+	</select>
+	<input id="right" />
+	<input id="launch" type="submit" value="Try me!"/>
+	<script>
+	setInterval(function() 
+	{
+		alert('Please, use me...');
+	}, 30000);
+
+	var left = document.getElementById('left');
+	var right = document.getElementById('right');
+	var op = document.getElementById('op');
+	var launch = document.getElementById('launch');
+
+	var check = function()
+	{
+		if (isNaN(parseInt(left.value)) || isNaN(parseInt(right.value)) || parseInt(left.value) < 0 || parseInt(right.value) < 0)
+			return (false);
+		else
+			return (true);
+	};
+
+	var checkbyzero = function()
+	{
+		if (parseInt(right.value) == 0 && (op.value == '%' || op.value == '/'))
+			return (false);
+		else
+			return (true);
+	};
+
+	var write = function(text)
+	{
+		alert(text);
+		console.log(text);
+	}
+
+	var calc = function()
+	{
+		if (op.value == '+')
+			write(parseInt(left.value) + parseInt(right.value));
+		if (op.value == '-')
+			write(parseInt(left.value) - parseInt(right.value));
+		if (op.value == '*')
+			write(parseInt(left.value) * parseInt(right.value));
+		if (op.value == '/')
+			write(parseInt(left.value) / parseInt(right.value));
+		if (op.value == '%')
+			write(parseInt(left.value) % parseInt(right.value));
+	}
+
+	launch.onclick = function()
+	{
+		if (check() == true)
+		{
+			if (checkbyzero() == true)
+				calc();
+			else
+				write('It’s over 9000!');
+		}
+		else
+			write('Error :(');
+	};
+	
+	</script>
+	</body>
+</html>

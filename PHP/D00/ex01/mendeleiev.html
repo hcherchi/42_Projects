@@ -1,0 +1,811 @@
+<HTML>
+<HEAD>
+<TITLE>Tableau de Mendeleiev</TITLE>
+<STYLE>
+
+body{
+	background-image: url("bg.jpg")
+}
+.fat{
+	width: 100%;
+
+}
+.little{
+	width: 3%;
+	height: 10%;
+	border: 2spx solid black;
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#cdeb8e+0,a5c956+100;Green+3D+%232 */
+background: #cdeb8e; /* Old browsers */
+background: -moz-linear-gradient(top,  #cdeb8e 0%, #a5c956 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #cdeb8e 0%,#a5c956 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #cdeb8e 0%,#a5c956 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdeb8e', endColorstr='#a5c956',GradientType=0 ); /* IE6-9 */
+
+}
+td{
+	display: inline-block;
+}
+.symbole{
+	text-align: center;
+	font-size: 1vw;
+	display: block;
+}
+.numero{
+	font-size: 0.5vw;
+	text-align: left;
+	margin-left: 0px;
+	display: block;
+}
+.poid{
+	font-size: 0.5vw;
+	margin-right: 0px;
+	text-align: right;
+	display: block;
+}
+.empty{
+	height: 10%;
+}
+</STYLE>
+</HEAD>
+<BODY>
+<div id="liste">
+<table class="fat">
+<tr class="ligne">
+<td class="little">
+<div class="poid">1.0079</div>
+<div class="symbole">H</div>
+<div class="numero">1</div>
+</td>
+<td class="empty">
+</td>
+<td class="empty">
+</td>
+<td class="empty">
+</td>
+<td class="empty">
+</td>
+<td class="empty">
+</td>
+<td class="empty">
+</td>
+<td class="empty">
+</td>
+<td class="empty">
+</td>
+<td class="empty">
+</td>
+<td class="empty">
+</td>
+<td class="empty">
+</td>
+<td class="empty">
+</td>
+<td class="empty">
+</td>
+<td class="empty">
+</td>
+<td class="empty">
+</td>
+<td class="empty">
+</td>
+<td class="little">
+<div class="poid">4.0026</div>
+<div class="symbole">He</div>
+<div class="numero">2</div>
+</td>
+</tr>
+
+
+
+
+
+<tr>
+<td class="little">
+<div class="poid">6.941</div>
+<div class="symbole">Li</div>
+<div class="numero">3</div>
+</td>
+<td class="little">
+<div class="poid">9.0122</div>
+<div class="symbole">Be</div>
+<div class="numero">4</div>
+</td>
+<td class="empty">
+</td>
+<td class="empty">
+</td>
+<td class="empty">
+</td>
+<td class="empty">
+</td>
+<td class="empty">
+</td>
+<td class="empty">
+</td>
+<td class="empty">
+</td>
+<td class="empty">
+</td>
+<td class="empty">
+</td>
+<td class="empty">
+</td>
+<td class="little">
+<div class="poid">10.811</div>
+<div class="symbole">B</div>
+<div class="numero">5</div>
+</td>
+<td class="little">
+<div class="poid">12.011</div>
+<div class="symbole">C</div>
+<div class="numero">6</div>
+</td>
+<td class="little">
+<div class="poid">14.007</div>
+<div class="symbole">N</div>
+<div class="numero">7</div>
+</td>
+<td class="little">
+<div class="poid">15.999</div>
+<div class="symbole">O</div>
+<div class="numero">8</div>
+</td>
+<td class="little">
+<div class="poid">18.998</div>
+<div class="symbole">F</div>
+<div class="numero">9</div>
+</td>
+<td class="little">
+<div class="poid">20.180</div>
+<div class="symbole">Ne</div>
+<div class="numero">10</div>
+</td>
+</tr>
+
+
+
+
+
+
+
+<tr>
+<td class="little">
+<div class="poid">22.990</div>
+<div class="symbole">Na</div>
+<div class="numero">11</div>
+</td>
+<td class="little">
+<div class="poid">24.305</div>
+<div class="symbole">Mg</div>
+<div class="numero">12</div>
+</td>
+<td class="empty">
+</td>
+<td class="empty">
+</td>
+<td class="empty">
+</td>
+<td class="empty">
+</td>
+<td class="empty">
+</td>
+<td class="empty">
+</td>
+<td class="empty">
+</td>
+<td class="empty">
+</td>
+<td class="empty">
+</td>
+<td class="empty">
+</td>
+<td class="little">
+<div class="poid">26.982</div>
+<div class="symbole">Al</div>
+<div class="numero">13</div>
+</td>
+<td class="little">
+<div class="poid">28.086</div>
+<div class="symbole">Si</div>
+<div class="numero">14</div>
+</td>
+<td class="little">
+<div class="poid">30.974</div>
+<div class="symbole">div</div>
+<div class="numero">15</div>
+</td>
+<td class="little">
+<div class="poid">32.066</div>
+<div class="symbole">S</div>
+<div class="numero">16</div>
+</td>
+<td class="little">
+<div class="poid">35.453</div>
+<div class="symbole">Cl</div>
+<div class="numero">17</div>
+</td>
+<td class="little">
+<div class="poid">39.948</div>
+<div class="symbole">Ar</div>
+<div class="numero">18</div>
+</td>
+</tr>
+
+
+
+<tr>
+<td class="little">
+<div class="poid">39.0983</div>
+<div class="symbole">K</div>
+<div class="numero">19</div>
+</td>
+<td class="little">
+<div class="poid">40.078</div>
+<div class="symbole">Ca</div>
+<div class="numero">20</div>
+</td>
+<td class="little">
+<div class="poid">44.955910</div>
+<div class="symbole">Sc</div>
+<div class="numero">21</div>
+</td>
+<td class="little">
+<div class="poid">47.867</div>
+<div class="symbole">Ti</div>
+<div class="numero">22</div>
+</td>
+<td class="little">
+<div class="poid">50.9415</div>
+<div class="symbole">V</div>
+<div class="numero">23</div>
+</td>
+<td class="little">
+<div class="poid">51.9961</div>
+<div class="symbole">Cr</div>
+<div class="numero">24</div>
+</td>
+<td class="little">
+<div class="poid">54.938049</div>
+<div class="symbole">Mn</div>
+<div class="numero">25</div>
+</td>
+<td class="little">
+<div class="poid">55.8457</div>
+<div class="symbole">Fe</div>
+<div class="numero">26</div>
+</td>
+<td class="little">
+<div class="poid">58.933200</div>
+<div class="symbole">Co</div>
+<div class="numero">27</div>
+</td>
+<td class="little">
+<div class="poid">58.6934</div>
+<div class="symbole">Ni</div>
+<div class="numero">28</div>
+</td>
+<td class="little">
+<div class="poid">63.546</div>
+<div class="symbole">Cu</div>
+<div class="numero">29</div>
+</td>
+<td class="little">
+<div class="poid">65.409</div>
+<div class="symbole">Zn</div>
+<div class="numero">30</div>
+</td>
+<td class="little">
+<div class="poid">69.723</div>
+<div class="symbole">Ga</div>
+<div class="numero">31</div>
+</td>
+<td class="little">
+<div class="poid">72.64</div>
+<div class="symbole">Ge</div>
+<div class="numero">32</div>
+</td>
+<td class="little">
+<div class="poid">74.92160</div>
+<div class="symbole">As</div>
+<div class="numero">33</div>
+</td>
+<td class="little">
+<div class="poid">78.96</div>
+<div class="symbole">Se</div>
+<div class="numero">34</div>
+</td>
+<td class="little">
+<div class="poid">79.904</div>
+<div class="symbole">Br</div>
+<div class="numero">35</div>
+</td>
+<td class="little">
+<div class="poid">83.798</div>
+<div class="symbole">Kr</div>
+<div class="numero">36</div>
+</td>
+</tr>
+
+
+
+<tr>
+<td class="little">
+<div class="poid">854678</div>
+<div class="symbole">Rb</div>
+<div class="numero">37</div>
+</td>
+<td class="little">
+<div class="poid">87.62</div>
+<div class="symbole">Sr</div>
+<div class="numero">38</div>
+</td>
+<td class="little">
+<div class="poid">88.90585</div>
+<div class="symbole">Y</div>
+<div class="numero">39</div>
+</td>
+<td class="little">
+<div class="poid">91.224</div>
+<div class="symbole">Zr</div>
+<div class="numero">40</div>
+</td>
+<td class="little">
+<div class="poid">92.90638</div>
+<div class="symbole">Nb</div>
+<div class="numero">41</div>
+</td>
+<td class="little">
+<div class="poid">95.94</div>
+<div class="symbole">Mo</div>
+<div class="numero">42</div>
+</td>
+<td class="little">
+<div class="poid">98</div>
+<div class="symbole">Tc</div>
+<div class="numero">43</div>
+</td>
+<td class="little">
+<div class="poid">101.07</div>
+<div class="symbole">Ru</div>
+<div class="numero">44</div>
+</td>
+<td class="little">
+<div class="poid">102.90550</div>
+<div class="symbole">Rh</div>
+<div class="numero">45</div>
+</td>
+<td class="little">
+<div class="poid">106.42</div>
+<div class="symbole">Pd</div>
+<div class="numero">46</div>
+</td>
+<td class="little">
+<div class="poid">107.8682</div>
+<div class="symbole">Ag</div>
+<div class="numero">47</div>
+</td>
+<td class="little">
+<div class="poid">112.411</div>
+<div class="symbole">Cd</div>
+<div class="numero">48</div>
+</td>
+<td class="little">
+<div class="poid">114.818</div>
+<div class="symbole">In</div>
+<div class="numero">49</div>
+</td>
+<td class="little">
+<div class="poid">118.710</div>
+<div class="symbole">Sn</div>
+<div class="numero">50</div>
+</td>
+<td class="little">
+<div class="poid">121.760</div>
+<div class="symbole">Sb</div>
+<div class="numero">51</div>
+</td>
+<td class="little">
+<div class="poid">127.60</div>
+<div class="symbole">Te</div>
+<div class="numero">52</div>
+</td>
+<td class="little">
+<div class="poid">126.90447</div>
+<div class="symbole">I</div>
+<div class="numero">53</div>
+</td>
+<td class="little">
+<div class="poid">131.293</div>
+<div class="symbole">Xe</div>
+<div class="numero">54</div>
+</td>
+</tr>
+
+
+
+<tr>
+<td class="little">
+<div class="poid">132.90545</div>
+<div class="symbole">Cs</div>
+<div class="numero">55</div>
+</td>
+<td class="little">
+<div class="poid">137.327</div>
+<div class="symbole">Ba</div>
+<div class="numero">56</div>
+</td>
+<td class="little">
+<div class="poid"></div>
+<h1 class="symbole">*</h1>
+<div class="numero"></div>
+</td>
+<td class="little">
+<div class="poid">178.49</div>
+<div class="symbole">Hf</div>
+<div class="numero">72</div>
+</td>
+<td class="little">
+<div class="poid">180.9479</div>
+<div class="symbole">Ta</div>
+<div class="numero">73</div>
+</td>
+<td class="little">
+<div class="poid">183.84</div>
+<div class="symbole">W</div>
+<div class="numero">74</div>
+</td>
+<td class="little">
+<div class="poid">186.207</div>
+<div class="symbole">Re</div>
+<div class="numero">75</div>
+</td>
+<td class="little">
+<div class="poid">190.23</div>
+<div class="symbole">Os</div>
+<div class="numero">76</div>
+</td>
+<td class="little">
+<div class="poid">192.217</div>
+<div class="symbole">Ir</div>
+<div class="numero">77</div>
+</td>
+<td class="little">
+<div class="poid">195.078</div>
+<div class="symbole">Pt</div>
+<div class="numero">78</div>
+</td>
+<td class="little">
+<div class="poid">196.96655</div>
+<div class="symbole">Au</div>
+<div class="numero">79</div>
+</td>
+<td class="little">
+<div class="poid">200.59</div>
+<div class="symbole">Hg</div>
+<div class="numero">80</div>
+</td>
+<td class="little">
+<div class="poid">204.3833</div>
+<div class="symbole">Tl</div>
+<div class="numero">81</div>
+</td>
+<td class="little">
+<div class="poid">207.2</div>
+<div class="symbole">Pb</div>
+<div class="numero">82</div>
+</td>
+<td class="little">
+<div class="poid">208.98038</div>
+<div class="symbole">Bi</div>
+<div class="numero">83</div>
+</td>
+<td class="little">
+<div class="poid">209</div>
+<div class="symbole">Po</div>
+<div class="numero">84</div>
+</td>
+<td class="little">
+<div class="poid">210</div>
+<div class="symbole">At</div>
+<div class="numero">85</div>
+</td>
+<td class="little">
+<div class="poid">222</div>
+<div class="symbole">Rn</div>
+<div class="numero">86</div>
+</td>
+</tr>
+
+
+
+<tr>
+<td class="little">
+<div class="poid">223</div>
+<div class="symbole">Fr</div>
+<div class="numero">87</div>
+</td>
+<td class="little">
+<div class="poid">226</div>
+<div class="symbole">Ra</div>
+<div class="numero">88</div>
+</td>
+<td class="little">
+<div class="poid"></div>
+<h1 class="symbole">**</h1>
+<div class="numero"></div>
+</td>
+<td class="little">
+<div class="poid">261</div>
+<div class="symbole">Rf</div>
+<div class="numero">104</div>
+</td>
+<td class="little">
+<div class="poid">262</div>
+<div class="symbole">Db</div>
+<div class="numero">105</div>
+</td>
+<td class="little">
+<div class="poid">266</div>
+<div class="symbole">Sg</div>
+<div class="numero">106</div>
+</td>
+<td class="little">
+<div class="poid">264</div>
+<div class="symbole">Bh</div>
+<div class="numero">107</div>
+</td>
+<td class="little">
+<div class="poid">269</div>
+<div class="symbole">Hs</div>
+<div class="numero">108</div>
+</td>
+<td class="little">
+<div class="poid">268</div>
+<div class="symbole">Mt</div>
+<div class="numero">109</div>
+</td>
+<td class="little">
+<div class="poid">271</div>
+<div class="symbole">Ds</div>
+<div class="numero">110</div>
+</td>
+<td class="little">
+<div class="poid">272</div>
+<div class="symbole">Rg</div>
+<div class="numero">111</div>
+</td>
+<td class="little">
+<div class="poid">285</div>
+<div class="symbole">Uub</div>
+<div class="numero">112</div>
+</td>
+<td class="little">
+<div class="poid">284</div>
+<div class="symbole">Uut</div>
+<div class="numero">113</div>
+</td>
+<td class="little">
+<div class="poid">289</div>
+<div class="symbole">Fl</div>
+<div class="numero">114</div>
+</td>
+<td class="little">
+<div class="poid">288</div>
+<div class="symbole">Uup</div>
+<div class="numero">115</div>
+</td>
+<td class="little">
+<div class="poid">292</div>
+<div class="symbole">Lv</div>
+<div class="numero">116</div>
+</td>
+<td class="little">
+<div class="poid">292</div>
+<div class="symbole">Uus</div>
+<div class="numero">117</div>
+</td>
+<td class="little">
+<div class="poid">294</div>
+<div class="symbole">Uuo</div>
+<div class="numero">118</div>
+</td>
+</tr>
+
+<tr>
+<td class=empty>
+</td>
+</tr>
+<tr>
+<td class="empty">
+<div class="poid"></div>
+<div class="symbole"></div>
+<div class="numero"></div>
+</td>
+<td class="empty">
+<div class="poid"></div>
+<div class="symbole"></div>
+<div class="numero"></div>
+</td>
+<td class="little">
+<div class="poid"></div>
+<h1 class="symbole">*</h1>
+<div class="numero"></div>
+</td>
+<td class="little">
+<div class="poid">138.90547</div>
+<div class="symbole">La</div>
+<div class="numero">57</div>
+</td>
+<td class="little">
+<div class="poid">140.116</div>
+<div class="symbole">Ce</div>
+<div class="numero">58</div>
+</td>
+<td class="little">
+<div class="poid">140.90765</div>
+<div class="symbole">Pr</div>
+<div class="numero">59</div>
+</td>
+<td class="little">
+<div class="poid">144.242</div>
+<div class="symbole">Nd</div>
+<div class="numero">60</div>
+</td>
+<td class="little">
+<div class="poid">144.9127</div>
+<div class="symbole">Pm</div>
+<div class="numero">61</div>
+</td>
+<td class="little">
+<div class="poid">150.36</div>
+<div class="symbole">Sm</div>
+<div class="numero">62</div>
+</td>
+<td class="little">
+<div class="poid">151.964</div>
+<div class="symbole">Eu</div>
+<div class="numero">63</div>
+</td>
+<td class="little">
+<div class="poid">157.25</div>
+<div class="symbole">Gd</div>
+<div class="numero">64</div>
+</td>
+<td class="little">
+<div class="poid">158.92535</div>
+<div class="symbole">Tb</div>
+<div class="numero">65</div>
+</td>
+<td class="little">
+<div class="poid">162.500</div>
+<div class="symbole">Dy</div>
+<div class="numero">66</div>
+</td>
+<td class="little">
+<div class="poid">164.93032</div>
+<div class="symbole">Ho</div>
+<div class="numero">67</div>
+</td>
+<td class="little">
+<div class="poid">167.259</div>
+<div class="symbole">Er</div>
+<div class="numero">68</div>
+</td>
+<td class="little">
+<div class="poid">168.93421</div>
+<div class="symbole">Tm</div>
+<div class="numero">69</div>
+</td>
+<td class="little">
+<div class="poid">173.04</div>
+<div class="symbole">Yb</div>
+<div class="numero">70</div>
+</td>
+<td class="little">
+<div class="poid">174.967</div>
+<div class="symbole">Lu</div>
+<div class="numero">71</div>
+</td>
+</tr>
+
+
+
+
+
+<tr>
+<td class="empty">
+<div class="poid"></div>
+<div class="symbole"></div>
+<div class="numero"></div>
+</td>
+<td class="empty">
+<div class="poid"></div>
+<div class="symbole"></div>
+<div class="numero"></div>
+</td>
+<td class="little">
+<div class="poid"></div>
+<h1 class="symbole">**</h1>
+<div class="numero"></div>
+</td>
+<td class="little">
+<div class="poid">227.0277</div>
+<div class="symbole">Ac</div>
+<div class="numero">89</div>
+</td>
+<td class="little">
+<div class="poid">232.03806</div>
+<div class="symbole">Th</div>
+<div class="numero">90</div>
+</td>
+<td class="little">
+<div class="poid">231.03588</div>
+<div class="symbole">Pa</div>
+<div class="numero">91</div>
+</td>
+<td class="little">
+<div class="poid">238.02891</div>
+<div class="symbole">U</div>
+<div class="numero">92</div>
+</td>
+<td class="little">
+<div class="poid">237.0482</div>
+<div class="symbole">Np</div>
+<div class="numero">93</div>
+</td>
+<td class="little">
+<div class="poid">244.0642</div>
+<div class="symbole">Pu</div>
+<div class="numero">94</div>
+</td>
+<td class="little">
+<div class="poid">243.0614</div>
+<div class="symbole">Am</div>
+<div class="numero">95</div>
+</td>
+<td class="little">
+<div class="poid">247.0703</div>
+<div class="symbole">Cm</div>
+<div class="numero">96</div>
+</td>
+<td class="little">
+<div class="poid">247.0703</div>
+<div class="symbole">Bk</div>
+<div class="numero">97</div>
+</td>
+<td class="little">
+<div class="poid">251.0796</div>
+<div class="symbole">Cf</div>
+<div class="numero">98</div>
+</td>
+<td class="little">
+<div class="poid">252.0830</div>
+<div class="symbole">Es</div>
+<div class="numero">99</div>
+</td>
+<td class="little">
+<div class="poid">257.0951</div>
+<div class="symbole">Fm</div>
+<div class="numero">100</div>
+</td>
+<td class="little">
+<div class="poid">258.0984</div>
+<div class="symbole">Md</div>
+<div class="numero">101</div>
+</td>
+<td class="little">
+<div class="poid">259.1011</div>
+<div class="symbole">No</div>
+<div class="numero">102</div>
+</td>
+<td class="little">
+<div class="poid">262.110</div>
+<div class="symbole">Lr</div>
+<div class="numero">103</div>
+</td>
+</tr>
+</div>
+
+</table>
+</BODY>
+</HTML>

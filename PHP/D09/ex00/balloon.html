@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Balloon</title>
+		<style>
+			body
+			{
+				display: flex;
+				justify-content: center;
+				padding: 10%;
+			}
+			#balloon
+			{
+				background-color: red;
+				height: 200px;
+				width: 200px;
+				border-radius: 100px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="balloon">
+		</div>
+		<script>
+			var size = 200;
+			var colors = ['red', 'green', 'blue'];
+			var curColor = 0;
+			var balloon = document.getElementById('balloon');
+
+			var changeColor = function()
+			{
+				if (curColor == 3)
+					curColor = 0;
+				else if (curColor == -1)
+					curColor = 2;
+				balloon.style.backgroundColor = colors[curColor];
+			}
+			var changeSize = function()
+			{
+				if (size > 420 || size < 200)
+				{
+					size = 200;
+				}
+				balloon.style.width = size + 'px';
+				balloon.style.height = size + 'px';
+				balloon.style.borderRadius =  size / 2 + 'px';
+			}
+			balloon.onclick = function()
+			{
+				size += 10;
+				curColor++;
+				changeColor();
+				changeSize();
+			};
+			balloon.onmouseout = function()
+			{
+				size -= 5;
+				curColor--;
+				changeColor();
+				changeSize();
+			};
+		</script>
+	</body>
+</html>
