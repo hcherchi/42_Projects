@@ -6,7 +6,7 @@
 #    By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/04 18:24:56 by hcherchi          #+#    #+#              #
-#    Updated: 2016/03/31 19:07:54 by fhenri           ###   ########.fr        #
+#    Updated: 2016/04/18 15:50:17 by hcherchi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,11 @@ OBJ_DIR = obj
 SRCS = src/main.c src/parse_tools.c src/parser.c src/draw.c src/inter.c src/normal.c src/vector.c src/color.c src/error.c src/init.c src/vector2.c src/illuminate.c src/key.c src/clean.c src/parser2.c src/rays.c src/inter2.c src/texture.c src/menu.c src/launch.c
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-IFLAGS = -I $(INC_DIR) -I libft/includes -I ~/minilibx_macos
+IFLAGS = -I $(INC_DIR) -I libft/includes
 FLAGS = -Wall -Werror -Wextra
 
 CC = gcc $(FLAGS)
-LIBFLAGS = -Llibft -L ~/minilibx_macos -lft -lmlx -framework OpenGL -framework AppKit
+LIBFLAGS = -Llibft -lft -lmlx -framework OpenGL -framework AppKit
 RM = /bin/rm -f
 
 all: $(LIB_NAME) $(NAME)
