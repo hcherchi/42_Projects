@@ -45,3 +45,13 @@ void	init_object(t_object *object)
     object->transp = 0;
     object->next = NULL;
 }
+
+void	init_camera(t_tool *tools)
+{
+	tools->rt->lumamb = 0.1;
+    tools->rt->x_res = 1000;
+    tools->rt->y_res = 800;
+    tools->rt->sky = NULL;
+    tools->rt->vect = NULL;
+    tools->rt->pos = NULL;
+}

@@ -1,14 +1,14 @@
-# **************************************************************************** #
+#******************************************************************************#
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: bgantelm <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2015/12/04 18:24:56 by hcherchi          #+#    #+#              #
-#    Updated: 2016/04/18 15:50:17 by hcherchi         ###   ########.fr        #
+#    Created: 2016/04/18 17:05:54 by bgantelm          #+#    #+#              #
+#    Updated: 2016/04/18 17:06:28 by bgantelm         ###   ########.fr        #
 #                                                                              #
-# **************************************************************************** #
+#******************************************************************************#
 
 NAME = RTv1
 LIB_NAME = libft/libft.a
@@ -16,10 +16,10 @@ INC_DIR = includes
 SRC_DIR = src
 OBJ_DIR = obj
 
-SRCS = src/main.c src/parse_tools.c src/parser.c src/draw.c src/inter.c src/normal.c src/vector.c src/color.c src/error.c src/init.c src/vector2.c src/illuminate.c src/key.c src/clean.c src/parser2.c src/rays.c src/inter2.c src/texture.c src/menu.c src/launch.c
+SRCS = src/main.c src/parse_tools.c src/parser.c src/draw.c src/inter.c src/normal.c src/vector.c src/color.c src/error.c src/init.c src/vector2.c src/illuminate.c src/key.c src/clean.c src/parser2.c src/rays.c src/inter2.c src/texture.c src/menu.c src/launch.c src/parser3.c
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-IFLAGS = -I $(INC_DIR) -I libft/includes
+IFLAGS = -I $(INC_DIR) -I libft/includes -I ~/mlx
 FLAGS = -Wall -Werror -Wextra
 
 CC = gcc $(FLAGS)
