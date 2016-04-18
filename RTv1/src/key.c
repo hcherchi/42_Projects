@@ -8,7 +8,6 @@ int		rt_event(int k, t_tool *t)
         t->rt->screenshot = 1;
         run_through(t);
         t->rt->screenshot = 0;
-		ft_putendl("the screen is finsh");
         free(t->rt->image->screen);
         t->rt->image->screen = NULL;
         
@@ -51,9 +50,9 @@ void	start_menu(int keycode, t_tool *t)
 
 void	scene_menu(int keycode, t_tool *t)
 {
-    if (keycode == 1)
+    if (keycode == 18)
         launch("scenes/new", t);
-    if (keycode == 3)
+    if (keycode == 19)
         print_build_menu(t);
 }
 
