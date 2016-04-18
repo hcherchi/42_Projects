@@ -41,6 +41,8 @@ void	parse_camera(t_tool *tools, int fd)
         }
 		else if (ft_strstr(line, "skybox:"))
 		{
+            
+            
 			if (ft_tablen(split) != 2)
 				ft_error();
 			tools->rt->sky = fill_texture(split[1], tools);

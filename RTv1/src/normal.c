@@ -4,7 +4,6 @@
 t_ray	*get_normal(t_object *object, t_ray *ray)
 {
 	t_ray	*impact;
-	double	k;
 
 	impact = malloc(sizeof(t_ray));
 	impact->o = vectoradd(ray->o, vectorscale(object->dist, ray->d));
@@ -13,15 +12,11 @@ t_ray	*get_normal(t_object *object, t_ray *ray)
 	else if (object->type == PLAN)
 		impact->d = vectorcopy(object->d);
 	else if (object->type == CONE)
-	{
-		k = pow(object->rad / object->h, 2);
-		impact->d = malloc(sizeof(t_pos));
-		impact->d->x = impact->o->x - object->o->x;
-		impact->d->y = k * object->o->y - k * impact->o->y;
-		impact->d->z = impact->o->z - object->o->z;
-	}
+        get_cone_normal(impact, object);
 	else if (object->type == CYL)
 		get_cyl_normal(impact, object);
+    else if (object->type == PARA)
+        get_para_normal(impact, object);
 	vectornorm(impact->d);
 	return (impact);
 }
@@ -44,4 +39,23 @@ void	get_cyl_normal(t_ray *impact, t_object *object)
 	* (impact->o->z - object->o->z) + object->d->y * (impact->o->y
 	- object->o->y))) / (pow(object->d->z, 2) + pow(object->d->y, 2)
 	+ pow(object->d->x, 2));
+}
+
+void    get_cone_normal(t_ray *impact, t_object *object)
+{
+    double	k;
+    
+    k = pow(object->rad / object->h, 2);
+    impact->d = malloc(sizeof(t_pos));
+    impact->d->x = impact->o->x - object->o->x;
+    impact->d->y = k * object->o->y - k * impact->o->y;
+    impact->d->z = impact->o->z - object->o->z;
+}
+
+void    get_para_normal(t_ray *impact, t_object *object) // HAHAHAHAHA PARANORMAL HAHAHA
+{
+    impact->d = malloc(sizeof(t_pos));
+    impact->d->x = impact->o->x - object->o->x;
+    impact->d->y = -object->h;
+    impact->d->z = impact->o->z - object->o->z;
 }

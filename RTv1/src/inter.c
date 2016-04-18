@@ -1,5 +1,5 @@
 #include <rtv1.h>
-
+#include <stdio.h>
 void	fill_dist(t_object *l_objects, t_ray *ray)
 {
 	t_object	*tmp;
@@ -15,6 +15,8 @@ void	fill_dist(t_object *l_objects, t_ray *ray)
 			tmp->dist = intersection_plan(tmp->d, tmp->h, ray->o, ray->d);
 		else if (tmp->type == CYL)
 			tmp->dist = intersection_cyl(tmp, ray);
+        else if (tmp->type == PARA)
+            tmp->dist = intersection_para(tmp, ray);
 		tmp = tmp->next;
 	}
 }
@@ -55,20 +57,17 @@ double	intersection_sphere(t_object *sphere, t_ray *ray)
 	return (param.t0);
 }
 
-// A REVOIR POUR LA ROTATION
-double	intersection_cone(t_object *cone, t_ray *ray)
+double	intersection_para(t_object *para, t_ray *ray)
 {
-	double		k;
 	t_equation	param;
-
-	k = pow(cone->rad / cone->h, 2);
-	param.a = pow(ray->d->x, 2) + pow(ray->d->z, 2) - pow(ray->d->y, 2) * k;
-	param.b = 2 * (ray->d->x * (ray->o->x - cone->o->x)
-			+ ray->d->z * (ray->o->z - cone->o->z)
-			- ray->d->y * (ray->o->y - cone->o->y) * k);
-	param.c = pow((ray->o->x - cone->o->x), 2)
-		+ pow((ray->o->z - cone->o->z), 2)
-		- pow((ray->o->y - cone->o->y), 2) * k;
+    
+	param.a = pow(ray->d->x, 2) + pow(ray->d->z, 2);
+	param.b = 2 * (ray->d->x * (ray->o->x - para->o->x)
+			+ ray->d->z * (ray->o->z - para->o->z)
+			- para->h * ray->d->y);
+	param.c = pow((ray->o->x - para->o->x), 2)
+		+ pow((ray->o->z - para->o->z), 2)
+		- 2 * para->h * (ray->o->y - para->o->y);
 	param.discr = param.b * param.b - 4 * param.a * param.c;
 	if (param.discr < E)
 		return (-1);
@@ -109,4 +108,29 @@ double	intersection_cyl(t_object *cyl, t_ray *ray)
 	if (param.t0 < E)
 		return (-1);
 	return (param.t0);
+}
+
+double	intersection_cone(t_object *cone, t_ray *ray)
+{
+    double		k;
+    t_equation	param;
+    
+    k = pow(cone->rad / cone->h, 2);
+    param.a = pow(ray->d->x, 2) + pow(ray->d->z, 2) - pow(ray->d->y, 2) * k;
+    param.b = 2 * (ray->d->x * (ray->o->x - cone->o->x)
+                   + ray->d->z * (ray->o->z - cone->o->z)
+                   - ray->d->y * (ray->o->y - cone->o->y) * k);
+    param.c = pow((ray->o->x - cone->o->x), 2)
+    + pow((ray->o->z - cone->o->z), 2)
+    - pow((ray->o->y - cone->o->y), 2) * k;
+    param.discr = param.b * param.b - 4 * param.a * param.c;
+    if (param.discr < E)
+        return (-1);
+    param.t0 = (-param.b + sqrtf(param.discr)) / (2 * param.a);
+    param.t1 = (-param.b - sqrtf(param.discr)) / (2 * param.a);
+    if (param.t0 > param.t1)
+        param.t0 = param.t1;
+    if (param.t0 < E)
+        return (-1);
+    return (param.t0);
 }

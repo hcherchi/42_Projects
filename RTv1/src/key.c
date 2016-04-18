@@ -17,15 +17,15 @@ int		rt_event(int k, t_tool *t)
         if (k == 82)
             t->rt->cam = t->rt->middlecams[5];
         else if (k == 84)
-            t->rt->cam = t->rt->upcams[0];
+            t->rt->cam = t->rt->middlecams[0];
         else if (k == 86)
-            t->rt->cam = t->rt->upcams[1];
+            t->rt->cam = t->rt->middlecams[1];
         else if (k == 87)
-            t->rt->cam = t->rt->upcams[4];
+            t->rt->cam = t->rt->middlecams[4];
         else if (k == 88)
-            t->rt->cam = t->rt->upcams[2];
+            t->rt->cam = t->rt->middlecams[2];
         else if (k == 91)
-            t->rt->cam = t->rt->upcams[3];
+            t->rt->cam = t->rt->middlecams[3];
         else if (k == 126 && t->rt->cam->nb != 5)
             t->rt->cam = t->rt->upcams[t->rt->cam->nb];
         else if (k == 125 && t->rt->cam->nb != 5)

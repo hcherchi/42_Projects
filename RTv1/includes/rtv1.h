@@ -22,6 +22,7 @@
 # define CYL 1
 # define CONE 2
 # define PLAN 3
+# define PARA 4
 # define SPOT 4
 # define SUN  5
 # define LIGHTPLAN 6
@@ -165,6 +166,8 @@ double				intersection_plan(t_pos *dir, double h, t_pos *oray, t_pos *dray);
 double				intersection_sphere(t_object *sphere, t_ray *ray);
 double				intersection_cone(t_object *cone, t_ray *ray);
 double				intersection_cyl(t_object *cyl, t_ray *ray);
+double	intersection_para(t_object *para, t_ray *ray);
+void    get_para_normal(t_ray *impact, t_object *object); // HAHAHAHAHA PARANORMAL HAHAHA
 
 // DRAW
 void				draw(t_tool *t, int x, int y);
@@ -182,6 +185,7 @@ t_color             *extract_color(t_tool *t, t_image *texture, int x, int y);
 // NORMAL
 t_ray				*get_normal(t_object *object, t_ray *ray);
 void				get_cyl_normal(t_ray *impact, t_object *object);
+void    get_cone_normal(t_ray *impact, t_object *object);
 
 // LUMINOSITY
 double				get_kspec(t_ray *lightray, t_ray *impact, double intens);

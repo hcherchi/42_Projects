@@ -23,7 +23,6 @@ void	init_param(t_tool *t)
 			&t->rt->image->size_line, &t->rt->image->endian);
 	t->rt->image->texture = NULL;
 	t->rt->image->screen = NULL;
-	t->rt->sky = NULL; // SKY A RAJOUTER A PARTIR DU PARSER
 }
 
 void    init_cams(t_tool *t)

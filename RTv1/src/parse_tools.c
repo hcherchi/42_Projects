@@ -25,6 +25,8 @@ int		object_type(char **split)
 		return (2);
 	else if (!ft_strcmp(split[1], "PLAN"))
 		return (3);
+    else if (!ft_strcmp(split[1], "PARA"))
+        return (4);
 	else
 		ft_error();
 	return (0);
