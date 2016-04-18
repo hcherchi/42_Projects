@@ -33,7 +33,7 @@ int		rt_event(int k, t_tool *t)
         mlx_clear_window(t->mlx_ptr, t->rt->mlx_win);
         run_through(t);
     }
-    if (k == 51)
+    if (k == 53)
         mlx_destroy_window(t->mlx_ptr, t->rt->mlx_win);
     return (0);
 }
@@ -50,9 +50,9 @@ void	start_menu(int keycode, t_tool *t)
 
 void	scene_menu(int keycode, t_tool *t)
 {
-    if (keycode == 1)
+    if (keycode == 18)
         launch("scenes/new", t);
-    if (keycode == 3)
+    if (keycode == 19)
         print_build_menu(t);
 }
 
@@ -68,5 +68,5 @@ int		menu_event(int keycode, t_tool *t)
         scene_menu(keycode, t);
     else if (t->m->menu == 3 && keycode == 36)
         launch("scenes/my_file", t);
-    return (0);
+	return (0);
 }
