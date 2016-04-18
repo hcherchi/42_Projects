@@ -8,6 +8,7 @@ int		rt_event(int k, t_tool *t)
         t->rt->screenshot = 1;
         run_through(t);
         t->rt->screenshot = 0;
+		ft_putendl("the screen is finsh");
         free(t->rt->image->screen);
         t->rt->image->screen = NULL;
         
@@ -68,5 +69,5 @@ int		menu_event(int keycode, t_tool *t)
         scene_menu(keycode, t);
     else if (t->m->menu == 3 && keycode == 36)
         launch("scenes/my_file", t);
-    return (0);
+	return (0);
 }
