@@ -73,8 +73,8 @@ t_color     *get_sky_color(t_ray *ray, t_tool *t)
     impact = malloc(sizeof(t_pos));
     impact = vectoradd(ray->o, vectorscale(100, ray->d));
     vectornorm(impact);
-    x = (0.5 + (atan2(impact->z, impact->x) / (2 * M_PI))) * t->rt->sky->width;
-    y = (0.5 - asin(impact->y) / M_PI) * t->rt->sky->height;
+    x = (0.5 + (atan2(impact->z, impact->x) / (2 * M_PI))) * t->rt->sky->width - 1;
+    y = (0.5 - asin(impact->y) / M_PI) * t->rt->sky->height - 1;
     free(impact);
     return (extract_color(t, t->rt->sky, x, y));
 }

@@ -1,7 +1,7 @@
 camera
 {
 	lumamb: 0.2
-	res: 1000 1000
+	res: 1000 800
 	vect: 0 0 1
 	pos: 0 0 -10
 	skybox: textures/sky1.xpm
@@ -17,9 +17,9 @@ light
 
 object
 {
-	type: PARA
+	type: SPHERE
 	pos: 0 0 0
 	color: 0 200 200
-	h: -3
 	rayon: 1
+	texture: textures/jupiter.xpm
 }
