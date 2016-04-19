@@ -4,7 +4,6 @@ camera
 	res: 1000 800
 	vect: 0 0 1
 	pos: 0 0 -10
-	skybox: textures/sky1.xpm
 }
 
 light

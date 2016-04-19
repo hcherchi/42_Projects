@@ -40,9 +40,9 @@ void    parse_light2(char *line, t_light *light, char **split)
     else if (ft_strstr(line, "lumdiff:"))
     {
         if (ft_tablen(split) != 2)
-            ft_error();
+            ft_error(7);
         if (str_digit(split[1]))
-            ft_error();
+            ft_error(2);
         light->lumdiff = ft_atof(split[1]);
     }
     else
@@ -54,21 +54,21 @@ void    parse_light3(char *line, t_light *light, char **split)
     if (ft_strstr(line, "h:"))
     {
         if (ft_tablen(split) != 2)
-            ft_error();
+            ft_error(7);
         if (str_digit(split[1]))
-            ft_error();
+            ft_error(2);
         light->h = ft_atof(split[1]);
     }
     else if (ft_strstr(line, "angle:"))
     {
         if (ft_tablen(split) != 2)
-            ft_error();
+            ft_error(7);
         if (str_digit(split[1]))
-            ft_error();
+            ft_error(2);
         light->angle = ft_atof(split[1]);
     }
     else if (ft_strstr(line, "type:"))
         light->type = light_type(split);
     else if (ft_strcmp(line, "{"))
-        ft_error();
+        ft_error(3);
 }

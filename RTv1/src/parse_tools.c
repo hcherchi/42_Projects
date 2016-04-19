@@ -8,7 +8,7 @@ t_image     *fill_texture(char *file, t_tool *t)
     texture->texture = ft_strdup(file);
     texture->mlx_img = mlx_xpm_file_to_image(t->mlx_ptr, texture->texture, &texture->width, &texture->height);
     if (texture->mlx_img == NULL)
-        ft_error();
+        ft_error(11);
     texture->data = mlx_get_data_addr(texture->mlx_img, &texture->bpp, &texture->size_line, &texture->endian);
     return (texture);
 }
@@ -16,7 +16,7 @@ t_image     *fill_texture(char *file, t_tool *t)
 int		object_type(char **split)
 {
 	if (ft_tablen(split) != 2)
-		ft_error();
+		ft_error(7);
 	if (!ft_strcmp(split[1], "SPHERE"))
 		return (0);
 	else if (!ft_strcmp(split[1], "CYL"))
@@ -28,14 +28,14 @@ int		object_type(char **split)
     else if (!ft_strcmp(split[1], "PARA"))
         return (4);
 	else
-		ft_error();
+		ft_error(5);
 	return (0);
 }
 
 int		light_type(char **split)
 {
     if (ft_tablen(split) != 2)
-        ft_error();
+        ft_error(7);
     if (!ft_strcmp(split[1], "SUN"))
         return (SUN);
     else if (!ft_strcmp(split[1], "LIGHTPLAN"))
@@ -43,7 +43,7 @@ int		light_type(char **split)
     else if (!ft_strcmp(split[1], "SPOT"))
         return (SPOT);
     else
-        ft_error();
+        ft_error(12);
     return (0);
 }
 
@@ -53,10 +53,10 @@ t_color	*fill_color(char **split)
 
 	color = malloc(sizeof(t_color));
 	if (ft_tablen(split) != 4)
-		ft_error();
+		ft_error(7);
 	if (str_digit(split[1]) || str_digit(split[2])
 		|| str_digit(split[3]))
-		ft_error();
+		ft_error(2);
 	color->r = ft_atof(split[1]);
 	color->g = ft_atof(split[2]);
 	color->b = ft_atof(split[3]);
@@ -69,10 +69,10 @@ t_pos	*fill_pos(char **split)
 
 	pos = malloc(sizeof(t_pos));
 	if (ft_tablen(split) != 4)
-		ft_error();
+		ft_error(7);
 	if (str_digit(split[1]) || str_digit(split[2])
 		|| str_digit(split[3]))
-		ft_error();
+		ft_error(2);
 	pos->x = ft_atof(split[1]);
 	pos->y = ft_atof(split[2]);
 	pos->z = ft_atof(split[3]);

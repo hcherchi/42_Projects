@@ -3,6 +3,8 @@
 
 void    launch(char *scene, t_tool *tools)
 {
+    if (tools->rt)
+        mlx_destroy_window(tools->mlx_ptr, tools->rt->mlx_win);
 	parser(open(scene, O_RDONLY), tools);
 	init_param(tools);
 	init_cams(tools);

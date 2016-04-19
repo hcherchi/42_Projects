@@ -16,11 +16,11 @@ void	parse_camera(t_tool *tools, int fd)
 		else if (ft_strstr(line, "res:"))
 		{
 			if (ft_tablen(split) != 3)
-				ft_error();
+				ft_error(7);
 			if (str_digit(split[1]) || str_digit(split[2]))
-				ft_error();
+				ft_error(2);
 			if (ft_atoi(split[1]) < 0 || ft_atoi(split[2]) < 0)
-				ft_error();
+				ft_error(8);
 			tools->rt->x_res = ft_atoi(split[1]);
 			tools->rt->y_res = ft_atoi(split[2]);
 		}
@@ -36,7 +36,7 @@ void    parse_camera2(char *line, t_tool *tools, char **split)
     if (ft_strstr(line, "lumamb:"))
     {
         if (ft_tablen(split) != 2)
-            ft_error();
+            ft_error(7);
         tools->rt->lumamb = ft_atof(split[1]);
     }
     else if (ft_strstr(line, "vect:"))
@@ -46,11 +46,11 @@ void    parse_camera2(char *line, t_tool *tools, char **split)
     else if (ft_strstr(line, "skybox:"))
     {
         if (ft_tablen(split) != 2)
-            ft_error();
+            ft_error(7);
         tools->rt->sky = fill_texture(split[1], tools);
     }
     else if (ft_strcmp(line, "{"))
-        ft_error();
+        ft_error(1);
 }
 
 
@@ -85,7 +85,7 @@ void	parser(int fd, t_tool *tools)
         }
 	}
 	if (ret == -1)
-		ft_error();
+		ft_error(10);
 	if (c != 1)
-		ft_error();
+		ft_error(6);
 }

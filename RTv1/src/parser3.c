@@ -65,7 +65,7 @@ void    parse_object3(char *line, t_object *object, char **split, t_tool *tools)
     if (ft_strstr(line, "texture:"))
     {
         if (ft_tablen(split) != 2)
-            ft_error();
+            ft_error(7);
         object->texture = fill_texture(split[1], tools);
     }
     else if (ft_strstr(line, "pos:"))
@@ -92,21 +92,21 @@ void    parse_object4(char *line, t_object *object, char **split)
     if (ft_strstr(line, "h:"))
     {
         if (ft_tablen(split) != 2)
-            ft_error();
+            ft_error(7);
         if (str_digit(split[1]))
-            ft_error();
+            ft_error(2);
         object->h = ft_atof(split[1]);
     }
     else if (ft_strstr(line, "shiny:"))
     {
         if (ft_tablen(split) != 2)
-            ft_error();
+            ft_error(7);
         if (str_digit(split[1]))
-            ft_error();
+            ft_error(2);
         object->shiny = ft_atof(split[1]);
     }
     else if (ft_strcmp(line, "{"))
-        ft_error();
+        ft_error(4);
 }
 
 

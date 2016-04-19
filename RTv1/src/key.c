@@ -34,7 +34,10 @@ int		rt_event(int k, t_tool *t)
         run_through(t);
     }
     if (k == 53)
+    {
         mlx_destroy_window(t->mlx_ptr, t->rt->mlx_win);
+        clean_rt(t->rt);
+    }
     return (0);
 }
 
