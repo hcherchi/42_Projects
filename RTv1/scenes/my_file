@@ -3,7 +3,7 @@ camera
 	lumamb: 0.2
 	res: 1000 800
 	vect: 0 0 1
-	pos: 0 0
+	pos: 0 0 0
 }
 
 light

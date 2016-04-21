@@ -52,7 +52,7 @@ void    get_cone_normal(t_ray *impact, t_object *object)
     impact->d->z = impact->o->z - object->o->z;
 }
 
-void    get_para_normal(t_ray *impact, t_object *object) // HAHAHAHAHA PARANORMAL HAHAHA
+void    get_para_normal(t_ray *impact, t_object *object) // HAHAHAHAHA PARANORMAL HAHAHA #padrol
 {
     impact->d = malloc(sizeof(t_pos));
     impact->d->x = impact->o->x - object->o->x;

@@ -263,6 +263,7 @@ void                clean_menu(t_menu *m);
 void                clean_rt(t_rt *rt);
 
 // MENU
+void                init_menu(t_tool *tools);
 void                main_menu(int i);
 void                print_scene_menu(t_tool *t);
 void                print_build_menu(t_tool *t);

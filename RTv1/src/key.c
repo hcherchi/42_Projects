@@ -2,6 +2,7 @@
 
 int		rt_event(int k, t_tool *t)
 {
+    ft_putendl("mdr les poto");
     if (k == 35)
     {
         t->rt->image->screen = malloc(sizeof(unsigned char) * (3 * t->rt->x_res * t->rt->y_res));
@@ -30,13 +31,16 @@ int		rt_event(int k, t_tool *t)
             t->rt->cam = t->rt->upcams[t->rt->cam->nb];
         else if (k == 125 && t->rt->cam->nb != 5)
             t->rt->cam = t->rt->middlecams[t->rt->cam->nb];
-        mlx_clear_window(t->mlx_ptr, t->rt->mlx_win);
+        mlx_clear_window(t->mlx_ptr, t->m->mlx_win);
         run_through(t);
     }
-    if (k == 53)
+    if (k == 51)
     {
-        mlx_destroy_window(t->mlx_ptr, t->rt->mlx_win);
-        //clean_rt(t->rt);
+        mlx_clear_window(t->mlx_ptr, t->m->mlx_win);
+        mlx_destroy_window(t->mlx_ptr, t->m->mlx_win);
+        init_menu(t);
+        t->m->menu = 1;
+        print_start_menu(t);
     }
     return (0);
 }
@@ -72,10 +76,8 @@ int		menu_event(int keycode, t_tool *t)
         scene_menu(keycode, t);
     else if (t->m->menu == 3 && keycode == 36)
         launch("scenes/my_file", t);
-    if (keycode == 115)
-    {
-//        t->m->menu = 1;
-        print_start_menu(t);
-    }
+    else if (t->m->menu == 4)
+        rt_event(keycode, t);
+    ft_putnbr(t->m->menu);
 	return (0);
 }
