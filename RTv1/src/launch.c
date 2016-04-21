@@ -3,12 +3,23 @@
 
 void    launch(char *scene, t_tool *tools)
 {
-    if (tools->rt)
-        mlx_destroy_window(tools->mlx_ptr, tools->rt->mlx_win);
-	parser(open(scene, O_RDONLY), tools);
-	init_param(tools);
-	init_cams(tools);
-	run_through(tools);
+	if (tools->error == 0)
+	{
+    	if (tools->rt)
+       		mlx_destroy_window(tools->mlx_ptr, tools->rt->mlx_win);
+		parser(open(scene, O_RDONLY), tools);
+		init_param(tools);
+		init_cams(tools);
+		run_through(tools);
+	}
+	else
+	{
+		mlx_clear_window(tools->mlx_ptr, tools->m->mlx_win);
+    	mlx_put_image_to_window(tools->mlx_ptr, tools->m->mlx_win, tools->m->bg->mlx_img, -100, -100);
+		mlx_string_put(tools->mlx_ptr, tools->m->mlx_win, tools->m->y_res/2 - 20, tools->m->x_res/2 -100, 0x00CCCCCC, "Error");
+		mlx_string_put(tools->mlx_ptr, tools->m->mlx_win, tools->m->y_res/2 + 10, tools->m->x_res/2 -100, 0x00CCCCCC, "Press enter to go back to menu");
+		tools->error = 0;
+	}
 }
 
 void	init_param(t_tool *t)

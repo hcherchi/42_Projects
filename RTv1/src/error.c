@@ -1,7 +1,8 @@
 #include <rtv1.h>
 
-void	ft_error(int i)
+void	ft_error(int i, t_tool *tools)
 {
+	ft_putendl("lol");
 	if (i == 1)
 		ft_putstr("Error, bad argument in camera. use just pos, res, vect, lumamb and skybox.\n");
 	else if (i == 2)
@@ -32,5 +33,6 @@ void	ft_error(int i)
         ft_putendl("Invalid texture");
     else if (i == 12)
         ft_putendl("Error, bad type of object.\n");
-    exit(0);
+    tools->error = 1;
+    main_menu(1);
 }

@@ -36,7 +36,7 @@ int		rt_event(int k, t_tool *t)
     if (k == 53)
     {
         mlx_destroy_window(t->mlx_ptr, t->rt->mlx_win);
-        clean_rt(t->rt);
+        //clean_rt(t->rt);
     }
     return (0);
 }
@@ -61,6 +61,7 @@ void	scene_menu(int keycode, t_tool *t)
 
 int		menu_event(int keycode, t_tool *t)
 {
+    ft_putendl("kikoo");
     if (keycode == 53)
         exit(0);
     if (keycode == 51 && t->m->menu != 0)
@@ -71,5 +72,10 @@ int		menu_event(int keycode, t_tool *t)
         scene_menu(keycode, t);
     else if (t->m->menu == 3 && keycode == 36)
         launch("scenes/my_file", t);
+    if (keycode == 115)
+    {
+//        t->m->menu = 1;
+        print_start_menu(t);
+    }
 	return (0);
 }

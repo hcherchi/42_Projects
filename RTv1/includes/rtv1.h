@@ -156,6 +156,7 @@ typedef struct		s_tool
     void            *mlx_ptr;
     t_rt            *rt;
     t_menu          *m;
+    int             error;
 }					t_tool;
 
 // INTERSECTIONS
@@ -212,12 +213,12 @@ t_pos				*rotation(t_pos *axe, t_pos *vect);
 // PARSER
 void				parser(int fd, t_tool *tools);
 void				parse_light(t_tool *tools, int fd);
-void                parse_light2(char *line, t_light *light, char **split);
-void                parse_light3(char *line, t_light *light, char **split);
+void                parse_light2(char *line, t_light *light, char **split, t_tool *tools);
+void                parse_light3(char *line, t_light *light, char **split, t_tool *tools);
 void				parse_object(t_tool *tools, int fd);
 void                parse_object2(char *line, t_object *object, char **split, t_tool *tools);
 void                parse_object3(char *line, t_object *object, char **split, t_tool *tools);
-void                parse_object4(char *line, t_object *object, char **split);
+void                parse_object4(char *line, t_object *object, char **split, t_tool *tools);
 void				parse_camera(t_tool *tools, int fd);
 void                parse_camera2(char *line, t_tool *tools, char **split);
 void				init_light(t_light *light);
@@ -225,10 +226,10 @@ void				init_object(t_object *object);
 void                init_camera(t_tool *tools);
 void				add_object(t_object **l_objects, t_object *new);
 void				add_light(t_light **l_lights, t_light *new);
-int					object_type(char **split);
-int                 light_type(char **split);
-t_pos				*fill_pos(char **split);
-t_color				*fill_color(char **split);
+int					object_type(char **split, t_tool *tools);
+int                 light_type(char **split, t_tool *tools);
+t_pos				*fill_pos(char **split, t_tool *tools);
+t_color				*fill_color(char **split, t_tool *tools);
 t_image             *fill_texture(char *file, t_tool *tools);
 
 // COLOR TOOLS
@@ -262,6 +263,7 @@ void                clean_menu(t_menu *m);
 void                clean_rt(t_rt *rt);
 
 // MENU
+void                main_menu(int i);
 void                print_scene_menu(t_tool *t);
 void                print_build_menu(t_tool *t);
 void                print_group_menu(t_tool *t);
