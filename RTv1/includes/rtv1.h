@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 14:56:14 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/04/22 16:27:13 by vnguyen          ###   ########.fr       */
+/*   Updated: 2016/04/22 19:29:26 by vnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,11 +120,11 @@ typedef struct		s_cam
 
 typedef struct      s_menu
 {
-    void            *mlx_win;
-    t_image         *bg;
-    int             x_res;
-    int             y_res;
-    int             menu;
+	void            *mlx_win;
+	t_image         *bg;
+	int             x_res;
+	int             y_res;
+	int             menu;
 }                   t_menu;
 
 typedef struct      s_rt
@@ -156,7 +156,8 @@ typedef struct		s_tool
     void            *mlx_ptr;
     t_rt            *rt;
     t_menu          *m;
-    int             error;
+	int				m_load_cursor;
+	int             error;
     int             no_error;
 }					t_tool;
 

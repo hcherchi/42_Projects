@@ -22,7 +22,7 @@ int     main()
     
     tools = malloc(sizeof(t_tool));
     tools->m = malloc(sizeof(t_menu));
-    tools->mlx_ptr = mlx_init();
+	tools->mlx_ptr = mlx_init();
     tools->rt = NULL;
     init_menu(tools);
     print_start_menu(tools);
