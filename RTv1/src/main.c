@@ -22,7 +22,6 @@ int     main()
     tools->m = malloc(sizeof(t_menu));
     tools->mlx_ptr = mlx_init();
     tools->rt = NULL;
-    tools->first = 0;
     init_menu(tools);
     print_start_menu(tools);
     mlx_key_hook(tools->m->mlx_win, menu_event, tools);

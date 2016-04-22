@@ -3,8 +3,6 @@
 
 void    launch(char *scene, t_tool *tools)
 {
-    	if (tools->rt)
-       		mlx_destroy_window(tools->mlx_ptr, tools->m->mlx_win);
 		parser(open(scene, O_RDONLY), tools);
 		if (tools->error == 0)
 		{
@@ -12,8 +10,8 @@ void    launch(char *scene, t_tool *tools)
 		init_cams(tools);
 		run_through(tools);
 		}
-		else
-		tools->error = 0;	
+		tools->no_error = 0;
+		tools->error = 0;
 }
 
 void	init_param(t_tool *t)
@@ -23,12 +21,11 @@ void	init_param(t_tool *t)
 	t->rt->w = t->rt->x_res * t->rt->indent;
 	t->rt->h = t->rt->y_res * t->rt->indent;
 	t->rt->dist = t->rt->w / (2 * tan((60 / 2) * (M_PI / 180)));
-	if (t->first == 0 && t->no_error == 0)
+	if (t->no_error == 0)
 	{
 		mlx_clear_window(t->mlx_ptr, t->m->mlx_win);
 		mlx_destroy_window(t->mlx_ptr, t->m->mlx_win);
 	}
-	t->first = 1;
 	t->m->mlx_win = mlx_new_window(t->mlx_ptr, t->rt->x_res, t->rt->y_res, "RTv1");
 	t->rt->image = malloc(sizeof(t_image));
 	t->rt->image->mlx_img = mlx_new_image(t->mlx_ptr, t->rt->x_res, t->rt->y_res);

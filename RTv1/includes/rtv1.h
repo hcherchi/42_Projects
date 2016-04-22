@@ -157,7 +157,6 @@ typedef struct		s_tool
     t_rt            *rt;
     t_menu          *m;
     int             error;
-    int             first;
     int             no_error;
 }					t_tool;
 
