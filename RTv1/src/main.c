@@ -8,6 +8,8 @@ void    init_menu(t_tool *tools)
     tools->m->bg = malloc(sizeof(t_image));
     tools->m->bg->texture = ft_strdup("textures/blue_background.xpm");
     tools->m->bg->mlx_img = mlx_xpm_file_to_image(tools->mlx_ptr, tools->m->bg->texture, &tools->m->bg->width, &tools->m->bg->height);
+    if (tools->m->bg->mlx_img == NULL)
+        exit(0);
     tools->m->bg->data = mlx_get_data_addr(tools->m->bg->mlx_img, &tools->m->bg->bpp, &tools->m->bg->size_line, &tools->m->bg->endian);
     tools->m->bg->screen = NULL;
     tools->error = 0;

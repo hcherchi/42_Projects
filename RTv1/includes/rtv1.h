@@ -26,7 +26,7 @@
 # define SPOT 4
 # define SUN  5
 # define LIGHTPLAN 6
-# define E 0.0001
+# define E 0.000001
 
 typedef struct		s_equation
 {

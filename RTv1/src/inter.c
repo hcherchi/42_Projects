@@ -115,20 +115,24 @@ double	intersection_cone(t_object *cone, t_ray *ray)
     double		k;
     t_equation	param;
     
+    t_pos		*tmp;
+    tmp = vectorsub(ray->o, cone->o);
     k = pow(cone->rad / cone->h, 2);
-    param.a = pow(ray->d->x, 2) + pow(ray->d->z, 2) - pow(ray->d->y, 2) * k;
-    param.b = 2 * (ray->d->x * (ray->o->x - cone->o->x)
-                   + ray->d->z * (ray->o->z - cone->o->z)
-                   - ray->d->y * (ray->o->y - cone->o->y) * k);
-    param.c = pow((ray->o->x - cone->o->x), 2)
-    + pow((ray->o->z - cone->o->z), 2)
-    - pow((ray->o->y - cone->o->y), 2) * k;
+    param.a = vectordot(ray->d, ray->d) - pow(cone->d->x * ray->d->x + cone->d->y * ray->d->y + cone->d->z * ray->d->z, 2)- pow(cone->d->x * ray->d->x + cone->d->y * ray->d->y + cone->d->z * ray->d->z, 2) * k;
+    param.b = 2 * (ray->d->x * tmp->x + (ray->d->y) * tmp->y + ray->d->z * tmp->z)
+    - (2 * (cone->d->x * ray->d->x + cone->d->y * ray->d->y + cone->d->z * ray->d->z) * (cone->d->x * tmp->x + cone->d->y * tmp->y + cone->d->z * tmp->z))
+    - (2 * (cone->d->x * ray->d->x + cone->d->y * ray->d->y + cone->d->z * ray->d->z) * (cone->d->x * tmp->x + cone->d->y * tmp->y + cone->d->z * tmp->z) * k);
+    param.c = tmp->x * tmp->x + tmp->z * tmp->z + tmp->y * tmp->y
+    - pow(cone->d->x * tmp->x + cone->d->y * tmp->y + cone->d->z * tmp->z, 2)
+    - pow(cone->d->x * tmp->x + cone->d->y * tmp->y + cone->d->z * tmp->z, 2) * k;
+    free(tmp);
+    
     param.discr = param.b * param.b - 4 * param.a * param.c;
     if (param.discr < E)
         return (-1);
     param.t0 = (-param.b + sqrtf(param.discr)) / (2 * param.a);
     param.t1 = (-param.b - sqrtf(param.discr)) / (2 * param.a);
-    if (param.t0 > param.t1)
+    if (fabs(param.t0) > fabs(param.t1))
         param.t0 = param.t1;
     if (param.t0 < E)
         return (-1);

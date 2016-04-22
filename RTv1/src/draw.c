@@ -125,7 +125,6 @@ t_color		*get_color(t_ray *ray, t_tool *t)
             colors->refract = get_color(get_refractray(ray, impact, object), t);
         clean_ray(impact);
         final_color = get_final_color(colors, object);
-        return (final_color);
 	}
     else
     {
