@@ -34,5 +34,5 @@ void	ft_error(int i, t_tool *tools)
     else if (i == 12)
         ft_putendl("Error, bad type of object.\n");
     tools->error = 1;
-    main_menu(1);
+    tools->no_error = 1;
 }

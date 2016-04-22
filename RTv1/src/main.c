@@ -11,9 +11,10 @@ void    init_menu(t_tool *tools)
     tools->m->bg->data = mlx_get_data_addr(tools->m->bg->mlx_img, &tools->m->bg->bpp, &tools->m->bg->size_line, &tools->m->bg->endian);
     tools->m->bg->screen = NULL;
     tools->error = 0;
+    tools->no_error = 0;
 }
 
-void    main_menu(int i)
+int     main()
 {
     t_tool *tools;
     
@@ -21,22 +22,10 @@ void    main_menu(int i)
     tools->m = malloc(sizeof(t_menu));
     tools->mlx_ptr = mlx_init();
     tools->rt = NULL;
+    tools->first = 0;
     init_menu(tools);
-    if (i == 0)
-        print_start_menu(tools);
-    else
-    {
-        tools->m->menu = 2;
-        print_scene_menu(tools);
-    }
+    print_start_menu(tools);
     mlx_key_hook(tools->m->mlx_win, menu_event, tools);
     mlx_loop(tools->mlx_ptr);
-}
-
-int		main(void)
-{
-    int i;
-
-    i = 0;
-    main_menu(i);
+    return (0);
 }

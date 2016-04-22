@@ -15,14 +15,17 @@ void	parse_camera(t_tool *tools, int fd)
 			tools->rt->pos = fill_pos(split, tools);
 		else if (ft_strstr(line, "res:"))
 		{
-			if (ft_tablen(split) != 3)
+			if (ft_tablen(split) == 3)
+			{
+				if (str_digit(split[1]) || str_digit(split[2]))
+					ft_error(2, tools);
+				if (ft_atoi(split[1]) < 0 || ft_atoi(split[2]) < 0)
+					ft_error(8, tools);
+				tools->rt->x_res = ft_atoi(split[1]);
+				tools->rt->y_res = ft_atoi(split[2]);
+			}
+			else
 				ft_error(7, tools);
-			if (str_digit(split[1]) || str_digit(split[2]))
-				ft_error(2, tools);
-			if (ft_atoi(split[1]) < 0 || ft_atoi(split[2]) < 0)
-				ft_error(8, tools);
-			tools->rt->x_res = ft_atoi(split[1]);
-			tools->rt->y_res = ft_atoi(split[2]);
 		}
         else
             parse_camera2(line, tools, split);
@@ -35,9 +38,10 @@ void    parse_camera2(char *line, t_tool *tools, char **split)
 {
     if (ft_strstr(line, "lumamb:"))
     {
-        if (ft_tablen(split) != 2)
-            ft_error(7, tools);
-        tools->rt->lumamb = ft_atof(split[1]);
+        if (ft_tablen(split) == 2)
+	        tools->rt->lumamb = ft_atof(split[1]);
+	    else
+		    ft_error(7, tools);
     }
     else if (ft_strstr(line, "vect:"))
     {
@@ -45,9 +49,10 @@ void    parse_camera2(char *line, t_tool *tools, char **split)
     }
     else if (ft_strstr(line, "skybox:"))
     {
-        if (ft_tablen(split) != 2)
-            ft_error(7, tools);
-        tools->rt->sky = fill_texture(split[1], tools);
+        if (ft_tablen(split) == 2)
+    	    tools->rt->sky = fill_texture(split[1], tools);
+    	else
+    	    ft_error(7, tools);
     }
     else if (ft_strcmp(line, "{"))
         ft_error(1, tools);

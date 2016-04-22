@@ -41,7 +41,10 @@ int		rt_event(int k, t_tool *t)
         init_menu(t);
         t->m->menu = 1;
         print_start_menu(t);
+        mlx_key_hook(t->m->mlx_win, menu_event, t);
     }
+    if (k == 53)
+        exit(0);
     return (0);
 }
 
@@ -76,8 +79,5 @@ int		menu_event(int keycode, t_tool *t)
         scene_menu(keycode, t);
     else if (t->m->menu == 3 && keycode == 36)
         launch("scenes/my_file", t);
-    else if (t->m->menu == 4)
-        rt_event(keycode, t);
-    ft_putnbr(t->m->menu);
 	return (0);
 }
