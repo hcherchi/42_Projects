@@ -68,17 +68,17 @@ void	scene_menu(int keycode, t_tool *t)
 
 int		menu_event(int keycode, t_tool *t)
 {
-    ft_putnbr(keycode);
-    ft_putchar('\n');
-    if (keycode == 53)
-        exit(0);
-    if (keycode == 51 && t->m->menu != 0)
-        print_start_menu(t);
-    if  (t->m->menu == 0)
-        start_menu(keycode, t);
-    else if (t->m->menu == 2)
-        scene_menu(keycode, t);
-    else if (t->m->menu == 3 && keycode == 36)
-        launch("scenes/my_file", t);
+	ft_putnbr(keycode);
+	ft_putchar('\n');
+	if (keycode == 53)
+		exit(0);
+	if (keycode == 51 && t->m->menu != 0)
+		print_start_menu(t);
+	if (t->m->menu == 0)
+		start_menu(keycode, t);
+	else if (t->m->menu == 2)
+		scene_menu(keycode, t);
+	else if (t->m->menu == 3 && keycode == 36)
+		launch("scenes/my_file", t);
 	return (0);
 }

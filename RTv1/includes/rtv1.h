@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 14:56:14 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/04/18 15:49:57 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/04/22 16:27:13 by vnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,4 +271,8 @@ void                print_build_menu(t_tool *t);
 void                print_group_menu(t_tool *t);
 void                print_start_menu(t_tool *t);
 int                 menu_event(int keycode, t_tool *t);
+int					ft_menu_mouse_handler( int x, int y, void *param);
+int					ft_menu_click_handler(int keycode, int x, int y, t_tool *t);
+void				scene_menu(int keycode, t_tool *t);
+
 #endif

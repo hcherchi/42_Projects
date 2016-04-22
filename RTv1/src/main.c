@@ -12,6 +12,8 @@ void    init_menu(t_tool *tools)
     tools->m->bg->screen = NULL;
     tools->error = 0;
     tools->no_error = 0;
+	mlx_hook(tools->m->mlx_win, 6, (1L << 6), ft_menu_mouse_handler, tools);
+	mlx_mouse_hook(tools->m->mlx_win, ft_menu_click_handler, tools);
 }
 
 int     main()
