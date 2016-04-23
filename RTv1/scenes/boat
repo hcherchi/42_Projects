@@ -2,7 +2,7 @@ camera
 {
 	lumamb: 0.3
 	res: 1000 1000
-	skybox: textures/skybox/boat.xpm
+	skybox: textures/skybox/space.xpm
 }
 
 object
