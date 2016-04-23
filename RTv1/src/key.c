@@ -2,9 +2,9 @@
 
 void		rt_event_light(int k, t_tool *t)
 {
-	if (k == 69)
+	if (k == 78)
 		modif_all_lights(t, -0.55);
-	else if (k == 78)
+	else if (k == 69)
 		modif_all_lights(t, 0.55);
 	else if (k == 24)
 		modif_lumamb(t, 0.25);

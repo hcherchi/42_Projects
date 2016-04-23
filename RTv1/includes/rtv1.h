@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 14:56:14 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/04/23 17:08:06 by vnguyen          ###   ########.fr       */
+/*   Updated: 2016/04/23 17:59:39 by vnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,13 @@ typedef struct		s_equation
 	double			t1;
 	double			t0;
 }					t_equation;
+
+typedef struct		s_neige
+{
+	int				x;
+	int				y;
+	t_pos			dir;
+}
 
 typedef struct		s_color
 {
@@ -132,11 +139,12 @@ typedef struct      s_rt
 {
     void			*mlx_win;
     t_object		*l_objects;
-    t_light			*l_lights;
-    t_image			*image;
-    t_image			*image_loading;
+	t_light			*l_lights;
+	t_image			*image;
+	t_image			*image_loading;
 	t_image         *sky;
-    t_cam			*cam;
+    t_neige			l_neiges;
+	t_cam			*cam;
     t_cam           **upcams;
     t_cam           **middlecams;
     double			lumamb;
@@ -278,5 +286,6 @@ int					ft_menu_click_handler(int keycode, int x, int y, t_tool *t);
 void				scene_menu(int keycode, t_tool *t);
 void				modif_all_lights(t_tool *k, double value);
 void				modif_lumamb(t_tool *k, double value);
+void				update_loading_menu(t_tool *t, int y);
 
 #endif
