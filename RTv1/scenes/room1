@@ -7,7 +7,7 @@ camera
 light
 {
 	type: SPOT
-	pos: 0 0 0
+	pos: 0 3 0
 	h: 1
 	lumdiff: 0.7
 }
@@ -16,27 +16,27 @@ object
 {
 	type: PLAN
 	dir: 1 0 0 
-	h: 3
+	h: 10
 	color: 150 250 50
-	texture: textures/plan/parquet.xpm
+	texture: textures/plan/parquet.xpm 100
 }
 
 object
 {
 	type: PLAN
 	dir: -1 0 0
-	h: 3
+	h: 10
 	color: 150 250 50
-	texture: textures/plan/parquet.xpm
+	texture: textures/plan/parquet.xpm 100
 }
 
 object
 {
 	type: PLAN
 	dir: 0 1 0
-	h: 1
+	h: 10
 	color: 150 250 50
-	texture: textures/plan/parquet.xpm
+	texture: textures/plan/parquet.xpm 100
 }
 
 object
@@ -45,16 +45,16 @@ object
 	dir: 0 0 -1
 	h: 10
 	color: 150 250 50
-	texture: textures/plan/parquet.xpm
+	texture: textures/plan/parquet.xpm 100
 }
 
 object
 {
 	type: PLAN
 	dir: 0 -1 0
-	h: 3
+	h: 10
 	color: 150 250 50
-	texture: textures/plan/parquet.xpm
+	texture: textures/plan/parquet.xpm 100
 }
 
 object
