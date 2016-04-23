@@ -122,7 +122,7 @@ t_color     *get_flash(t_ray *ray, t_tool *t)
         lightdist = sqrtf(pow(light->o->x - t->rt->cam->pos->x, 2) + pow(light->o->y - t->rt->cam->pos->y, 2) + pow(light->o->z - t->rt->cam->pos->z, 2));
         intens = get_flash_intens(t, ray, lightdist);
         if (angle > 0 && ((light->type == SPOT && vectordot(vectorscale(-1, flashray->d), light->d) > light->angle) || light->type != SPOT))
-            flash = add_color(flash, mult_color(light->color, pow(angle, 20) * intens));
+            flash = add_color(flash, mult_color(light->color, pow(angle, 30) * intens * light->lumdiff));
         clean_ray(&flashray);
         light = light->next;
     }
