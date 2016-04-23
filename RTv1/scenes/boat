@@ -1,0 +1,15 @@
+camera
+{
+	lumamb: 0.3
+	res: 1000 1000
+	skybox: textures/boat.xpm
+}
+
+object
+{
+	type: SPHERE
+	pos: 0 0 0
+	rayon: 1.3
+	shiny: 1
+	mirror: 0.7
+}

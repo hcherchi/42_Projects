@@ -3,13 +3,16 @@
 void print_scene_menu(t_tool *t)
 {
     mlx_clear_window(t->mlx_ptr, t->m->mlx_win);
-	t->m->bg->texture = ft_strdup("textures/rtmenu_minimal-61664251.xpm");
+	t->m->bg->texture = ft_strdup("textures/menu/rtmenu_minimal-61664251.xpm");
 	t->m->bg->mlx_img = mlx_xpm_file_to_image(t->mlx_ptr, t->m->bg->texture, &t->m->bg->width, &t->m->bg->height);
 	t->m->bg->data = mlx_get_data_addr(t->m->bg->mlx_img, &t->m->bg->bpp, &t->m->bg->size_line, &t->m->bg->endian);
 	mlx_put_image_to_window(t->mlx_ptr, t->m->mlx_win, t->m->bg->mlx_img, 0, 0);
-    mlx_string_put(t->mlx_ptr, t->m->mlx_win, 20, t->m->x_res/2 -100, 0x00CCCCCC, "RT/2016");
-    mlx_string_put(t->mlx_ptr, t->m->mlx_win, 20, t->m->x_res/2 -10, 0x0099FF00, "1 : NEW - 3 spheres + 1 plan + 1 light");
-    mlx_string_put(t->mlx_ptr, t->m->mlx_win, 20, t->m->x_res/2 +70, 0x0099FF00, "2 : MY_FILE - Create your own scene");
+    mlx_string_put(t->mlx_ptr, t->m->mlx_win, t->m->y_res/2 - 20, t->m->x_res/2 -100, 0x00CCCCCC, "RT/2016");
+    mlx_string_put(t->mlx_ptr, t->m->mlx_win, t->m->y_res/2 - 20, t->m->x_res/2 -10, 0x0099FF00, "1 : NEW - 3 spheres + 1 plan + 1 light");
+    mlx_string_put(t->mlx_ptr, t->m->mlx_win, t->m->y_res/2 - 20, t->m->x_res/2 +20, 0x0099FF00, "2 Boat - 1 sphere + 1 skybox");
+    mlx_string_put(t->mlx_ptr, t->m->mlx_win, t->m->y_res/2 - 20, t->m->x_res/2 +50, 0x0099FF00, "3 :Rool1 - 1 sphere + 5 plan + texture");
+    mlx_string_put(t->mlx_ptr, t->m->mlx_win, t->m->y_res/2 - 20, t->m->x_res/2 +50, 0x0099FF00, "4:Speciale");
+    mlx_string_put(t->mlx_ptr, t->m->mlx_win, t->m->y_res/2 - 20, t->m->x_res/2 +70, 0x0099FF00, "5: MY_FILE - Create your own scene");
     mlx_string_put(t->mlx_ptr, t->m->mlx_win, 50, 50, 0x00FF9966, "Press DELETE to go back to menu");
     t->m->menu = 2;
 }
@@ -18,7 +21,7 @@ void print_scene_menu(t_tool *t)
 void print_group_menu(t_tool *t)
 {
     mlx_clear_window(t->mlx_ptr, t->m->mlx_win);
-	t->m->bg->texture = ft_strdup("textures/rtmenu_minimal-61664251.xpm");
+	t->m->bg->texture = ft_strdup("textures/menu/rtmenu_minimal-61664251.xpm");
 	t->m->bg->mlx_img = mlx_xpm_file_to_image(t->mlx_ptr, t->m->bg->texture, &t->m->bg->width, &t->m->bg->height);
 	t->m->bg->data = mlx_get_data_addr(t->m->bg->mlx_img, &t->m->bg->bpp, &t->m->bg->size_line, &t->m->bg->endian);
 	mlx_put_image_to_window(t->mlx_ptr, t->m->mlx_win, t->m->bg->mlx_img, 0, 0);
@@ -34,7 +37,7 @@ void print_group_menu(t_tool *t)
 void print_start_menu(t_tool *t)
 {
     mlx_clear_window(t->mlx_ptr, t->m->mlx_win);
-	t->m->bg->texture = ft_strdup("textures/blue_background.xpm");
+	t->m->bg->texture = ft_strdup("textures/menu/blue_background.xpm");
 	t->m->bg->mlx_img = mlx_xpm_file_to_image(t->mlx_ptr, t->m->bg->texture, &t->m->bg->width, &t->m->bg->height);
 	t->m->bg->data = mlx_get_data_addr(t->m->bg->mlx_img, &t->m->bg->bpp, &t->m->bg->size_line, &t->m->bg->endian);
 	mlx_put_image_to_window(t->mlx_ptr, t->m->mlx_win, t->m->bg->mlx_img, 0, 0);

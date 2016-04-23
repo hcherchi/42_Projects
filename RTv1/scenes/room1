@@ -1,0 +1,68 @@
+camera
+{
+	lumamb: 0.3
+	res: 1000 800
+}
+
+light
+{
+	type: SPOT
+	pos: 0 0 0
+	h: 1
+	lumdiff: 0.7
+}
+
+object
+{
+	type: PLAN
+	dir: 1 0 0 
+	h: 3
+	color: 150 250 50
+	texture: textures/plan/parquet.xpm
+}
+
+object
+{
+	type: PLAN
+	dir: -1 0 0
+	h: 3
+	color: 150 250 50
+	texture: textures/plan/parquet.xpm
+}
+
+object
+{
+	type: PLAN
+	dir: 0 1 0
+	h: 1
+	color: 150 250 50
+	texture: textures/plan/parquet.xpm
+}
+
+object
+{
+	type: PLAN
+	dir: 0 0 -1
+	h: 10
+	color: 150 250 50
+	texture: textures/plan/parquet.xpm
+}
+
+object
+{
+	type: PLAN
+	dir: 0 -1 0
+	h: 3
+	color: 150 250 50
+	texture: textures/plan/parquet.xpm
+}
+
+object
+{
+	type: SPHERE
+	rayon: 1
+	pos: 0 0 0
+	color: 250 250 250
+	shiny: 3
+	mirror: 1
+}
