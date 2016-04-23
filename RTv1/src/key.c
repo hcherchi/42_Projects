@@ -53,8 +53,14 @@ void	start_menu(int keycode, t_tool *t)
 void	scene_menu(int keycode, t_tool *t)
 {
     if (keycode == 18)
-        launch("scenes/new", t);
-    else if (keycode == 19)
+		launch("scenes/new", t);
+	if (keycode == 19)
+		launch("scenes/boat", t);
+	if (keycode == 20)
+		launch("scenes/room1", t);
+	if (keycode == 21)
+		launch("scenes/speciale", t);
+    else if (keycode == 22)
     {
         system("open scenes/my_file");
         launch("scenes/my_file", t);
