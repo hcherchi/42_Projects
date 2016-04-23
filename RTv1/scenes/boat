@@ -2,12 +2,7 @@ camera
 {
 	lumamb: 0.2
 	res: 1000 1000
-}
-
-light
-{
-	type: SUN
-	pos: 1 1 2
+	skybox: textures/skybox/space.xpm
 }
 
 object
