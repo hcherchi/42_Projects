@@ -2,31 +2,31 @@
 
 void    clean_tools(t_tool **tools)
 {
-    if (*tools->m)
-        clean_menu(*tools->m);
-    if (tools->rt)
-        clean_rt(tools->rt);
-    if (tools->mlx_ptr)
+    if ((*tools)->m)
+        clean_menu(&(*tools)->m);
+    if ((*tools)->rt)
+        clean_rt(&(*tools)->rt);
+    if ((*tools)->mlx_ptr)
     {
-        free(tools->mlx_ptr);
-        tools->mlx_ptr = NULL;
+        free((*tools)->mlx_ptr);
+        (*tools)->mlx_ptr = NULL;
     }
-    if (tools)
+    if (*tools)
     {
-        free(tools);
-        tools = NULL;
+        free(*tools);
+        *tools = NULL;
     }
 }
 
 void    clean_menu(t_menu **m)
 {
-    if (*m->mlx_win)
+    if ((*m)->mlx_win)
     {
-        free(*m->mlx_win);
-        *m->mlx_win = NULL;
+        free((*m)->mlx_win);
+        (*m)->mlx_win = NULL;
     }
-    if (*m->bg)
-        clean_image(*m->bg);
+    if ((*m)->bg)
+        clean_image(&(*m)->bg);
     if (*m)
     {
         free(*m);
@@ -36,15 +36,15 @@ void    clean_menu(t_menu **m)
 
 void	clean_ray(t_ray **ray)
 {
-    if (*ray->o)
+    if ((*ray)->o)
     {
-    	free(*ray->o);
-        *ray->o = NULL;
+    	free((*ray)->o);
+        (*ray)->o = NULL;
     }
-    if (*ray->d)
+    if ((*ray)->d)
     {
-        free(*ray->d);
-        *ray->d = NULL;
+        free((*ray)->d);
+        (*ray)->d = NULL;
     }
 	if (*ray)
     {
@@ -55,42 +55,42 @@ void	clean_ray(t_ray **ray)
 
 void	clean_rt(t_rt **rt)
 {
-    if (*rt->sky)
-        clean_image(*rt->sky);
-    if (*rt->image)
-        clean_image(*rt->image);
-	if (*rt->l_objects)
-        clean_obj(*rt->l_objects);
-	if (*rt->l_lights)
-        clean_lights(*rt->l_lights);
-    if (*rt->upcams)
-        clean_cams(*rt->upcams, 5);
-    if (*rt->middlecams)
-        clean_cams(*rt->middlecams, 6);
+    if ((*rt)->sky)
+        clean_image(&(*rt)->sky);
+    if ((*rt)->image)
+        clean_image(&(*rt)->image);
+	if ((*rt)->l_objects)
+        clean_obj(&(*rt)->l_objects);
+	if ((*rt)->l_lights)
+        clean_lights(&(*rt)->l_lights);
+    if ((*rt)->upcams)
+        clean_cams(&(*rt)->upcams, 5);
+    if ((*rt)->middlecams)
+        clean_cams(&(*rt)->middlecams, 6);
     *rt = NULL;
 }
 
 void    clean_image(t_image **image)
 {
-    if (*image->data)
+    if ((*image)->data)
     {
-        free(*image->data);
-        *image->data = NULL;
+        free((*image)->data);
+        (*image)->data = NULL;
     }
-    if (*image->mlx_img)
+    if ((*image)->mlx_img)
     {
-        free(*image->mlx_img);
-        *image->mlx_img = NULL;
+        free((*image)->mlx_img);
+        (*image)->mlx_img = NULL;
     }
-    if (*image->texture)
+    if ((*image)->texture)
     {
-        free(*image->texture);
-        *image->texture = NULL;
+        free((*image)->texture);
+        (*image)->texture = NULL;
     }
-    if (*image->screen)
+    if ((*image)->screen)
     {
-        free(*image->screen);
-        *image->screen = NULL;
+        free((*image)->screen);
+        (*image)->screen = NULL;
     }
     if (*image)
     {
@@ -101,20 +101,20 @@ void    clean_image(t_image **image)
 
 void    clean_colors(t_colors **colors)
 {
-    if (*colors->base)
+    if ((*colors)->base)
     {
-        free(*colors->base);
-        *colors->base = NULL;
+        free((*colors)->base);
+        (*colors)->base = NULL;
     }
-    if (*color->refract)
+    if ((*colors)->refract)
     {
-        free(*colors->refract);
-        *colors->refract = NULL;
+        free((*colors)->refract);
+        (*colors)->refract = NULL;
     }
-    if (*colors->reflect)
+    if ((*colors)->reflect)
     {
-        free(*colors->reflect);
-        *colors->reflect = NULL;
+        free((*colors)->reflect);
+        (*colors)->reflect = NULL;
     }
     if (*colors)
     {
@@ -123,44 +123,44 @@ void    clean_colors(t_colors **colors)
     }
 }
 
-void    clean_cams(t_cam **cams, int nb)
+void    clean_cams(t_cam ***cams, int nb)
 {
     int i;
 
     i = 0;
     while (i < nb)
     {
-        clean_cam(*cams[i]);
+        clean_cam(cams[i]);
         i++;
     }
 }
 
 void	clean_cam(t_cam **cam)
 {
-    if (*cam->pos)
+    if ((*cam)->pos)
     {
-    	free(*cam->pos);
-        *cam->pos = NULL;
+    	free((*cam)->pos);
+        (*cam)->pos = NULL;
     }
-    if (*cam->vect)
+    if ((*cam)->vect)
     {
-    	free(*cam->vect);
-        *cam->vect = NULL;
+    	free((*cam)->vect);
+        (*cam)->vect = NULL;
     }
-    if (*cam->h_vect)
+    if ((*cam)->h_vect)
     {
-    	free(*cam->h_vect);
-        *cam->h_vect = NULL;
+    	free((*cam)->h_vect);
+        (*cam)->h_vect = NULL;
     }
-    if (*cam->r_vect)
+    if ((*cam)->r_vect)
     {
-    	free(*cam->r_vect);
-        *cam->r_vect = NULL;
+    	free((*cam)->r_vect);
+        (*cam)->r_vect = NULL;
     }
-    if (*cam->upleft)
+    if ((*cam)->upleft)
     {
-    	free(*cam->upleft);
-        *cam->upleft = NULL;
+    	free((*cam)->upleft);
+        (*cam)->upleft = NULL;
     }
     if (*cam)
     {
@@ -176,7 +176,7 @@ void	clean_lights(t_light **l_lights)
 	while (*l_lights)
 	{
 		tmp = *l_lights;
-		*l_lights = *l_lights->next;
+		*l_lights = (*l_lights)->next;
         if (tmp->color)
         {
     		free(tmp->color);
@@ -207,7 +207,7 @@ void	clean_obj(t_object **l_objects)
 	while (*l_objects)
 	{
 		tmp = *l_objects;
-		*l_objects = *l_objects->next;
+		*l_objects = (*l_objects)->next;
         if (tmp->color)
         {
     		free(tmp->color);
@@ -224,7 +224,7 @@ void	clean_obj(t_object **l_objects)
             tmp->d = NULL;
         }
         if (tmp->texture)
-            clean_image(tmp->texture);
+            clean_image(&tmp->texture);
         if (tmp)
         {
     		free(tmp);
