@@ -38,13 +38,6 @@ typedef struct		s_equation
 	double			t0;
 }					t_equation;
 
-typedef struct		s_neige
-{
-	int				x;
-	int				y;
-	t_pos			dir;
-}
-
 typedef struct		s_color
 {
 	int				r;
@@ -143,7 +136,6 @@ typedef struct      s_rt
 	t_image			*image;
 	t_image			*image_loading;
 	t_image         *sky;
-    t_neige			l_neiges;
 	t_cam			*cam;
     t_cam           **upcams;
     t_cam           **middlecams;

@@ -1,7 +1,5 @@
 #include <rtv1.h>
 
-
-// FONCTION A RAJOUTER POUR REMPLACER TOUS LES TEST TABLEN ET STRDIGIT.
 void	parse_camera(t_tool *tools, int fd)
 {
 	char	**split;

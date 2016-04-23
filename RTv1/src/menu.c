@@ -7,24 +7,13 @@ void print_scene_menu(t_tool *t)
 	t->m->bg->mlx_img = mlx_xpm_file_to_image(t->mlx_ptr, t->m->bg->texture, &t->m->bg->width, &t->m->bg->height);
 	t->m->bg->data = mlx_get_data_addr(t->m->bg->mlx_img, &t->m->bg->bpp, &t->m->bg->size_line, &t->m->bg->endian);
 	mlx_put_image_to_window(t->mlx_ptr, t->m->mlx_win, t->m->bg->mlx_img, 0, 0);
-<<<<<<< HEAD
-	mlx_string_put(t->mlx_ptr, t->m->mlx_win, t->m->y_res/2 - 20, t->m->x_res/2 -100, 0x00CCCCCC, "RT/2016");
-	mlx_string_put(t->mlx_ptr, t->m->mlx_win, t->m->y_res/2 - 20, t->m->x_res/2 -10, 0x0099FF00, "1 : NEW - 3 spheres + 1 plan + 1 light");
-	mlx_string_put(t->mlx_ptr, t->m->mlx_win, t->m->y_res/2 - 20, t->m->x_res/2 +30, 0x0099FF00, "2 :Boat - 1 sphere + 1 skybox");
-	mlx_string_put(t->mlx_ptr, t->m->mlx_win, t->m->y_res/2 - 20, t->m->x_res/2 +60, 0x0099FF00, "3 :Rool1 - 1 sphere + 5 plan + texture");
-	mlx_string_put(t->mlx_ptr, t->m->mlx_win, t->m->y_res/2 - 20, t->m->x_res/2 +90, 0x0099FF00, "4 :Speciale");
-	mlx_string_put(t->mlx_ptr, t->m->mlx_win, t->m->y_res/2 - 20, t->m->x_res/2 +120, 0x0099FF00, "5 : MY_FILE - Create your own scene");
-	mlx_string_put(t->mlx_ptr, t->m->mlx_win, 50, 50, 0x00FF9966, "Press DELETE to go back to menu");
-	t->m->menu = 2;
-=======
     mlx_string_put(t->mlx_ptr, t->m->mlx_win, 20, 100, 0x0099FF00, "1 : NEW");
     mlx_string_put(t->mlx_ptr, t->m->mlx_win, 20, 150, 0x0099FF00, "2 : BOAT");
     mlx_string_put(t->mlx_ptr, t->m->mlx_win, 20, 200, 0x0099FF00, "3 : ROOM");
     mlx_string_put(t->mlx_ptr, t->m->mlx_win, 20, 250, 0x0099FF00, "4 : SPECIALE");
-    mlx_string_put(t->mlx_ptr, t->m->mlx_win, 20, 300, 0x0099FF00, "5 : MY_FILE - Create your own scene");
+    mlx_string_put(t->mlx_ptr, t->m->mlx_win, 20, 300, 0x0099FF00, "5 : MY_FILE");
     mlx_string_put(t->mlx_ptr, t->m->mlx_win, 20, 550, 0x00FF9966, "Press DELETE to go back to menu");
     t->m->menu = 2;
->>>>>>> f25d8d3de10144e13ecec3937462494c1df6c2c8
 }
 
 
@@ -35,15 +24,6 @@ void print_group_menu(t_tool *t)
 	t->m->bg->mlx_img = mlx_xpm_file_to_image(t->mlx_ptr, t->m->bg->texture, &t->m->bg->width, &t->m->bg->height);
 	t->m->bg->data = mlx_get_data_addr(t->m->bg->mlx_img, &t->m->bg->bpp, &t->m->bg->size_line, &t->m->bg->endian);
 	mlx_put_image_to_window(t->mlx_ptr, t->m->mlx_win, t->m->bg->mlx_img, 0, 0);
-<<<<<<< HEAD
-	mlx_string_put(t->mlx_ptr, t->m->mlx_win, 20, t->m->x_res/2 -100, 0x00CCCCCC, "RT/2016");
-	mlx_string_put(t->mlx_ptr, t->m->mlx_win, 20, t->m->x_res/2 -50, 0x0099FF00, "Hugo Cherchi – hcherchi email: hcherchi@student.42.fr");
-	mlx_string_put(t->mlx_ptr, t->m->mlx_win, 20, t->m->x_res/2 -10, 0x0099FF00, "Bruno Gantelmi – bgantelm email: bgantelm@student.42.fr");
-	mlx_string_put(t->mlx_ptr, t->m->mlx_win, 20, t->m->x_res/2 +30, 0x0099FF00, "Vincent Nguyen – vnguyen email: vnguyen@student.42.fr");
-	mlx_string_put(t->mlx_ptr, t->m->mlx_win, 20, t->m->x_res/2 +70, 0x0099FF00, "Floren Henri – fhenri email: fhenri@student.42.fr");
-	mlx_string_put(t->mlx_ptr, t->m->mlx_win, 50, 50, 0x00FF9966, "Press DELETE to go back to menu");
-	t->m->menu = 1;
-=======
     mlx_string_put(t->mlx_ptr, t->m->mlx_win, 20, 100, 0x0099FF00, "Hugo Cherchi - Hcherchi");
     mlx_string_put(t->mlx_ptr, t->m->mlx_win, 20, 130, 0x0099FF00, "hcherchi@student.42.fr");
     mlx_string_put(t->mlx_ptr, t->m->mlx_win, 20, 200, 0x0099FF00, "Bruno Gantelmi - Bgantelm");
@@ -54,7 +34,6 @@ void print_group_menu(t_tool *t)
     mlx_string_put(t->mlx_ptr, t->m->mlx_win, 20, 430, 0x0099FF00, "fhenri@student.42.fr");
     mlx_string_put(t->mlx_ptr, t->m->mlx_win, 20, 550, 0x00FF9966, "Press DELETE to go back to menu");
     t->m->menu = 1;
->>>>>>> f25d8d3de10144e13ecec3937462494c1df6c2c8
 }
 
 void print_start_menu(t_tool *t)

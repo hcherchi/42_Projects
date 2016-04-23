@@ -1,6 +1,6 @@
 camera
 {
-	lumamb: 2
+	lumamb: 0
 	res: 1200 1200
 }
 object
