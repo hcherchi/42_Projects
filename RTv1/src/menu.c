@@ -9,10 +9,10 @@ void print_scene_menu(t_tool *t)
 	mlx_put_image_to_window(t->mlx_ptr, t->m->mlx_win, t->m->bg->mlx_img, 0, 0);
     mlx_string_put(t->mlx_ptr, t->m->mlx_win, t->m->y_res/2 - 20, t->m->x_res/2 -100, 0x00CCCCCC, "RT/2016");
     mlx_string_put(t->mlx_ptr, t->m->mlx_win, t->m->y_res/2 - 20, t->m->x_res/2 -10, 0x0099FF00, "1 : NEW - 3 spheres + 1 plan + 1 light");
-    mlx_string_put(t->mlx_ptr, t->m->mlx_win, t->m->y_res/2 - 20, t->m->x_res/2 +20, 0x0099FF00, "2 Boat - 1 sphere + 1 skybox");
-    mlx_string_put(t->mlx_ptr, t->m->mlx_win, t->m->y_res/2 - 20, t->m->x_res/2 +50, 0x0099FF00, "3 :Rool1 - 1 sphere + 5 plan + texture");
-    mlx_string_put(t->mlx_ptr, t->m->mlx_win, t->m->y_res/2 - 20, t->m->x_res/2 +50, 0x0099FF00, "4:Speciale");
-    mlx_string_put(t->mlx_ptr, t->m->mlx_win, t->m->y_res/2 - 20, t->m->x_res/2 +70, 0x0099FF00, "5: MY_FILE - Create your own scene");
+    mlx_string_put(t->mlx_ptr, t->m->mlx_win, t->m->y_res/2 - 20, t->m->x_res/2 +30, 0x0099FF00, "2 :Boat - 1 sphere + 1 skybox");
+    mlx_string_put(t->mlx_ptr, t->m->mlx_win, t->m->y_res/2 - 20, t->m->x_res/2 +60, 0x0099FF00, "3 :Rool1 - 1 sphere + 5 plan + texture");
+    mlx_string_put(t->mlx_ptr, t->m->mlx_win, t->m->y_res/2 - 20, t->m->x_res/2 +90, 0x0099FF00, "4 :Speciale");
+    mlx_string_put(t->mlx_ptr, t->m->mlx_win, t->m->y_res/2 - 20, t->m->x_res/2 +120, 0x0099FF00, "5 : MY_FILE - Create your own scene");
     mlx_string_put(t->mlx_ptr, t->m->mlx_win, 50, 50, 0x00FF9966, "Press DELETE to go back to menu");
     t->m->menu = 2;
 }
