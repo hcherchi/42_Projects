@@ -90,8 +90,11 @@ void run_through(t_tool *t)
 	int y;
 
 	y = 0;
-	mlx_string_put(t->mlx_ptr, t->rt->mlx_win, t->rt->x_res/2 - 50, t->rt->y_res/2, 0xFFFFFFFF, "RT is loading...");
-	mlx_put_image_to_window(t->mlx_ptr, t->rt->mlx_win, t->rt->image_loading->mlx_img, 0, 0);
+    if (t->rt->screenshot == 0)
+    {
+        mlx_string_put(t->mlx_ptr, t->rt->mlx_win, t->rt->x_res/2 - 50, t->rt->y_res/2, 0xFFFFFFFF, "RT is loading...");
+        mlx_put_image_to_window(t->mlx_ptr, t->rt->mlx_win, t->rt->image_loading->mlx_img, 0, 0);
+}
 	while (y < t->rt->y_res)
 	{
 		x = 0;
