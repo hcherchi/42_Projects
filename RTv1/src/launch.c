@@ -3,15 +3,23 @@
 
 void    launch(char *scene, t_tool *tools)
 {
-		parser(open(scene, O_RDONLY), tools);
-		if (tools->error == 0)
-		{
-		init_param(tools);
-		init_cams(tools);
-		run_through(tools);
-		}
-		tools->no_error = 0;
-		tools->error = 0;
+    if (tools->rt)
+    {
+        mlx_destroy_window(tools->mlx_ptr, tools->rt->mlx_win);
+        tools->rt = NULL;
+    }
+    parser(open(scene, O_RDONLY), tools);
+    if (tools->error == 0)
+    {
+        init_param(tools);
+        init_cams(tools);
+        run_through(tools);
+    }
+    else
+    {
+        tools->error = 0;
+        tools->rt = NULL;
+    }
 }
 
 void	init_param(t_tool *t)
@@ -21,12 +29,7 @@ void	init_param(t_tool *t)
 	t->rt->w = t->rt->x_res * t->rt->indent;
 	t->rt->h = t->rt->y_res * t->rt->indent;
 	t->rt->dist = t->rt->w / (2 * tan((60 / 2) * (M_PI / 180)));
-	if (t->no_error == 0)
-	{
-		mlx_clear_window(t->mlx_ptr, t->m->mlx_win);
-		mlx_destroy_window(t->mlx_ptr, t->m->mlx_win);
-	}
-	t->m->mlx_win = mlx_new_window(t->mlx_ptr, t->rt->x_res, t->rt->y_res, "RTv1");
+	t->rt->mlx_win = mlx_new_window(t->mlx_ptr, t->rt->x_res, t->rt->y_res, "RTv1");
 	t->rt->image = malloc(sizeof(t_image));
 	t->rt->image->mlx_img = mlx_new_image(t->mlx_ptr, t->rt->x_res, t->rt->y_res);
 	t->rt->image->data = mlx_get_data_addr(t->rt->image->mlx_img, &t->rt->image->bpp,
@@ -91,13 +94,13 @@ void run_through(t_tool *t)
 		y += 1;
 	}
 	if (t->rt->screenshot == 0)
-		mlx_put_image_to_window(t->mlx_ptr, t->m->mlx_win, t->rt->image->mlx_img, 0, 0);
+		mlx_put_image_to_window(t->mlx_ptr, t->rt->mlx_win, t->rt->image->mlx_img, 0, 0);
 	else
 		put_image_to_file(t);
-	mlx_string_put(t->mlx_ptr, t->m->mlx_win, 50, 25, 0x009933FF, "2 - 4 - 5 - 6 - 8 and arrows to change CAMERA");
-	mlx_string_put(t->mlx_ptr, t->m->mlx_win, 50, 50, 0x009933FF, "P : SCREENSHOT");
-	mlx_string_put(t->mlx_ptr, t->m->mlx_win, 50, 75, 0x009933FF, "Press 'DELETE' to go back to the menu");
-	mlx_key_hook(t->m->mlx_win, rt_event, t);
+	mlx_string_put(t->mlx_ptr, t->rt->mlx_win, 50, 25, 0x009933FF, "2 - 4 - 5 - 6 - 8 and arrows to change CAMERA");
+	mlx_string_put(t->mlx_ptr, t->rt->mlx_win, 50, 50, 0x009933FF, "P : SCREENSHOT");
+	mlx_string_put(t->mlx_ptr, t->rt->mlx_win, 50, 75, 0x009933FF, "Press 'DELETE' to go back to the menu");
+	mlx_key_hook(t->rt->mlx_win, rt_event, t);
 }
 
 t_cam *new_cam(t_pos *pos, t_pos *vect, t_tool *t, int nb)

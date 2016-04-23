@@ -2,7 +2,7 @@
 
 void    init_menu(t_tool *tools)
 {
-    tools->m->x_res = 800;
+    tools->m->x_res = 700;
     tools->m->y_res = 600;
     tools->m->mlx_win = mlx_new_window(tools->mlx_ptr, tools->m->x_res, tools->m->y_res, "RT");
     tools->m->bg = malloc(sizeof(t_image));
@@ -16,7 +16,6 @@ void    init_menu(t_tool *tools)
     tools->m->bg->data = mlx_get_data_addr(tools->m->bg->mlx_img, &tools->m->bg->bpp, &tools->m->bg->size_line, &tools->m->bg->endian);
     tools->m->bg->screen = NULL;
     tools->error = 0;
-    tools->no_error = 0;
 	mlx_hook(tools->m->mlx_win, 6, (1L << 6), ft_menu_mouse_handler, tools);
 	mlx_mouse_hook(tools->m->mlx_win, ft_menu_click_handler, tools);
 }

@@ -33,9 +33,9 @@ void	init_object(t_object *object)
 	object->d->x = 0;
 	object->d->y = 1;
 	object->d->z = 0;
-	object->color->r = 0;
-	object->color->g = 0;
-	object->color->b = 0;
+	object->color->r = 255;
+	object->color->g = 255;
+	object->color->b = 255;
 	object->type = SPHERE;
 	object->rad = 0.5;
 	object->h = 1;

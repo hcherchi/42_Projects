@@ -2,7 +2,6 @@
 
 void	ft_error(int i, t_tool *tools)
 {
-	ft_putendl("lol");
 	if (i == 1)
 		ft_putstr("Error, bad argument in camera. use just pos, res, vect, lumamb and skybox.\n");
 	else if (i == 2)

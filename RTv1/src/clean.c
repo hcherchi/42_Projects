@@ -25,7 +25,6 @@ void	clean_ray(t_ray *ray)
 
 void	clean_rt(t_rt *rt)
 {
-	free(rt->mlx_win);
     if (rt->sky)
         clean_image(rt->sky);
     clean_image(rt->image);
@@ -33,6 +32,7 @@ void	clean_rt(t_rt *rt)
 	clean_lights(rt->l_lights);
     clean_cams(rt->upcams, 5);
     clean_cams(rt->middlecams, 6);
+    rt = NULL;
 }
 
 void    clean_image(t_image *image)

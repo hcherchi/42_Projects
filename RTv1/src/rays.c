@@ -1,7 +1,5 @@
 #include <rtv1.h>
 
-
-// PAS JOJO
 t_ray	*get_lightray(t_ray *impact, t_light *light)
 {
     t_ray	*lightray;
