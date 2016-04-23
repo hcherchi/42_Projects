@@ -54,4 +54,8 @@ void	init_camera(t_tool *tools)
     tools->rt->sky = NULL;
     tools->rt->vect = NULL;
     tools->rt->pos = NULL;
+    tools->rt->image = NULL;
+    tools->rt->cam = NULL;
+    tools->rt->upcams = NULL;
+    tools->rt->middlecams = NULL;
 }

@@ -1,5 +1,5 @@
 #include <rtv1.h>
-
+#include <stdio.h>
 void		pixel_put_to_image(t_tool *t, int x, int y, t_color *color)
 {
     if(t->rt->screenshot == 0)
@@ -79,33 +79,55 @@ t_color     *get_sky_color(t_ray *ray, t_tool *t)
     return (extract_color(t, t->rt->sky, x, y));
 }
 
+double  get_flash_intens(t_tool *t, t_ray *ray, double lightdist)
+{
+    t_object *curobj;
+    double  intens;
+    
+    intens = 1;
+    curobj = t->rt->l_objects;
+    fill_dist(curobj, ray);
+    while (curobj)
+    {
+        if (curobj->dist != -1 && curobj->dist < lightdist)
+            intens -= (1 - curobj->transp);
+        curobj = curobj->next;
+    }
+    return (intens);
+}
+
 t_color     *get_flash(t_ray *ray, t_tool *t)
 {
     t_light     *light;
     t_color     *flash;
-    t_pos       *flashray;
+    t_ray       *flashray;
     double      angle;
+    double      intens;
+    double      lightdist;
     
     flash = new_color();
     light = t->rt->l_lights;
+    flashray = malloc(sizeof(t_ray));
     while (light)
     {
+        flashray->o = vectorcopy(t->rt->cam->pos);
         if (light->type == SUN || light->type == SPOT)
         {
-            flashray = vectorsub(light->o, ray->o);
-            vectornorm(flashray);
+            flashray->d = vectorsub(light->o, ray->o);
+            vectornorm(flashray->d);
         }
         else if (light->type == LIGHTPLAN)
-            flashray = vectorscale(-1, light->d);
-        angle = vectordot(flashray, ray->d);
-        if (angle > 0 && ((light->type == SPOT && vectordot(vectorscale(-1, flashray), light->d) > light->angle) || light->type != SPOT))
-            flash = add_color(flash, mult_color(light->color, pow(angle, 10)));
+            flashray->d = vectorscale(-1, light->d);
+        angle = vectordot(flashray->d, ray->d);
+        lightdist = sqrtf(pow(light->o->x - t->rt->cam->pos->x, 2) + pow(light->o->y - t->rt->cam->pos->y, 2) + pow(light->o->z - t->rt->cam->pos->z, 2));
+        intens = get_flash_intens(t, ray, lightdist);
+        if (angle > 0 && ((light->type == SPOT && vectordot(vectorscale(-1, flashray->d), light->d) > light->angle) || light->type != SPOT))
+            flash = add_color(flash, mult_color(light->color, pow(angle, 20) * intens));
+        clean_ray(&flashray);
         light = light->next;
     }
     return (flash);
 }
-
-// RECUPER LES 3 COULEURS : BASE REFLETEE REFRACTEE
 
 t_color		*get_color(t_ray *ray, t_tool *t)
 {
