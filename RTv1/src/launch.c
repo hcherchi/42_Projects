@@ -18,7 +18,7 @@ void    launch(char *scene, t_tool *tools)
     else
     {
         tools->error = 0;
-        tools->rt = NULL;
+        clean_rt(&tools->rt);
     }
 }
 
@@ -88,7 +88,7 @@ void run_through(t_tool *t)
 		x = 0;
 		while (x < t->rt->x_res)
 		{
-			draw(t, x, y);
+            draw(t, x, y);
 			x += 1;
 		}
 		y += 1;

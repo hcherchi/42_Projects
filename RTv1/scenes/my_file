@@ -1,0 +1,21 @@
+camera
+{
+	lumamb: 0.3
+	pos: 0 0 -4
+	vect: 0 0 1
+}
+
+light
+{
+	pos: 0 0 -5
+}
+
+object
+{
+	type: PLAN
+	dir: 0 0 -1
+	h: 10
+	texture: textures/parquet.xpm 3000
+	shiny: 1
+	mirror: 0.3
+}

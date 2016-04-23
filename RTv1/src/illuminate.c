@@ -43,8 +43,6 @@ double  get_ray_intens(t_tool *t, t_ray *lightray, t_object *obj)
     return (intens);
 }
 
-
-// A REDUIRE
 t_color     *get_base_color(t_tool *t, t_object *obj, t_ray *impact)
 {
 	t_light		*light;

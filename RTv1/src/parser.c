@@ -76,7 +76,7 @@ void	parser(int fd, t_tool *tools)
 		{
 			c++;
             free(line);
-			parse_camera(tools, fd);
+            parse_camera(tools, fd);
 		}
 		else if (!ft_strcmp(line, "light"))
         {

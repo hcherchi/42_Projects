@@ -67,7 +67,7 @@ void	clean_rt(t_rt **rt)
         clean_cams(&(*rt)->upcams, 5);
     if ((*rt)->middlecams)
         clean_cams(&(*rt)->middlecams, 6);
-    *rt = NULL;
+    //*rt = NULL;
 }
 
 void    clean_image(t_image **image)
