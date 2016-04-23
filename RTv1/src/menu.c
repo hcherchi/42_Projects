@@ -5,7 +5,7 @@ void print_build_menu(t_tool *t)
     mlx_clear_window(t->mlx_ptr, t->m->mlx_win);
     system("open scenes/my_file");
     mlx_clear_window(t->mlx_ptr, t->m->mlx_win);
-    mlx_put_image_to_window(t->mlx_ptr, t->m->mlx_win, t->m->bg->mlx_img, -100, -100);
+    mlx_put_image_to_window(t->mlx_ptr, t->m->mlx_win, t->m->bg->mlx_img, 0, 0);
     mlx_string_put(t->mlx_ptr, t->m->mlx_win, t->m->y_res/2, t->m->x_res/2 -100, 0x0000CC00, "STEP 1 : BUILT AND SAVE");
     mlx_string_put(t->mlx_ptr, t->m->mlx_win, t->m->y_res/2, t->m->x_res/2 -70, 0x0000CC00, "STEP 2 : PRESS 'ENTER' TO LAUNCH YOUR SCENE");
     mlx_string_put(t->mlx_ptr, t->m->mlx_win, 50, 50, 0x00FF0000, "Press DELETE to go back to menu");
