@@ -26,7 +26,7 @@ t_ray	*get_lightray(t_ray *impact, t_light *light)
     vectornorm(lightray->d);
     if (light->type == SPOT && vectordot(lightray->d, light->d) < light->angle)
     {
-        clean_ray(lightray);
+        clean_ray(&lightray);
         return (NULL);
     }
     return (lightray);

@@ -252,17 +252,17 @@ void                init_cams(t_tool *t);
 int					rt_event(int keycode, t_tool *t);
 
 // CLEANING
-void				clean_ray(t_ray *ray);
-void				clean_obj(t_object *l_objects);
-void				clean_lights(t_light *l_lights);
-void				clean_cam(t_cam *cam);
-void				clean_tools(t_tool *tools);
-void                clean_colors(t_colors *colors);
-void                clean_cams(t_cam **cams, int nb);
-void                clean_image(t_image *image);
+void				clean_ray(t_ray **ray);
+void				clean_obj(t_object **l_objects);
+void				clean_lights(t_light **l_lights);
+void				clean_cam(t_cam **cam);
+void				clean_tools(t_tool **tools);
+void                clean_colors(t_colors **colors);
+void                clean_cams(t_cam ***cams, int nb);
+void                clean_image(t_image **image);
 void                clean_tab(char **tab);
-void                clean_menu(t_menu *m);
-void                clean_rt(t_rt *rt);
+void                clean_menu(t_menu **m);
+void                clean_rt(t_rt **rt);
 
 // MENU
 void                init_menu(t_tool *tools);
