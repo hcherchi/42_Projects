@@ -77,7 +77,7 @@ void	scene_menu(int keycode, t_tool *t)
 		launch("scenes/room1", t);
 	if (keycode == 21)
 		launch("scenes/speciale", t);
-    else if (keycode == 22)
+    if (keycode == 23)
     {
         system("open scenes/my_file");
         launch("scenes/my_file", t);

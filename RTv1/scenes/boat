@@ -2,7 +2,7 @@ camera
 {
 	lumamb: 0.2
 	res: 1000 1000
-	skybox: textures/skybox/space.xpm
+	skybox: textures/skybox/boat.xpm
 }
 
 object
@@ -12,4 +12,5 @@ object
 	rayon: 1.3
 	shiny: 0
 	color: 200 0 0
+	mirror: 1
 }
