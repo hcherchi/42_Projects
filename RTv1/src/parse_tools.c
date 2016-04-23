@@ -8,7 +8,10 @@ t_image     *fill_texture(char *file, t_tool *t)
     texture->texture = ft_strdup(file);
     texture->mlx_img = mlx_xpm_file_to_image(t->mlx_ptr, texture->texture, &texture->width, &texture->height);
     if (texture->mlx_img == NULL)
+    {
         ft_error(11, t);
+        return (NULL);
+    }
     texture->data = mlx_get_data_addr(texture->mlx_img, &texture->bpp, &texture->size_line, &texture->endian);
     return (texture);
 }

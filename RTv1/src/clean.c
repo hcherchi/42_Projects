@@ -67,7 +67,7 @@ void	clean_rt(t_rt **rt)
         clean_cams(&(*rt)->upcams, 5);
     if ((*rt)->middlecams)
         clean_cams(&(*rt)->middlecams, 6);
-    //*rt = NULL;
+    *rt = NULL;
 }
 
 void    clean_image(t_image **image)
@@ -130,7 +130,7 @@ void    clean_cams(t_cam ***cams, int nb)
     i = 0;
     while (i < nb)
     {
-        clean_cam(cams[i]);
+        clean_cam(&(*cams)[i]);
         i++;
     }
 }
@@ -224,7 +224,10 @@ void	clean_obj(t_object **l_objects)
             tmp->d = NULL;
         }
         if (tmp->texture)
+        {
+            ft_putendl("Yo");
             clean_image(&tmp->texture);
+        }
         if (tmp)
         {
     		free(tmp);
