@@ -22,8 +22,37 @@ t_color     *get_texture_color(t_object *object, t_ray *impact, t_tool *t)
     double x;
     double y;
     t_color *color;
+    double tmp;
+    double div;
     
-    if (object->type == SPHERE)
+    if (object->type == PLAN)
+    {
+        if (fabs(object->d->y) == 1)
+        {
+            x = impact->o->x * object->texture_zoom;
+            y = -impact->o->z * object->texture_zoom;
+        }
+        else if (fabs(object->d->z) == 1)
+        {
+            x = impact->o->x * object->texture_zoom;
+            y = -impact->o->y * object->texture_zoom;
+        }
+        else if (fabs(object->d->x) == 1)
+        {
+            x = -impact->o->z * object->texture_zoom;
+            y = -impact->o->y * object->texture_zoom;
+        }
+        else
+            return (mult_color(object->color, 1));
+        tmp = y / object->texture->height;
+        div = floor(tmp);
+        y = (tmp - div) * object->texture->height;
+        tmp = x / object->texture->width;
+        div = floor(tmp);
+        x = (tmp - div) * object->texture->height;
+        color = extract_color(t, object->texture, x, y);
+    }
+    else if (object->type == SPHERE)
     {
         x = (0.5 + (atan2(impact->d->z, impact->d->x) / (2 * M_PI))) * object->texture->width;
         y = (0.5 - asin(impact->d->y) / M_PI) * object->texture->height;

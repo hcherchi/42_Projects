@@ -88,7 +88,7 @@ void run_through(t_tool *t)
 		x = 0;
 		while (x < t->rt->x_res)
 		{
-			draw(t, x, y);
+            draw(t, x, y);
 			x += 1;
 		}
 		y += 1;

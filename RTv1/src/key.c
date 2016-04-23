@@ -29,7 +29,7 @@ int		rt_event(int k, t_tool *t)
             t->rt->cam = t->rt->upcams[t->rt->cam->nb];
         else if (k == 125 && t->rt->cam->nb != 5)
             t->rt->cam = t->rt->middlecams[t->rt->cam->nb];
-        mlx_clear_window(t->mlx_ptr, t->m->mlx_win);
+        mlx_clear_window(t->mlx_ptr, t->rt->mlx_win);
         run_through(t);
     }
     if (k == 53)

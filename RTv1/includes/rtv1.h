@@ -81,6 +81,7 @@ typedef struct		s_object
 	t_pos			*o;
 	t_pos			*d;
     t_image			*texture;
+    double          texture_zoom;
 	double			rad;
 	double			h;
 	double			shiny;
@@ -158,7 +159,6 @@ typedef struct		s_tool
     t_menu          *m;
 	int				m_load_cursor;
 	int             error;
-    int             no_error;
 }					t_tool;
 
 // INTERSECTIONS
@@ -169,8 +169,8 @@ double				intersection_plan(t_pos *dir, double h, t_pos *oray, t_pos *dray);
 double				intersection_sphere(t_object *sphere, t_ray *ray);
 double				intersection_cone(t_object *cone, t_ray *ray);
 double				intersection_cyl(t_object *cyl, t_ray *ray);
-double	intersection_para(t_object *para, t_ray *ray);
-void    get_para_normal(t_ray *impact, t_object *object); // HAHAHAHAHA PARANORMAL HAHAHA
+double              intersection_para(t_object *para, t_ray *ray);
+void                get_para_normal(t_ray *impact, t_object *object); // HAHAHAHAHA PARANORMAL HAHAHA
 
 // DRAW
 void				draw(t_tool *t, int x, int y);

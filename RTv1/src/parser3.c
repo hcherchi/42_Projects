@@ -76,8 +76,13 @@ void    parse_object3(char *line, t_object *object, char **split, t_tool *tools)
 {
     if (ft_strstr(line, "texture:"))
     {
-        if (ft_tablen(split) == 2)
-        object->texture = fill_texture(split[1], tools);
+        if (ft_tablen(split) == 3)
+        {
+            object->texture = fill_texture(split[1], tools);
+            if (str_digit(split[2]))
+                ft_error(2, tools);
+            object->texture_zoom = ft_atof(split[2]);
+        }
         else
             ft_error(7, tools);
     }
