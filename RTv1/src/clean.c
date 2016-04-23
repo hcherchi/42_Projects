@@ -89,7 +89,9 @@ void    clean_image(t_image **image)
     }
     if ((*image)->screen)
     {
+        ft_putendl("Ya un screen");
         free((*image)->screen);
+        ft_putendl("Ya un screen");
         (*image)->screen = NULL;
     }
     if (*image)

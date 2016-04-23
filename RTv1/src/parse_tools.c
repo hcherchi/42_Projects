@@ -13,6 +13,7 @@ t_image     *fill_texture(char *file, t_tool *t)
         return (NULL);
     }
     texture->data = mlx_get_data_addr(texture->mlx_img, &texture->bpp, &texture->size_line, &texture->endian);
+    texture->screen = NULL;
     return (texture);
 }
 
