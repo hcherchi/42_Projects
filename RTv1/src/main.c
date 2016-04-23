@@ -6,7 +6,7 @@ void    init_menu(t_tool *tools)
     tools->m->y_res = 600;
     tools->m->mlx_win = mlx_new_window(tools->mlx_ptr, tools->m->x_res, tools->m->y_res, "RT");
     tools->m->bg = malloc(sizeof(t_image));
-    tools->m->bg->texture = ft_strdup("textures/blue_background.xpm");
+    tools->m->bg->texture = ft_strdup("textures/menu/blue_background.xpm");
     tools->m->bg->mlx_img = mlx_xpm_file_to_image(tools->mlx_ptr, tools->m->bg->texture, &tools->m->bg->width, &tools->m->bg->height);
     if (tools->m->bg->mlx_img == NULL)
     {
