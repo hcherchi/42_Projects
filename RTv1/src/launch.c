@@ -18,7 +18,7 @@ void    launch(char *scene, t_tool *tools)
     else
     {
         tools->error = 0;
-        tools->rt = NULL;
+        clean_rt(&tools->rt);
     }
 }
 

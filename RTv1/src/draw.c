@@ -60,7 +60,7 @@ t_color     *get_final_color(t_colors   *colors, t_object *object)
     if (colors->refract)
         final_color = add_color(final_color, mult_color(colors->refract, object->transp));
     final_color = add_color(final_color, mult_color(colors->base, kbase));
-    clean_colors(colors);
+    clean_colors(&colors);
     return (final_color);
 }
 
@@ -123,7 +123,7 @@ t_color		*get_color(t_ray *ray, t_tool *t)
             colors->reflect = get_color(get_reflectray(ray, t, impact), t);
         if (object->transp)
             colors->refract = get_color(get_refractray(ray, impact, object), t);
-        clean_ray(impact);
+        clean_ray(&impact);
         final_color = get_final_color(colors, object);
 	}
     else
@@ -134,6 +134,6 @@ t_color		*get_color(t_ray *ray, t_tool *t)
             final_color = new_color();
     }
     final_color = add_color(final_color, get_flash(ray, t));
-    clean_ray(ray);
+    clean_ray(&ray);
     return (final_color);
 }
