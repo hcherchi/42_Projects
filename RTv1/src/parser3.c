@@ -26,6 +26,8 @@ void	parse_object(t_tool *tools, int fd)
 		}
         else
             parse_object2(line, object, split, tools);
+        if (object->mirror + object->transp > 1)
+            ft_error(15, tools);
         clean_tab(split);
         free(line);
 	}
@@ -41,6 +43,8 @@ void    parse_object2(char *line, t_object *object, char **split, t_tool *tools)
         {
             if (str_digit(split[1]))
                 ft_error(2, tools);
+            if (ft_atof(split[1]) > 1 || ft_atof(split[1]) < 0)
+                ft_error(14, tools);
             object->mirror = ft_atof(split[1]);
         }
         else
@@ -63,6 +67,8 @@ void    parse_object2(char *line, t_object *object, char **split, t_tool *tools)
         {
             if (str_digit(split[1]))
                 ft_error(2, tools);
+            if (ft_atof(split[1]) > 1 || ft_atof(split[1]) < 0)
+                ft_error(14, tools);
             object->transp = ft_atof(split[1]);
         }
         else
