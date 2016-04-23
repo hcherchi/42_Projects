@@ -3,23 +3,23 @@
 
 void    launch(char *scene, t_tool *tools)
 {
-    if (tools->rt)
-    {
-        mlx_destroy_window(tools->mlx_ptr, tools->rt->mlx_win);
-        tools->rt = NULL;
-    }
-    parser(open(scene, O_RDONLY), tools);
-    if (tools->error == 0)
-    {
-        init_param(tools);
-        init_cams(tools);
-        run_through(tools);
-    }
-    else
-    {
-        tools->error = 0;
-        clean_rt(&tools->rt);
-    }
+	if (tools->rt)
+	{
+		mlx_destroy_window(tools->mlx_ptr, tools->rt->mlx_win);
+		tools->rt = NULL;
+	}
+	parser(open(scene, O_RDONLY), tools);
+	if (tools->error == 0)
+	{
+		init_param(tools);
+		init_cams(tools);
+		run_through(tools);
+	}
+	else
+	{
+		tools->error = 0;
+		clean_rt(&tools->rt);
+	}
 }
 
 void	init_param(t_tool *t)
@@ -36,6 +36,13 @@ void	init_param(t_tool *t)
 			&t->rt->image->size_line, &t->rt->image->endian);
 	t->rt->image->texture = NULL;
 	t->rt->image->screen = NULL;
+
+	t->rt->image_loading = malloc(sizeof(t_image));
+	t->rt->image_loading->mlx_img = mlx_new_image(t->mlx_ptr, t->rt->x_res, t->rt->y_res);
+	t->rt->image_loading->data = mlx_get_data_addr(t->rt->image_loading->mlx_img, &t->rt->image_loading->bpp,
+	&t->rt->image_loading->size_line, &t->rt->image_loading->endian);
+	t->rt->image_loading->texture = NULL;
+	t->rt->image_loading->screen = NULL;
 }
 
 void    init_cams(t_tool *t)
@@ -83,12 +90,14 @@ void run_through(t_tool *t)
 	int y;
 
 	y = 0;
+	mlx_string_put(t->mlx_ptr, t->rt->mlx_win, t->rt->x_res/2 - 50, t->rt->y_res/2, 0xFFFFFFFF, "RT is loading...");
+	mlx_put_image_to_window(t->mlx_ptr, t->rt->mlx_win, t->rt->image->mlx_img, 0, 0);
 	while (y < t->rt->y_res)
 	{
 		x = 0;
 		while (x < t->rt->x_res)
 		{
-            draw(t, x, y);
+			draw(t, x, y);
 			x += 1;
 		}
 		y += 1;

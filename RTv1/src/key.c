@@ -1,8 +1,20 @@
 #include <rtv1.h>
 
+void		rt_event_light(int k, t_tool *t)
+{
+	if (k == 69)
+		modif_all_lights(t, -0.55);
+	else if (k == 78)
+		modif_all_lights(t, 0.55);
+	else if (k == 24)
+		modif_lumamb(t, 0.25);
+	else if (k == 27)
+		modif_lumamb(t, -0.25);	
+}
+
 int		rt_event(int k, t_tool *t)
 {
-    if (k == 35)
+	if (k == 35)
     {
         t->rt->image->screen = malloc(sizeof(unsigned char) * (3 * t->rt->x_res * t->rt->y_res));
         t->rt->screenshot = 1;
@@ -11,8 +23,11 @@ int		rt_event(int k, t_tool *t)
         free(t->rt->image->screen);
         t->rt->image->screen = NULL;
     }
-    else if (k == 82 || k == 84 || k == 86 || k == 87 || k == 88 || k == 91 || k == 126 || k == 125)
+    else if (k == 82 || k == 84 || k == 86 || k == 87 || k == 88
+			|| k == 91 || k == 126 || k == 125 || k == 69 || k == 78
+			|| k == 24 || k == 27)
     {
+		rt_event_light(k, t);
         if (k == 82)
             t->rt->cam = t->rt->middlecams[5];
         else if (k == 84)
@@ -52,6 +67,8 @@ void	start_menu(int keycode, t_tool *t)
 
 void	scene_menu(int keycode, t_tool *t)
 {
+	if (keycode == 18 || keycode == 19 || keycode == 20 || keycode == 21)
+	//	mlx_string_put(t->mlx_ptr, t->rt->mlx_win, t->rt->x_res/2, t->rt->y_res/2, 0x009933FF, "Please wait whi    le RT is loading");
     if (keycode == 18)
 		launch("scenes/new", t);
 	if (keycode == 19)
