@@ -19,6 +19,8 @@ void	parse_camera(t_tool *tools, int fd)
 			{
 				if (str_digit(split[1]) || str_digit(split[2]))
 					ft_error(2, tools);
+				if(ft_atof(split[1]) > 2000 || ft_atof(split[2]) > 1300)
+					ft_error(13, tools);
 				if (ft_atoi(split[1]) < 0 || ft_atoi(split[2]) < 0)
 					ft_error(8, tools);
 				tools->rt->x_res = ft_atoi(split[1]);

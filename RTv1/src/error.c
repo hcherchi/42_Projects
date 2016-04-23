@@ -32,5 +32,7 @@ void	ft_error(int i, t_tool *tools)
         ft_putendl("Invalid texture");
     else if (i == 12)
         ft_putendl("Error, bad type of object.\n");
+    else if (i == 13)
+    	ft_putendl("Error, Resolution can't be superior at 2000*1300\n");
     tools->error = 1;
 }
