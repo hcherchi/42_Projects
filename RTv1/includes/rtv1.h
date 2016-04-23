@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 14:56:14 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/04/22 19:29:26 by vnguyen          ###   ########.fr       */
+/*   Updated: 2016/04/23 17:08:06 by vnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,8 @@ typedef struct      s_rt
     t_object		*l_objects;
     t_light			*l_lights;
     t_image			*image;
-    t_image         *sky;
+    t_image			*image_loading;
+	t_image         *sky;
     t_cam			*cam;
     t_cam           **upcams;
     t_cam           **middlecams;
@@ -275,5 +276,7 @@ int                 menu_event(int keycode, t_tool *t);
 int					ft_menu_mouse_handler( int x, int y, void *param);
 int					ft_menu_click_handler(int keycode, int x, int y, t_tool *t);
 void				scene_menu(int keycode, t_tool *t);
+void				modif_all_lights(t_tool *k, double value);
+void				modif_lumamb(t_tool *k, double value);
 
 #endif

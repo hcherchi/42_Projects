@@ -6,7 +6,7 @@
 #    By: bgantelm <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/18 17:05:54 by bgantelm          #+#    #+#              #
-#    Updated: 2016/04/22 19:29:01 by vnguyen          ###   ########.fr        #
+#    Updated: 2016/04/23 16:15:48 by vnguyen          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -16,7 +16,7 @@ INC_DIR = includes
 SRC_DIR = src
 OBJ_DIR = obj
 
-SRCS = src/main.c src/parse_tools.c src/parser.c src/draw.c src/inter.c src/normal.c src/vector.c src/color.c src/error.c src/init.c src/vector2.c src/illuminate.c src/key.c src/clean.c src/parser2.c src/rays.c src/inter2.c src/texture.c src/menu.c src/launch.c src/parser3.c
+SRCS = src/main.c src/parse_tools.c src/parser.c src/draw.c src/inter.c src/normal.c src/vector.c src/color.c src/error.c src/init.c src/vector2.c src/illuminate.c src/key.c src/clean.c src/parser2.c src/rays.c src/inter2.c src/texture.c src/menu.c src/launch.c src/parser3.c src/key_lights.c
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 IFLAGS = -I $(INC_DIR) -I libft/includes -I ~/mlx
