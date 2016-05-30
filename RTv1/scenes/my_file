@@ -1,8 +1,8 @@
 camera
 {
 	lumamb: 0.1
-	res: 1000 800
-	skybox: textures/skybox/boat.xpm
+	res: 600 600
+	skybox: textures/skybox/jungle.xpm
 	vect: -1 -1 1
 	pos: 5 5 -5
 }
@@ -14,9 +14,9 @@ light
 
 object
 {
-	type: SPHERE
+	type: CONE
 	pos: 0 0 0
-	rayon: 1.6
-	shiny: 1
+	rayon: 0.2
+	h: 0.4
 	mirror: 1
 }
