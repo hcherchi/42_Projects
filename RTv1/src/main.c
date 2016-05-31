@@ -6,7 +6,7 @@
 /*   By: vnguyen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 19:54:12 by vnguyen           #+#    #+#             */
-/*   Updated: 2016/05/31 19:54:13 by vnguyen          ###   ########.fr       */
+/*   Updated: 2016/05/31 20:09:05 by vnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int	main(void)
 	tools->rt = NULL;
 	tools->m->x_res = 400;
 	tools->m->y_res = 1150;
-	tools->m->mlx_win = mlx_new_window(tools->mlx_ptr, tools->m->x_res, tools->m->y_res, "RT");
+	tools->m->mlx_win = mlx_new_window(tools->mlx_ptr,
+			tools->m->x_res, tools->m->y_res, "RT");
 	print_scene_menu(tools);
 	tools->m->bg->screen = NULL;
 	tools->error = 0;
