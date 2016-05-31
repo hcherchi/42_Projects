@@ -6,47 +6,46 @@
 /*   By: vnguyen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 19:32:10 by vnguyen           #+#    #+#             */
-/*   Updated: 2016/05/31 19:46:10 by vnguyen          ###   ########.fr       */
+/*   Updated: 2016/05/31 22:47:01 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <rtv1.h>
 
-t_ray	*ft_free_perso(t_ray *lightray)
+t_ray	*ft_free_perso(t_ray *l)
 {
-	free(lightray->d);
-	free(lightray);
+	free(l->d);
+	free(l);
 	return (NULL);
 }
 
 t_ray	*get_lightray(t_ray *impact, t_light *light)
 {
-	t_ray	*lightray;
+	t_ray	*l;
 	float	dist;
 
-	lightray = malloc(sizeof(t_ray));
+	l = malloc(sizeof(t_ray));
 	if (light->type == SUN || light->type == SPOT)
 	{
-		lightray->o = vectorcopy(light->o);
-		lightray->d = vectorsub(impact->o, lightray->o);
+		l->o = vectorcopy(light->o);
+		l->d = vectorsub(impact->o, l->o);
 	}
 	else if (light->type == LIGHTPLAN)
 	{
-		lightray->d = vectorcopy(light->d);
-		if ((dist = intersection_plan(light->d, light->h,
-						impact->o, vectorscale(-1, lightray->d))) != -1)
-			lightray->o = vectoradd(impact->o,
-					vectorscale(dist, vectorscale(-1, lightray->d)));
+		l->d = vectorcopy(light->d);
+		if ((dist = intersection_plan(light->d, light->h, impact->o,
+					vectorscale(-1, l->d))) != -1)
+			l->o = v(impact->o, vectorscale(dist, vectorscale(-1, l->d)));
 		else
-			return (ft_free_perso(lightray));
+			return (ft_free_perso(l));
 	}
-	vectornorm(lightray->d);
-	if (light->type == SPOT && vectordot(lightray->d, light->d) < light->angle)
+	vectornorm(l->d);
+	if (light->type == SPOT && vectordot(l->d, light->d) < light->angle)
 	{
-		clean_ray(&lightray);
+		clean_ray(&l);
 		return (NULL);
 	}
-	return (lightray);
+	return (l);
 }
 
 t_ray	*get_ray(t_tool *t, double x, double y)

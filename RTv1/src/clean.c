@@ -6,7 +6,7 @@
 /*   By: vnguyen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 19:21:34 by vnguyen           #+#    #+#             */
-/*   Updated: 2016/05/31 19:21:35 by vnguyen          ###   ########.fr       */
+/*   Updated: 2016/05/31 22:48:31 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,10 @@ void	clean_rt(t_rt **rt)
 		clean_obj(&(*rt)->l_objects);
 	if ((*rt)->l_lights)
 		clean_lights(&(*rt)->l_lights);
-	if ((*rt)->upcams)
-		clean_cams(&(*rt)->upcams, 4);
-	if ((*rt)->middlecams)
-		clean_cams(&(*rt)->middlecams, 5);
+	if ((*rt)->up)
+		clean_cams(&(*rt)->up, 4);
+	if ((*rt)->mid)
+		clean_cams(&(*rt)->mid, 5);
 	*rt = NULL;
 }
 
