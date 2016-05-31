@@ -1,46 +1,5 @@
 #include <rtv1.h>
 
-t_image		*fill_texture(char *file, t_tool *t)
-{
-	t_image *texture;
-
-	texture = malloc(sizeof(t_image));
-	texture->texture = ft_strdup(file);
-	texture->mlx_img = mlx_xpm_file_to_image(t->mlx_ptr,
-	texture->texture, &texture->width, &texture->height);
-	if (texture->mlx_img == NULL)
-	{
-		ft_error(11, t);
-		return (NULL);
-	}
-	texture->data = mlx_get_data_addr(texture->mlx_img,
-	&texture->bpp, &texture->size_line, &texture->endian);
-	texture->screen = NULL;
-	return (texture);
-}
-
-int			object_type(char **split, t_tool *tools)
-{
-	if (ft_tablen(split) == 2)
-	{
-		if (!ft_strcmp(split[1], "SPHERE"))
-			return (0);
-		else if (!ft_strcmp(split[1], "CYL"))
-			return (1);
-		else if (!ft_strcmp(split[1], "CONE"))
-			return (2);
-		else if (!ft_strcmp(split[1], "PLAN"))
-			return (3);
-		else if (!ft_strcmp(split[1], "PARA"))
-			return (4);
-		else
-			ft_error(5, tools);
-	}
-	else
-		ft_error(7, tools);
-	return (0);
-}
-
 int			light_type(char **split, t_tool *tools)
 {
 	if (ft_tablen(split) == 2)
