@@ -6,15 +6,15 @@
 /*   By: vnguyen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 19:53:59 by vnguyen           #+#    #+#             */
-/*   Updated: 2016/05/31 21:44:21 by bgantelm         ###   ########.fr       */
+/*   Updated: 2016/05/31 21:49:08 by bgantelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <rtv1.h>
 
-double      minimum(t_object *l_objects)
+double		minimum(t_object *l_objects)
 {
-	double  min;
+	double	min;
 
 	min = 200000;
 	while (l_objects != NULL)
@@ -26,10 +26,10 @@ double      minimum(t_object *l_objects)
 	return (min);
 }
 
-t_object    *intersection(t_object *l_objects, t_ray *ray)
+t_object	*intersection(t_object *l_objects, t_ray *ray)
 {
-	t_object    *tmp;
-	double      min;
+	t_object	*tmp;
+	double		min;
 
 	fill_dist(l_objects, ray);
 	tmp = l_objects;
@@ -66,13 +66,21 @@ void		fill_dist(t_object *l_objects, t_ray *ray)
 	}
 }
 
-double		calcul_cone(t_object *cone, t_ray *ray, double k, t_equation param, t_pos *tmp)
+double		calcul_cone(t_object *cone, t_ray *ray, double k, t_pos *tmp)
 {
-	param.b = 2 * (ray->d->x * tmp->x + (ray->d->y)* tmp->y + ray->d->z * tmp->z) - (2 * (cone->d->x * ray->d->x
-				+ cone->d->y * ray->d->y + cone->d->z * ray->d->z)
-				* (cone->d->x * tmp->x + cone->d->y * tmp->y + cone->d->z * tmp->z))
-				- (2 * (cone->d->x * ray->d->x + cone->d->y * ray->d->y + cone->d->z
-				* ray->d->z) * (cone->d->x * tmp->x + cone->d->y * tmp->y
+	t_equation	param;
+
+	param.b = 2 * (ray->d->x * tmp->x + (ray->d->y)
+				* tmp->y + ray->d->z * tmp->z)
+				- (2 * (cone->d->x * ray->d->x
+				+ cone->d->y * ray->d->y + cone->d->z
+				* ray->d->z)
+				* (cone->d->x * tmp->x + cone->d->y * tmp->y
+				+ cone->d->z * tmp->z))
+				- (2 * (cone->d->x * ray->d->x + cone->d->y
+				* ray->d->y + cone->d->z
+				* ray->d->z) * (cone->d->x * tmp->x
+				+ cone->d->y * tmp->y
 				+ cone->d->z * tmp->z) * k);
 	return (param.b);
 }

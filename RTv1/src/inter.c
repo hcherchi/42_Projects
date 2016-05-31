@@ -6,7 +6,7 @@
 /*   By: vnguyen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 19:53:55 by vnguyen           #+#    #+#             */
-/*   Updated: 2016/05/31 21:39:15 by bgantelm         ###   ########.fr       */
+/*   Updated: 2016/05/31 22:02:03 by bgantelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,16 +109,14 @@ double	intersection_cone(t_object *cone, t_ray *ray)
 	tmp = vectorsub(ray->o, cone->o);
 	k = pow(cone->rad / cone->h, 2);
 	param.a = vectordot(ray->d, ray->d) - pow(cone->d->x * ray->d->x
-		+ cone->d->y * ray->d->y + cone->d->z * ray->d->z, 2)
-		- pow(cone->d->x * ray->d->x
-		+ cone->d->y * ray->d->y + cone->d->z * ray->d->z, 2) * k;
+	+ cone->d->y * ray->d->y + cone->d->z * ray->d->z, 2)
+	- pow(cone->d->x * ray->d->x + cone->d->y * ray->d->y
+	+ cone->d->z * ray->d->z, 2) * k;
 	param.b = calcul_cone(cone, ray, k, param, tmp);
 	param.c = tmp->x * tmp->x + tmp->z * tmp->z + tmp->y * tmp->y
-		- pow(cone->d->x * tmp->x + cone->d->y * tmp->y
-		+ cone->d->z * tmp->z, 2)
-		- pow(cone->d->x * tmp->x + cone->d->y * tmp->y
-		+ cone->d->z * tmp->z, 2) * k;
-	free(tmp);
+	- pow(cone->d->x * tmp->x + cone->d->y * tmp->y + cone->d->z
+	* tmp->z, 2) - pow(cone->d->x * tmp->x + cone->d->y * tmp->y
+	+ cone->d->z * tmp->z, 2) * k;
 	param.discr = param.b * param.b - 4 * param.a * param.c;
 	if (param.discr < E)
 		return (-1);
