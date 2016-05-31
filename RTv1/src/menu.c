@@ -28,6 +28,8 @@ void print_scene_menu(t_tool *t)
 	t->m->bg->data = mlx_get_data_addr(t->m->bg->mlx_img, &t->m->bg->bpp, &t->m->bg->size_line, &t->m->bg->endian);
 	mlx_put_image_to_window(t->mlx_ptr, t->m->mlx_win, t->m->bg->mlx_img, -500, -300);
 
+	ft_verif(t,ft_strdup("miniature/logo_rt.xpm"));
+	mlx_put_image_to_window(t->mlx_ptr, t->m->mlx_win,  mlx_xpm_file_to_image(t->mlx_ptr,ft_strdup("miniature/logo_rt.xpm"), &t->m->bg->width, &t->m->bg->height),100, 10);
 	ft_verif(t,ft_strdup("miniature/point.xpm"));
 	mlx_put_image_to_window(t->mlx_ptr, t->m->mlx_win,  mlx_xpm_file_to_image(t->mlx_ptr,ft_strdup("miniature/point.xpm"), &t->m->bg->width, &t->m->bg->height),60, 980);
 	ft_verif(t,ft_strdup("miniature/new.xpm"));
@@ -83,6 +85,8 @@ void print_group_menu(t_tool *t)
 	t->m->bg->mlx_img = mlx_xpm_file_to_image(t->mlx_ptr, t->m->bg->texture, &t->m->bg->width, &t->m->bg->height);
 	t->m->bg->data = mlx_get_data_addr(t->m->bg->mlx_img, &t->m->bg->bpp, &t->m->bg->size_line, &t->m->bg->endian);
 	mlx_put_image_to_window(t->mlx_ptr, t->m->mlx_win, t->m->bg->mlx_img, -500, -300);
+	ft_verif(t,ft_strdup("miniature/logo_rt.xpm"));
+	mlx_put_image_to_window(t->mlx_ptr, t->m->mlx_win,  mlx_xpm_file_to_image(t->mlx_ptr,ft_strdup("miniature/logo_rt.xpm"), &t->m->bg->width, &t->m->bg->height),100, 10);
 	ft_verif(t,ft_strdup("miniature/hcherchi.xpm"));
 	mlx_put_image_to_window(t->mlx_ptr, t->m->mlx_win,  mlx_xpm_file_to_image(t->mlx_ptr,ft_strdup("miniature/hcherchi.xpm"), &t->m->bg->width, &t->m->bg->height),160, 180);
 	ft_verif(t,ft_strdup("miniature/bgantelm.xpm"));
