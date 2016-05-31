@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 14:56:14 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/05/31 21:31:07 by fhenri           ###   ########.fr       */
+/*   Updated: 2016/05/31 21:40:19 by bgantelm         ###   ########.fr       */
 /*   Updated: 2016/05/31 19:22:43 by vnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -166,6 +166,7 @@ typedef struct		s_tool
 // INTERSECTIONS
 double				minimum(t_object *l_objects);
 void				fill_dist(t_object *l_objects, t_ray *ray);
+double			calcul_cone(t_object *cone, t_ray *ray, double k, t_equation param, t_pos *tmp);
 t_object			*intersection(t_object *l_objects, t_ray *ray);
 double				intersection_plan(t_pos *dir, double h, t_pos *oray, t_pos *dray);
 double				intersection_sphere(t_object *sphere, t_ray *ray);
