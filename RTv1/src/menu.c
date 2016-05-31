@@ -3,7 +3,7 @@
 void print_scene_menu(t_tool *t)
 {
 	mlx_clear_window(t->mlx_ptr, t->m->mlx_win);
-	t->m->bg->texture = ft_strdup("textures/menu/background.xpm");
+	t->m->bg->texture = ft_strdup("textures/menu/background3.xpm");
 	t->m->bg->mlx_img = mlx_xpm_file_to_image(t->mlx_ptr, t->m->bg->texture, &t->m->bg->width, &t->m->bg->height);
 	t->m->bg->data = mlx_get_data_addr(t->m->bg->mlx_img, &t->m->bg->bpp, &t->m->bg->size_line, &t->m->bg->endian);
 	mlx_put_image_to_window(t->mlx_ptr, t->m->mlx_win, t->m->bg->mlx_img, 0, 0);
@@ -44,26 +44,31 @@ void print_scene_menu(t_tool *t)
 void print_group_menu(t_tool *t)
 {
 	mlx_clear_window(t->mlx_ptr, t->m->mlx_win);
-	t->m->bg->texture = ft_strdup("textures/menu/rtmenu_minimal-61664251.xpm");
+	t->m->bg->texture = ft_strdup("textures/menu/background3.xpm");
 	t->m->bg->mlx_img = mlx_xpm_file_to_image(t->mlx_ptr, t->m->bg->texture, &t->m->bg->width, &t->m->bg->height);
 	t->m->bg->data = mlx_get_data_addr(t->m->bg->mlx_img, &t->m->bg->bpp, &t->m->bg->size_line, &t->m->bg->endian);
 	mlx_put_image_to_window(t->mlx_ptr, t->m->mlx_win, t->m->bg->mlx_img, 0, 0);
-    mlx_string_put(t->mlx_ptr, t->m->mlx_win, 20, 100, 0x0099FF00, "Hugo Cherchi - Hcherchi");
-    mlx_string_put(t->mlx_ptr, t->m->mlx_win, 20, 130, 0x0099FF00, "hcherchi@student.42.fr");
-    mlx_string_put(t->mlx_ptr, t->m->mlx_win, 20, 200, 0x0099FF00, "Bruno Gantelmi - Bgantelm");
-    mlx_string_put(t->mlx_ptr, t->m->mlx_win, 20, 230, 0x0099FF00, "bgantelm@student.42.fr");
-    mlx_string_put(t->mlx_ptr, t->m->mlx_win, 20, 300, 0x0099FF00, "Vincent Nguyen - Vnguyen");
-    mlx_string_put(t->mlx_ptr, t->m->mlx_win, 20, 330, 0x0099FF00, "vnguyen@student.42.fr");
-    mlx_string_put(t->mlx_ptr, t->m->mlx_win, 20, 400, 0x0099FF00, "Floren Henri - Fhenri");
-    mlx_string_put(t->mlx_ptr, t->m->mlx_win, 20, 430, 0x0099FF00, "fhenri@student.42.fr");
-    mlx_string_put(t->mlx_ptr, t->m->mlx_win, 20, 550, 0x00FF9966, "Press DELETE to go back to menu");
+	mlx_put_image_to_window(t->mlx_ptr, t->m->mlx_win,  mlx_xpm_file_to_image(t->mlx_ptr,ft_strdup("miniature/hcherchi.xpm"), &t->m->bg->width, &t->m->bg->height),160, 180);
+	mlx_put_image_to_window(t->mlx_ptr, t->m->mlx_win,  mlx_xpm_file_to_image(t->mlx_ptr,ft_strdup("miniature/bgantelm.xpm"), &t->m->bg->width, &t->m->bg->height),160, 380);
+	mlx_put_image_to_window(t->mlx_ptr, t->m->mlx_win,  mlx_xpm_file_to_image(t->mlx_ptr,ft_strdup("miniature/vnguyen.xpm"), &t->m->bg->width, &t->m->bg->height),160, 580);
+	mlx_put_image_to_window(t->mlx_ptr, t->m->mlx_win,  mlx_xpm_file_to_image(t->mlx_ptr,ft_strdup("miniature/fhenri.xpm"), &t->m->bg->width, &t->m->bg->height),160, 780);
+ 	mlx_put_image_to_window(t->mlx_ptr, t->m->mlx_win,  mlx_xpm_file_to_image(t->mlx_ptr,ft_strdup("miniature/go_back.xpm"), &t->m->bg->width, &t->m->bg->height),100, 910);
+ 	mlx_put_image_to_window(t->mlx_ptr, t->m->mlx_win,  mlx_xpm_file_to_image(t->mlx_ptr,ft_strdup("miniature/copy.xpm"), &t->m->bg->width, &t->m->bg->height),120, 990);
+    mlx_string_put(t->mlx_ptr, t->m->mlx_win, 80, 100, 0x0099FF00, "Hugo Cherchi - Hcherchi");
+    mlx_string_put(t->mlx_ptr, t->m->mlx_win, 80, 130, 0x0099FF00, "hcherchi@student.42.fr");
+    mlx_string_put(t->mlx_ptr, t->m->mlx_win, 80, 300, 0x0099FF00, "Bruno Gantelmi - Bgantelm");
+    mlx_string_put(t->mlx_ptr, t->m->mlx_win, 80, 330, 0x0099FF00, "bgantelm@student.42.fr");
+    mlx_string_put(t->mlx_ptr, t->m->mlx_win, 80, 500, 0x0099FF00, "Vincent Nguyen - Vnguyen");
+    mlx_string_put(t->mlx_ptr, t->m->mlx_win, 80, 530, 0x0099FF00, "vnguyen@student.42.fr");
+    mlx_string_put(t->mlx_ptr, t->m->mlx_win, 80, 700, 0x0099FF00, "Floren Henri - Fhenri");
+    mlx_string_put(t->mlx_ptr, t->m->mlx_win, 80, 730, 0x0099FF00, "fhenri@student.42.fr");
     t->m->menu = 1;
 }
 
 void print_start_menu(t_tool *t)
 {
 	mlx_clear_window(t->mlx_ptr, t->m->mlx_win);
-	t->m->bg->texture = ft_strdup("textures/menu/blue_background.xpm");
+	t->m->bg->texture = ft_strdup("textures/menu/blue_background2.xpm");
 	t->m->bg->mlx_img = mlx_xpm_file_to_image(t->mlx_ptr, t->m->bg->texture, &t->m->bg->width, &t->m->bg->height);
 	t->m->bg->data = mlx_get_data_addr(t->m->bg->mlx_img, &t->m->bg->bpp, &t->m->bg->size_line, &t->m->bg->endian);
 	mlx_put_image_to_window(t->mlx_ptr, t->m->mlx_win, t->m->bg->mlx_img, 0, 0);

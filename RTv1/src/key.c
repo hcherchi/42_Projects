@@ -74,46 +74,66 @@ int		mouse_event(int keycode, int x, int y, t_tool *t)
 	ft_putstr(" = x\n");
 	ft_putnbr(y);
 	ft_putstr(" = y\n");
-	if (x >= 60 && x <= 160 && y >= 150 && y <= 250)
+	if (t->m->menu == 2)
 	{
-		launch("scenes/new", t);
+		if (x >= 60 && x <= 160 && y >= 150 && y <= 250)
+		{
+			launch("scenes/new", t);
+		}
+		if (x >= 260 && x <= 360 && y >= 150 && y <= 250)
+		{
+			launch("scenes/boat", t);
+		}
+		if (x >= 60 && x <= 160 && y >= 300 && y <= 400)
+		{
+			launch("scenes/room1", t);
+		}
+		if (x >= 260 && x <= 360 && y >= 300 && y <= 400)
+		{
+			launch("scenes/speciale", t);
+		}
+		if (x >= 60 && x <= 160 && y >= 450 && y <= 550)
+		{
+			launch("scenes/blackhole", t);
+		}
+		if (x >= 260 && x <= 360 && y >= 450 && y <= 550)
+		{
+			ft_putstr("test");
+			launch("scenes/jungle", t);
+		}
+		if (x >= 160 && x <= 260 && y >= 50 && y <= 150)
+		{
+			system("open scenes/my_file");
+			launch("scenes/my_file", t);
+		}
+		if (x >= 160 && x <= 260 && y >= 980 && y <= 1020)
+		{
+			print_group_menu(t);
+			menu_event(keycode,t);
+		}
+
+		if (x >= 160 && x <= 260 && y >= 1040 && y <= 1080)
+			system("open https://www.youtube.com");
 	}
-	if (x >= 260 && x <= 360 && y >= 150 && y <= 250)
+	if (t->m->menu == 1)
 	{
-		launch("scenes/boat", t);
+		if (x >= 160 && x <= 231 && y >= 182 && y <= 268)
+			system("open https://profile.intra.42.fr/users/hcherchi");
+		if (x >= 160 && x <= 231 && y >= 382 && y <= 468)
+			system("open https://profile.intra.42.fr/users/bgantelm");
+		if (x >= 160 && x <= 231 && y >= 582 && y <= 668)
+			system("open https://profile.intra.42.fr/users/vnguyen");
+		if (x >= 160 && x <= 231 && y >= 782 && y <= 868)
+			system("open https://profile.intra.42.fr/users/fhenri");
+		if (x >= 111 && x <= 277 && y >= 920 && y <= 956)
+		{
+			print_scene_menu(t);
+			menu_event(keycode,t);
+		}
 	}
-	if (x >= 60 && x <= 160 && y >= 300 && y <= 400)
-	{
-		launch("scenes/room1", t);
-	}
-	if (x >= 260 && x <= 360 && y >= 300 && y <= 400)
-	{
-		launch("scenes/speciale", t);
-	}
-	if (x >= 60 && x <= 160 && y >= 450 && y <= 550)
-	{
-		launch("scenes/blackhole", t);
-	}
-	if (x >= 260 && x <= 360 && y >= 450 && y <= 550)
-	{
-		ft_putstr("test");
-		launch("scenes/jungle", t);
-	}
-	if (x >= 160 && x <= 260 && y >= 50 && y <= 150)
-	{
-		system("open scenes/my_file");
-		launch("scenes/my_file", t);
-	}
-	if (x >= 160 && x <= 260 && y >= 980 && y <= 1020)
-	{
-		print_group_menu(t);
-		menu_event(keycode,t);
-	}
-	
-	if (x >= 160 && x <= 260 && y >= 1040 && y <= 1080)
-		system("open https://www.youtube.com");
 	return (0);
 }
+
 int		menu_event(int keycode, t_tool *t)
 {
 	ft_putnbr(keycode);

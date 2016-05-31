@@ -3,6 +3,7 @@
 int	ft_exit(t_tool *t)
 {
 	(void)(t);
+	ft_putstr("on apuusi sur la croi");
 	exit(0);
 	return (0);
 }
