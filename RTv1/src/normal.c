@@ -51,14 +51,25 @@ void	get_cone_normal(t_ray *impact, t_object *object)
 	k = pow(object->rad / object->h, 2);
 	impact->d->x = 2 * (impact->o->x - object->o->x)
 		- (2 * object->d->x * (object->d->x * (impact->o->x - object->o->x)
-		+ object->d->z * (impact->o->z - object->o->z) + object->d->y * (impact->o->y - object->o->y)))
-		- (k * 2 * object->d->x * (object->d->x * (impact->o->x - object->o->x) + object->d->z * (impact->o->z - object->o->z) + object->d->y * (impact->o->y - object->o->y)));
+		+ object->d->z * (impact->o->z - object->o->z)
+		+ object->d->y * (impact->o->y - object->o->y)))
+		- (k * 2 * object->d->x * (object->d->x * (impact->o->x - object->o->x)
+		+ object->d->z * (impact->o->z - object->o->z)
+		+ object->d->y * (impact->o->y - object->o->y)));
 	impact->d->y = 2 * (impact->o->y - object->o->y)
-		- (2 * object->d->y * (object->d->x * (impact->o->x - object->o->x) + object->d->z * (impact->o->z - object->o->z) + object->d->y * (impact->o->y - object->o->y)))
-		- (k * 2 * object->d->y * (object->d->x * (impact->o->x - object->o->x) + object->d->z * (impact->o->z - object->o->z) + object->d->y * (impact->o->y - object->o->y)));
+		- (2 * object->d->y * (object->d->x * (impact->o->x - object->o->x)
+		+ object->d->z * (impact->o->z - object->o->z)
+		+ object->d->y * (impact->o->y - object->o->y)))
+		- (k * 2 * object->d->y * (object->d->x * (impact->o->x - object->o->x)
+		+ object->d->z * (impact->o->z - object->o->z)
+		+ object->d->y * (impact->o->y - object->o->y)));
 	impact->d->z = 2 * (impact->o->z - object->o->z)
-		- (2 * object->d->z * (object->d->x * (impact->o->x - object->o->x) + object->d->z * (impact->o->z - object->o->z) + object->d->y * (impact->o->y - object->o->y)))
-		- (k * 2 * object->d->z * (object->d->x * (impact->o->x - object->o->x) + object->d->z * (impact->o->z - object->o->z) + object->d->y * (impact->o->y - object->o->y)));
+		- (2 * object->d->z * (object->d->x * (impact->o->x - object->o->x)
+		+ object->d->z * (impact->o->z - object->o->z)
+		+ object->d->y * (impact->o->y - object->o->y)))
+		- (k * 2 * object->d->z * (object->d->x * (impact->o->x - object->o->x)
+		+ object->d->z * (impact->o->z - object->o->z)
+		+ object->d->y * (impact->o->y - object->o->y)));
 }
 
 void	get_para_normal(t_ray *impact, t_object *object)
