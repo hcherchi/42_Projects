@@ -6,7 +6,7 @@ void    launch(char *scene, t_tool *tools)
 	if (tools->rt)
 	{
 		if (tools->rt->mlx_win != NULL)
-		mlx_destroy_window(tools->mlx_ptr, tools->rt->mlx_win);
+			mlx_destroy_window(tools->mlx_ptr, tools->rt->mlx_win);
 		tools->rt = NULL;
 	}
 	parser(open(scene, O_RDONLY), tools);
@@ -41,7 +41,7 @@ void	init_param(t_tool *t)
 	t->rt->image_loading = malloc(sizeof(t_image));
 	t->rt->image_loading->mlx_img = mlx_new_image(t->mlx_ptr, t->rt->x_res, t->rt->y_res);
 	t->rt->image_loading->data = mlx_get_data_addr(t->rt->image_loading->mlx_img, &t->rt->image_loading->bpp,
-	&t->rt->image_loading->size_line, &t->rt->image_loading->endian);
+			&t->rt->image_loading->size_line, &t->rt->image_loading->endian);
 	t->rt->image_loading->texture = NULL;
 	t->rt->image_loading->screen = NULL;
 }
@@ -91,11 +91,11 @@ void run_through(t_tool *t)
 	int y;
 
 	y = 0;
-    if (t->rt->screenshot == 0)
-    {
-        mlx_string_put(t->mlx_ptr, t->rt->mlx_win, t->rt->x_res/2 - 50, t->rt->y_res/2, 0xFFFFFFFF, "RT is loading...");
-        mlx_put_image_to_window(t->mlx_ptr, t->rt->mlx_win, t->rt->image_loading->mlx_img, 0, 0);
-}
+	if (t->rt->screenshot == 0)
+	{
+		mlx_string_put(t->mlx_ptr, t->rt->mlx_win, t->rt->x_res/2 - 50, t->rt->y_res/2, 0xFFFFFFFF, "RT is loading...");
+		mlx_put_image_to_window(t->mlx_ptr, t->rt->mlx_win, t->rt->image_loading->mlx_img, 0, 0);
+	}
 	while (y < t->rt->y_res)
 	{
 		x = 0;
@@ -110,6 +110,8 @@ void run_through(t_tool *t)
 		mlx_put_image_to_window(t->mlx_ptr, t->rt->mlx_win, t->rt->image->mlx_img, 0, 0);
 	else
 		put_image_to_file(t);
+	
+	mlx_put_image_to_window(t->mlx_ptr, t->rt->mlx_win,  mlx_xpm_file_to_image(t->mlx_ptr,ft_strdup("miniature/blackhole.xpm"), &t->m->bg->width, &t->m->bg->height),20, 100);
 	mlx_string_put(t->mlx_ptr, t->rt->mlx_win, 50, 25, 0x009933FF, "2 - 4 - 5 - 6 - 8 and arrows to change CAMERA");
 	mlx_string_put(t->mlx_ptr, t->rt->mlx_win, 50, 50, 0x009933FF, "P : SCREENSHOT");
 	mlx_string_put(t->mlx_ptr, t->rt->mlx_win, 50, 75, 0x009933FF, "Press 'DELETE' to go back to the menu");	
