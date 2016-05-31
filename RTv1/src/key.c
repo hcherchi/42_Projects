@@ -23,26 +23,24 @@ int		rt_event(int k, t_tool *t)
 		free(t->rt->image->screen);
 		t->rt->image->screen = NULL;
 	}
-	else if (k == 82 || k == 84 || k == 86 || k == 87 || k == 88
+	else if (k == 82 || k == 84 || k == 86 || k == 88
 			|| k == 91 || k == 126 || k == 125 || k == 69 || k == 78
 			|| k == 24 || k == 27)
 	{
 		rt_event_light(k, t);
 		if (k == 82)
-			t->rt->cam = t->rt->middlecams[5];
+			t->rt->cam = t->rt->middlecams[4];
 		else if (k == 84)
 			t->rt->cam = t->rt->middlecams[0];
 		else if (k == 86)
 			t->rt->cam = t->rt->middlecams[1];
-		else if (k == 87)
-			t->rt->cam = t->rt->middlecams[4];
 		else if (k == 88)
 			t->rt->cam = t->rt->middlecams[2];
 		else if (k == 91)
 			t->rt->cam = t->rt->middlecams[3];
-		else if (k == 126 && t->rt->cam->nb != 5)
+		else if (k == 126 && t->rt->cam->nb != 4)
 			t->rt->cam = t->rt->upcams[t->rt->cam->nb];
-		else if (k == 125 && t->rt->cam->nb != 5)
+		else if (k == 125 && t->rt->cam->nb != 4)
 			t->rt->cam = t->rt->middlecams[t->rt->cam->nb];
 		mlx_clear_window(t->mlx_ptr, t->rt->mlx_win);
 		run_through(t);

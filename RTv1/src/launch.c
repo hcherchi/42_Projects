@@ -47,23 +47,21 @@ void	init_param(t_tool *t)
 
 void    init_cams(t_tool *t)
 {
-	t->rt->middlecams = malloc(sizeof(t_cam*) * 6);
+	t->rt->middlecams = malloc(sizeof(t_cam*) * 5);
 	t->rt->middlecams[0] = new_cam(vectornew(0, 0, -5), vectornew(0, 0, 1), t, 0);
 	t->rt->middlecams[1] = new_cam(vectornew(-5, 0, 0), vectornew(1, 0, 0), t, 1);
 	t->rt->middlecams[2] = new_cam(vectornew(5, 0, 0), vectornew(-1, 0, 0), t, 2);
 	t->rt->middlecams[3] = new_cam(vectornew(0, 0, 5), vectornew(0, 0, -1), t, 3);
-	t->rt->middlecams[4] = new_cam(vectornew(0, 5, 0), vectornew(0, -1, 0), t, 4);
 	if (t->rt->pos && t->rt->vect)
-		t->rt->middlecams[5] = new_cam(t->rt->pos, t->rt->vect, t, 5);
+		t->rt->middlecams[4] = new_cam(t->rt->pos, t->rt->vect, t, 4);
 	else
 		t->rt->middlecams[5] = new_cam(vectornew(0, 2.5, -5), vectornew(0, -1, 2), t, 5);
-	t->rt->upcams = malloc(sizeof(t_cam*) * 5);
+	t->rt->upcams = malloc(sizeof(t_cam*) * 4);
 	t->rt->upcams[0] = new_cam(vectornew(0, 2.5, -5), vectornew(0, -1, 2), t, 0);
 	t->rt->upcams[1] = new_cam(vectornew(-5, 2.5, 0), vectornew(2, -1, 0), t, 1);
 	t->rt->upcams[2] = new_cam(vectornew(5, 2.5, 0), vectornew(-2, -1, 0), t, 2);
 	t->rt->upcams[3] = new_cam(vectornew(0, 2.5, 5), vectornew(0, -1, -2), t, 3);
-	t->rt->upcams[4] = new_cam(vectornew(0, 10, 0), vectornew(0, -1, 0), t, 4);
-	t->rt->cam = t->rt->middlecams[5];
+	t->rt->cam = t->rt->middlecams[4];
 }
 
 void put_image_to_file(t_tool *t)
