@@ -6,32 +6,11 @@
 /*   By: vnguyen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 19:53:55 by vnguyen           #+#    #+#             */
-/*   Updated: 2016/05/31 19:53:56 by vnguyen          ###   ########.fr       */
+/*   Updated: 2016/05/31 21:22:39 by bgantelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <rtv1.h>
-
-void	fill_dist(t_object *l_objects, t_ray *ray)
-{
-	t_object	*tmp;
-
-	tmp = l_objects;
-	while (tmp != NULL)
-	{
-		if (tmp->type == SPHERE)
-			tmp->dist = intersection_sphere(tmp, ray);
-		else if (tmp->type == CONE)
-			tmp->dist = intersection_cone(tmp, ray);
-		else if (tmp->type == PLAN)
-			tmp->dist = intersection_plan(tmp->d, tmp->h, ray->o, ray->d);
-		else if (tmp->type == CYL)
-			tmp->dist = intersection_cyl(tmp, ray);
-		else if (tmp->type == PARA)
-			tmp->dist = intersection_para(tmp, ray);
-		tmp = tmp->next;
-	}
-}
 
 double	intersection_plan(t_pos *d, double h, t_pos *oray, t_pos *dray)
 {
@@ -109,7 +88,6 @@ double	intersection_cyl(t_object *cyl, t_ray *ray)
 	param.c = tmp->x * tmp->x + tmp->y * tmp->y + tmp->z * tmp->z - (cyl->rad
 	* cyl->rad) - (pow(cyl->d->x * tmp->x + cyl->d->y * tmp->y
 	+ cyl->d->z * tmp->z, 2) / k);
-	free(tmp);
 	param.discr = param.b * param.b - 4 * param.a * param.c;
 	if (param.discr < E)
 		return (-1);
@@ -130,13 +108,16 @@ double	intersection_cone(t_object *cone, t_ray *ray)
 
 	tmp = vectorsub(ray->o, cone->o);
 	k = pow(cone->rad / cone->h, 2);
-	param.a = vectordot(ray->d, ray->d) - pow(cone->d->x * ray->d->x + cone->d->y * ray->d->y + cone->d->z * ray->d->z, 2) - pow(cone->d->x * ray->d->x + cone->d->y * ray->d->y + cone->d->z * ray->d->z, 2) * k;
-	param.b = 2 * (ray->d->x * tmp->x + (ray->d->y) * tmp->y + ray->d->z * tmp->z)
-		- (2 * (cone->d->x * ray->d->x + cone->d->y * ray->d->y + cone->d->z * ray->d->z) * (cone->d->x * tmp->x + cone->d->y * tmp->y + cone->d->z * tmp->z))
-		- (2 * (cone->d->x * ray->d->x + cone->d->y * ray->d->y + cone->d->z * ray->d->z) * (cone->d->x * tmp->x + cone->d->y * tmp->y + cone->d->z * tmp->z) * k);
+	param.a = vectordot(ray->d, ray->d) - pow(cone->d->x * ray->d->x
+		+ cone->d->y * ray->d->y + cone->d->z * ray->d->z, 2)
+		- pow(cone->d->x * ray->d->x
+		+ cone->d->y * ray->d->y + cone->d->z * ray->d->z, 2) * k;
+	param.b = calcul_cone(cone, ray, k, param, tmp);
 	param.c = tmp->x * tmp->x + tmp->z * tmp->z + tmp->y * tmp->y
-		- pow(cone->d->x * tmp->x + cone->d->y * tmp->y + cone->d->z * tmp->z, 2)
-		- pow(cone->d->x * tmp->x + cone->d->y * tmp->y + cone->d->z * tmp->z, 2) * k;
+		- pow(cone->d->x * tmp->x + cone->d->y * tmp->y
+		+ cone->d->z * tmp->z, 2)
+		- pow(cone->d->x * tmp->x + cone->d->y * tmp->y
+		+ cone->d->z * tmp->z, 2) * k;
 	free(tmp);
 	param.discr = param.b * param.b - 4 * param.a * param.c;
 	if (param.discr < E)
