@@ -2,11 +2,11 @@
 
 void	modif_all_lights(t_tool *k, double value)
 {
-	t_light *ptr;
+	t_light	*ptr;
 
 	ptr = k->rt->l_lights;
 	if (k->rt->l_lights == NULL)
-		return;
+		return ;
 	while (ptr != NULL)
 	{
 		ptr->lumdiff += value;
