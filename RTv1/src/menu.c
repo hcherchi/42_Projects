@@ -2,9 +2,14 @@
 
 void print_scene_menu(t_tool *t)
 {
-	mlx_clear_window(t->mlx_ptr, t->m->mlx_win);
+    t->m->bg = malloc(sizeof(t_image));
 	t->m->bg->texture = ft_strdup("textures/menu/background3.xpm");
 	t->m->bg->mlx_img = mlx_xpm_file_to_image(t->mlx_ptr, t->m->bg->texture, &t->m->bg->width, &t->m->bg->height);
+    if (t->m->bg->mlx_img == NULL)
+    {
+        ft_putendl("Error, you are not allowed to lauch RT from this directory.");
+        exit(0);
+    }
 	t->m->bg->data = mlx_get_data_addr(t->m->bg->mlx_img, &t->m->bg->bpp, &t->m->bg->size_line, &t->m->bg->endian);
 	mlx_put_image_to_window(t->mlx_ptr, t->m->mlx_win, t->m->bg->mlx_img, 0, 0);
 	mlx_put_image_to_window(t->mlx_ptr, t->m->mlx_win,  mlx_xpm_file_to_image(t->mlx_ptr,ft_strdup("miniature/point.xpm"), &t->m->bg->width, &t->m->bg->height),160, 45);
@@ -65,66 +70,3 @@ void print_group_menu(t_tool *t)
     t->m->menu = 1;
 }
 
-void print_start_menu(t_tool *t)
-{
-	mlx_clear_window(t->mlx_ptr, t->m->mlx_win);
-	t->m->bg->texture = ft_strdup("textures/menu/blue_background2.xpm");
-	t->m->bg->mlx_img = mlx_xpm_file_to_image(t->mlx_ptr, t->m->bg->texture, &t->m->bg->width, &t->m->bg->height);
-	t->m->bg->data = mlx_get_data_addr(t->m->bg->mlx_img, &t->m->bg->bpp, &t->m->bg->size_line, &t->m->bg->endian);
-	mlx_put_image_to_window(t->mlx_ptr, t->m->mlx_win, t->m->bg->mlx_img, 0, 0);
-	//mlx_string_put(t->mlx_ptr, t->m->mlx_win, 35, 180, 0xFFFFFFFF, "1 : SCENES");
-	//mlx_string_put(t->mlx_ptr, t->m->mlx_win, 35, 200, 0xFFFFFFFF, "2 : GROUP");
-	//mlx_string_put(t->mlx_ptr, t->m->mlx_win, 35, 220, 0xFFFFFFFF, "3 : VIDEO");
-	t->m->menu = 0;
-}
-
-void	start_menu_hover(t_tool *t, int choice)
-{
-	mlx_clear_window(t->mlx_ptr, t->m->mlx_win);
-	if (choice == 1)
-		t->m->bg->texture = ft_strdup("textures/menu/menu_hover_1.xpm");
-	else if (choice == 2)
-		t->m->bg->texture = ft_strdup("textures/menu/menu_hover_2.xpm");
-	else if (choice == 3)
-		t->m->bg->texture = ft_strdup("textures/menu/menu_hover_3.xpm");
-	else
-		return;
-	t->m->bg->mlx_img = mlx_xpm_file_to_image(t->mlx_ptr, t->m->bg->texture, &t->m->bg->width, &t->m->bg->height);
-	t->m->bg->data = mlx_get_data_addr(t->m->bg->mlx_img, &t->m->bg->bpp, &t->m->bg->size_line, &t->m->bg->endian);
-	mlx_put_image_to_window(t->mlx_ptr, t->m->mlx_win, t->m->bg->mlx_img, 0, 0);
-}
-
-int ft_menu_mouse_handler(int x, int y, void *param)
-{
-	t_tool *t;
-
-	t = (t_tool*)param;
-	if (t->m->menu == 0)
-	{
-		if (x >= 35 && x <= 155 && y >= 186 && y <= 200)
-			start_menu_hover(t, 1);
-			//mlx_string_put(t->mlx_ptr, t->m->mlx_win, 35, 180, 0x00E1FF, "1 : SCENES");
-		else if (x >= 35 && x <= 155 && y >= 206 && y <= 220)
-			start_menu_hover(t, 2);
-			//mlx_string_put(t->mlx_ptr, t->m->mlx_win, 35, 200, 0x00E1FF, "2 : GROUP");
-		else if (x >= 35 && x <= 155 && y >= 226 && y <= 240)
-			start_menu_hover(t, 3);
-			//mlx_string_put(t->mlx_ptr, t->m->mlx_win, 35, 220, 0x00E1FF, "3 : VIDEO");
-		else
-			print_start_menu(t);
-	}
-	return (1);
-}
-
-int	ft_menu_click_handler(int keycode, int x, int y, t_tool *t)
-{
-	if (keycode != 1)
-		return (1);
-	if (x >= 35 && x <= 165 && y >= 186 && y <= 200)
-		print_scene_menu(t);
-	else if (x >= 35 && x <= 165 && y >= 206 && y <= 220)
-		print_group_menu(t);
-	else if (x >= 35 && x <= 165 && y >= 226 && y <= 240)
-		system("open https://www.youtube.com");
-	return (0);
-}

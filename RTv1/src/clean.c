@@ -89,9 +89,7 @@ void    clean_image(t_image **image)
     }
     if ((*image)->screen)
     {
-        ft_putendl("Ya un screen");
         free((*image)->screen);
-        ft_putendl("Ya un screen");
         (*image)->screen = NULL;
     }
     if (*image)
@@ -227,7 +225,6 @@ void	clean_obj(t_object **l_objects)
         }
         if (tmp->texture)
         {
-            ft_putendl("Yo");
             clean_image(&tmp->texture);
         }
         if (tmp)

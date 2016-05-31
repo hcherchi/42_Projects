@@ -4,8 +4,7 @@ void	parse_camera(t_tool *tools, int fd)
 {
 	char	**split;
 	char	*line;
-
-    init_camera(tools);
+    
 	while (get_next_line(fd, &line) > 0 && ft_strcmp(line, "}"))
 	{
 		split = ft_strsplit(line, ' ');
@@ -70,6 +69,8 @@ void	parser(int fd, t_tool *tools)
     tools->rt = malloc(sizeof(t_rt));
     tools->rt->l_objects = NULL;
     tools->rt->l_lights = NULL;
+    tools->rt->mlx_win = NULL;
+    init_camera(tools);
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
 		if (!ft_strcmp(line, "camera"))

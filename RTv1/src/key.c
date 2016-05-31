@@ -53,15 +53,6 @@ int		rt_event(int k, t_tool *t)
 	return (0);
 }
 
-void	start_menu(int keycode, t_tool *t)
-{
-	if (keycode == 19)
-		print_group_menu(t);
-	if (keycode == 18)
-		print_scene_menu(t);
-}
-
-
 int		mouse_event(int keycode, int x, int y, t_tool *t)
 {
 	(void)(keycode);
@@ -107,7 +98,6 @@ int		mouse_event(int keycode, int x, int y, t_tool *t)
 		if (x >= 160 && x <= 260 && y >= 980 && y <= 1020)
 		{
 			print_group_menu(t);
-			menu_event(keycode,t);
 		}
 
 		if (x >= 160 && x <= 260 && y >= 1040 && y <= 1080)
@@ -126,7 +116,6 @@ int		mouse_event(int keycode, int x, int y, t_tool *t)
 		if (x >= 111 && x <= 277 && y >= 920 && y <= 956)
 		{
 			print_scene_menu(t);
-			menu_event(keycode,t);
 		}
 	}
 	return (0);
@@ -134,13 +123,8 @@ int		mouse_event(int keycode, int x, int y, t_tool *t)
 
 int		menu_event(int keycode, t_tool *t)
 {
-	ft_putnbr(keycode);
-	ft_putchar('\n');
+    (void)(t);
 	if (keycode == 53)
 		exit(0);
-	if (keycode == 51 && t->m->menu != 0)
-		print_scene_menu(t);
-	if (t->m->menu == 0)
-		start_menu(keycode, t);
 	return (0);
 }
