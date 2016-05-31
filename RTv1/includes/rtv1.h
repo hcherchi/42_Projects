@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 14:56:14 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/05/31 16:58:19 by fhenri           ###   ########.fr       */
+/*   Updated: 2016/05/31 19:59:49 by fhenri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,7 +266,9 @@ void                clean_menu(t_menu **m);
 void                clean_rt(t_rt **rt);
 
 // MENU
-
+void				print_groupe1(t_tool *t);
+int					ft_verif(t_tool *t, char *verife);
+void				print_suite(t_tool *t);
 int					ft_exit2(t_tool *t);
 int					ft_exit(t_tool *t);
 int					mouse_event(int x, int y, int keycode, t_tool *t);
