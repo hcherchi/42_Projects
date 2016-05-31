@@ -1,20 +1,16 @@
-#include <rtv1.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   color.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vnguyen <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/05/31 19:21:45 by vnguyen           #+#    #+#             */
+/*   Updated: 2016/05/31 19:33:19 by vnguyen          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void		normalize_color(t_color *final_color)
-{
-	if (final_color->r < 0)
-		final_color->r = 0;
-	if (final_color->b < 0)
-		final_color->b = 0;
-	if (final_color->g < 0)
-		final_color->g = 0;
-	if (final_color->r > 255)
-		final_color->r = 255;
-	if (final_color->b > 255)
-		final_color->b = 255;
-	if (final_color->g > 255)
-		final_color->g = 255;
-}
+#include <rtv1.h>
 
 t_color		*add_color(t_color *color1, t_color *color2)
 {
