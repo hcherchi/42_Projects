@@ -103,6 +103,8 @@ double  get_flash_intens(t_tool *t, t_ray *ray, double lightdist)
             intens -= (1 - curobj->transp);
         curobj = curobj->next;
     }
+	if (intens < 0)
+		intens = 0;
     return (intens);
 }
 
