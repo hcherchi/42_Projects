@@ -6,6 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 14:56:14 by hcherchi          #+#    #+#             */
+/*   Updated: 2016/05/31 20:54:56 by fhenri           ###   ########.fr       */
 /*   Updated: 2016/05/31 19:22:43 by vnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -266,11 +267,15 @@ void                clean_menu(t_menu **m);
 void                clean_rt(t_rt **rt);
 
 // MENU
-
+void				print_groupe1(t_tool *t);
+int					ft_verif(t_tool *t, char *verife);
+void				print_suite(t_tool *t);
 int					ft_exit2(t_tool *t);
 int					ft_exit(t_tool *t);
 int					mouse_event(int x, int y, int keycode, t_tool *t);
 int					mouse_event_rt(int x, int y, int keycode, t_tool *t);
+void				mouse_event_rt2(int x, int y, t_tool *t);
+void				mouse_event2(int x, int y, t_tool *t);
 void                init_menu(t_tool *tools);
 void                main_menu(int i);
 void                print_scene_menu(t_tool *t);
