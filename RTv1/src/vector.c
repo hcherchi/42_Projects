@@ -6,7 +6,7 @@
 /*   By: vnguyen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 19:32:25 by vnguyen           #+#    #+#             */
-/*   Updated: 2016/05/31 19:54:24 by vnguyen          ###   ########.fr       */
+/*   Updated: 2016/05/31 22:10:48 by fhenri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,17 @@ t_pos	*vectorscale(double c, t_pos *v)
 }
 
 t_pos	*vectoradd(t_pos *v1, t_pos *v2)
+{
+	t_pos	*result;
+
+	result = malloc(sizeof(t_pos));
+	result->x = v1->x + v2->x;
+	result->y = v1->y + v2->y;
+	result->z = v1->z + v2->z;
+	return (result);
+}
+
+t_pos *v(t_pos *v1, t_pos *v2)
 {
 	t_pos	*result;
 

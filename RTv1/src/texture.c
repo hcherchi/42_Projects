@@ -6,12 +6,15 @@
 /*   By: vnguyen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 19:32:20 by vnguyen           #+#    #+#             */
-/*   Updated: 2016/05/31 19:53:19 by vnguyen          ###   ########.fr       */
+/*   Updated: 2016/05/31 22:03:41 by fhenri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <rtv1.h>
+void	suite_suite()
+{
 
+}
 t_color	*extract_color(t_tool *t, t_image *texture, int x, int y)
 {
 	t_color			*c;

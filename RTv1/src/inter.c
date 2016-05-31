@@ -6,7 +6,7 @@
 /*   By: vnguyen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 19:53:55 by vnguyen           #+#    #+#             */
-/*   Updated: 2016/05/31 22:02:03 by bgantelm         ###   ########.fr       */
+/*   Updated: 2016/05/31 22:18:51 by fhenri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ double	intersection_cone(t_object *cone, t_ray *ray)
 	+ cone->d->y * ray->d->y + cone->d->z * ray->d->z, 2)
 	- pow(cone->d->x * ray->d->x + cone->d->y * ray->d->y
 	+ cone->d->z * ray->d->z, 2) * k;
-	param.b = calcul_cone(cone, ray, k, param, tmp);
+	param.b = calcul_cone(cone, ray, k, tmp);
 	param.c = tmp->x * tmp->x + tmp->z * tmp->z + tmp->y * tmp->y
 	- pow(cone->d->x * tmp->x + cone->d->y * tmp->y + cone->d->z
 	* tmp->z, 2) - pow(cone->d->x * tmp->x + cone->d->y * tmp->y
