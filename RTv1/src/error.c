@@ -6,7 +6,7 @@
 /*   By: vnguyen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 19:53:45 by vnguyen           #+#    #+#             */
-/*   Updated: 2016/05/31 19:53:46 by vnguyen          ###   ########.fr       */
+/*   Updated: 2016/05/31 20:16:26 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,17 @@ void	ft_error(int i, t_tool *tools)
 		ft_putstr("Error, window can not be negative.\n");
 	else if (i == 9)
 		ft_putstr("Error parser object.\n");
-    else if (i == 10)
-        ft_putstr("Invalid File.\n");
-    else if (i == 11)
-        ft_putendl("Invalid texture");
-    else if (i == 12)
-        ft_putendl("Error, bad type of object.\n");
-    else if (i == 13)
-    	ft_putendl("Error, Resolution can't be superior at 2000*1300\n");
-    else if (i == 14)
-    	ft_putendl("Error, Number must be between 0 and 1\n");
-    else if (i == 15)
-    	ft_putendl("Error, Mirror and reflect additionates cant be superior at 1 \n");
-    tools->error = 1;
+	else if (i == 10)
+		ft_putstr("Invalid File.\n");
+	else if (i == 11)
+		ft_putendl("Invalid texture");
+	else if (i == 12)
+		ft_putendl("Error, bad type of object.\n");
+	else if (i == 13)
+		ft_putendl("Error, Resolution can't be superior at 2000*1300\n");
+	else if (i == 14)
+		ft_putendl("Error, Number must be between 0 and 1\n");
+	else if (i == 15)
+		ft_putendl("Error, Mirror and reflect additionates cant be superior at 1 \n");
+	tools->error = 1;
 }
