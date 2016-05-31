@@ -52,7 +52,7 @@ void		draw(t_tool *t, int x, int y)
 	}
 	moy_color = div_color(moy_color, 4);
     if (t->rt->sepia == 1)
-        change_to_sepia(color);
+        change_to_sepia(moy_color);
 	normalize_color(moy_color);
 	pixel_put_to_image(t, x, y, moy_color);
 	free(moy_color);

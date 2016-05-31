@@ -1,6 +1,6 @@
 camera
 {
-	res: 300 300
+	res: 100 100
 }
 
 light
