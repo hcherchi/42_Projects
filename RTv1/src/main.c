@@ -22,7 +22,7 @@ int     main()
 	tools->mlx_ptr = mlx_init();
 	tools->rt = NULL;
     tools->m->x_res = 400;
-    tools->m->y_res = 1100;
+    tools->m->y_res = 1150;
     tools->m->mlx_win = mlx_new_window(tools->mlx_ptr, tools->m->x_res, tools->m->y_res, "RT");
 	print_scene_menu(tools);
     tools->m->bg->screen = NULL;

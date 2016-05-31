@@ -101,17 +101,17 @@ int		mouse_event(int keycode, int x, int y, t_tool *t)
 		{
 			launch("scenes/jungle", t);
 		}
-		if (x >= 160 && x <= 260 && y >= 50 && y <= 150)
+		if (x >= 63 && x <= 160 && y >= 980 && y <= 1080)
 		{
 			system("open scenes/my_file");
 			launch("scenes/my_file", t);
 		}
-		if (x >= 160 && x <= 260 && y >= 980 && y <= 1020)
+		if (x >= 250 && x <= 310 && y >= 980 && y <= 1020)
 		{
 			print_group_menu(t);
 		}
 
-		if (x >= 160 && x <= 260 && y >= 1040 && y <= 1080)
+		if (x >= 250 && x <= 310 && y >= 1030 && y <= 1075)
 			system("open https://www.youtube.com");
 	}
 	if (t->m->menu == 1)

@@ -165,7 +165,7 @@ t_color		*get_color(t_ray *ray, t_tool *t)
         else
             final_color = new_color();
     }
-    final_color = add_color(final_color, get_flash(ray, t));
+    //final_color = add_color(final_color, get_flash(ray, t));
     clean_ray(&ray);
     return (final_color);
 }
