@@ -54,9 +54,9 @@ void print_scene_menu(t_tool *t)
 	mlx_put_image_to_window(t->mlx_ptr, t->m->mlx_win,  mlx_xpm_file_to_image(t->mlx_ptr,ft_strdup("miniature/not-found.xpm"), &t->m->bg->width, &t->m->bg->height),60, 850);
 	ft_verif(t,ft_strdup("miniature/not-found.xpm"));
 	mlx_put_image_to_window(t->mlx_ptr, t->m->mlx_win,  mlx_xpm_file_to_image(t->mlx_ptr,ft_strdup("miniature/not-found.xpm"), &t->m->bg->width, &t->m->bg->height),240, 850);
-	ft_verif(t,ft_strdup("miniature/not-found.xpm"));
+	ft_verif(t,ft_strdup("miniature/42.xpm"));
 	mlx_put_image_to_window(t->mlx_ptr, t->m->mlx_win,  mlx_xpm_file_to_image(t->mlx_ptr,ft_strdup("miniature/42.xpm"), &t->m->bg->width, &t->m->bg->height),250, 980);
-	ft_verif(t,ft_strdup("miniature/youtube.xpm.xpm"));
+	ft_verif(t,ft_strdup("miniature/youtube.xpm"));
 	mlx_put_image_to_window(t->mlx_ptr, t->m->mlx_win,  mlx_xpm_file_to_image(t->mlx_ptr,ft_strdup("miniature/youtube.xpm"), &t->m->bg->width, &t->m->bg->height),210, 1000);
 	mlx_string_put(t->mlx_ptr, t->m->mlx_win, 60, 120, 0x00fcf3f0, "NEW");
 	mlx_string_put(t->mlx_ptr, t->m->mlx_win, 240, 120, 0x00fcf3f0, "BOAT");

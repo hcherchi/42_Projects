@@ -1,6 +1,6 @@
 #include <rtv1.h>
 
-void	normalize_color(t_color *final_color)
+void		normalize_color(t_color *final_color)
 {
 	if (final_color->r < 0)
 		final_color->r = 0;
@@ -16,7 +16,7 @@ void	normalize_color(t_color *final_color)
 		final_color->g = 255;
 }
 
-t_color	*add_color(t_color *color1, t_color *color2)
+t_color		*add_color(t_color *color1, t_color *color2)
 {
 	t_color	*color;
 
@@ -27,7 +27,7 @@ t_color	*add_color(t_color *color1, t_color *color2)
 	return (color);
 }
 
-t_color	*div_color(t_color *color, double n)
+t_color		*div_color(t_color *color, double n)
 {
 	t_color	*color1;
 
@@ -38,7 +38,7 @@ t_color	*div_color(t_color *color, double n)
 	return (color1);
 }
 
-t_color	*mult_color(t_color *color, double n)
+t_color		*mult_color(t_color *color, double n)
 {
 	t_color	*color1;
 
@@ -49,7 +49,7 @@ t_color	*mult_color(t_color *color, double n)
 	return (color1);
 }
 
-t_colors    *new_colors(void)
+t_colors	*new_colors(void)
 {
 	t_colors *colors;
 
@@ -60,7 +60,7 @@ t_colors    *new_colors(void)
 	return (colors);
 }
 
-t_color	*new_color(void)
+t_color		*new_color(void)
 {
 	t_color *color;
 
