@@ -5,6 +5,7 @@ void    launch(char *scene, t_tool *tools)
 {
 	if (tools->rt)
 	{
+		if (tools->rt->mlx_win != NULL)
 		mlx_destroy_window(tools->mlx_ptr, tools->rt->mlx_win);
 		tools->rt = NULL;
 	}
@@ -111,6 +112,7 @@ void run_through(t_tool *t)
 	mlx_string_put(t->mlx_ptr, t->rt->mlx_win, 50, 50, 0x009933FF, "P : SCREENSHOT");
 	mlx_string_put(t->mlx_ptr, t->rt->mlx_win, 50, 75, 0x009933FF, "Press 'DELETE' to go back to the menu");	
 	mlx_key_hook(t->rt->mlx_win, rt_event, t);
+	mlx_hook(t->rt->mlx_win, 17,(1L << 17),ft_exit2,t);
 }
 
 t_cam *new_cam(t_pos *pos, t_pos *vect, t_tool *t, int nb)

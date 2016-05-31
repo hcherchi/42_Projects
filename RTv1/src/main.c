@@ -1,5 +1,11 @@
 #include <rtv1.h>
 
+int ft_exit2(t_tool *t)
+{
+	t->rt->mlx_win = NULL;
+	return(0);
+}
+
 int	ft_exit(t_tool *t)
 {
 	(void)(t);

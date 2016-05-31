@@ -29,20 +29,20 @@ t_color	*add_color(t_color *color1, t_color *color2)
 
 t_color	*div_color(t_color *color, double n)
 {
-    t_color	*color1;
-    
-    color1 = new_color();
-    color1->r = color->r / n;
-    color1->g = color->g / n;
+	t_color	*color1;
+
+	color1 = new_color();
+	color1->r = color->r / n;
+	color1->g = color->g / n;
 	color1->b = color->b / n;
 	return (color1);
 }
 
 t_color	*mult_color(t_color *color, double n)
 {
-    t_color	*color1;
-    
-    color1 = new_color();
+	t_color	*color1;
+
+	color1 = new_color();
 	color1->r = color->r * n;
 	color1->g = color->g * n;
 	color1->b = color->b * n;
@@ -51,13 +51,13 @@ t_color	*mult_color(t_color *color, double n)
 
 t_colors    *new_colors(void)
 {
-    t_colors *colors;
-    
-    colors = malloc(sizeof(t_colors));
-    colors->refract = NULL;
-    colors->reflect = NULL;
-    colors->base = NULL;
-    return (colors);
+	t_colors *colors;
+
+	colors = malloc(sizeof(t_colors));
+	colors->refract = NULL;
+	colors->reflect = NULL;
+	colors->base = NULL;
+	return (colors);
 }
 
 t_color	*new_color(void)
