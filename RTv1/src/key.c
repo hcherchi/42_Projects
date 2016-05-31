@@ -1,71 +1,71 @@
 #include <rtv1.h>
 
-int     mouse_event_rt(int keycode, int x, int y, t_tool *t)
+int	mouse_event_rt(int keycode, int x, int y, t_tool *t)
 {
-    ft_putnbr(x);
-    ft_putstr(" = x\n");
-    ft_putnbr(y);
-    ft_putstr(" = y\n");
-    if (keycode == 1 && x >= 19 && x <= 184 && y >= 17 && y <= 188)
-    {
-        if (x >= 126 && x <= 178 && y >= 64 && y <= 84) // picture
-        {
-            t->rt->image->screen = malloc(sizeof(unsigned char) * (3 * t->rt->x_res * t->rt->y_res));
-            t->rt->screenshot = 1;
-            run_through(t);
-            t->rt->screenshot = 0;
-            free(t->rt->image->screen);
-            t->rt->image->screen = NULL;
-        }
-        else
-        {
-            if (x >= 126 && x <= 169 && y >= 30 && y <= 53) // sepia
-            {
-                if (t->rt->sepia == 0)
-                    t->rt->sepia = 1;
-                else
-                    t->rt->sepia = 0;
-            }
-            if (x >= 29 && x <= 43 && y >= 39 && y <= 41)
-                modif_all_lights(t, -0.10);
-            if (x >= 90 && x <= 100 && y >= 35 && y <= 47)
-                modif_all_lights(t, 0.10);
-            if (x >= 30 && x <= 43 && y >= 77 && y <= 79)
-                modif_lumamb(t, -0.10);
-            if (x >= 83 && x <= 100 && y >= 73 && y <= 84)
-                modif_lumamb(t, 0.10);
-            if (x >= 52 && x <= 80 && y >= 105 && y <= 120) // touche haut
-                t->rt->cam = t->rt->middlecams[3];
-            if (x >= 23 && x <= 41 && y >= 131 && y <= 155) // touche de gauche
-                t->rt->cam = t->rt->middlecams[2];
-            if (x >= 92 && x <= 104 && y >= 131 && y <= 154) // touche de droite
-                t->rt->cam = t->rt->middlecams[1];
-            if (x >= 55 && x <= 79 && y >= 168 && y <= 177) // touche du bas
-                t->rt->cam = t->rt->middlecams[0];
-            if (x >= 54 && x <= 77 && y >= 132 && y <= 153) // touche du milieu
-                t->rt->cam = t->rt->middlecams[4];
-            if (x >= 125 && x <= 153 && y >= 113 && y <= 134  && t->rt->cam->nb != 4) // touche droite haute
-                t->rt->cam = t->rt->upcams[t->rt->cam->nb];
-            if (x >= 125 && x <= 153 && y >= 147 && y <= 172 && t->rt->cam->nb != 4) // touche droite bate
-                t->rt->cam = t->rt->middlecams[t->rt->cam->nb];
-            mlx_clear_window(t->mlx_ptr, t->rt->mlx_win);
-            run_through(t);
-        }
-    }
-    return (0);
+	ft_putnbr(x);
+	ft_putstr(" = x\n");
+	ft_putnbr(y);
+	ft_putstr(" = y\n");
+	if (keycode == 1 && x >= 19 && x <= 184 && y >= 17 && y <= 188)
+	{
+		if (x >= 126 && x <= 178 && y >= 64 && y <= 84)
+		{
+			t->rt->image->screen = malloc(sizeof(unsigned char) * (3 * t->rt->x_res * t->rt->y_res));
+			t->rt->screenshot = 1;
+			run_through(t);
+			t->rt->screenshot = 0;
+			free(t->rt->image->screen);
+			t->rt->image->screen = NULL;
+		}
+		else
+		{
+			if (x >= 126 && x <= 169 && y >= 30 && y <= 53)
+			{
+				if (t->rt->sepia == 0)
+					t->rt->sepia = 1;
+				else
+					t->rt->sepia = 0;
+			}
+			if (x >= 29 && x <= 43 && y >= 39 && y <= 41)
+				modif_all_lights(t, -0.10);
+			if (x >= 90 && x <= 100 && y >= 35 && y <= 47)
+				modif_all_lights(t, 0.10);
+			if (x >= 30 && x <= 43 && y >= 77 && y <= 79)
+				modif_lumamb(t, -0.10);
+			if (x >= 83 && x <= 100 && y >= 73 && y <= 84)
+				modif_lumamb(t, 0.10);
+			if (x >= 52 && x <= 80 && y >= 105 && y <= 120)
+				t->rt->cam = t->rt->middlecams[3];
+			if (x >= 23 && x <= 41 && y >= 131 && y <= 155)
+				t->rt->cam = t->rt->middlecams[2];
+			if (x >= 92 && x <= 104 && y >= 131 && y <= 154)
+				t->rt->cam = t->rt->middlecams[1];
+			if (x >= 55 && x <= 79 && y >= 168 && y <= 177)
+				t->rt->cam = t->rt->middlecams[0];
+			if (x >= 54 && x <= 77 && y >= 132 && y <= 153)
+				t->rt->cam = t->rt->middlecams[4];
+			if (x >= 125 && x <= 153 && y >= 113 && y <= 134  && t->rt->cam->nb != 4)
+				t->rt->cam = t->rt->upcams[t->rt->cam->nb];
+			if (x >= 125 && x <= 153 && y >= 147 && y <= 172 && t->rt->cam->nb != 4)
+				t->rt->cam = t->rt->middlecams[t->rt->cam->nb];
+			mlx_clear_window(t->mlx_ptr, t->rt->mlx_win);
+			run_through(t);
+		}
+	}
+	return (0);
 }
 
-int     rt_event(int k, t_tool *t)
+int	rt_event(int k, t_tool *t)
 {
-    if (k == 53)
-    {
-        mlx_destroy_window(t->mlx_ptr, t->rt->mlx_win);
-        clean_rt(&t->rt);
-    }
-    return (0);
+	if (k == 53)
+	{
+		mlx_destroy_window(t->mlx_ptr, t->rt->mlx_win);
+		clean_rt(&t->rt);
+	}
+	return (0);
 }
 
-int		mouse_event(int keycode, int x, int y, t_tool *t)
+int	mouse_event(int keycode, int x, int y, t_tool *t)
 {
 	(void)(keycode);
 	(void)(x);
@@ -110,7 +110,6 @@ int		mouse_event(int keycode, int x, int y, t_tool *t)
 		{
 			print_group_menu(t);
 		}
-
 		if (x >= 250 && x <= 310 && y >= 1030 && y <= 1075)
 			system("open https://www.youtube.com");
 	}
@@ -132,9 +131,9 @@ int		mouse_event(int keycode, int x, int y, t_tool *t)
 	return (0);
 }
 
-int		menu_event(int keycode, t_tool *t)
+int	menu_event(int keycode, t_tool *t)
 {
-    (void)(t);
+	(void)(t);
 	if (keycode == 53)
 		exit(0);
 	return (0);
