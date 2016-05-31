@@ -6,31 +6,15 @@
 /*   By: vnguyen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 19:53:45 by vnguyen           #+#    #+#             */
-/*   Updated: 2016/05/31 20:16:26 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/05/31 22:22:56 by vnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <rtv1.h>
 
-void	ft_error(int i, t_tool *tools)
+void	ft_error_suite(int i, t_tool *tools)
 {
-	if (i == 1)
-		ft_putstr("Error, bad argument in camera. use just pos, res, vect, lumamb and skybox.\n");
-	else if (i == 2)
-		ft_putstr("Error, arguments need numbers.\n");
-	else if (i == 3)
-	{
-		ft_putstr("Error, bad argument in light. ");
-		ft_putstr("use just pos color, h, type, lumdiff.\n");
-	}
-	else if (i == 4)
-	{
-		ft_putstr("Error, bad argument in object, ");
-		ft_putstr("use just type, pos, dir, rayon, color, h, shiny, mirror, refract, texture.\n");
-	}
-	else if (i == 5)
-		ft_putstr("Error, bad type of object.\n");
-	else if (i == 6)
+	if (i == 6)
 		ft_putstr("Error, you need one and only one camera.\n");
 	else if (i == 7)
 		ft_putstr("Error, bad numbers of argument.\n");
@@ -49,6 +33,30 @@ void	ft_error(int i, t_tool *tools)
 	else if (i == 14)
 		ft_putendl("Error, Number must be between 0 and 1\n");
 	else if (i == 15)
-		ft_putendl("Error, Mirror and reflect additionates cant be superior at 1 \n");
+		ft_putendl("Error, Mirror and reflect
+				additionates cant be superior at 1 \n");
 	tools->error = 1;
+}
+
+void	ft_error(int i, t_tool *tools)
+{
+	if (i == 1)
+		ft_putstr("Error, bad argument in camera. use just
+				pos, res, vect, lumamb and skybox.\n");
+	else if (i == 2)
+		ft_putstr("Error, arguments need numbers.\n");
+	else if (i == 3)
+	{
+		ft_putstr("Error, bad argument in light. ");
+		ft_putstr("use just pos color, h, type, lumdiff.\n");
+	}
+	else if (i == 4)
+	{
+		ft_putstr("Error, bad argument in object, ");
+		ft_putstr("use just type, pos, dir, rayon, color,
+				h, shiny, mirror, refract, texture.\n");
+	}
+	else if (i == 5)
+		ft_putstr("Error, bad type of object.\n");
+	ft_error_suite(i, tools);
 }
