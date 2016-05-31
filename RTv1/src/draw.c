@@ -51,7 +51,8 @@ void		draw(t_tool *t, int x, int y)
 		x0 += 0.5;
 	}
 	moy_color = div_color(moy_color, 4);
-    change_to_sepia(color);
+    if (t->rt->sepia == 1)
+        change_to_sepia(color);
 	normalize_color(moy_color);
 	pixel_put_to_image(t, x, y, moy_color);
 	free(moy_color);

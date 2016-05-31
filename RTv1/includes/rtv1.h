@@ -134,7 +134,6 @@ typedef struct      s_rt
     t_object		*l_objects;
 	t_light			*l_lights;
 	t_image			*image;
-	t_image			*image_loading;
 	t_image         *sky;
 	t_cam			*cam;
     t_cam           **upcams;
@@ -151,6 +150,7 @@ typedef struct      s_rt
     t_pos           *vect;
     int             error;
     int             screenshot;
+    int             sepia;
 }                   t_rt;
 
 typedef struct		s_tool
@@ -270,6 +270,7 @@ void                clean_rt(t_rt **rt);
 int					ft_exit2(t_tool *t);
 int					ft_exit(t_tool *t);
 int					mouse_event(int x, int y, int keycode, t_tool *t);
+int					mouse_event_rt(int x, int y, int keycode, t_tool *t);
 void                init_menu(t_tool *tools);
 void                main_menu(int i);
 void                print_scene_menu(t_tool *t);
