@@ -56,7 +56,7 @@ void    init_cams(t_tool *t)
 	if (t->rt->pos && t->rt->vect)
 		t->rt->middlecams[4] = new_cam(t->rt->pos, t->rt->vect, t, 4);
 	else
-		t->rt->middlecams[5] = new_cam(vectornew(0, 2.5, -5), vectornew(0, -1, 2), t, 5);
+		t->rt->middlecams[4] = new_cam(vectornew(0, 2.5, -5), vectornew(0, -1, 2), t, 4);
 	t->rt->upcams = malloc(sizeof(t_cam*) * 4);
 	t->rt->upcams[0] = new_cam(vectornew(0, 2.5, -5), vectornew(0, -1, 2), t, 0);
 	t->rt->upcams[1] = new_cam(vectornew(-5, 2.5, 0), vectornew(2, -1, 0), t, 1);

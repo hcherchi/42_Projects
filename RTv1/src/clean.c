@@ -64,9 +64,9 @@ void	clean_rt(t_rt **rt)
 	if ((*rt)->l_lights)
         clean_lights(&(*rt)->l_lights);
     if ((*rt)->upcams)
-        clean_cams(&(*rt)->upcams, 5);
+        clean_cams(&(*rt)->upcams, 4);
     if ((*rt)->middlecams)
-        clean_cams(&(*rt)->middlecams, 6);
+        clean_cams(&(*rt)->middlecams, 5);
     *rt = NULL;
 }
 
