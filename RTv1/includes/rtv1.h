@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 14:56:14 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/05/31 21:40:19 by bgantelm         ###   ########.fr       */
+/*   Updated: 2016/05/31 22:35:01 by hcherchi         ###   ########.fr       */
 /*   Updated: 2016/05/31 19:22:43 by vnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -137,8 +137,8 @@ typedef struct      s_rt
 	t_image			*image;
 	t_image         *sky;
 	t_cam			*cam;
-    t_cam           **upcams;
-    t_cam           **middlecams;
+    t_cam           **up;
+    t_cam           **mid;
     double			lumamb;
     int             depth;
     double			dist;
@@ -166,7 +166,7 @@ typedef struct		s_tool
 // INTERSECTIONS
 double				minimum(t_object *l_objects);
 void				fill_dist(t_object *l_objects, t_ray *ray);
-double			calcul_cone(t_object *cone, t_ray *ray, double k, t_equation param, t_pos *tmp);
+double				calcul_cone(t_object *cone, t_ray *ray, double k, t_pos *tmp);
 t_object			*intersection(t_object *l_objects, t_ray *ray);
 double				intersection_plan(t_pos *dir, double h, t_pos *oray, t_pos *dray);
 double				intersection_sphere(t_object *sphere, t_ray *ray);
@@ -252,6 +252,7 @@ t_color				*mult_color(t_color *color, double n);
 
 // LAUNCH
 void				ft_error();
+void				ft_error_suite();
 void				run_through(t_tool *t);
 void                launch(char *scene, t_tool *tools);
 void				init_param(t_tool *t);
