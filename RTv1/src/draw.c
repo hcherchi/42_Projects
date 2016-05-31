@@ -1,5 +1,13 @@
 #include <rtv1.h>
 #include <stdio.h>
+
+void        change_to_sepia(t_color *color)
+{
+    color->r = (color->r * 0.393) + (color->g * 0.769) + (color->b * 0.189);
+    color->g = (color->r * 0.349) + (color->g * 0.686) + (color->b * 0.168);
+    color->b = (color->r * 0.272) + (color->g * 0.534) + (color->b * 0.131);
+}
+
 void		pixel_put_to_image(t_tool *t, int x, int y, t_color *color)
 {
     if(t->rt->screenshot == 0)
@@ -43,6 +51,7 @@ void		draw(t_tool *t, int x, int y)
 		x0 += 0.5;
 	}
 	moy_color = div_color(moy_color, 4);
+    change_to_sepia(color);
 	normalize_color(moy_color);
 	pixel_put_to_image(t, x, y, moy_color);
 	free(moy_color);
