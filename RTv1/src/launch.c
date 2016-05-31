@@ -111,7 +111,7 @@ void run_through(t_tool *t)
 		put_image_to_file(t);
 	mlx_string_put(t->mlx_ptr, t->rt->mlx_win, 50, 25, 0x009933FF, "2 - 4 - 5 - 6 - 8 and arrows to change CAMERA");
 	mlx_string_put(t->mlx_ptr, t->rt->mlx_win, 50, 50, 0x009933FF, "P : SCREENSHOT");
-	mlx_string_put(t->mlx_ptr, t->rt->mlx_win, 50, 75, 0x009933FF, "Press 'DELETE' to go back to the menu");
+	mlx_string_put(t->mlx_ptr, t->rt->mlx_win, 50, 75, 0x009933FF, "Press 'DELETE' to go back to the menu");	
 	mlx_key_hook(t->rt->mlx_win, rt_event, t);
 }
 
