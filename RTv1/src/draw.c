@@ -103,6 +103,8 @@ double  get_flash_intens(t_tool *t, t_ray *ray, double lightdist)
             intens -= (1 - curobj->transp);
         curobj = curobj->next;
     }
+	if (intens < 0)
+		intens = 0;
     return (intens);
 }
 
@@ -165,7 +167,7 @@ t_color		*get_color(t_ray *ray, t_tool *t)
         else
             final_color = new_color();
     }
-    //final_color = add_color(final_color, get_flash(ray, t));
+    final_color = add_color(final_color, get_flash(ray, t));
     clean_ray(&ray);
     return (final_color);
 }
