@@ -6,7 +6,7 @@
 /*   By: vnguyen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 19:54:03 by vnguyen           #+#    #+#             */
-/*   Updated: 2016/05/31 19:54:04 by vnguyen          ###   ########.fr       */
+/*   Updated: 2016/05/31 21:00:41 by vnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	run_through(t_tool *t)
 	y = 0;
 	if (t->rt->screenshot == 0)
 		mlx_string_put(t->mlx_ptr, t->rt->mlx_win, t->rt->x_res / 2 - 50, t->rt->y_res / 2, 0xFFFFFFFF, "RT is loading...");
+	mlx_put_image_to_window(t->mlx_ptr, t->rt->mlx_win, t->rt->image->mlx_img, 0, 0);
 	while (y < t->rt->y_res)
 	{
 		x = 0;
