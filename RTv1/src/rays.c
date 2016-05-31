@@ -26,7 +26,7 @@ t_ray	*get_lightray(t_ray *impact, t_light *light)
 			lightray->o = vectoradd(impact->o,
 					vectorscale(dist, vectorscale(-1, lightray->d)));
 		else
-			return (ft_free(lightray));
+			return (ft_free_perso(lightray));
 	}
 	vectornorm(lightray->d);
 	if (light->type == SPOT && vectordot(lightray->d, light->d) < light->angle)
