@@ -1,5 +1,12 @@
 #include <rtv1.h>
 
+int	ft_exit(t_tool *t)
+{
+	(void)(t);
+	exit(0);
+	return (0);
+}
+
 void    init_menu(t_tool *tools)
 {
 	tools->m->x_res = 400;
@@ -32,6 +39,7 @@ int     main()
 	print_scene_menu(tools);
 	mlx_key_hook(tools->m->mlx_win, menu_event, tools);
 	mlx_mouse_hook(tools->m->mlx_win, mouse_event, tools);
+	mlx_hook(tools->m->mlx_win, 17,(1L << 17),ft_exit,tools);
 	mlx_loop(tools->mlx_ptr);
 	return (0);
 }
