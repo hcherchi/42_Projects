@@ -6,7 +6,7 @@
 /*   By: bgantelm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 10:48:31 by bgantelm          #+#    #+#             */
-/*   Updated: 2016/06/01 15:11:16 by bgantelm         ###   ########.fr       */
+/*   Updated: 2016/06/01 15:27:44 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,6 @@ void			mouse_event2(int x, int y, t_tool *t)
 	if (x >= 250 && x <= 310 && y >= 980 && y <= 1020)
 		print_group_menu(t);
 	if (x >= 250 && x <= 310 && y >= 1030 && y <= 1075)
-		system("open https://www.youtube.com");
+		system("open https://www.youtube.com/watch?v=kiPL5w18s4Y");
 	mouse_event3(x, y, t);
 }
