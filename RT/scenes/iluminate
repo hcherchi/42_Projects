@@ -1,0 +1,64 @@
+camera
+{
+    res: 600 600
+}
+
+light
+{
+    pos: 0 4 -15
+}
+
+light
+{
+    pos: 0 0 -15
+}
+
+light
+{
+    pos: 0 -4 -15
+}
+
+object
+{
+    type: PLAN
+    dir: 1 0 0
+    h: 10
+    color: 150 250 50
+}
+
+object
+{
+    type: PLAN
+    dir: -1 0 0
+    h: 10
+    color: 250 150 50
+}
+
+object
+{
+    type: CYL
+    pos: 0 0 0
+    h: 0
+    dir: 3 2 0
+    rayon: 0.5
+    shiny: 1
+    mirror: 1
+}
+
+object
+{
+    type: SPHERE
+    pos: 0 2 0
+    rayon: 0.5
+    color: 255 0 255
+    mirror: 0.5
+}
+
+object
+{
+    type: SPHERE
+    pos: 0 -2 0
+    rayon: 0.5
+    color: 255 255 0
+    mirror: 0.5
+}

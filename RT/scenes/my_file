@@ -1,0 +1,17 @@
+camera
+{
+	res: 300 300
+}
+
+light
+{
+	pos: 0 5 -15
+}
+
+object
+{
+	type: SPHERE
+	pos: 0 0 0
+	rayon: 2
+}
+

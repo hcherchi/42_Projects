@@ -1,0 +1,53 @@
+camera
+{
+    res: 600 600
+    lumamb: 0.2
+}
+light
+{
+    type: SPOT
+    dir: -1 -1.2 -1
+    pos: 2 2 2
+    angle: 0.6
+}
+object
+{
+    type: PLAN
+    dir: 0 1 0
+    h: 1
+    texture: textures/plan/damier.xpm 80
+    mirror: 0.4
+}
+object
+{
+    type: SPHERE
+    pos: -0.7 0.3 0.8
+    rayon: 0.4
+    color: 0 200 200
+    mirror: 0.6
+}
+object
+{
+    type: PARA
+    pos: -0.7 0 0.8
+    h: -0.2
+    transp: 0.2
+    color: 255 230 210
+}
+object
+{
+    type: SPHERE
+    pos: 0.7 0.3 -0.4
+    rayon: 0.4
+    color: 255 30 30
+    mirror: 0.6
+}
+object
+{
+    type: PARA
+    pos: 0.7 0 -0.4
+    h: -0.2
+    transp: 0.2
+    color: 255 230 210
+}
+

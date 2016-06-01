@@ -1,0 +1,49 @@
+camera
+{
+    res: 600 600
+    skybox: textures/skybox/pano.xpm
+}
+light
+{
+    type: SUN
+    color: 255 255 150
+    pos: 0 3 0
+}
+light
+{
+    type: SUN
+    pos: 0 0 -20
+    lumdiff: 0.5
+color: 255 255 150
+}
+object
+{
+    type: SPHERE
+    rayon: 0.5
+    pos: 0 0 2
+    texture: textures/sphere/magic.xpm 100
+}
+object
+{
+    type: SPHERE
+    rayon: 0.5
+    pos: 1.5 0 -1.5
+    texture: textures/sphere/pierre.xpm 100
+}
+object
+{
+    type: SPHERE
+    rayon: 0.5
+    pos: -1 1 -1
+    mirror: 1
+}
+object
+{
+    type: CYL
+    rayon: 0.5
+    pos: 0 0 0
+    dir: 1 2 1
+    mirror: 0.5
+    color: 230 50 50
+    transp: 0.1
+}

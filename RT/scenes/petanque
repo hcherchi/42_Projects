@@ -1,0 +1,53 @@
+camera
+{
+	res: 600 600
+	pos: 0 10 -10
+	vect: 0 -1 1
+	skybox: textures/skybox/sky1.xpm
+}
+
+light
+{
+	type: LIGHTPLAN
+	pos: 0 -1 0
+}
+
+
+object
+{
+	type: PLAN
+	dir: 0 1 0
+	texture: textures/plan/beuher.XPM 100
+	h: 2
+	color: 250 0 0
+}
+
+
+object
+{
+	type: SPHERE
+	pos: 2 -0.8 0
+	rayon: 1.2
+	texture: textures/sphere/metal.XPM 100
+	color: 255 0 255
+	mirror: 0.1
+}
+
+object
+{
+	type: SPHERE
+	pos: 0 -1.5 0
+	rayon: 0.5
+	color: 255 255 0
+	mirror: 0
+}
+
+object
+{
+	type: SPHERE
+	pos: -2.5 -0.8 2.1
+	rayon: 1.2
+	texture: textures/sphere/metal.XPM 100
+	color: 125 125 125
+	mirror: 0.1
+}

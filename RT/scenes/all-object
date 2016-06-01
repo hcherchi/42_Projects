@@ -1,0 +1,91 @@
+camera
+{
+	lumamb: 0.4
+	pos: 5 5 5
+	res: 600 600
+}
+
+
+light
+{
+	pos: 0 1 -5
+}
+
+object
+{
+	type: PLAN
+    dir: 1 0 0 
+	h: 3
+    color: 153 0 0
+	shiny: 0.5
+mirror: 0.3 
+}
+
+object
+{
+	type: PLAN
+    dir: -1 0 0
+	h: 3
+    color: 153 0 0
+	shiny: 0.5
+mirror: 0.3
+}
+
+object
+{
+    type: PLAN
+    dir: 0 1 0
+	h: 1
+    color: 153 0 0
+shiny: 0.5
+mirror: 0.3
+}
+
+object
+{
+    type: PLAN
+    dir: 0 0 -1
+	h: 10
+    color: 153 0 0
+shiny: 0.5
+}
+
+object
+{
+    type: PLAN
+    dir: 0 -1 0
+	h: 3
+    color: 153 0 0
+shiny: 0.5
+}
+
+object
+{
+	type: CONE
+    rayon: 0.2
+	dir: 1 1 0
+    pos: 0 1 5
+	h: 0.4
+    color: 0 102 204
+mirror: 0.3
+}
+
+object
+{
+    type: SPHERE
+    rayon: 0.4
+    pos: 0.8 0.2 4
+    color: 51 0 102
+	shiny: 0.5
+}
+
+object
+{
+	type: CYL
+	rayon: 0.6
+	pos: 0.6 0 7
+	dir: 3 2 0
+	h: 0.4
+	color: 160 160 160
+	shiny: 2
+}

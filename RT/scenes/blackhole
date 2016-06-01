@@ -1,0 +1,38 @@
+camera
+{
+		lumamb: 0.1
+		res: 1200 800
+		skybox: textures/skybox/blackhole.xpm
+		vect: -1 -1 1
+		pos: 5 5 -5
+}
+
+light
+{
+		pos: 0 1 1
+}
+
+object
+{
+		type: SPHERE
+		pos: 0 0 0
+		rayon: 2
+		shiny: 1
+		mirror: 1
+}
+object
+{
+	type: CONE
+	pos: 2 0 0
+	rayon: 0.2
+	h: 0.4
+	mirror: 1
+}
+object
+{
+	type: CONE
+	pos: -2 0 0
+	rayon: 0.2
+	h: 0.4
+	mirror: 1
+}

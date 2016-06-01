@@ -1,0 +1,66 @@
+camera
+{
+    lumamb: 0.3
+    res: 1000 1000
+    skybox: textures/skybox/the_universe.xpm
+}
+light
+{
+    pos: -3 -2 15
+    h: 1
+    lumdiff: 0.9
+}
+object
+{
+    type: SPHERE
+    pos: -5 -4 60
+    rayon: 20
+    shiny: 1
+    texture: textures/sphere/sun2.xpm 100
+    mirror: 0
+}
+object
+{
+    type: SPHERE
+    pos: 2 -4 10
+    rayon: 0.85
+    shiny: 0
+    texture: textures/sphere/mars.xpm 100
+    mirror: 0
+}
+object
+{
+    type: SPHERE
+    pos: 0 -4 14
+    rayon: 0.5
+    shiny: 0
+    texture: textures/sphere/tcearthdaymap.xpm 100
+    mirror: 0
+}
+object
+{
+    type: SPHERE
+    pos: -2 -4 16
+    rayon: 0.15
+    shiny: 0
+    texture: textures/sphere/venus.xpm 100
+    mirror: 0
+}
+object
+{
+    type: SPHERE
+    pos: 1 -3 13
+    rayon: 0.11
+    shiny: 0
+    texture: textures/sphere/moon.xpm 100
+    mirror: 0
+}
+object
+{
+    type: SPHERE
+    pos: 4 -3 0
+    rayon: 2.8
+    shiny: 0.5
+    texture: textures/sphere/jupiter_hq.xpm 100
+    mirror: 0
+}
