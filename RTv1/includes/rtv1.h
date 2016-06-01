@@ -6,11 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 14:56:14 by hcherchi          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2016/06/01 10:41:11 by fhenri           ###   ########.fr       */
-=======
-/*   Updated: 2016/06/01 10:31:21 by hcherchi         ###   ########.fr       */
->>>>>>> f0b8dbba507c5376fdcd0429e6bfbfb0c620ee19
+/*   Updated: 2016/06/01 10:49:01 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +38,6 @@ typedef struct		s_equation
 	double			t0;
 }					t_equation;
 
-typedef struct		s_k
-{
-	double intens;
-	double s;
-	double diff;
-}					t_k;
-
 typedef struct		s_color
 {
 	int				r;
@@ -62,6 +51,13 @@ typedef struct      s_colors
     t_color         *base;
     t_color         *refract;
 }                   t_colors;
+
+typedef struct		s_k
+{
+	double intens;
+	double s;
+	double diff;
+}					t_k;
 
 typedef struct		s_pos
 {
@@ -181,17 +177,6 @@ typedef struct		s_tool
 	int				m_load_cursor;
 	int             error;
 }					t_tool;
-
-// Launch
-
-void				launch(char *scene, t_tool *tools);
-void				init_param(t_tool *t);
-void				init_cams(t_tool *t);
-void				put_image_to_file(t_tool *t);
-void				run_through_tools(t_tool *t);
-void				run_through(t_tool *t);
-void				new_cam_upleft(t_cam *cam, t_tool *t);
-t_cam				*new_cam(t_pos *pos, t_pos *vect, t_tool *t, int nb);
 
 // INTERSECTIONS
 double				minimum(t_object *l_objects);
