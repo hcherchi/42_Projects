@@ -41,7 +41,8 @@ t_colors	*get_colors(t_object *object, t_ray *ray, t_tool *t)
 
 	colors = new_colors();
 	impact = get_normal(object, ray);
-	colors->base = get_base_color(t, object, impact);
+	colors->base = mult_color(object->color, t->rt->lumamb);
+	get_base_color(t, object, impact, colors);
 	if (object->mirror && t->rt->depth < 4)
 		colors->reflect = get_color(get_reflectray(ray, t, impact), t);
 	if (object->transp)

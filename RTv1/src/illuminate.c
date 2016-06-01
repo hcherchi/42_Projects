@@ -6,7 +6,7 @@
 /*   By: vnguyen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 19:53:40 by vnguyen           #+#    #+#             */
-/*   Updated: 2016/05/31 22:46:28 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/06/01 10:34:51 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ double	get_kspec(t_ray *lightray, t_ray *impact, double lumdiff)
 	t_pos	*reflectray;
 
 	invlight = vectorscale(-1, lightray->d);
-	reflectray = vectoradd(vectorscale(-2 * vectordot(lightray->d, impact->d), impact->d), lightray->d);
+	reflectray = vectoradd(vectorscale(-2 * vectordot(lightray->d,
+	impact->d), impact->d), lightray->d);
 	vectornorm(reflectray);
 	kspec = vectordot(invlight, reflectray);
 	free(invlight);
@@ -55,43 +56,38 @@ double	get_ray_intens(t_tool *t, t_ray *lightray, t_object *obj)
 	return (intens);
 }
 
-t_color	*get_base_color(t_tool *t, t_object *obj, t_ray *impact)
+void	get_base_color(t_tool *t, t_object *obj, t_ray *impact, t_colors *col)
 {
 	t_light		*light;
 	t_ray		*lightray;
-	double		kspec;
-	double		kdiff;
-	t_color		*base_color;
-	double		intens;
+	t_k			*k;
 
+	k = malloc(sizeof(*k));
 	if (obj->texture)
 		obj->color = get_texture_color(obj, impact, t);
-	base_color = mult_color(obj->color, t->rt->lumamb);
 	light = t->rt->l_lights;
 	while (light)
 	{
 		if ((lightray = get_lightray(impact, light)))
 		{
-			intens = get_ray_intens(t, lightray, obj);
-			kdiff = get_kdiff(lightray, impact, intens * light->lumdiff);
-			if (kdiff >= 0)
+			k->intens = get_ray_intens(t, lightray, obj);
+			k->diff = get_kdiff(lightray, impact, k->intens * light->lumdiff);
+			if (k->diff >= 0)
 			{
-				update_color(kdiff, light->color, base_color, obj->color);
-				kspec = get_kspec(lightray, impact, intens * light->lumdiff);
-				if (kspec >= 0)
-					update_color(kspec * obj->shiny, light->color, base_color, obj->color);
+				update_color(k->diff, light->color, col->base, obj->color);
+				k->s = get_kspec(lightray, impact, k->intens * light->lumdiff);
+				if (k->s >= 0)
+					update_color(k->s * obj->shiny, light->color,
+					col->base, obj->color);
 			}
 		}
 		light = light->next;
 	}
-	if (obj->texture)
-		free(obj->color);
-	return (base_color);
 }
 
-void	update_color(double k, t_color *lightcolor, t_color *color, t_color *objcolor)
+void	update_color(double k, t_color *lcol, t_color *col, t_color *objcol)
 {
-	color->r += (lightcolor->r + 3 * objcolor->r) / 4 * k;
-	color->g += (lightcolor->g + 3 * objcolor->g) / 4 * k;
-	color->b += (lightcolor->b + 3 * objcolor->b) / 4 * k;
+	col->r += (lcol->r + 3 * objcol->r) / 4 * k;
+	col->g += (lcol->g + 3 * objcol->g) / 4 * k;
+	col->b += (lcol->b + 3 * objcol->b) / 4 * k;
 }

@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 14:56:14 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/06/01 10:24:02 by bgantelm         ###   ########.fr       */
+/*   Updated: 2016/06/01 10:31:21 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,13 @@ typedef struct		s_equation
 	double			t1;
 	double			t0;
 }					t_equation;
+
+typedef struct		s_k
+{
+	double intens;
+	double s;
+	double diff;
+}					t_k;
 
 typedef struct		s_color
 {
@@ -191,7 +198,7 @@ void				pixel_put_to_image(t_tool *t, int x, int y, t_color *color);
 
 // GET COLOR
 t_color				*get_color(t_ray *ray, t_tool *t);
-t_color             *get_base_color(t_tool *t, t_object *obj, t_ray *impact);
+void				get_base_color(t_tool *t, t_object *obj, t_ray *impact, t_colors *colors);
 t_color             *get_final_color(t_colors   *colors, t_object *object);
 
 // TEXTURES
