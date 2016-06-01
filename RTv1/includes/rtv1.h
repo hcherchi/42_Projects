@@ -6,7 +6,11 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 14:56:14 by hcherchi          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2016/06/01 10:41:11 by fhenri           ###   ########.fr       */
+=======
+/*   Updated: 2016/06/01 10:31:21 by hcherchi         ###   ########.fr       */
+>>>>>>> f0b8dbba507c5376fdcd0429e6bfbfb0c620ee19
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +41,13 @@ typedef struct		s_equation
 	double			t1;
 	double			t0;
 }					t_equation;
+
+typedef struct		s_k
+{
+	double intens;
+	double s;
+	double diff;
+}					t_k;
 
 typedef struct		s_color
 {
@@ -171,6 +182,17 @@ typedef struct		s_tool
 	int             error;
 }					t_tool;
 
+// Launch
+
+void				launch(char *scene, t_tool *tools);
+void				init_param(t_tool *t);
+void				init_cams(t_tool *t);
+void				put_image_to_file(t_tool *t);
+void				run_through_tools(t_tool *t);
+void				run_through(t_tool *t);
+void				new_cam_upleft(t_cam *cam, t_tool *t);
+t_cam				*new_cam(t_pos *pos, t_pos *vect, t_tool *t, int nb);
+
 // INTERSECTIONS
 double				minimum(t_object *l_objects);
 void				fill_dist(t_object *l_objects, t_ray *ray);
@@ -189,7 +211,7 @@ void				pixel_put_to_image(t_tool *t, int x, int y, t_color *color);
 
 // GET COLOR
 t_color				*get_color(t_ray *ray, t_tool *t);
-t_color             *get_base_color(t_tool *t, t_object *obj, t_ray *impact);
+void				get_base_color(t_tool *t, t_object *obj, t_ray *impact, t_colors *colors);
 t_color             *get_final_color(t_colors   *colors, t_object *object);
 
 // TEXTURES

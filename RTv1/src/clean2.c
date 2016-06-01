@@ -6,7 +6,7 @@
 /*   By: vnguyen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 19:51:51 by vnguyen           #+#    #+#             */
-/*   Updated: 2016/05/31 19:51:52 by vnguyen          ###   ########.fr       */
+/*   Updated: 2016/06/01 10:08:17 by bgantelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,9 @@ void	clean_cams(t_cam ***cams, int nb)
 void	clean_cam(t_cam **cam)
 {
 	if ((*cam)->pos)
-	{
 		free((*cam)->pos);
-		(*cam)->pos = NULL;
-	}
 	if ((*cam)->vect)
-	{
 		free((*cam)->vect);
-		(*cam)->vect = NULL;
-	}
 	if ((*cam)->h_vect)
 	{
 		free((*cam)->h_vect);
@@ -91,10 +85,7 @@ void	clean_lights(t_light **l_lights)
 		tmp = *l_lights;
 		*l_lights = (*l_lights)->next;
 		if (tmp->color)
-		{
 			free(tmp->color);
-			tmp->color = NULL;
-		}
 		if (tmp->o)
 		{
 			free(tmp->o);
@@ -122,15 +113,9 @@ void	clean_obj(t_object **l_objects)
 		tmp = *l_objects;
 		*l_objects = (*l_objects)->next;
 		if (tmp->color)
-		{
 			free(tmp->color);
-			tmp->color = NULL;
-		}
 		if (tmp->o)
-		{
 			free(tmp->o);
-			tmp->o = NULL;
-		}
 		if (tmp->d)
 		{
 			free(tmp->d);
