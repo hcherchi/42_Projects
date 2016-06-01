@@ -6,7 +6,7 @@
 /*   By: vnguyen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 19:32:25 by vnguyen           #+#    #+#             */
-/*   Updated: 2016/05/31 22:10:48 by fhenri           ###   ########.fr       */
+/*   Updated: 2016/06/01 10:08:46 by bgantelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_pos	*vectoradd(t_pos *v1, t_pos *v2)
 	return (result);
 }
 
-t_pos *v(t_pos *v1, t_pos *v2)
+t_pos	*v(t_pos *v1, t_pos *v2)
 {
 	t_pos	*result;
 
