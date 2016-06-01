@@ -6,16 +6,31 @@
 /*   By: vnguyen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 19:32:20 by vnguyen           #+#    #+#             */
-/*   Updated: 2016/05/31 22:03:41 by fhenri           ###   ########.fr       */
+/*   Updated: 2016/06/01 10:41:19 by fhenri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <rtv1.h>
-void	suite_suite()
-{
 
+void		calcule3(t_ray *impact, t_object *object, t_double *deux)
+{
+	deux->x = -impact->o->z * object->texture_zoom;
+	deux->y = -impact->o->y * object->texture_zoom;
 }
-t_color	*extract_color(t_tool *t, t_image *texture, int x, int y)
+
+void		calcule2(t_ray *impact, t_object *object, t_double *deux)
+{
+	deux->x = impact->o->x * object->texture_zoom;
+	deux->y = -impact->o->y * object->texture_zoom;
+}
+
+void		calcule1(t_ray *impact, t_object *object, t_double *deux)
+{
+	deux->x = impact->o->x * object->texture_zoom;
+	deux->y = -impact->o->z * object->texture_zoom;
+}
+
+t_color		*extract_color(t_tool *t, t_image *texture, int x, int y)
 {
 	t_color			*c;
 	int				color;
@@ -34,49 +49,31 @@ t_color	*extract_color(t_tool *t, t_image *texture, int x, int y)
 	return (c);
 }
 
-t_color	*get_texture_color(t_object *object, t_ray *impact, t_tool *t)
+t_color		*get_texture_color(t_object *object, t_ray *impact, t_tool *t)
 {
-	double	x;
-	double	y;
-	t_color *color;
-	double	tmp;
-	double	div;
+	t_double deux;
 
 	if (object->type == PLAN)
 	{
 		if (fabs(object->d->y) == 1)
-		{
-			x = impact->o->x * object->texture_zoom;
-			y = -impact->o->z * object->texture_zoom;
-		}
+			calcule1(impact, object, &deux);
 		else if (fabs(object->d->z) == 1)
-		{
-			x = impact->o->x * object->texture_zoom;
-			y = -impact->o->y * object->texture_zoom;
-		}
+			calcule2(impact, object, &deux);
 		else if (fabs(object->d->x) == 1)
-		{
-			x = -impact->o->z * object->texture_zoom;
-			y = -impact->o->y * object->texture_zoom;
-		}
+			calcule3(impact, object, &deux);
 		else
 			return (mult_color(object->color, 1));
-		tmp = y / object->texture->height;
-		div = floor(tmp);
-		y = (tmp - div) * object->texture->height;
-		tmp = x / object->texture->width;
-		div = floor(tmp);
-		x = (tmp - div) * object->texture->height;
-		color = extract_color(t, object->texture, x, y);
+		texture_suite(&deux, object);
+		deux.color = extract_color(t, object->texture, deux.x, deux.y);
 	}
 	else if (object->type == SPHERE)
 	{
-		x = (0.5 + (atan2(impact->d->z, impact->d->x)
+		deux.x = (0.5 + (atan2(impact->d->z, impact->d->x)
 					/ (2 * M_PI))) * object->texture->width;
-		y = (0.5 - asin(impact->d->y) / M_PI) * object->texture->height;
-		color = extract_color(t, object->texture, x, y);
+		deux.y = (0.5 - asin(impact->d->y) / M_PI) * object->texture->height;
+		deux.color = extract_color(t, object->texture, deux.x, deux.y);
 	}
 	else
-		color = object->color;
-	return (color);
+		deux.color = object->color;
+	return (deux.color);
 }

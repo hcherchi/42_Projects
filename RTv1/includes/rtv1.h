@@ -6,7 +6,11 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 14:56:14 by hcherchi          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2016/06/01 10:41:11 by fhenri           ###   ########.fr       */
+=======
 /*   Updated: 2016/06/01 10:31:21 by hcherchi         ###   ########.fr       */
+>>>>>>> f0b8dbba507c5376fdcd0429e6bfbfb0c620ee19
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +164,15 @@ typedef struct      s_rt
     int             sepia;
 }                   t_rt;
 
+typedef struct		s_double
+{
+	double			x;
+	double			y;
+	double			tmp;
+	double			div;
+	t_color			*color;
+}					t_double;
+
 typedef struct		s_tool
 {
     void            *mlx_ptr;
@@ -204,6 +217,7 @@ t_color             *get_final_color(t_colors   *colors, t_object *object);
 // TEXTURES
 t_color             *get_texture_color(t_object *object, t_ray *impact, t_tool *t);
 t_color             *extract_color(t_tool *t, t_image *texture, int x, int y);
+void				texture_suite(t_double *deux, t_object *object);
 
 // NORMAL
 t_ray				*get_normal(t_object *object, t_ray *ray);
