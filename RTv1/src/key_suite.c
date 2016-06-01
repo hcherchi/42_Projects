@@ -11,19 +11,19 @@ void			mouse_event_rt2(int x, int y, t_tool *t)
 	if (x >= 83 && x <= 100 && y >= 73 && y <= 84)
 		modif_lumamb(t, 0.10);
 	if (x >= 52 && x <= 80 && y >= 105 && y <= 120)
-		t->rt->cam = t->rt->middlecams[3];
+		t->rt->cam = t->rt->mid[3];
 	if (x >= 23 && x <= 41 && y >= 131 && y <= 155)
-		t->rt->cam = t->rt->middlecams[2];
+		t->rt->cam = t->rt->mid[2];
 	if (x >= 92 && x <= 104 && y >= 131 && y <= 154)
-		t->rt->cam = t->rt->middlecams[1];
+		t->rt->cam = t->rt->mid[1];
 	if (x >= 55 && x <= 79 && y >= 168 && y <= 177)
-		t->rt->cam = t->rt->middlecams[0];
+		t->rt->cam = t->rt->mid[0];
 	if (x >= 54 && x <= 77 && y >= 132 && y <= 153)
-		t->rt->cam = t->rt->middlecams[4];
+		t->rt->cam = t->rt->mid[4];
 	if (x >= 125 && x <= 153 && y >= 113 && y <= 134 && t->rt->cam->nb != 4)
-		t->rt->cam = t->rt->upcams[t->rt->cam->nb];
+		t->rt->cam = t->rt->up[t->rt->cam->nb];
 	if (x >= 125 && x <= 153 && y >= 147 && y <= 172 && t->rt->cam->nb != 4)
-		t->rt->cam = t->rt->middlecams[t->rt->cam->nb];
+		t->rt->cam = t->rt->mid[t->rt->cam->nb];
 	mlx_clear_window(t->mlx_ptr, t->rt->mlx_win);
 	run_through(t);
 }

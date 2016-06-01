@@ -6,7 +6,11 @@
 /*   By: vnguyen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 19:32:10 by vnguyen           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2016/05/31 22:23:06 by fhenri           ###   ########.fr       */
+=======
+/*   Updated: 2016/05/31 22:47:01 by hcherchi         ###   ########.fr       */
+>>>>>>> ab9d5bc0f750f5232cc604703060c70a34af456f
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +23,7 @@ t_ray	*ft_free_perso(t_ray *l)
 	return (NULL);
 }
 
-t_ray	*get_l(t_ray *impact, t_light *light)
+t_ray	*get_lightray(t_ray *impact, t_light *light)
 {
 	t_ray	*l;
 	float	dist;

@@ -6,7 +6,7 @@
 /*   By: vnguyen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/31 19:58:28 by vnguyen           #+#    #+#             */
-/*   Updated: 2016/05/31 19:58:30 by vnguyen          ###   ########.fr       */
+/*   Updated: 2016/05/31 22:47:56 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,6 @@ void	init_camera(t_tool *tools)
 	tools->rt->pos = NULL;
 	tools->rt->image = NULL;
 	tools->rt->cam = NULL;
-	tools->rt->upcams = NULL;
-	tools->rt->middlecams = NULL;
+	tools->rt->up = NULL;
+	tools->rt->mid = NULL;
 }

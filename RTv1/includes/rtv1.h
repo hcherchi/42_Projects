@@ -6,8 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 14:56:14 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/05/31 22:16:55 by fhenri           ###   ########.fr       */
-/*   Updated: 2016/05/31 19:22:43 by vnguyen          ###   ########.fr       */
+/*   Updated: 2016/05/31 22:43:01 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,8 +136,8 @@ typedef struct      s_rt
 	t_image			*image;
 	t_image         *sky;
 	t_cam			*cam;
-    t_cam           **upcams;
-    t_cam           **middlecams;
+    t_cam           **up;
+    t_cam           **mid;
     double			lumamb;
     int             depth;
     double			dist;
@@ -253,6 +252,7 @@ t_color				*mult_color(t_color *color, double n);
 
 // LAUNCH
 void				ft_error();
+void				ft_error_suite();
 void				run_through(t_tool *t);
 void                launch(char *scene, t_tool *tools);
 void				init_param(t_tool *t);
