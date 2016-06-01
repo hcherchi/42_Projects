@@ -6,7 +6,7 @@
 /*   By: bgantelm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 10:49:47 by bgantelm          #+#    #+#             */
-/*   Updated: 2016/06/01 10:49:49 by bgantelm         ###   ########.fr       */
+/*   Updated: 2016/06/01 11:50:19 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_colors	*get_colors(t_object *object, t_ray *ray, t_tool *t)
 	impact = get_normal(object, ray);
 	colors->base = mult_color(object->color, t->rt->lumamb);
 	get_base_color(t, object, impact, colors);
-	if (object->mirror && t->rt->depth < 4)
+	if (object->mirror && t->rt->depth < 2)
 		colors->reflect = get_color(get_reflectray(ray, t, impact), t);
 	if (object->transp)
 		colors->refract = get_color(get_refractray(ray, impact, object), t);

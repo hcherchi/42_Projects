@@ -6,12 +6,12 @@
 #    By: bgantelm <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/18 17:05:54 by bgantelm          #+#    #+#              #
-#    Updated: 2016/06/01 10:17:10 by bgantelm         ###   ########.fr        #
+#    Updated: 2016/06/01 12:09:17 by hcherchi         ###   ########.fr        #
 #    Updated: 2016/05/31 19:33:49 by vnguyen          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-NAME = RTv1
+NAME = RT
 LIB_NAME = libft/libft.a
 INC_DIR = includes
 SRC_DIR = src
