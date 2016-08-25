@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   GNL.h                                              :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bgantelm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/05 18:40:55 by hcherchi          #+#    #+#             */
-/*   Updated: 2015/12/29 12:06:43 by hcherchi         ###   ########.fr       */
+/*   Created: 2015/11/24 15:27:12 by bgantelm          #+#    #+#             */
+/*   Updated: 2015/11/27 16:33:24 by bgantelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <libft.h>
-# define BUFF_SIZE 4096
+#include "libft.h"
 
-int		get_next_line(int const fd, char **line);
-#endif
+void    ft_putstrsp(char *str)
+{
+  ft_putstr(str);
+  ft_putstr("  ");
+}

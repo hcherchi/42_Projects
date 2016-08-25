@@ -13,6 +13,7 @@
 #ifndef FILLIT_H
 # define FILLIT_H
 
+# include <libft.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
@@ -37,11 +38,6 @@ int				test_char(char *pieces);
 int				test_forme(char *pieces);
 char			*test_file(char *str);
 int				test_general(char *pieces);
-void			*ft_memset(void *b, int c, size_t len);
-void			ft_putstr(char *str);
-void			ft_putchar(char c);
-void			ft_putnbr(int n);
-char			*ft_strsub(char const *s, unsigned int start, size_t len);
 int				width(int *lim_upleft, char **tab_piece);
 int				height(int *lim_upleft, char **tab_piece);
 char			**split_piece(char *piece);

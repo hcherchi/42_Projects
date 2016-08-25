@@ -13,7 +13,7 @@
 #ifndef ALUM1_H
 # define ALUM1_H
 
-# include "../libft/includes/libft.h"
+# include <libft.h>
 # include <fcntl.h>
 # define BUF_SIZE 4096
 
