@@ -10,13 +10,13 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fdf
+NAME = wolf3d
 LIB_NAME = ../libft/libft.a
 INC_DIR = includes
 SRC_DIR = src
 OBJ_DIR = obj
 
-SRCS = src/draw.c src/error.c src/main.c src/point_handling.c src/set_fdf.c
+SRCS = src/main.c src/draw.c src/vertical.c src/horizontal.c src/util.c
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
