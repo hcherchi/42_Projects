@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                              :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -120,14 +120,14 @@ void   init(t_tool *tools)
 	float miFOV;
 
 	pos = malloc(sizeof(*pos));
-	pos->x = 10;
-	pos->y = 10;
+	pos->x = 30;
+	pos->y = 30;
 	tools->pos = pos;
-	tools->angle = 55;
+	tools->angle = 135;
 	tools->FOV = 60;
 	miFOV = tools->FOV / 2;
-	tools->screenWidth = 500;
-	tools->screenHeight = 300;
+	tools->screenWidth = 1000;
+	tools->screenHeight = 800;
 	tools->centerX = tools->screenWidth / 2;
 	tools->centerY = tools->screenHeight / 2;
 	tools->dist = (tools->centerX / tan(degreesToRadians(miFOV)));
@@ -137,10 +137,48 @@ void   init(t_tool *tools)
 	tools->mlx_win = mlx_new_window(tools->mlx_ptr, tools->screenWidth, tools->screenHeight, "I <3 Wolf3D");
 }
 
-int		keyPress(int key)
+void adjustAngle (t_tool *tools, int inc)
+{
+	if (tools->angle + inc > 180)
+	{
+		tools->angle = tools->angle + inc - 360;
+	}
+	else if (tools->angle + inc < - 180)
+	{
+		tools->angle = tools->angle + inc + 360;
+	}
+	else
+	{
+		tools->angle = tools->angle + inc;
+	}
+}
+
+int		keyPress(int key, t_tool *tools)
 {
 	if (key == 53)
 		exit(0);
+	else if (key == 123)
+	{
+		adjustAngle(tools, 5);
+		launch(tools);
+	}
+	else if (key == 124)
+	{
+		adjustAngle(tools, -5);
+		launch(tools);
+	}
+	else if (key == 126)
+	{
+		tools->pos->x += cos(degreesToRadians(tools->angle)) * 5;
+		tools->pos->y += - sin(degreesToRadians(tools->angle)) * 5;
+		launch(tools);
+	}
+	else if (key == 125)
+	{
+		tools->pos->x += -cos(degreesToRadians(tools->angle)) * 5;
+		tools->pos->y += sin(degreesToRadians(tools->angle)) * 5;
+		launch(tools);
+	}
 	return (0);
 }
 
@@ -166,7 +204,8 @@ int		main()
 	ft_putendl("GO!");
 	ft_putendl("\n\n");
 	launch(tools);
-	mlx_key_hook(tools->mlx_win, keyPress, tools);
+	//mlx_key_hook(tools->mlx_win, keyPress, tools);
+	mlx_hook(tools->mlx_win, 2, (1L<<0), keyPress, tools);
 	mlx_loop(tools->mlx_ptr);
 	return (0);
 }

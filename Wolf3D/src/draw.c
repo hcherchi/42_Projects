@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                              :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -26,10 +26,24 @@ void drawCol(int wallHeight, int col, t_tool *t)
   {
     if (line > min && line < max)
     {
-      pixel_put_to_image(0x990000, t, col, line);
+      pixel_put_to_image(t->color, t, col, line);
     }
     line++;
   }
+}
+
+int getWallColor(float wallDistHorizontal, float wallDistVertical, float dist, float ray)
+{
+  ray = 3;
+  if (dist == wallDistHorizontal)
+  {
+    return NORTH;
+  }
+  else if (dist == wallDistVertical)
+  {
+    return SOUTH;
+  }
+  return 0;
 }
 
 int getWallHeight(int col, t_tool *t)
@@ -42,17 +56,11 @@ int getWallHeight(int col, t_tool *t)
 
 
   ray = t->angle + (t->FOV / 2) - col * t->incAngle;
-  printf("rayAngle: %f\n", ray);
   wallDistHorizontal = getDist(getHorizontal(t, ray), t);
   wallDistVertical = getDist(getVertical(t, ray), t);
-  printf("Vertical distance: %f\nHorizontal distance: %f\n", wallDistVertical, wallDistHorizontal);
   dist = MIN(wallDistHorizontal, wallDistVertical);
-  if(dist == -1)
-  {
-    return 0;
-  }
+  t->color = getWallColor(wallDistHorizontal, wallDistVertical, dist, ray);
   wallHeight = (t->cubeSize * t->dist) / dist;
-
   return wallHeight;
 }
 
@@ -65,9 +73,6 @@ void launch(t_tool *t)
   t->mlx_img = mlx_new_image(t->mlx_ptr, t->screenWidth, t->screenHeight);
   while (col < t->screenWidth)
   {
-    ft_putstr("running column ");
-    ft_putnbr(col);
-    ft_putchar('\n');
     wallHeight = getWallHeight(col, t);
     drawCol(wallHeight, col, t);
     col++;

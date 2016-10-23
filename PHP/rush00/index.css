@@ -1,0 +1,374 @@
+@font-face{
+    font-family: "font-title";
+    src: url('fonts/font-title.ttf');
+}
+
+body
+{
+    font-family: times;
+    background-color: #002020;
+    max-width: 1500px;
+    margin: auto;
+}
+
+footer
+{
+    display: flex;
+    justify-content: space-around;
+    height: 150px;
+	margin-top: 50px;
+    margin-right: 28%;
+    margin-left: 28%;
+    margin-bottom: 50px;
+    border-style: double;
+    border-color: white;
+}
+
+footer img
+{
+    height: 150px;
+}
+
+footer h1
+{
+    text-align: left;
+    font-family: "font-title";
+    font-size: 3.5em;
+    padding: 20px;
+    margin: 0;
+    font-weight: lighter;
+    color: #006060;
+}
+
+section
+{
+	display: flex;
+	justify-content: space-between;
+}
+
+.formulaire
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    margin-top: 50px;
+    width: 400px;
+    border-style: double;
+    padding: 20px;
+    text-align: center;
+    border-color: #003030;
+    background-color: white;
+}
+
+.formulaire h1
+{
+    font-family: "font-title";
+    font-size: 5em;
+    font-weight: lighter;
+    padding: 20px;
+    margin: 0;
+    color: #006060;
+}
+
+.formulaire label
+{
+    display: block;
+    font-size: 1.5em;
+}
+.formulaire button
+{
+    display: block;
+    font-size: 1.5em;
+    font-family:times;
+    width: 50%;
+    background-color: #005050;
+    color: white; 
+    padding: 10px;
+}
+.formulaire input
+{
+    display: block;
+    font-size: 2em;
+}
+.item
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    margin: 20px;
+    border-style: double;
+    padding: 20px;
+    height: 450px;
+    max-width: 400px;
+}
+
+.item img
+{
+    height: 75%;
+}
+
+.item h2
+{
+    font-weight: lighter;
+    font-size: 1.2em;
+}
+
+.item h1, h2
+{
+    margin: 8px;
+}
+
+.item button
+{
+    font-size: 1em;
+    color: white;
+    text-decoration: none;
+    padding: 6px;
+    margin: 0;
+    border: none;
+    background-color: #004040;
+    border-color: white;
+    border-radius: 5px;
+}
+
+.item button:hover
+{
+    background-color: #006060;
+}
+
+.vitrinetitle
+{
+    text-align: center;
+    font-family: "font-title";
+    font-size: 7em;
+    padding: 5px;
+    margin: 0;
+    font-weight: lighter;
+    color: #003030;
+}
+
+
+.elementsblock
+{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.vitrine
+{
+	min-width: 650px;
+	flex: 3;
+    margin: 40px;
+    margin-right: 0;
+    padding: 2%;
+    border-radius: 5px;
+    background-color: white;
+}
+
+aside
+{
+	width: 170px;
+	margin:0;
+	padding:2%;
+	text-align: center;
+    color: white;
+}
+
+.panier-title
+{
+    font-family: "font-title";
+    font-size: 4.5em;
+    font-weight: lighter;
+    margin: 0;
+    margin-right: 20px;
+}
+
+.smallitem
+{
+    margin-top: 10px;
+    text-align: center;
+    margin: 0;
+    border-style: solid;
+    border-width: 1px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.commandbutton
+{
+    display: block;
+    font-size: 1.2em;
+    color: white;
+    text-decoration: none;
+    padding: 6px;
+    margin-bottom: 20px;
+    background-color: #004040;
+    border-color: white;
+    border-radius: 5px;
+}
+
+.commandbutton:hover
+{
+    background-color: #006060;
+}
+
+.smallitem img
+{
+    width: 100%;
+    border-radius: 5px;
+}
+
+.smallitem h1
+{
+    margin: 0;
+    padding: 5px;
+    font-size: 1.2em;
+}
+
+.smallitem h2
+{
+    margin: 0;
+    padding: 5px;
+    font-weight: lighter;
+}
+
+.logo-panier
+{
+    margin-bottom: 20px;
+}
+
+header
+{
+    min-width: 800px;
+    background-image: url("img/fete.jpg");
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 2% 2% 0 2%;
+    color: white;
+}
+
+.titlelink
+{
+    font-size: 10em;
+    font-family: "font-title";
+    text-decoration: none;
+    display: block;
+    color: white;
+}
+
+.header-content
+{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+nav ul
+{
+    list-style-type: none;
+    display: flex;
+}
+
+nav li
+{
+    margin-right: 15px;
+}
+
+nav a
+{
+    font-size: 1.8em;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    background-color: #004040;
+    border-color: white;
+    border-radius: 5px;
+}
+
+nav a:hover
+{
+    background-color: #006060;
+}
+
+#menu, #menu ul
+{
+padding:0;
+margin:0;
+list-style:none;
+text-align:center;
+}
+#menu li{
+display:inline-block;
+position:relative;
+
+background-color: #004040;
+}
+#menu ul li
+{
+display:inherit;
+}
+
+#menu ul{
+position:absolute;
+z-index: 1000;
+max-height:0;
+left: 0;
+right: 0;
+overflow:hidden;
+-moz-transition: .8s all .3s;
+-webkit-transition: .8s all .3s;
+transition: .8s all .3s;
+}
+#menu li:hover ul
+{
+	max-height:15em;
+}
+
+#menu a{
+text-decoration:none;
+display:block;
+padding:8px 32px;
+color: white;
+font-size: 1.4em;
+}
+
+#menu a:hover
+{
+	background-color: #006060;
+}
+
+#menu_admin
+{
+   float: left;
+   width: 200px;
+}
+​
+.element_menu_admin
+{
+   background-color: #626262;
+   background-image: url("images/motif.png");
+   background-repeat: repeat-x;
+   
+   border: 2px solid black;
+   
+   margin-bottom: 20px;
+}
+​
+#corps
+{
+   margin-left: 140px;
+   margin-bottom: 20px;
+   padding: 5px;
+   font-family: "Comic Sans MS", "Trebuchet MS", Georgia, serif;
+   
+   color: #B3B3B3;
+   background-color: #626262;
+   background-repeat: repeat-x;
+   min-height:300px;
+   border: 2px solid black;
+}

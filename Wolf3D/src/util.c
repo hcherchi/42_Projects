@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                              :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -17,8 +17,8 @@ int   isWall(t_point *intersection, t_tool *t)
   int i;
   int j;
 
-  i = intersection->x / t->cubeSize;
-  j = intersection->y / t->cubeSize;
+  i = intersection->y / t->cubeSize;
+  j = intersection->x / t->cubeSize;
   if (t->grid[i][j] == 1)
   {
     return 1;
@@ -34,9 +34,9 @@ int   insideMap(t_point *intersection, t_tool *t)
   int i;
   int j;
 
-  i = intersection->x / t->cubeSize;
-  j = intersection->y / t->cubeSize;
-  if (i < t->nbline && j < t->nbcol)
+  i = intersection->y / t->cubeSize;
+  j = intersection->x / t->cubeSize;
+  if (i < t->nbline && i >= 0 && j < t->nbcol && j >= 0 && intersection->y >= 0 && intersection->x >= 0)
   {
     return 1;
   }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                              :+:      :+:    :+:   */
+/*   vertical.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -15,21 +15,15 @@
 t_point *getVertical(t_tool *t, float rayAngle)
 {
   t_point *inc;
-  int inside;
   t_point *curPoint;
 
   inc = malloc(sizeof(*inc));
   curPoint = getFirstPointVertical(t, rayAngle);
-  inc->y = t->cubeSize * tan(degreesToRadians(rayAngle));
   inc->x = (rayAngle < 90 && rayAngle > -90) ? t->cubeSize : - t->cubeSize;
-  while ((inside = insideMap(curPoint, t)) && !isWall(curPoint, t))
+  inc->y = - inc->x * tan(degreesToRadians(rayAngle));
+  while (insideMap(curPoint, t) && !isWall(curPoint, t))
   {
     curPoint = getNextPointVertical(t, curPoint, inc);
-    printf("\nVertical search\nX: %d\nY: %d\n", (int)(curPoint->x / t->cubeSize), (int)(curPoint->y / t->cubeSize));
-  }
-  if (!inside)
-  {
-    return NULL;
   }
   return curPoint;
 }
@@ -42,13 +36,13 @@ t_point *getFirstPointVertical(t_tool *t, float rayAngle)
 
   if (rayAngle < 90 && rayAngle > -90)
   {
-    point->x = floor(t->pos->x / t->cubeSize) * t->cubeSize - 1;
+    point->x = floor(t->pos->x / t->cubeSize) * t->cubeSize + t->cubeSize;
   }
   else
   {
-    point->x = floor(t->pos->x / t->cubeSize) * t->cubeSize + t->cubeSize;
+    point->x = floor(t->pos->x / t->cubeSize) * t->cubeSize - 1;
   }
-  point->y = t->pos->y + fabs(t->pos->x - point->x) * tan(degreesToRadians(rayAngle));
+  point->y = t->pos->y + (t->pos->x - point->x) * tan(degreesToRadians(rayAngle));
   return point;
 }
 

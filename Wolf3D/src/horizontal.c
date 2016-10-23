@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                              :+:      :+:    :+:   */
+/*   horizontal.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -20,17 +20,11 @@ t_point *getHorizontal(t_tool *t, float rayAngle)
 
   inc = malloc(sizeof(*inc));
   curPoint = getFirstPointHorizontal(t, rayAngle);
-
-  inc->x = t->cubeSize / tan(degreesToRadians(rayAngle));
-  inc->y = (rayAngle > 0) ? t->cubeSize : - t->cubeSize;
+  inc->y = (rayAngle > 0) ? - t->cubeSize : + t->cubeSize;
+  inc->x = - inc->y / tan(degreesToRadians(rayAngle));
   while ((inside = insideMap(curPoint, t)) && !isWall(curPoint, t))
   {
     curPoint = getNextPointHorizontal(t, curPoint, inc);
-    printf("Horizontal search\nX: %d\nY: %d\n", (int)(curPoint->x / t->cubeSize), (int)(curPoint->y / t->cubeSize));
-  }
-  if (!inside)
-  {
-    return NULL;
   }
   return curPoint;
 }
@@ -49,7 +43,7 @@ t_point *getFirstPointHorizontal(t_tool *t, float rayAngle)
   {
     point->y = floor(t->pos->y / t->cubeSize) * t->cubeSize + t->cubeSize;
   }
-  point->x = t->pos->x + fabs(t->pos->y - point->y) / tan(degreesToRadians(rayAngle));
+  point->x = t->pos->x + (t->pos->y - point->y) / tan(degreesToRadians(rayAngle));
   return point;
 }
 
