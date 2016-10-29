@@ -18,8 +18,8 @@ void   init(t_tool *tools)
 	double miFOV;
 
 	pos = malloc(sizeof(*pos));
-	pos->x = 0;
-	pos->y = 0;
+	pos->x = 1;
+	pos->y = 1;
 	tools->pos = pos;
 	tools->angle = 0;
 	tools->FOV = 60;
@@ -73,7 +73,7 @@ int		keyPress(int key, t_tool *tools)
 		newPos = malloc(sizeof(*newPos));
 		newPos->x = tools->pos->x + cos(degreesToRadians(tools->angle)) * 5;
 		newPos->y = tools->pos->y - sin(degreesToRadians(tools->angle)) * 5;
-		if (insideMap(newPos, tools))
+		if (insideMap(newPos, tools) && isWall(newPos, tools) == 0)
 		{
 			tools->pos = newPos;
 		}
@@ -86,7 +86,7 @@ int		keyPress(int key, t_tool *tools)
 		newPos = malloc(sizeof(*newPos));
 		newPos->x = tools->pos->x - cos(degreesToRadians(tools->angle)) * 5;
 		newPos->y = tools->pos->y + sin(degreesToRadians(tools->angle)) * 5;
-		if (insideMap(newPos, tools))
+		if (insideMap(newPos, tools) && isWall(newPos, tools) == 0)
 		{
 			tools->pos = newPos;
 		}		
