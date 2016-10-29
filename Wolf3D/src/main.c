@@ -12,108 +12,6 @@
 
 #include "wolf3d.h"
 
-int		checkDigit(char **split)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (split[i])
-	{
-		j = 0;
-		while (split[i][j])
-		{
-			if (!ft_isdigit(split[i][j]))
-				return (-1);
-			j++;
-		}
-		i++;
-	}
-	return (1);
-}
-
-int		checkGrid(t_tool *tools, char *filename)
-{
-	char	*line;
-	int		ret;
-	int		fd;
-	char	**split;
-
-	line = NULL;
-	fd = open(filename, O_RDONLY);
-	tools->nbcol = 0;
-	tools->nbline = 0;
-	while ((ret = get_next_line(fd, &line)) == 1)
-	{
-		tools->nbline += 1;
-		split = ft_strsplit(line, ' ');
-		if (tools->nbcol == 0)
-			tools->nbcol = ft_tablen(split);
-		else
-		{
-			if (tools->nbcol != ft_tablen(split))
-				return (-1);
-		}
-		if (checkDigit(split) == -1)
-			return (-1);
-	}
-	close(fd);
-	return (ret);
-}
-
-void	printGrid(t_tool *t)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (i < t->nbline)
-	{
-		j = 0;
-		while (j < t->nbcol)
-		{
-			ft_putnbr(t->grid[i][j]);
-			ft_putchar(' ');
-			j++;
-		}
-		i++;
-		ft_putchar('\n');
-	}
-}
-
-void	readLine(int i, t_tool *t)
-{
-	char	*line;
-	int		j;
-	char	**split;
-
-	line = NULL;
-	j = 0;
-	get_next_line(t->fd, &line);
-	split = ft_strsplit(line, ' ');
-	t->grid[i] = (int *)malloc(sizeof(int) * t->nbcol);
-	while (j < t->nbcol)
-	{
-		t->grid[i][j] = ft_atoi(split[j]);
-		j++;
-	}
-}
-
-void readGrid(char *file, t_tool *t)
-{
-	int i;
-
-	t->fd = open(file, O_RDONLY);
-
-	t->grid = (int **)malloc(sizeof(int*) * t->nbline);
-	i = 0;
-	while (i < t->nbline)
-	{
-		readLine(i, t);
-		i++;
-	}
-}
-
 void   init(t_tool *tools)
 {
 	t_point *pos;
@@ -123,7 +21,7 @@ void   init(t_tool *tools)
 	pos->x = 0;
 	pos->y = 0;
 	tools->pos = pos;
-	tools->angle = -45;
+	tools->angle = 0;
 	tools->FOV = 60;
 	miFOV = tools->FOV / 2;
 	tools->screenWidth = 1000;
@@ -139,11 +37,11 @@ void   init(t_tool *tools)
 
 double adjustAngle(double angle, double inc)
 {
-	if (angle + inc > 180)
+	if (angle + inc >= 360)
 	{
 		angle = angle + inc - 360;
 	}
-	else if (angle + inc <= - 180)
+	else if (angle + inc < 0)
 	{
 		angle = angle + inc + 360;
 	}
@@ -211,15 +109,11 @@ int		main()
 		ft_putendl("Invalid map error");
 		exit(1);
 	}
-	printf("\nlines: %d\ncolumns: %d\n\n", tools->nbline, tools->nbcol);
+
 	readGrid(file, tools);
-	printGrid(tools);
 	init(tools);
-	ft_putendl("\n\n");
-	ft_putendl("GO!");
-	ft_putendl("\n\n");
 	launch(tools);
-	//mlx_key_hook(tools->mlx_win, keyPress, tools);
+
 	mlx_hook(tools->mlx_win, 2, (1L<<0), keyPress, tools);
 	mlx_loop(tools->mlx_ptr);
 	return (0);

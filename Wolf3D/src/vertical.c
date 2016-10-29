@@ -19,12 +19,10 @@ t_point *getVertical(t_tool *t, double rayAngle)
 
   inc = malloc(sizeof(*inc));
   curPoint = getFirstPointVertical(t, rayAngle);
-  inc->x = (rayAngle < 90 && rayAngle >= -90) ? t->cubeSize : - t->cubeSize;
+  inc->x = (isRightPart(rayAngle)) ? t->cubeSize : - t->cubeSize;
   inc->y = - inc->x * tan(degreesToRadians(rayAngle));
   while (insideMap(curPoint, t) && !isWall(curPoint, t))
-  {
     curPoint = getNextPointVertical(t, curPoint, inc);
-  }
   return curPoint;
 }
 
@@ -34,14 +32,10 @@ t_point *getFirstPointVertical(t_tool *t, double rayAngle)
 
   point = malloc(sizeof(*point));
 
-  if (rayAngle < 90 && rayAngle >= -90)
-  {
+  if (isRightPart(rayAngle))
     point->x = floor(t->pos->x / t->cubeSize) * t->cubeSize + t->cubeSize;
-  }
   else
-  {
-    point->x = floor(t->pos->x / t->cubeSize) * t->cubeSize - 1;
-  }
+    point->x = floor(t->pos->x / t->cubeSize) * t->cubeSize - E;
   point->y = t->pos->y + (t->pos->x - point->x) * tan(degreesToRadians(rayAngle));
   return point;
 }

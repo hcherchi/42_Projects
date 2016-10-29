@@ -26,6 +26,9 @@
 #define SOUTH 0xD2691E
 #define EAST 0xFF0000
 #define WEST 0x00FF00
+#define SKY 0x87CEEB
+#define GROUND 0xADFF2F
+#define E 0.000001
 
 typedef struct	s_point
 {
@@ -35,7 +38,7 @@ typedef struct	s_point
 
 typedef struct	s_tool
 {
-	int fd;
+	int		fd;
 	int nbcol;
 	int nbline;
 	int		color;
@@ -47,7 +50,7 @@ typedef struct	s_tool
 	int		screenWidth;
 	int		screenHeight;
 	int		centerX;
-	int	centerY;
+	int		centerY;
 	double		dist;
 	double		incAngle;
 	void *mlx_ptr;
@@ -73,6 +76,8 @@ int   isWall(t_point *intersection, t_tool *t);
 int   insideMap(t_point *intersection, t_tool *t);
 void	pixel_put_to_image(int color, t_tool *t, int x, int y);
 double adjustAngle(double angle, double inc);
+int   isUpPart(double angle);
+int isRightPart(double angle);
 
 void drawCol(int wallHeight, int col, t_tool *t);
 void launch(t_tool *tools);
