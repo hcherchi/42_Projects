@@ -24,19 +24,26 @@ void drawCol(int wallHeight, int col, t_tool *t)
   max = min + wallHeight;
   while(line < t->screenHeight)
   {
-    if (line > min && line < max)
+    if (line <= min)
+      pixel_put_to_image(SKY, t, col, line);
+    else if (line > min && line < max)
       pixel_put_to_image(t->color, t, col, line);
+    else
+      pixel_put_to_image(GROUND, t, col, line);
     line++;
   }
 }
 
 int getWallColor(double wallDistHorizontal, double wallDistVertical, double dist, double ray)
 {
-  ray = 3;
-  if (dist == wallDistHorizontal)
+  if (dist == wallDistHorizontal && isUpPart(ray))
     return NORTH;
-  else if (dist == wallDistVertical)
+  else if (dist == wallDistHorizontal && !isUpPart(ray))
     return SOUTH;
+  else if (dist == wallDistVertical && isRightPart(ray))
+    return EAST;
+  else if (dist == wallDistVertical && !isRightPart(ray))
+    return WEST;
   return 0;
 }
 

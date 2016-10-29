@@ -26,6 +26,8 @@
 #define SOUTH 0xD2691E
 #define EAST 0xFF0000
 #define WEST 0x00FF00
+#define SKY 0x87CEEB
+#define GROUND 0xADFF2F
 #define E 0.000001
 
 typedef struct	s_point
