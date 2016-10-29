@@ -25,9 +25,7 @@ void drawCol(int wallHeight, int col, t_tool *t)
   while(line < t->screenHeight)
   {
     if (line > min && line < max)
-    {
       pixel_put_to_image(t->color, t, col, line);
-    }
     line++;
   }
 }
@@ -36,31 +34,27 @@ int getWallColor(double wallDistHorizontal, double wallDistVertical, double dist
 {
   ray = 3;
   if (dist == wallDistHorizontal)
-  {
     return NORTH;
-  }
   else if (dist == wallDistVertical)
-  {
     return SOUTH;
-  }
   return 0;
 }
 
 int getWallHeight(int col, t_tool *t)
 {
-  int wallHeight;
   double wallDistVertical;
   double wallDistHorizontal;
   double dist;
   double ray;
+  double correctedDist;
 
-  ray = adjustAngle(t->angle, (t->FOV / 2) - (double)col * t->incAngle);
+  ray = adjustAngle(t->angle, (t->FOV / 2) - col * t->incAngle);
   wallDistHorizontal = getDist(getHorizontal(t, ray), t);
   wallDistVertical = getDist(getVertical(t, ray), t);
   dist = MIN(wallDistHorizontal, wallDistVertical);
   t->color = getWallColor(wallDistHorizontal, wallDistVertical, dist, ray);
-  wallHeight = (t->cubeSize * t->dist) / dist;
-  return wallHeight;
+  correctedDist = dist * cos(degreesToRadians(fabs(ray - t->angle)));
+  return (t->cubeSize * t->dist) / correctedDist;
 }
 
 void launch(t_tool *t)
