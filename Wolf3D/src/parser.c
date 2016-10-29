@@ -32,36 +32,33 @@ int		checkDigit(char **split)
 	return (1);
 }
 
-int		checkGrid(t_tool *tools, char *filename)
+int		checkGrid(t_tool *tools, int fd)
 {
 	char	*line;
 	int		ret;
-	int		fd;
 	char	**split;
 
 	line = NULL;
-	fd = open(filename, O_RDONLY);
 	tools->nbcol = 0;
 	tools->nbline = 0;
 	while ((ret = get_next_line(fd, &line)) == 1)
 	{
 		tools->nbline += 1;
 		split = ft_strsplit(line, ' ');
+    free(line);
 		if (tools->nbcol == 0)
 			tools->nbcol = ft_tablen(split);
-		else
-		{
-			if (tools->nbcol != ft_tablen(split))
-				return (-1);
-		}
+		else if (tools->nbcol != ft_tablen(split))
+			return (-1);
 		if (checkDigit(split) == -1)
 			return (-1);
+    cleanTab(split);
 	}
-	close(fd);
+  close(fd);
 	return (ret);
 }
 
-void	readLine(int i, t_tool *t)
+void	readLine(int i, t_tool *t, int fd)
 {
 	char	*line;
 	int		j;
@@ -69,27 +66,28 @@ void	readLine(int i, t_tool *t)
 
 	line = NULL;
 	j = 0;
-	get_next_line(t->fd, &line);
+	get_next_line(fd, &line);
 	split = ft_strsplit(line, ' ');
+  free(line);
 	t->grid[i] = (int *)malloc(sizeof(int) * t->nbcol);
 	while (j < t->nbcol)
 	{
 		t->grid[i][j] = ft_atoi(split[j]);
 		j++;
 	}
+  cleanTab(split);
 }
 
-void readGrid(char *file, t_tool *t)
+void readGrid(t_tool *t, int fd)
 {
 	int i;
-
-	t->fd = open(file, O_RDONLY);
 
 	t->grid = (int **)malloc(sizeof(int*) * t->nbline);
 	i = 0;
 	while (i < t->nbline)
 	{
-		readLine(i, t);
+		readLine(i, t, fd);
 		i++;
 	}
+  close(fd);
 }

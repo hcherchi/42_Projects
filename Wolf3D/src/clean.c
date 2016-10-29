@@ -29,3 +29,18 @@ void clean(t_tool *tools)
   free(tools->grid);
   free(tools);
 }
+
+void cleanTab(char **tab)
+{
+  int i;
+  int len;
+
+  i = 0;
+  len = ft_tablen(tab);
+  while (i < len)
+  {
+    free(tab[i]);
+    i++;
+  }
+  free(tab);
+}

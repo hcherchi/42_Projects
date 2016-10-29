@@ -99,12 +99,13 @@ float adjustAngle(float angle, float inc);
 /* initialization */
 
 void  init(t_tool *t);
-int		checkGrid(t_tool *tools, char *filename);
+int		checkGrid(t_tool *tools, int fd);
 int		checkDigit(char **split);
-void readGrid(char *file, t_tool *t);
+void readGrid(t_tool *t, int fd);
 
 /* Cleaning */
 
 void clean(t_tool *tools);
+void cleanTab(char **tab);
 
 #endif
