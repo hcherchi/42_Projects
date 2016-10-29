@@ -12,7 +12,7 @@
 
 #include "wolf3d.h"
 
-t_point *getHorizontal(t_tool *t, float rayAngle)
+t_point *getHorizontal(t_tool *t, double rayAngle)
 {
   t_point *inc;
   t_point *curPoint;
@@ -29,7 +29,7 @@ t_point *getHorizontal(t_tool *t, float rayAngle)
   return curPoint;
 }
 
-t_point *getFirstPointHorizontal(t_tool *t, float rayAngle)
+t_point *getFirstPointHorizontal(t_tool *t, double rayAngle)
 {
   t_point *point;
 
@@ -50,7 +50,7 @@ t_point *getFirstPointHorizontal(t_tool *t, float rayAngle)
 t_point *getNextPointHorizontal(t_tool *t, t_point *curPoint, t_point *inc)
 {
   t_point *nextPoint;
-  float dist;
+  double dist;
 
   nextPoint = malloc(sizeof(*nextPoint));
   nextPoint->x = curPoint->x + inc->x;

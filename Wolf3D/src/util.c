@@ -46,12 +46,8 @@ int   insideMap(t_point *intersection, t_tool *t)
   }
 }
 
-float getDist(t_point *wall, t_tool *t)
+double getDist(t_point *wall, t_tool *t)
 {
-  if (!wall)
-  {
-    return -1;
-  }
   return (sqrt(pow(t->pos->x - wall->x, 2) + pow(t->pos->y - wall->y, 2)));
 }
 

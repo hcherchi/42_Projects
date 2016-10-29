@@ -32,7 +32,7 @@ void drawCol(int wallHeight, int col, t_tool *t)
   }
 }
 
-int getWallColor(float wallDistHorizontal, float wallDistVertical, float dist, float ray)
+int getWallColor(double wallDistHorizontal, double wallDistVertical, double dist, double ray)
 {
   ray = 3;
   if (dist == wallDistHorizontal)
@@ -49,15 +49,17 @@ int getWallColor(float wallDistHorizontal, float wallDistVertical, float dist, f
 int getWallHeight(int col, t_tool *t)
 {
   int wallHeight;
-  float wallDistVertical;
-  float wallDistHorizontal;
-  float dist;
-  float ray;
+  double wallDistVertical;
+  double wallDistHorizontal;
+  double dist;
+  double ray;
 
 
-  ray = t->angle + (t->FOV / 2) - col * t->incAngle;
+  ray = t->angle + (t->FOV / 2) - (double)col * t->incAngle;
   wallDistHorizontal = getDist(getHorizontal(t, ray), t);
   wallDistVertical = getDist(getVertical(t, ray), t);
+  if (fabs(wallDistHorizontal - wallDistVertical) < 20)
+    printf("angle %f: %f / %f\n", ray, wallDistVertical, wallDistHorizontal);
   dist = MIN(wallDistHorizontal, wallDistVertical);
   t->color = getWallColor(wallDistHorizontal, wallDistVertical, dist, ray);
   wallHeight = (t->cubeSize * t->dist) / dist;

@@ -19,18 +19,18 @@
 # include <fcntl.h>
 # include <stdio.h>
 
-#define degreesToRadians(angleDegrees) (angleDegrees * M_PI / 180.0)
+#define degreesToRadians(angleDegrees) (angleDegrees * M_PI / (double)180)
 #define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
 #define LIM 1000
-#define NORTH 0x00FF00
-#define SOUTH 0x0000FF
+#define NORTH 0xFFDAB9
+#define SOUTH 0xD2691E
 #define EAST 0xFF0000
 #define WEST 0x00FF00
 
 typedef struct	s_point
 {
-	float		x;
-	float		y;
+	double		x;
+	double		y;
 }								t_point;
 
 typedef struct	s_tool
@@ -41,15 +41,15 @@ typedef struct	s_tool
 	int		color;
 	int		**grid;
 	t_point *pos;
-	float		angle;
-	float			cubeSize;
-	float		FOV;
-	float		screenWidth;
-	float		screenHeight;
-	float		centerX;
-	float	centerY;
-	float		dist;
-	float		incAngle;
+	double		angle;
+	int			cubeSize;
+	int		FOV;
+	int		screenWidth;
+	int		screenHeight;
+	int		centerX;
+	int	centerY;
+	double		dist;
+	double		incAngle;
 	void *mlx_ptr;
 	void *mlx_win;
 	void *mlx_img;
@@ -58,17 +58,17 @@ typedef struct	s_tool
 	int			size_line;
 }				t_tool;
 
-t_point *getVertical(t_tool *t, float rayAngle);
-t_point *getFirstPointVertical(t_tool *t, float rayAngle);
+t_point *getVertical(t_tool *t, double rayAngle);
+t_point *getFirstPointVertical(t_tool *t, double rayAngle);
 t_point *getNextPointVertical(t_tool *t, t_point *curPoint, t_point *inc);
 
-t_point *getHorizontal(t_tool *t, float rayAngle);
-t_point *getFirstPointHorizontal(t_tool *t, float rayAngle);
+t_point *getHorizontal(t_tool *t, double rayAngle);
+t_point *getFirstPointHorizontal(t_tool *t, double rayAngle);
 t_point *getNextPointHorizontal(t_tool *t, t_point *curPoint, t_point *inc);
 
 int getWallHeight(int col, t_tool *t);
 
-float getDist(t_point *wall, t_tool *t);
+double getDist(t_point *wall, t_tool *t);
 int   isWall(t_point *intersection, t_tool *t);
 int   insideMap(t_point *intersection, t_tool *t);
 void	pixel_put_to_image(int color, t_tool *t, int x, int y);

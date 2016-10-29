@@ -117,13 +117,13 @@ void readGrid(char *file, t_tool *t)
 void   init(t_tool *tools)
 {
 	t_point *pos;
-	float miFOV;
+	double miFOV;
 
 	pos = malloc(sizeof(*pos));
-	pos->x = 30;
-	pos->y = 30;
+	pos->x = 200;
+	pos->y = 200;
 	tools->pos = pos;
-	tools->angle = 135;
+	tools->angle = -45;
 	tools->FOV = 60;
 	miFOV = tools->FOV / 2;
 	tools->screenWidth = 1000;
@@ -131,8 +131,8 @@ void   init(t_tool *tools)
 	tools->centerX = tools->screenWidth / 2;
 	tools->centerY = tools->screenHeight / 2;
 	tools->dist = (tools->centerX / tan(degreesToRadians(miFOV)));
-	tools->incAngle = tools->FOV / (float)tools->screenWidth;
-	tools->cubeSize = 50;
+	tools->incAngle = tools->FOV / (double)tools->screenWidth;
+	tools->cubeSize = 100;
 	tools->mlx_ptr = mlx_init();
 	tools->mlx_win = mlx_new_window(tools->mlx_ptr, tools->screenWidth, tools->screenHeight, "I <3 Wolf3D");
 }
@@ -151,6 +151,7 @@ void adjustAngle (t_tool *tools, int inc)
 	{
 		tools->angle = tools->angle + inc;
 	}
+	ft_putendl("\n\n");
 }
 
 int		keyPress(int key, t_tool *tools)
