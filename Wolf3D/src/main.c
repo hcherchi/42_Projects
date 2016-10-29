@@ -151,7 +151,6 @@ void adjustAngle (t_tool *tools, int inc)
 	{
 		tools->angle = tools->angle + inc;
 	}
-	ft_putendl("\n\n");
 }
 
 int		keyPress(int key, t_tool *tools)

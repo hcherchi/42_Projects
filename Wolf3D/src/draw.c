@@ -54,12 +54,9 @@ int getWallHeight(int col, t_tool *t)
   double dist;
   double ray;
 
-
   ray = t->angle + (t->FOV / 2) - (double)col * t->incAngle;
   wallDistHorizontal = getDist(getHorizontal(t, ray), t);
   wallDistVertical = getDist(getVertical(t, ray), t);
-  if (fabs(wallDistHorizontal - wallDistVertical) < 20)
-    printf("angle %f: %f / %f\n", ray, wallDistVertical, wallDistHorizontal);
   dist = MIN(wallDistHorizontal, wallDistVertical);
   t->color = getWallColor(wallDistHorizontal, wallDistVertical, dist, ray);
   wallHeight = (t->cubeSize * t->dist) / dist;
@@ -71,7 +68,7 @@ void launch(t_tool *t)
   int col;
   int wallHeight;
   col = 0;
-
+  printf("Angle: %f\n", t->angle);
   t->mlx_img = mlx_new_image(t->mlx_ptr, t->screenWidth, t->screenHeight);
   while (col < t->screenWidth)
   {
