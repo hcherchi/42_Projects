@@ -137,20 +137,21 @@ void   init(t_tool *tools)
 	tools->mlx_win = mlx_new_window(tools->mlx_ptr, tools->screenWidth, tools->screenHeight, "I <3 Wolf3D");
 }
 
-void adjustAngle (t_tool *tools, int inc)
+double adjustAngle(double angle, double inc)
 {
-	if (tools->angle + inc > 180)
+	if (angle + inc > 180)
 	{
-		tools->angle = tools->angle + inc - 360;
+		angle = angle + inc - 360;
 	}
-	else if (tools->angle + inc < - 180)
+	else if (angle + inc <= - 180)
 	{
-		tools->angle = tools->angle + inc + 360;
+		angle = angle + inc + 360;
 	}
 	else
 	{
-		tools->angle = tools->angle + inc;
+		angle = angle + inc;
 	}
+	return angle;
 }
 
 int		keyPress(int key, t_tool *tools)
@@ -159,12 +160,12 @@ int		keyPress(int key, t_tool *tools)
 		exit(0);
 	else if (key == 123)
 	{
-		adjustAngle(tools, 5);
+		tools->angle = adjustAngle(tools->angle, 5);
 		launch(tools);
 	}
 	else if (key == 124)
 	{
-		adjustAngle(tools, -5);
+		tools->angle = adjustAngle(tools->angle, -5);
 		launch(tools);
 	}
 	else if (key == 126)

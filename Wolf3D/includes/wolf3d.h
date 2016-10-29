@@ -72,6 +72,7 @@ double getDist(t_point *wall, t_tool *t);
 int   isWall(t_point *intersection, t_tool *t);
 int   insideMap(t_point *intersection, t_tool *t);
 void	pixel_put_to_image(int color, t_tool *t, int x, int y);
+double adjustAngle(double angle, double inc);
 
 void drawCol(int wallHeight, int col, t_tool *t);
 void launch(t_tool *tools);

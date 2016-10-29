@@ -20,7 +20,7 @@ t_point *getHorizontal(t_tool *t, double rayAngle)
 
   inc = malloc(sizeof(*inc));
   curPoint = getFirstPointHorizontal(t, rayAngle);
-  inc->y = (rayAngle > 0) ? - t->cubeSize : + t->cubeSize;
+  inc->y = (rayAngle > 0 && rayAngle <= 180) ? - t->cubeSize : + t->cubeSize;
   inc->x = - inc->y / tan(degreesToRadians(rayAngle));
   while ((inside = insideMap(curPoint, t)) && !isWall(curPoint, t))
   {
@@ -35,7 +35,7 @@ t_point *getFirstPointHorizontal(t_tool *t, double rayAngle)
 
   point = malloc(sizeof(*point));
 
-  if (rayAngle > 0)
+  if (rayAngle > 0 && rayAngle <= 180)
   {
     point->y = floor(t->pos->y / t->cubeSize) * t->cubeSize - 1;
   }

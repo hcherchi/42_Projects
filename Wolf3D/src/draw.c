@@ -54,7 +54,7 @@ int getWallHeight(int col, t_tool *t)
   double dist;
   double ray;
 
-  ray = t->angle + (t->FOV / 2) - (double)col * t->incAngle;
+  ray = adjustAngle(t->angle, (t->FOV / 2) - (double)col * t->incAngle);
   wallDistHorizontal = getDist(getHorizontal(t, ray), t);
   wallDistVertical = getDist(getVertical(t, ray), t);
   dist = MIN(wallDistHorizontal, wallDistVertical);
