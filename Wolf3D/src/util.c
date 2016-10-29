@@ -28,26 +28,26 @@ int isRightPart(float angle)
     return 0;
 }
 
-int   isWall(t_point *intersection, t_tool *t, float rayAngle)
+int   isWall(t_point *intersection, t_tool *t)
 {
   int i;
   int j;
 
-  i = (!isUpPart(rayAngle)) ? intersection->y / t->cubeSize : intersection->y / t->cubeSize - 1;
-  j = (isRightPart(rayAngle)) ? intersection->x / t->cubeSize : intersection->x / t->cubeSize - 1;
+  i = intersection->y / t->cubeSize;
+  j = intersection->x / t->cubeSize;
   if (t->grid[i][j] == 1)
     return 1;
   else
     return 0;
 }
 
-int   insideMap(t_point *intersection, t_tool *t, float rayAngle)
+int   insideMap(t_point *intersection, t_tool *t)
 {
   int i;
   int j;
 
-  i = (!isUpPart(rayAngle)) ? intersection->y / t->cubeSize : intersection->y / t->cubeSize - 1;
-  j = (isRightPart(rayAngle)) ? intersection->x / t->cubeSize : intersection->x / t->cubeSize - 1;
+  i = intersection->y / t->cubeSize;
+  j = intersection->x / t->cubeSize;
   if (i < t->nbline && i >= 0 && j < t->nbcol && j >= 0)
     return 1;
   else

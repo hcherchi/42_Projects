@@ -72,8 +72,8 @@ t_point *getNextPointHorizontal(t_tool *t, t_point *curPoint, t_point *inc);
 int getWallHeight(int col, t_tool *t);
 
 float getDist(t_point *wall, t_tool *t);
-int   isWall(t_point *intersection, t_tool *t, float rayAngle);
-int   insideMap(t_point *intersection, t_tool *t, float rayAngle);
+int   isWall(t_point *intersection, t_tool *t);
+int   insideMap(t_point *intersection, t_tool *t);
 void	pixel_put_to_image(int color, t_tool *t, int x, int y);
 float adjustAngle(float angle, float inc);
 int   isUpPart(float angle);

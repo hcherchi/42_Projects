@@ -21,7 +21,7 @@ t_point *getHorizontal(t_tool *t, float rayAngle)
   curPoint = getFirstPointHorizontal(t, rayAngle);
   inc->y = isUpPart(rayAngle) ? - t->cubeSize : + t->cubeSize;
   inc->x = - inc->y / tan(degreesToRadians(rayAngle));
-  while (insideMap(curPoint, t, rayAngle) && !isWall(curPoint, t, rayAngle))
+  while (insideMap(curPoint, t) && !isWall(curPoint, t))
     curPoint = getNextPointHorizontal(t, curPoint, inc);
   return curPoint;
 }
@@ -33,7 +33,7 @@ t_point *getFirstPointHorizontal(t_tool *t, float rayAngle)
   point = malloc(sizeof(*point));
 
   if (isUpPart(rayAngle))
-    point->y = floor(t->pos->y / t->cubeSize) * t->cubeSize;
+    point->y = floor(t->pos->y / t->cubeSize) * t->cubeSize - E;
   else
     point->y = floor(t->pos->y / t->cubeSize) * t->cubeSize + t->cubeSize;
   point->x = t->pos->x + (t->pos->y - point->y) / tan(degreesToRadians(rayAngle));

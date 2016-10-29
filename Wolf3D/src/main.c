@@ -89,7 +89,7 @@ int		keyPress(int key, t_tool *tools)
 		if (insideMap(newPos, tools) && isWall(newPos, tools) == 0)
 		{
 			tools->pos = newPos;
-		}		
+		}
 		launch(tools);
 	}
 	return (0);

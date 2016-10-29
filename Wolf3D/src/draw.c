@@ -69,7 +69,6 @@ void launch(t_tool *t)
   int col;
   int wallHeight;
   col = 0;
-  printf("Angle: %f\n", t->angle);
   t->mlx_img = mlx_new_image(t->mlx_ptr, t->screenWidth, t->screenHeight);
   while (col < t->screenWidth)
   {
