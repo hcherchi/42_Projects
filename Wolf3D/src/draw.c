@@ -34,7 +34,7 @@ void drawCol(int wallHeight, int col, t_tool *t)
   }
 }
 
-int getWallColor(double wallDistHorizontal, double wallDistVertical, double dist, double ray)
+int getWallColor(float wallDistHorizontal, float wallDistVertical, float dist, float ray)
 {
   if (dist == wallDistHorizontal && isUpPart(ray))
     return NORTH;
@@ -49,11 +49,11 @@ int getWallColor(double wallDistHorizontal, double wallDistVertical, double dist
 
 int getWallHeight(int col, t_tool *t)
 {
-  double wallDistVertical;
-  double wallDistHorizontal;
-  double dist;
-  double ray;
-  double correctedDist;
+  float wallDistVertical;
+  float wallDistHorizontal;
+  float dist;
+  float ray;
+  float correctedDist;
 
   ray = adjustAngle(t->angle, (t->FOV / 2) - col * t->incAngle);
   wallDistHorizontal = getDist(getHorizontal(t, ray), t);

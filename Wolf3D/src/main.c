@@ -15,7 +15,7 @@
 void   init(t_tool *tools)
 {
 	t_point *pos;
-	double miFOV;
+	float miFOV;
 
 	pos = malloc(sizeof(*pos));
 	pos->x = 1;
@@ -29,13 +29,13 @@ void   init(t_tool *tools)
 	tools->centerX = tools->screenWidth / 2;
 	tools->centerY = tools->screenHeight / 2;
 	tools->dist = (tools->centerX / tan(degreesToRadians(miFOV)));
-	tools->incAngle = tools->FOV / (double)tools->screenWidth;
+	tools->incAngle = tools->FOV / (float)tools->screenWidth;
 	tools->cubeSize = 100;
 	tools->mlx_ptr = mlx_init();
 	tools->mlx_win = mlx_new_window(tools->mlx_ptr, tools->screenWidth, tools->screenHeight, "I <3 Wolf3D");
 }
 
-double adjustAngle(double angle, double inc)
+float adjustAngle(float angle, float inc)
 {
 	if (angle + inc >= 360)
 	{

@@ -12,7 +12,7 @@
 
 #include "wolf3d.h"
 
-t_point *getVertical(t_tool *t, double rayAngle)
+t_point *getVertical(t_tool *t, float rayAngle)
 {
   t_point *inc;
   t_point *curPoint;
@@ -21,12 +21,12 @@ t_point *getVertical(t_tool *t, double rayAngle)
   curPoint = getFirstPointVertical(t, rayAngle);
   inc->x = (isRightPart(rayAngle)) ? t->cubeSize : - t->cubeSize;
   inc->y = - inc->x * tan(degreesToRadians(rayAngle));
-  while (insideMap(curPoint, t) && !isWall(curPoint, t))
+  while (insideMap(curPoint, t, rayAngle) && !isWall(curPoint, t, rayAngle))
     curPoint = getNextPointVertical(t, curPoint, inc);
   return curPoint;
 }
 
-t_point *getFirstPointVertical(t_tool *t, double rayAngle)
+t_point *getFirstPointVertical(t_tool *t, float rayAngle)
 {
   t_point *point;
 
@@ -35,7 +35,7 @@ t_point *getFirstPointVertical(t_tool *t, double rayAngle)
   if (isRightPart(rayAngle))
     point->x = floor(t->pos->x / t->cubeSize) * t->cubeSize + t->cubeSize;
   else
-    point->x = floor(t->pos->x / t->cubeSize) * t->cubeSize - E;
+    point->x = floor(t->pos->x / t->cubeSize) * t->cubeSize;
   point->y = t->pos->y + (t->pos->x - point->x) * tan(degreesToRadians(rayAngle));
   return point;
 }
@@ -43,7 +43,7 @@ t_point *getFirstPointVertical(t_tool *t, double rayAngle)
 t_point *getNextPointVertical(t_tool *t, t_point *curPoint, t_point *inc)
 {
   t_point *nextPoint;
-  double dist;
+  float dist;
 
   nextPoint = malloc(sizeof(*nextPoint));
   nextPoint->x = curPoint->x + inc->x;
