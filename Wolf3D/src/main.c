@@ -18,8 +18,8 @@ void   init(t_tool *tools)
 	float miFOV;
 
 	pos = malloc(sizeof(*pos));
-	pos->x = 1;
-	pos->y = 1;
+	pos->x = 10;
+	pos->y = 10;
 	tools->pos = pos;
 	tools->angle = 0;
 	tools->FOV = 60;
@@ -35,66 +35,6 @@ void   init(t_tool *tools)
 	tools->mlx_win = mlx_new_window(tools->mlx_ptr, tools->screenWidth, tools->screenHeight, "I <3 Wolf3D");
 }
 
-float adjustAngle(float angle, float inc)
-{
-	if (angle + inc >= 360)
-	{
-		angle = angle + inc - 360;
-	}
-	else if (angle + inc < 0)
-	{
-		angle = angle + inc + 360;
-	}
-	else
-	{
-		angle = angle + inc;
-	}
-	return angle;
-}
-
-int		keyPress(int key, t_tool *tools)
-{
-	if (key == 53)
-		exit(0);
-	else if (key == 123)
-	{
-		tools->angle = adjustAngle(tools->angle, 5);
-		launch(tools);
-	}
-	else if (key == 124)
-	{
-		tools->angle = adjustAngle(tools->angle, -5);
-		launch(tools);
-	}
-	else if (key == 126)
-	{
-		t_point *newPos;
-
-		newPos = malloc(sizeof(*newPos));
-		newPos->x = tools->pos->x + cos(degreesToRadians(tools->angle)) * 5;
-		newPos->y = tools->pos->y - sin(degreesToRadians(tools->angle)) * 5;
-		if (insideMap(newPos, tools) && isWall(newPos, tools) == 0)
-		{
-			tools->pos = newPos;
-		}
-		launch(tools);
-	}
-	else if (key == 125)
-	{
-		t_point *newPos;
-
-		newPos = malloc(sizeof(*newPos));
-		newPos->x = tools->pos->x - cos(degreesToRadians(tools->angle)) * 5;
-		newPos->y = tools->pos->y + sin(degreesToRadians(tools->angle)) * 5;
-		if (insideMap(newPos, tools) && isWall(newPos, tools) == 0)
-		{
-			tools->pos = newPos;
-		}
-		launch(tools);
-	}
-	return (0);
-}
-
 int		main()
 {
 	t_tool	*tools;
@@ -107,13 +47,12 @@ int		main()
 	if (ret == -1 || tools->nbline < 1 || tools->nbcol < 1)
 	{
 		ft_putendl("Invalid map error");
+		free(tools);
 		exit(1);
 	}
-
 	readGrid(file, tools);
 	init(tools);
 	launch(tools);
-
 	mlx_hook(tools->mlx_win, 2, (1L<<0), keyPress, tools);
 	mlx_loop(tools->mlx_ptr);
 	return (0);

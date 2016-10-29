@@ -16,7 +16,7 @@ INC_DIR = includes
 SRC_DIR = src
 OBJ_DIR = obj
 
-SRCS = src/main.c src/draw.c src/vertical.c src/horizontal.c src/util.c src/parser.c
+SRCS = src/main.c src/draw.c src/vertical.c src/horizontal.c src/util.c src/parser.c src/clean.c src/event.c
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 

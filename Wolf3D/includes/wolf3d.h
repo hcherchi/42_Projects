@@ -21,14 +21,16 @@
 
 #define degreesToRadians(angleDegrees) (angleDegrees * M_PI / 180)
 #define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
+
 #define LIM 1000
+#define E 0.0001
+
 #define NORTH 0x8B4513
 #define SOUTH 0xCD853F
 #define EAST 0xA0522D
 #define WEST 0xD2691E
 #define SKY 0x48D1CC
 #define GROUND 0x6B8E23
-#define E 0.0001
 
 typedef struct	s_point
 {
@@ -61,30 +63,48 @@ typedef struct	s_tool
 	int			size_line;
 }				t_tool;
 
-t_point *getVertical(t_tool *t, float rayAngle);
+/* Vertical search */
+
+float		getVerticalDist(t_tool *t, float rayAngle);
 t_point *getFirstPointVertical(t_tool *t, float rayAngle);
 t_point *getNextPointVertical(t_tool *t, t_point *curPoint, t_point *inc);
 
-t_point *getHorizontal(t_tool *t, float rayAngle);
+/* Horizontal search */
+
+float		getHorizontalDist(t_tool *t, float rayAngle);
 t_point *getFirstPointHorizontal(t_tool *t, float rayAngle);
 t_point *getNextPointHorizontal(t_tool *t, t_point *curPoint, t_point *inc);
 
+/* drawing */
+
+void drawCol(int wallHeight, int col, t_tool *t);
+void launch(t_tool *tools);
+void	pixel_put_to_image(int color, t_tool *t, int x, int y);
 int getWallHeight(int col, t_tool *t);
+int getWallColor(float horizontalDist, float verticalDist, float dist, float ray);
+
+/* Utils */
 
 float getDist(t_point *wall, t_tool *t);
 int   isWall(t_point *intersection, t_tool *t);
 int   insideMap(t_point *intersection, t_tool *t);
-void	pixel_put_to_image(int color, t_tool *t, int x, int y);
-float adjustAngle(float angle, float inc);
 int   isUpPart(float angle);
 int isRightPart(float angle);
 
-void drawCol(int wallHeight, int col, t_tool *t);
-void launch(t_tool *tools);
+/* Events */
+
 int		keyPress(int key, t_tool *tools);
+float adjustAngle(float angle, float inc);
+
+/* initialization */
+
 void  init(t_tool *t);
 int		checkGrid(t_tool *tools, char *filename);
 int		checkDigit(char **split);
 void readGrid(char *file, t_tool *t);
+
+/* Cleaning */
+
+void clean(t_tool *tools);
 
 #endif

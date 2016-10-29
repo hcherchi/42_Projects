@@ -12,6 +12,21 @@
 
 #include "wolf3d.h"
 
+void launch(t_tool *t)
+{
+  int col;
+  int wallHeight;
+  col = 0;
+  t->mlx_img = mlx_new_image(t->mlx_ptr, t->screenWidth, t->screenHeight);
+  while (col < t->screenWidth)
+  {
+    wallHeight = getWallHeight(col, t);
+    drawCol(wallHeight, col, t);
+    col++;
+  }
+  mlx_put_image_to_window(t->mlx_ptr, t->mlx_win, t->mlx_img, 0, 0);
+}
+
 void drawCol(int wallHeight, int col, t_tool *t)
 {
   int min;
@@ -34,47 +49,50 @@ void drawCol(int wallHeight, int col, t_tool *t)
   }
 }
 
-int getWallColor(float wallDistHorizontal, float wallDistVertical, float dist, float ray)
-{
-  if (dist == wallDistHorizontal && isUpPart(ray))
-    return NORTH;
-  else if (dist == wallDistHorizontal && !isUpPart(ray))
-    return SOUTH;
-  else if (dist == wallDistVertical && isRightPart(ray))
-    return EAST;
-  else if (dist == wallDistVertical && !isRightPart(ray))
-    return WEST;
-  return 0;
-}
-
 int getWallHeight(int col, t_tool *t)
 {
-  float wallDistVertical;
-  float wallDistHorizontal;
+  float verticalDist;
+  float horizontalDist;
   float dist;
   float ray;
   float correctedDist;
 
   ray = adjustAngle(t->angle, (t->FOV / 2) - col * t->incAngle);
-  wallDistHorizontal = getDist(getHorizontal(t, ray), t);
-  wallDistVertical = getDist(getVertical(t, ray), t);
-  dist = MIN(wallDistHorizontal, wallDistVertical);
-  t->color = getWallColor(wallDistHorizontal, wallDistVertical, dist, ray);
+  horizontalDist = getHorizontalDist(t, ray);
+  verticalDist = getVerticalDist(t, ray);
+  dist = MIN(horizontalDist, verticalDist);
+  t->color = getWallColor(horizontalDist, verticalDist, dist, ray);
   correctedDist = dist * cos(degreesToRadians(fabs(ray - t->angle)));
   return (t->cubeSize * t->dist) / correctedDist;
 }
 
-void launch(t_tool *t)
+int getWallColor(float horizontalDist, float verticalDist, float dist, float ray)
 {
-  int col;
-  int wallHeight;
-  col = 0;
-  t->mlx_img = mlx_new_image(t->mlx_ptr, t->screenWidth, t->screenHeight);
-  while (col < t->screenWidth)
-  {
-    wallHeight = getWallHeight(col, t);
-    drawCol(wallHeight, col, t);
-    col++;
-  }
-  mlx_put_image_to_window(t->mlx_ptr, t->mlx_win, t->mlx_img, 0, 0);
+  if (dist == horizontalDist && isUpPart(ray))
+    return NORTH;
+  else if (dist == horizontalDist && !isUpPart(ray))
+    return SOUTH;
+  else if (dist == verticalDist && isRightPart(ray))
+    return EAST;
+  else if (dist == verticalDist && !isRightPart(ray))
+    return WEST;
+  return 0;
+}
+
+void	pixel_put_to_image(int color, t_tool *t, int x, int y)
+{
+	char			*data;
+	unsigned long	lcolor;
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+
+	lcolor = mlx_get_color_value(t->mlx_ptr, color);
+	data = mlx_get_data_addr(t->mlx_img, &t->bpp, &t->size_line, &t->endian);
+	r = ((lcolor & 0xFF0000) >> 16);
+	g = ((lcolor & 0xFF00) >> 8);
+	b = ((lcolor & 0xFF));
+	data[x * t->bpp / 8 + y * t->size_line] = b;
+	data[x * t->bpp / 8 + 1 + y * t->size_line] = g;
+	data[x * t->bpp / 8 + 2 + y * t->size_line] = r;
 }

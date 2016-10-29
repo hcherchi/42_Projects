@@ -12,18 +12,25 @@
 
 #include "wolf3d.h"
 
-t_point *getHorizontal(t_tool *t, float rayAngle)
+float   getHorizontalDist(t_tool *t, float rayAngle)
 {
   t_point *inc;
   t_point *curPoint;
+  float dist;
 
   inc = malloc(sizeof(*inc));
   curPoint = getFirstPointHorizontal(t, rayAngle);
   inc->y = isUpPart(rayAngle) ? - t->cubeSize : + t->cubeSize;
   inc->x = - inc->y / tan(degreesToRadians(rayAngle));
   while (insideMap(curPoint, t) && !isWall(curPoint, t))
+  {
+    free(curPoint);
     curPoint = getNextPointHorizontal(t, curPoint, inc);
-  return curPoint;
+  }
+  free(inc);
+  dist = getDist(curPoint, t);
+  free(curPoint);
+  return dist;
 }
 
 t_point *getFirstPointHorizontal(t_tool *t, float rayAngle)

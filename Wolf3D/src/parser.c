@@ -61,26 +61,6 @@ int		checkGrid(t_tool *tools, char *filename)
 	return (ret);
 }
 
-void	printGrid(t_tool *t)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (i < t->nbline)
-	{
-		j = 0;
-		while (j < t->nbcol)
-		{
-			ft_putnbr(t->grid[i][j]);
-			ft_putchar(' ');
-			j++;
-		}
-		i++;
-		ft_putchar('\n');
-	}
-}
-
 void	readLine(int i, t_tool *t)
 {
 	char	*line;
