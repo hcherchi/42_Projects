@@ -23,7 +23,7 @@
 #define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
 
 #define LIM 1000
-#define E 0.0001
+#define E 0.001
 
 #define NORTH 0x8B4513
 #define SOUTH 0xCD853F
