@@ -120,8 +120,8 @@ void   init(t_tool *tools)
 	double miFOV;
 
 	pos = malloc(sizeof(*pos));
-	pos->x = 200;
-	pos->y = 200;
+	pos->x = 0;
+	pos->y = 0;
 	tools->pos = pos;
 	tools->angle = -45;
 	tools->FOV = 60;
@@ -170,14 +170,28 @@ int		keyPress(int key, t_tool *tools)
 	}
 	else if (key == 126)
 	{
-		tools->pos->x += cos(degreesToRadians(tools->angle)) * 5;
-		tools->pos->y += - sin(degreesToRadians(tools->angle)) * 5;
+		t_point *newPos;
+
+		newPos = malloc(sizeof(*newPos));
+		newPos->x = tools->pos->x + cos(degreesToRadians(tools->angle)) * 5;
+		newPos->y = tools->pos->y - sin(degreesToRadians(tools->angle)) * 5;
+		if (insideMap(newPos, tools))
+		{
+			tools->pos = newPos;
+		}
 		launch(tools);
 	}
 	else if (key == 125)
 	{
-		tools->pos->x += -cos(degreesToRadians(tools->angle)) * 5;
-		tools->pos->y += sin(degreesToRadians(tools->angle)) * 5;
+		t_point *newPos;
+
+		newPos = malloc(sizeof(*newPos));
+		newPos->x = tools->pos->x - cos(degreesToRadians(tools->angle)) * 5;
+		newPos->y = tools->pos->y + sin(degreesToRadians(tools->angle)) * 5;
+		if (insideMap(newPos, tools))
+		{
+			tools->pos = newPos;
+		}		
 		launch(tools);
 	}
 	return (0);
