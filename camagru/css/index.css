@@ -21,6 +21,11 @@ button {
   width: 150px;
 }
 
+.setFont {
+  font-family: "quicksand";
+  color: rgb(250, 250 , 250);
+}
+
 .flex-h {
   display: flex;
   flex-direction: row;
@@ -39,6 +44,10 @@ button {
 
 .w-base {
   width: 400px;
+}
+
+.w-100p {
+  width: 100px;
 }
 
 .w-200p {

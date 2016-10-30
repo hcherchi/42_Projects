@@ -23,4 +23,3 @@ if ($_POST['submit'] === "register_button") {
 	echo "503 bag get a way Forbidden";
 }
 ?>
-
