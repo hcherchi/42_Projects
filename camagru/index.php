@@ -9,8 +9,8 @@
     <title>I <3 Camagru</title>
   </head>
   <body>
-    <?PHP include("components/header.php"); ?>
-    <?PHP include("components/sign.php"); ?>
-    <?PHP include("components/footer.php"); ?>
+    <?PHP include("components/header.html"); ?>
+    <?PHP include("components/sign.html"); ?>
+    <?PHP include("components/footer.html"); ?>
   </body>
 </html>
