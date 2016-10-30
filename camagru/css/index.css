@@ -8,6 +8,9 @@ body {
   color: rgb(112,128,144);
   padding:0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 button {
@@ -21,21 +24,17 @@ button {
 .flex-h {
   display: flex;
   flex-direction: row;
-  justify-content: start;
+  justify-content: center;
 }
 
 .flex-v {
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: center;
 }
 
 .extend {
   flex: 1;
-}
-
-.center {
-  margin: auto;
 }
 
 .w-base {
@@ -225,6 +224,14 @@ button {
   bottom: 0;
 }
 
+.disp-none {
+  display: none;
+}
+
 .items-center {
   align-items: center;
+}
+
+.hover:hover {
+  cursor: pointer;
 }

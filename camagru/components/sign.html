@@ -1,9 +1,66 @@
-<div class="flex-v center w-base m-v-200">
+<div onload="switchToSignup()" class="flex-v w-base m-v-200">
   <div class="flex-h">
-    <div class="p-v-20 w-50 rounded-top-left text-center bg-grey-1 font-L font-grey-2">SignIn</div>
-    <div class="p-v-20 w-50 rounded-top-right text-center bg-grey-2 font-L font-grey-1">SignUp</div>
+    <div onclick="switchToSignin()" id="signinButton" class="p-v-20 w-50 rounded-top-left text-center bg-grey-1 font-L font-grey-2">SignIn</div>
+    <div onclick="switchToSignup()" id="signupButton" class="hover p-v-20 w-50 rounded-top-right text-center bg-grey-2 font-L font-grey-1">SignUp</div>
   </div>
-  <?PHP include("components/signin.html"); ?>
+  <form id="signup" class="disp-none rounded-bottom p-v-30 p-h-50 bg-grey-1 flex-v items-center text-center" action="create_account.php" method="POST">
+    <div class="flex-v m-b-30">
+      <label class="font-S m-b-10" for="">Email: </label>
+      <input class="h-25p w-200p" type="text" name="email"/>
+    </div>
+    <div class="flex-v m-b-30">
+      <label class="font-S m-b-10" for="">Username: </label>
+      <input class="h-25p w-200p" type="text" name="username"/>
+    </div>
+    <div class="flex-v m-b-30">
+      <label class="font-S m-b-10" for="">Password: </label>
+      <input class="h-25p w-200p" type="password" name="password">
+    </div>
+    <div class="flex-v m-b-30">
+      <label class="font-S m-b-10" for="">Confirm Password: </label>
+      <input class="h-25p w-200p" type="password" name="password_confirm">
+    </div>
+    <button class="hover font-M p-v-10 m-t-20 font-grey-1 bg-grey-2 rounded" type="submit" name="submit" value="register_button">Create</button>
+  </form>
+  <form id="signin" class="rounded-bottom p-v-30 p-h-50 bg-grey-1 flex-v items-center text-center" action="connect.php" method="POST">
+    <div class="flex-v m-b-30">
+      <label class="font-S m-b-10" for="">Username: </label>
+      <input class="h-25p w-200p" type="text" name="username"/>
+    </div>
+    <div class="flex-v m-b-30">
+      <label class="font-S m-b-10" for="">Password: </label>
+      <input class="h-25p w-200p" type="password" name="password">
+    </div>
+    <button class="hover font-M p-v-10 m-t-20 font-grey-1 bg-grey-2 rounded" type="submit" name="submit" value="register_button">Connect</button>
+  </form>
 </div>
-<script>
+<script type="text/javascript">
+
+var active = 'signin'
+var signup = document.getElementById('signup')
+var signin = document.getElementById('signin')
+var signinButton = document.getElementById('signinButton')
+var signupButton = document.getElementById('signupButton')
+
+var switchToSignup = function() {
+  if (active != 'signup')
+  {
+    active = 'signup'
+    signup.style.display = 'flex'
+    signin.style.display = 'none'
+    signupButton.className = "p-v-20 w-50 rounded-top-right text-center bg-grey-1 font-L font-grey-2"
+    signinButton.className = "hover p-v-20 w-50 rounded-top-left text-center bg-grey-2 font-L font-grey-1"
+  }
+}
+
+var switchToSignin = function() {
+  if (active != 'signin')
+  {
+    active = 'signin'
+    signin.style.display = 'flex'
+    signup.style.display = 'none'
+    signinButton.className = "p-v-20 w-50 rounded-top-left text-center bg-grey-1 font-L font-grey-2"
+    signupButton.className = "hover p-v-20 w-50 rounded-top-right text-center bg-grey-2 font-L font-grey-1"
+  }
+}
 </script>
