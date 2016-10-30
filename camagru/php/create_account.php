@@ -6,7 +6,7 @@ if ($_POST['submit'] === "register_button") {
 			$username = $db->quote($_POST['username']);
 			$email = $db->quote($_POST['email']);
 			$password = $db->quote(hash(whirlpool,$_POST['password'], false));
-			$select = $db->query("SELECT * FROM User WHERE username=$username OR email=$email");
+			$select = $db->prepare("SELECT * FROM User WHERE username=:username OR email=:email");
 
 			if ($select->rowCount() == 0) {
 				$db->query("INSERT INTO User SET username=$username, password=$password, email=$email");
