@@ -1,0 +1,25 @@
+.flex-h {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-v {
+  display: flex;
+  flex-direction: column;
+}
+
+.center {
+  margin: auto;
+}
+
+.w-300 {
+  width: 300px;
+}
+
+.p-30 {
+  padding: 30px;
+}
+
+.border {
+  border: 1px solid black;
+}
