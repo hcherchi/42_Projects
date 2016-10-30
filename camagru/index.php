@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="stylesheet" type="text/css" href="./css/index.css">
     <meta charset="UTF-8">
     <title>I <3 Camagru</title>
   </head>

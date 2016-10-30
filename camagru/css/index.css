@@ -1,0 +1,230 @@
+@font-face {
+    font-family: "quicksand";
+    src: url("fonts/Quicksand/Quicksand-Regular.ttf");
+}
+
+body {
+  font-family: "quicksand";
+  color: rgb(112,128,144);
+  padding:0;
+  margin: 0;
+}
+
+button {
+  font-family: "quicksand";
+  color: rgb(250, 250 , 250);
+  border: none;
+  align-self: center;
+  width: 150px;
+}
+
+.flex-h {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+}
+
+.flex-v {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+.extend {
+  flex: 1;
+}
+
+.center {
+  margin: auto;
+}
+
+.w-base {
+  width: 400px;
+}
+
+.w-200p {
+  width: 200px;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.w-50 {
+  width: 50%;
+}
+
+.w-80 {
+  width: 80%;
+}
+
+.p-0 {
+  padding: 0;
+}
+
+.p-10 {
+  padding: 10px;
+}
+
+.p-20 {
+  padding: 20px;
+}
+
+.p-30 {
+  padding: 30px;
+}
+
+.p-v-10 {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.p-v-20 {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.p-v-30 {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.p-h-10 {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.p-h-20 {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.p-h-30 {
+  padding-right: 30px;
+  padding-left: 30px;
+}
+
+.p-h-50 {
+  padding-right: 50px;
+  padding-left: 50px;
+}
+
+.border {
+  border: 1px solid black;
+}
+
+.rounded {
+  border-radius: 6px;
+}
+
+.rounded-top-left {
+  border-radius: 6px 0px 0 0;
+}
+
+.rounded-top-right {
+  border-radius: 0px 6px 0 0;
+}
+
+.rounded-bottom {
+  border-radius: 0px 0px 6px 6px;
+}
+
+
+.m-0 {
+  margin: 0px;
+}
+
+.m-10 {
+  margin: 10px;
+}
+
+.m-20 {
+  margin: 20px;
+}
+
+.m-30 {
+  margin: 30px;
+}
+
+.m-t-10 {
+  margin-top: 10px;
+}
+
+.m-t-20 {
+  margin-top: 20px;
+}
+
+.m-t-30 {
+  margin-top: 30px;
+}
+
+.m-b-10 {
+  margin-bottom: 10px;
+}
+
+.m-b-20 {
+  margin-bottom: 20px;
+}
+
+.m-b-30 {
+  margin-bottom: 30px;
+}
+
+.m-v-200 {
+  margin-bottom: 200px;
+  margin-top: 200px;
+}
+
+.h-20p {
+  height: 20px;
+}
+.h-25p {
+  height: 25px;
+}
+.h-35p {
+  height: 40px;
+}
+
+.font-S {
+  font-size: 1em;
+}
+
+.font-M {
+  font-size: 1.5em;
+}
+
+.font-L {
+  font-size: 2em;
+}
+
+.font-XL {
+  font-size: 2.5em;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.bg-grey-1 {
+  background-color: rgb(230, 230, 230);
+}
+
+.bg-grey-2 {
+  background-color: rgb(112,128,144);
+}
+
+.font-grey-1 {
+  color: rgb(230, 230, 230);
+}
+.font-grey-2 {
+  color: rgb(112,128,144);
+}
+
+.absolute-b {
+  position: absolute;
+  bottom: 0;
+}
+
+.items-center {
+  align-items: center;
+}
