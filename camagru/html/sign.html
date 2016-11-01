@@ -1,0 +1,70 @@
+<div class="flex-v w-base justify-between m-t-50">
+  <div class="flex-h">
+    <div onclick="switchToSignin()" id="signinButton" class="p-v-20 w-50 rounded-top-left text-center bg-grey-1 font-L font-grey-2">SignIn</div>
+    <div onclick="switchToSignup()" id="signupButton" class="hover p-v-20 w-50 rounded-top-right text-center bg-grey-2 font-L font-grey-1">SignUp</div>
+  </div>
+  <form id="signup" class="disp-none rounded-bottom p-v-30 p-h-30 bg-grey-1 items-center text-center" action="php/create_account.php" method="POST">
+    <div class="flex-v m-b-30">
+      <label class="font-M m-b-10" for="">Email</label>
+      <input class="p-h-10 h-30p w-200p font-M" type="text" name="email"/>
+    </div>
+    <div class="flex-v m-b-30">
+      <label class="font-M m-b-10" for="">Username</label>
+      <input class="p-h-10 h-30p w-200p font-M" type="text" name="username"/>
+    </div>
+    <div class="flex-v m-b-30">
+      <label class="font-M m-b-10" for="">Password</label>
+      <input class="p-h-10 h-30p w-200p font-M" type="password" name="password">
+    </div>
+    <div class="flex-v m-b-30">
+      <label class="font-M m-b-10" for="">Confirm Password</label>
+      <input class="p-h-10 h-30p w-200p font-M" type="password" name="password_confirm">
+    </div>
+    <button class="w-150p hover font-M p-v-10 font-grey-1 bg-grey-2 rounded" type="submit" name="submit" value="register_button">Create</button>
+  </form>
+  <form id="signin" class="rounded-bottom p-v-30 p-h-30 bg-grey-1 flex-v items-center text-center" action="php/connect.php" method="POST">
+    <div class="flex-v m-b-30">
+      <label class="font-M m-b-10" for="">Username</label>
+      <input class="p-h-10 h-30p w-200p font-M" type="text" name="username"/>
+    </div>
+    <div class="flex-v m-b-30">
+      <label class="font-M m-b-10" for="">Password</label>
+      <input class="p-h-10 h-30p w-200p font-M" type="password" name="password">
+    </div>
+    <button class="w-150p hover font-M p-v-10 font-grey-1 bg-grey-2 rounded" type="submit" name="submit" value="register_button">Connect</button>
+  </form>
+</div>
+<script type="text/javascript">
+
+var state = 'signin'
+var signup = document.getElementById('signup')
+var signin = document.getElementById('signin')
+var signinButton = document.getElementById('signinButton')
+var signupButton = document.getElementById('signupButton')
+var visible = "flex-v rounded-bottom p-v-30 p-h-30 bg-grey-1 items-center text-center"
+var invisible = "disp-none rounded-bottom p-v-30 p-h-30 bg-grey-1 items-center text-center"
+var active = "p-v-20 w-50 text-center bg-grey-1 font-L font-grey-2"
+var inactive = "hover p-v-20 w-50 text-center bg-grey-2 font-L font-grey-1"
+
+var switchToSignup = function() {
+  if (state != 'signup')
+  {
+    state = 'signup'
+    signup.className = visible
+    signin.className = invisible
+    signupButton.className = active + ' rounded-top-right'
+    signinButton.className = inactive + ' rounded-top-left'
+  }
+}
+
+var switchToSignin = function() {
+  if (state != 'signin')
+  {
+    state = 'signin'
+    signin.className = visible
+    signup.className = invisible
+    signinButton.className = active + ' rounded-top-left'
+    signupButton.className = inactive + ' rounded-top-right'
+  }
+}
+</script>

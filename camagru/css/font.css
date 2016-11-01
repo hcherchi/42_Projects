@@ -1,0 +1,31 @@
+@font-face {
+    font-family: "quicksand";
+    src: url("fonts/Quicksand/Quicksand-Regular.ttf");
+}
+
+.font-S {
+  font-size: 1em;
+}
+
+.font-M {
+  font-size: 1.5em;
+}
+
+.font-L {
+  font-size: 2em;
+}
+
+.font-XL {
+  font-size: 4em;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.font-grey-1 {
+  color: rgb(235, 240, 245);
+}
+.font-grey-2 {
+  color: rgb(112,128,144);
+}

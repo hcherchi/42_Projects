@@ -1,0 +1,41 @@
+.p-10 {
+  padding: 10px;
+}
+
+.p-20 {
+  padding: 20px;
+}
+
+.p-30 {
+  padding: 30px;
+}
+
+.p-v-10 {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.p-v-20 {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.p-v-30 {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.p-h-10 {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.p-h-20 {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.p-h-30 {
+  padding-right: 30px;
+  padding-left: 30px;
+}
