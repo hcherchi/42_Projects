@@ -7,6 +7,10 @@
   min-width: 400px;
 }
 
+.w-50p {
+  width: 50px;
+}
+
 .w-100p {
   width: 100px;
 }
@@ -98,6 +102,19 @@
 .h-35p {
   height: 35px;
 }
+.h-50p {
+  height: 50px;
+}
+
+.h-100p {
+  height: 100px;
+}
+
+.h-150p {
+  height: 150px;
+}
+
+
 
 .h-200p {
   height: 200px;

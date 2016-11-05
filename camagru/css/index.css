@@ -24,6 +24,10 @@ input {
   border-radius: 6px;
 }
 
+.fullrounded {
+  border-radius: 100px;
+}
+
 .rounded-top-left {
   border-radius: 6px 0px 0 0;
 }
