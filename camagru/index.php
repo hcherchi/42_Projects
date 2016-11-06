@@ -16,9 +16,7 @@
   </head>
   <body class="flex-v w-100 h-100 items-stretch">
     <?PHP include("html/header.html"); ?>
-    <div class="self-flex flex-v justify-center items-center">
-      <?PHP include("html/cam.html"); ?>
-    </div>
+    <?PHP include("html/cam.html"); ?>
     <?PHP include("html/footer.html"); ?>
   </body>
 </html>
