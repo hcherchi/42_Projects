@@ -11,7 +11,6 @@ try
 			CREATE TABLE `User` (`id` int(25) NOT NULL,`username` varchar(255) NOT NULL,`password` varchar(255) NOT NULL, `email` varchar(255) NOT NULL) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 	";
 	$db -> exec($sql);
-	echo "Bb is create whit sucesse\n";
 }
 catch (Exception $e)
 {
