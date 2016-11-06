@@ -6,9 +6,14 @@
       <div class="self-unshrink w-100p h-70 bg-grey-1"></div>
     </aside>
     <div class="w-100 h-80 bg-grey-2 rounded">
+		<video id="video" class="w-100 h-80 bg-grey-2 rounded"></video>
+		<button id='take_picture' onclick="takePic()">take a picture</button>
     </div>
+		<canvas id="canvas" style="visibility: hidden;" ></canvas>
   </section>
   <aside class="w-30 h-100 bg-grey-2 flex-v justify-start items-center scroll rounded">
+	<div id="new_image">
+	</div>
     <img class="self-unshrink w-80 h-250p bg-grey-1 m-v-30">
     <img class="self-unshrink w-80 h-250p bg-grey-1 m-v-30">
     <img class="self-unshrink w-80 h-250p bg-grey-1 m-v-30">
@@ -16,7 +21,7 @@
     <img class="self-unshrink w-80 h-250p bg-grey-1 m-v-30">
     <img class="self-unshrink w-80 h-250p bg-grey-1 m-v-30">
     <img class="self-unshrink w-80 h-250p bg-grey-1 m-v-30">
-  </aside>
+	</aside>
 </div>
-<script>
+<script src='./js/display_webcam.js'>
 </script>
