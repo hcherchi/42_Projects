@@ -30,7 +30,6 @@ function takePic() {
     var data = canvas.toDataURL('image/png')
     var image = document.createElement('img')
     image.src = data
-    document.getElementById('new_image').value = ""
     document.getElementById('new_image').appendChild(image)
 
 
