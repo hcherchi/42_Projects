@@ -23,17 +23,19 @@ if (navigator.getUserMedia) {
 }
 
 function takePic() {
-  console.log('in the fucntion')
+  var date = new Date()
+
     canvas.width = width
     canvas.height = height
     canvas.getContext('2d').drawImage(video, 30, 30, width, height)
     var data = canvas.toDataURL('image/png')
     var image = document.createElement('img')
     image.src = data
+    var xmlhttp = new XMLHttpRequest()
+    xmlhttp.onreadystatechange = function() {}
+    xmlhttp.open("POST", "./php/home_page.php?url=" +'hello' + "date=" + date, true)
+    xmlhttp.send()
     document.getElementById('new_image').appendChild(image)
-
-
-    //photo.setAttribute('src', data)
 }
 window.takePic = takePic
 
