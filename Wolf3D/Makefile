@@ -20,7 +20,7 @@ SRCS = src/main.c src/draw.c src/vertical.c src/horizontal.c src/util.c src/pars
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-IFLAGS = -I $(INC_DIR) -I ../libft/includes
+IFLAGS = -I $(INC_DIR) -I ../libft/includes -I../mlx
 FLAGS = -Wall -Werror -Wextra
 
 CC = gcc $(FLAGS)
