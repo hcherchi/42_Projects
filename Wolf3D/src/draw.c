@@ -6,77 +6,77 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/24 19:45:08 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/02/01 12:17:02 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/12/04 13:11:17 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void launch(t_tool *t)
+void	launch(t_tool *t)
 {
-  int col;
-  int wallHeight;
-  col = 0;
-  t->mlx_img = mlx_new_image(t->mlx_ptr, t->screenWidth, t->screenHeight);
-  while (col < t->screenWidth)
-  {
-    wallHeight = getWallHeight(col, t);
-    drawCol(wallHeight, col, t);
-    col++;
-  }
-  mlx_put_image_to_window(t->mlx_ptr, t->mlx_win, t->mlx_img, 0, 0);
+	int col;
+	int wall_height;
+
+	col = 0;
+	t->mlx_img = mlx_new_image(t->mlx_ptr, t->width, t->height);
+	while (col < t->width)
+	{
+		wall_height = get_wall_height(col, t);
+		draw_col(wall_height, col, t);
+		col++;
+	}
+	mlx_put_image_to_window(t->mlx_ptr, t->mlx_win, t->mlx_img, 0, 0);
 }
 
-void drawCol(int wallHeight, int col, t_tool *t)
+void	draw_col(int wall_height, int col, t_tool *t)
 {
-  int min;
-  int max;
-  int line;
+	int min;
+	int max;
+	int line;
 
-  line = 0;
-
-  min = (t->screenHeight - wallHeight) / 2;
-  max = min + wallHeight;
-  while(line < t->screenHeight)
-  {
-    if (line <= min)
-      pixel_put_to_image(SKY, t, col, line);
-    else if (line > min && line < max)
-      pixel_put_to_image(t->color, t, col, line);
-    else
-      pixel_put_to_image(GROUND, t, col, line);
-    line++;
-  }
+	line = 0;
+	min = (t->height - wall_height) / 2;
+	max = min + wall_height;
+	while (line < t->height)
+	{
+		if (line <= min)
+			pixel_put_to_image(SKY, t, col, line);
+		else if (line > min && line < max)
+			pixel_put_to_image(t->color, t, col, line);
+		else
+			pixel_put_to_image(GROUND, t, col, line);
+		line++;
+	}
 }
 
-int getWallHeight(int col, t_tool *t)
+int		get_wall_height(int col, t_tool *t)
 {
-  float verticalDist;
-  float horizontalDist;
-  float dist;
-  float ray;
-  float correctedDist;
+	float	vertical_dist;
+	float	horizontal_dist;
+	float	dist;
+	float	ray;
+	float	corrected_dist;
 
-  ray = adjustAngle(t->angle, (t->FOV / 2) - col * t->incAngle);
-  horizontalDist = getHorizontalDist(t, ray);
-  verticalDist = getVerticalDist(t, ray);
-  dist = MIN(horizontalDist, verticalDist);
-  t->color = getWallColor(horizontalDist, verticalDist, dist, ray);
-  correctedDist = dist * cos(degreesToRadians(fabs(ray - t->angle)));
-  return (t->cubeSize * t->dist) / correctedDist;
+	ray = adjust_angle(t->angle, (t->fov / 2) - col * t->inc_angle);
+	horizontal_dist = get_horizontal_dist(t, ray);
+	vertical_dist = get_vertical_dist(t, ray);
+	dist = MIN(horizontal_dist, vertical_dist);
+	t->color = get_wall_color(horizontal_dist, vertical_dist, dist, ray);
+	corrected_dist = dist * cos(D_TO_R(fabs(ray - t->angle)));
+	return (t->cube * t->dist) / corrected_dist;
 }
 
-int getWallColor(float horizontalDist, float verticalDist, float dist, float ray)
+int		get_wall_color(float horizontal, float vertical, float dist, float ray)
 {
-  if (dist == horizontalDist && isUpPart(ray))
-    return NORTH;
-  else if (dist == horizontalDist && !isUpPart(ray))
-    return SOUTH;
-  else if (dist == verticalDist && isRightPart(ray))
-    return EAST;
-  else if (dist == verticalDist && !isRightPart(ray))
-    return WEST;
-  return 0;
+	if (dist == horizontal && is_up_part(ray))
+		return (NORTH);
+	else if (dist == horizontal && !is_up_part(ray))
+		return (SOUTH);
+	else if (dist == vertical && is_right_part(ray))
+		return (EAST);
+	else if (dist == vertical && !is_right_part(ray))
+		return (WEST);
+	return (0);
 }
 
 void	pixel_put_to_image(int color, t_tool *t, int x, int y)

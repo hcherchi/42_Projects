@@ -6,13 +6,13 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/24 19:45:08 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/02/01 12:17:02 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/12/04 13:05:31 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-int		checkDigit(char **split)
+int		check_digit(char **split)
 {
 	int i;
 	int j;
@@ -32,7 +32,7 @@ int		checkDigit(char **split)
 	return (1);
 }
 
-int		checkGrid(t_tool *tools, int fd)
+int		check_grid(t_tool *tools, int fd)
 {
 	char	*line;
 	int		ret;
@@ -45,20 +45,20 @@ int		checkGrid(t_tool *tools, int fd)
 	{
 		tools->nbline += 1;
 		split = ft_strsplit(line, ' ');
-    free(line);
+		free(line);
 		if (tools->nbcol == 0)
 			tools->nbcol = ft_tablen(split);
 		else if (tools->nbcol != ft_tablen(split))
 			return (-1);
-		if (checkDigit(split) == -1)
+		if (check_digit(split) == -1)
 			return (-1);
-    cleanTab(split);
+		clean_tab(split);
 	}
-  close(fd);
+	close(fd);
 	return (ret);
 }
 
-void	readLine(int i, t_tool *t, int fd)
+void	read_line(int i, t_tool *t, int fd)
 {
 	char	*line;
 	int		j;
@@ -68,17 +68,17 @@ void	readLine(int i, t_tool *t, int fd)
 	j = 0;
 	get_next_line(fd, &line);
 	split = ft_strsplit(line, ' ');
-  free(line);
+	free(line);
 	t->grid[i] = (int *)malloc(sizeof(int) * t->nbcol);
 	while (j < t->nbcol)
 	{
 		t->grid[i][j] = ft_atoi(split[j]);
 		j++;
 	}
-  cleanTab(split);
+	clean_tab(split);
 }
 
-void readGrid(t_tool *t, int fd)
+void	read_grid(t_tool *t, int fd)
 {
 	int i;
 
@@ -86,8 +86,8 @@ void readGrid(t_tool *t, int fd)
 	i = 0;
 	while (i < t->nbline)
 	{
-		readLine(i, t, fd);
+		read_line(i, t, fd);
 		i++;
 	}
-  close(fd);
+	close(fd);
 }

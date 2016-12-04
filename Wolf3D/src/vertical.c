@@ -6,55 +6,54 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/24 19:45:08 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/02/01 12:17:02 by hcherchi         ###   ########.fr       */
+/*   Updated: 2016/12/04 13:02:01 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-float   getVerticalDist(t_tool *t, float rayAngle)
+float	get_vertical_dist(t_tool *t, float ray_angle)
 {
-  t_point *inc;
-  t_point *curPoint;
-  float dist;
+	t_point	*inc;
+	t_point	*cur_point;
+	float	dist;
 
-  inc = malloc(sizeof(*inc));
-  curPoint = getFirstPointVertical(t, rayAngle);
-  inc->x = (isRightPart(rayAngle)) ? t->cubeSize : - t->cubeSize;
-  inc->y = - inc->x * tan(degreesToRadians(rayAngle));
-  while (insideMap(curPoint, t) && !isWall(curPoint, t))
-  {
-    free(curPoint);
-    curPoint = getNextPointVertical(t, curPoint, inc);
-  }
-  free(inc);
-  dist = getDist(curPoint, t);
-  free(curPoint);
-  return dist;
+	inc = malloc(sizeof(*inc));
+	cur_point = get_first_point_vertical(t, ray_angle);
+	inc->x = (is_right_part(ray_angle)) ? t->cube : -t->cube;
+	inc->y = -inc->x * tan(D_TO_R(ray_angle));
+	while (inside_map(cur_point, t) && !is_wall(cur_point, t))
+	{
+		free(cur_point);
+		cur_point = get_next_point_vertical(t, cur_point, inc);
+	}
+	free(inc);
+	dist = get_dist(cur_point, t);
+	free(cur_point);
+	return (dist);
 }
 
-t_point *getFirstPointVertical(t_tool *t, float rayAngle)
+t_point	*get_first_point_vertical(t_tool *t, float ray_angle)
 {
-  t_point *point;
+	t_point	*point;
 
-  point = malloc(sizeof(*point));
-
-  if (isRightPart(rayAngle))
-    point->x = floor(t->pos->x / t->cubeSize) * t->cubeSize + t->cubeSize;
-  else
-    point->x = floor(t->pos->x / t->cubeSize) * t->cubeSize - E;
-  point->y = t->pos->y + (t->pos->x - point->x) * tan(degreesToRadians(rayAngle));
-  return point;
+	point = malloc(sizeof(*point));
+	if (is_right_part(ray_angle))
+		point->x = floor(t->pos->x / t->cube) * t->cube + t->cube;
+	else
+		point->x = floor(t->pos->x / t->cube) * t->cube - E;
+	point->y = t->pos->y + (t->pos->x - point->x) * tan(D_TO_R(ray_angle));
+	return (point);
 }
 
-t_point *getNextPointVertical(t_tool *t, t_point *curPoint, t_point *inc)
+t_point	*get_next_point_vertical(t_tool *t, t_point *cur_point, t_point *inc)
 {
-  t_point *nextPoint;
-  float dist;
+	t_point	*next_point;
+	float	dist;
 
-  nextPoint = malloc(sizeof(*nextPoint));
-  nextPoint->x = curPoint->x + inc->x;
-  nextPoint->y = curPoint->y + inc->y;
-  dist = getDist(nextPoint, t);
-  return nextPoint;
+	next_point = malloc(sizeof(*next_point));
+	next_point->x = cur_point->x + inc->x;
+	next_point->y = cur_point->y + inc->y;
+	dist = get_dist(next_point, t);
+	return (next_point);
 }
