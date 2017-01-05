@@ -6,15 +6,15 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/24 19:45:08 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/12/04 13:05:31 by hcherchi         ###   ########.fr       */
+/*   Updated: 2017/01/05 15:15:15 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-int		check_digit(char **split)
+int		check_digit(char **split, int *count, t_tool *t)
 {
-	int i;
+	int	i;
 	int j;
 
 	i = 0;
@@ -27,6 +27,15 @@ int		check_digit(char **split)
 				return (-1);
 			j++;
 		}
+		if (ft_atoi(split[i]) != 0 && ft_atoi(split[i]) != 1
+			&& ft_atoi(split[i]) != 2)
+			return (-1);
+		if (ft_atoi(split[i]) == 2)
+		{
+			(*count)++;
+			t->i = i;
+			t->j = t->nbline;
+		}
 		i++;
 	}
 	return (1);
@@ -37,25 +46,27 @@ int		check_grid(t_tool *tools, int fd)
 	char	*line;
 	int		ret;
 	char	**split;
+	int		count;
 
+	count = 0;
 	line = NULL;
 	tools->nbcol = 0;
 	tools->nbline = 0;
 	while ((ret = get_next_line(fd, &line)) == 1)
 	{
-		tools->nbline += 1;
 		split = ft_strsplit(line, ' ');
 		free(line);
 		if (tools->nbcol == 0)
 			tools->nbcol = ft_tablen(split);
 		else if (tools->nbcol != ft_tablen(split))
 			return (-1);
-		if (check_digit(split) == -1)
+		if (check_digit(split, &count, tools) == -1)
 			return (-1);
+		tools->nbline += 1;
 		clean_tab(split);
 	}
 	close(fd);
-	return (ret);
+	return (count != 1) ? (-1) : (ret);
 }
 
 void	read_line(int i, t_tool *t, int fd)

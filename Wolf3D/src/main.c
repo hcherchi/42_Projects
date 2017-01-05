@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/24 19:45:08 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/12/04 13:10:18 by hcherchi         ###   ########.fr       */
+/*   Updated: 2017/01/05 15:06:20 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,8 @@ void	init(t_tool *t)
 	float	mifov;
 
 	pos = malloc(sizeof(*pos));
-	pos->x = 10;
-	pos->y = 10;
 	t->pos = pos;
-	t->angle = 0;
+	t->angle = 90;
 	t->fov = 60;
 	mifov = t->fov / 2;
 	t->width = 1000;
@@ -31,8 +29,16 @@ void	init(t_tool *t)
 	t->dist = (t->center_x / tan(D_TO_R(mifov)));
 	t->inc_angle = t->fov / (float)t->width;
 	t->cube = 100;
+	pos->x = t->i * t->cube + t->cube / 2;
+	pos->y = t->j * t->cube + t->cube / 2;
 	t->mlx_ptr = mlx_init();
 	t->mlx_win = mlx_new_window(t->mlx_ptr, t->width, t->height, "<3 wolf");
+}
+
+int		clean_exit(t_tool *tools)
+{
+	clean(tools);
+	exit(0);
 }
 
 int		main(void)
@@ -52,6 +58,7 @@ int		main(void)
 	init(tools);
 	launch(tools);
 	mlx_hook(tools->mlx_win, 2, (1L << 0), key_press, tools);
+	mlx_hook(tools->mlx_win, 17, (1L << 17), clean_exit, tools);
 	mlx_loop(tools->mlx_ptr);
 	return (0);
 }

@@ -12,11 +12,26 @@
 
 #include "ft_printf.h"
 
-int ft_printf(const char *format, ...)
+int ft_printf(const char *input, ...)
 {
-  t_tool *tools;
+  int count;
+  va_list	ap;
 
-  tools = parse_conv(format);
-
-  return (0);
+  count = 0;
+  va_start(ap, input);
+  while (*input)
+  {
+    if (*input == '%')
+    {
+      input += handle_convertion(input + 1, ap, &count);
+    }
+    else
+    {
+      ft_putchar(*input);
+      count++;
+      input++;
+    }
+  }
+  va_end(ap);
+  return (count);
 }

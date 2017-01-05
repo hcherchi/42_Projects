@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/24 19:45:08 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/12/04 12:55:07 by hcherchi         ###   ########.fr       */
+/*   Updated: 2017/01/05 15:01:48 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ int		key_press(int key, t_tool *tools)
 	else if (key == 123 || key == 124)
 	{
 		if (key == 123)
-			tools->angle = adjust_angle(tools->angle, 10);
+			tools->angle = adjust_angle(tools->angle, 5);
 		else if (key == 124)
-			tools->angle = adjust_angle(tools->angle, -10);
+			tools->angle = adjust_angle(tools->angle, -5);
 		launch(tools);
 	}
 	else if (key == 126)

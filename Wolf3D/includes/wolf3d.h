@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/24 19:45:29 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/12/04 13:36:08 by hcherchi         ###   ########.fr       */
+/*   Updated: 2017/01/05 15:11:10 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,10 @@
 # include "mlx.h"
 # include <math.h>
 # include <fcntl.h>
-# include <stdio.h>
 
 # define D_TO_R(angle_degrees) (angle_degrees * M_PI / 180)
 # define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
 
-# define LIM 1000
 # define E 0.001
 
 # define NORTH 0x8B4513
@@ -47,7 +45,7 @@ typedef struct	s_tool
 	int			**grid;
 	t_point		*pos;
 	float		angle;
-	int			cube;
+	float		cube;
 	int			fov;
 	int			width;
 	int			height;
@@ -61,6 +59,8 @@ typedef struct	s_tool
 	int			bpp;
 	int			endian;
 	int			size_line;
+	int			i;
+	int			j;
 }				t_tool;
 
 float			get_vertical_dist(t_tool *t, float ray_angle);
@@ -88,7 +88,7 @@ float			adjust_angle(float angle, float inc);
 
 void			init(t_tool *t);
 int				check_grid(t_tool *tools, int fd);
-int				check_digit(char **split);
+int				check_digit(char **split, int *count, t_tool *t);
 void			read_grid(t_tool *t, int fd);
 
 void			clean(t_tool *tools);

@@ -15,22 +15,35 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
+# include <stdarg.h>
 
-typedef struct	s_conv
+typedef struct	s_format
 {
   int accur;
-  char indic;
+  char type;
   char att;
   int width;
   char *mod;
-}               t_conv;
-
-typedef struct	s_tool
-{
-  t_conv *l_conv;
-}               t_tool;
+}               t_format;
 
 
 int   ft_printf(const char *restrict format, ...);
+int   handle_convertion(const char *input, va_list ap, int *count);
+int   is_convertor(char c);
+t_format *init_format();
+int  fill_format(const char *input, t_format *format);
+
+char *ft_itoa_base(int nb, int base);
+char *ft_uitoa_base(unsigned int unb, int base);
+char *ft_ctoa(unsigned char uc);
+
+int ft_strlen(const char *str);
+int     lennbr(unsigned int unb, int base);
+
+void ft_putchar(const char c);
+void ft_putstr(const char *str);
+void ft_putendl(const char *str);
+void ft_putnbr(int n);
+char	*ft_strchr(const char *s, int c);
 
 #endif

@@ -20,7 +20,7 @@ SRCS = src/main.c src/draw.c src/vertical.c src/horizontal.c src/util.c src/pars
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-IFLAGS = -I $(INC_DIR) -I ../libft/includes -I../mlx
+IFLAGS = -I $(INC_DIR) -I ../libft/includes -I ../mlx
 FLAGS = -Wall -Werror -Wextra
 
 CC = gcc $(FLAGS)
@@ -30,7 +30,7 @@ RM = /bin/rm -f
 all: $(LIB_NAME) $(NAME)
 
 $(LIB_NAME) :
-	@make -C ../libft re
+	@make -C ../libft
 
 $(NAME) : $(OBJS)
 	@echo "Make Objects :\033[1;32m DONE !\033[m"

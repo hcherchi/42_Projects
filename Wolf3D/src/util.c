@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/24 19:45:08 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/12/04 12:55:44 by hcherchi         ###   ########.fr       */
+/*   Updated: 2017/01/05 15:12:59 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int		inside_map(t_point *intersection, t_tool *t)
 
 	i = intersection->y / t->cube;
 	j = intersection->x / t->cube;
-	if (i < t->nbline && i >= 0 && j < t->nbcol && j >= 0)
+	if (i < t->nbline && intersection->y >= 0 && i >= 0
+		&& j < t->nbcol && intersection->x >= 0 && j >= 0)
 		return (1);
 	else
 		return (0);

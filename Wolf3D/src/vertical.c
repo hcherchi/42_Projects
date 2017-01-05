@@ -20,7 +20,7 @@ float	get_vertical_dist(t_tool *t, float ray_angle)
 
 	inc = malloc(sizeof(*inc));
 	cur_point = get_first_point_vertical(t, ray_angle);
-	inc->x = (is_right_part(ray_angle)) ? t->cube : -t->cube;
+	inc->x = (is_right_part(ray_angle)) ? +t->cube : -t->cube;
 	inc->y = -inc->x * tan(D_TO_R(ray_angle));
 	while (inside_map(cur_point, t) && !is_wall(cur_point, t))
 	{
