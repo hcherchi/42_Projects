@@ -3,7 +3,6 @@
 
 int main(void)
 {
-    ft_printf("salut %s %s %%d trop trop trop\n", "Hugo", "est");
-    printf("salut %s %s %%d trop trop trop", "Hugo", "est");
+    ft_printf("salut %c %s %d trop trop trop\n", 'c', "Hugo", 10);
     return (0);
 }
