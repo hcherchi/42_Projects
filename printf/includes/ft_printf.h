@@ -29,6 +29,7 @@ typedef struct	s_format
   int   minus;
   int   plus;
   int   space;
+  int   moins;
 }               t_format;
 
 
