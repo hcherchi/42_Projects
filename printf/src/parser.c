@@ -28,10 +28,58 @@ void  print_struct(t_format *format)
     ft_putendl("sp");
 }
 
-int   is_attribut(char c)
+int   is_attribut(char c, t_format *format)
 {
-  if (ft_strchr("# 0-+", c))
+  if (c == '#')
+  {
+    format->attribut = '#'
     return (1);
+  }
+  else if (c == ' ')
+  {
+    format->attribut = ' '
+    return (1);
+  }
+  else if (c == '0')
+  {
+    format->attribut = '0'
+    return (1);
+  }
+  else if (c == '-')
+  {
+    format->attribut = '-'
+    return (1);
+  }
+  else if (c == '+')
+  {
+    format->attribut = '+'
+    return (1);
+  }
+  return (0);
+}
+
+int   is_flag(char c, t_format *format)
+{
+  if (c == 'h')
+  {
+    format->flag = 'h'
+    return (1);
+  }
+  else if (c == 'l')
+  {
+    format->flag = 'l'
+    return (1);
+  }
+  else if (c == 'j')
+  {
+    format->flag = 'j'
+    return (1);
+  }
+  else if (c == 'z')
+  {
+    format->flag = 'z'
+    return (1);
+  }
   return (0);
 }
 
@@ -98,14 +146,53 @@ char *convert_arg(t_format *format, va_list ap)
   return (converted_arg);
 }
 
-
 int  fill_format(const char *input, t_format *format)
 {
-    if (is_convertor(*input))
+  char *tmp;
+  int i;
+
+  if (is_attribut(*input, format))
+    input++;
+  while (strchr('# -+', *input))
+    input++;
+  while (isdigit(ft_atoi(*input)))
+  {
+    tmp[i] = *input;
+    input++;
+    i++;
+  }
+  if (i > 0)
+    format->minus = ft_atoi(tmp);
+  if (*input == '.')
+  {
+    i = 0;
+    while (isdigit(ft_atoi(*input)))
     {
-      format->type = *input;
+      tmp2[i] = *input
+      input++;
+      i++;
     }
-    return (1);
+    if (i > 0)
+      format->accur = ft_atoi(tmp2)
+  }
+  if (is_flag(*input))
+    input++;
+  if (*input == 'h')
+  {
+    format->flag = 'H';
+    input++
+  }
+  if (*input == 'l')
+  {
+    format->flag = 'L';
+    input++;
+  }
+  if (is_convertor(*input))
+  {
+    format->type = *input;
+    input++;
+  }
+  return (1);
 }
 
 int   handle_convertion(const char *input, va_list ap, int *count)
