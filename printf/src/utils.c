@@ -33,7 +33,7 @@ int ft_strlen(const char *str)
   return (i);
 }
 
-int     lennbr(unsigned int unb, int base)
+int     lennbr(unsigned long long int unb, int base)
 {
     int c;
 
@@ -48,9 +48,9 @@ int     lennbr(unsigned int unb, int base)
     return (c);
 }
 
-char *ft_itoa_base(int nb, int base)
+char *ft_lltoa_base(long long int nb, int base, int maj)
 {
-    unsigned int unb;
+    unsigned long long int unb;
     int signe;
     int len;
     char    *value;
@@ -74,8 +74,10 @@ char *ft_itoa_base(int nb, int base)
     {
         if (unb % base <= 9)
             value[len] = unb % base + '0';
-        else
+        else if (maj)
             value[len] = unb % base + 'A' - 10;
+				else
+						value[len] = unb % base + 'a' - 10;
         unb /= base;
         len--;
     }
@@ -84,7 +86,7 @@ char *ft_itoa_base(int nb, int base)
     return (value);
 }
 
-char *ft_uitoa_base(unsigned int unb, int base)
+char *ft_ulltoa_base(unsigned long long int unb, int base, int maj)
 {
     int len;
     char    *value;
@@ -99,8 +101,10 @@ char *ft_uitoa_base(unsigned int unb, int base)
     {
         if (unb % base <= 9)
             value[len] = unb % base + '0';
-        else
+        else if (maj)
             value[len] = unb % base + 'A' - 10;
+				else
+						value[len] = unb % base + 'a' - 10;
         unb /= base;
         len--;
     }
