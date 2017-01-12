@@ -8,7 +8,7 @@ int main(void)
 
   nb = 3;
   *ptr = nb;
-  ft_printf("%p\n", ptr);
+  ft_printf("%hhd\n", 42);
   //printf("%p\n", ptr);
 	return (0);
 }

@@ -92,28 +92,11 @@ int   is_convertor(char c)
   return (0);
 }
 
-int  fill_format(const char *input, t_format *format)
+int fill_precision(const char *input, t_format *format, int j, int i)
 {
-  char *tmp;
   char *tmp2;
-  int i;
-  int j;
 
-  i = 0;
-  j = 0;
-  tmp = malloc(sizeof(*input));
-  tmp2 = malloc(sizeof(*input));
-
-  while (is_attribut(input[j], format))
-    j++;
-  while (input[j] >= '0' && input[j] <= '9')
-  {
-    tmp[i] = input[j];
-    j++;
-    i++;
-  }
-  if (i > 0)
-    format->width = ft_atoi(tmp);
+  tmp2 = malloc(sizeof(ft_strlen(input)));
   if (input[j] == '.')
   {
     j++;
@@ -135,6 +118,29 @@ int  fill_format(const char *input, t_format *format)
   }
   while (strchr("hjlz", input[j]))
     j++;
+  return (j);
+}
+
+int  fill_format(const char *input, t_format *format)
+{
+  char *tmp;
+  int i;
+  int j;
+
+  i = 0;
+  j = 0;
+  tmp = malloc(sizeof(ft_strlen(input)));
+  while (is_attribut(input[j], format))
+    j++;
+  while (input[j] >= '0' && input[j] <= '9')
+  {
+    tmp[i] = input[j];
+    j++;
+    i++;
+  }
+  if (i > 0)
+    format->width = ft_atoi(tmp);
+  j = fill_precision(input, format, j, i);
   if (is_convertor(input[j]))
   {
     format->type = input[j];
@@ -179,6 +185,7 @@ int   handle_convertion(const char *input, va_list ap, int *count)
 
   format = init_format();
   pass = fill_format(input, format);
+  print_struct(format);
   update_format(format);
 
   to_print = choose_convertion(format, ap);
