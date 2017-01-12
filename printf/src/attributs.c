@@ -53,15 +53,31 @@ void attribute_moins(t_format *format, char *nbr, char *tmp)
 
 }
 
-void attribute_hash(t_format *format, char *tmp)
+void attribute_hash(t_format *format, char *tmp, char *nbr)
 {
+
+  int x = 0;
+  int h = 0;
+
   if (format->type == 'x' || format->type == 'X')
   {
     tmp[0] = '0';
     tmp[1] = format->type == 'x' ? 'x' : 'X';
+    h += 2;
   }
   if (format->type == 'o' || format->type == 'O')
+  {
     tmp[0] = '0';
+    h++;
+  }
+  while (nbr[x])
+  {
+    tmp[h] = nbr[x];
+    x++;
+    h++;
+  }
+  if (format->moins == 0 && format->zero == 0)
+    tmp[h] = '\0';
 
 }
 
@@ -123,7 +139,7 @@ char *ft_attribute(t_format *format, char *nbr)
   if (format->plus != 0 || format->space != 0)
     attribute_plus_space(format, nbr, tmp);
   if (format->hash != 0)
-    attribute_hash(format, tmp);
+    attribute_hash(format, tmp, nbr);
 
   if (format->moins != 0)
     attribute_moins(format, nbr, tmp);
