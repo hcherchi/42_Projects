@@ -74,7 +74,6 @@ void attribute_hash(t_format *format, char *tmp, char *nbr)
   }
   if (format->moins == 0 && format->zero == 0)
     tmp[h] = '\0';
-
 }
 
 void attribute_zero(t_format *format, char *nbr, char *tmp)
