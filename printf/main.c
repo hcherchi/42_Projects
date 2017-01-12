@@ -3,6 +3,6 @@
 
 int main(void)
 {
-  ft_printf("salut %c %++255.56hhs %d trop trop trop\n", 'c', "Hugo", 10);
+  printf("%d", 4328654329065);
 	return (0);
 }

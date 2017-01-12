@@ -148,6 +148,13 @@ void update_format(t_format *format)
     format->type = format->type - 32;
     format->l += 1;
   }
+  if (format->type == '%')
+  {
+    format->plus = 0;
+    format->zero = 0;
+    format->space = 0;
+    format->hash = 0;
+  }
   if (format->zero && (format->moins || ft_strchr("scp", format->type)))
     format->zero = 0;
   if (format->hash && !ft_strchr("oxX", format->type))

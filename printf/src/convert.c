@@ -15,7 +15,7 @@
 char *choose_convertion(t_format *format, va_list ap)
 {
   if (format->type == '%')
-    return (ft_strdup(""));
+    return (ft_strdup("%"));
   if (format->flag == '\0' || (format->flag != 'l' && (format->type == 's' || format->type == 'c')))
     return (convert(format, ap));
   else if (format->flag == 'l')
