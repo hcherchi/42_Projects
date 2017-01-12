@@ -163,7 +163,7 @@ void update_format(t_format *format)
     format->plus = 0;
   if (format->space && format->plus)
     format->space = 0;
-  if (!ft_strchr("scdoxXiup", format->type))
+  if (!ft_strchr("scdoxXiup%", format->type))
     format->type = '\0';
 }
 
@@ -175,12 +175,15 @@ int   handle_convertion(const char *input, va_list ap, int *count)
 
   format = init_format();
   pass = fill_format(input, format);
+  //ft_putendl("AVANT");
+  //print_struct(format);
   update_format(format);
+  //ft_putendl("\nAPRES");
   //print_struct(format);
 
   to_print = choose_convertion(format, ap);
   to_print = ft_attribute(format, to_print);
   ft_putstr(to_print);
-  *count += ft_strlen(to_print) + 1;
+  *count += ft_strlen(to_print);
   return (pass + 1);
 }

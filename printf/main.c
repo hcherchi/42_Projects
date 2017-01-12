@@ -3,6 +3,7 @@
 
 int main(void)
 {
-  printf("%d", 4328654329065);
+  printf("%%salut\n");
+  ft_printf("%%salut\n\n");
 	return (0);
 }
