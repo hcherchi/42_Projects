@@ -155,13 +155,18 @@ void update_format(t_format *format)
     format->space = 0;
     format->hash = 0;
   }
-  if (format->zero && (format->moins || ft_strchr("scp", format->type)))
+  if (format->type == 'p')
+  {
+    format->type = 'x';
+    format->hash = 1;
+  }
+  if (format->zero && (format->moins || format->accur > -1 && !ft_strchr("scp", format->type)))
     format->zero = 0;
   if (format->hash && !ft_strchr("oxX", format->type))
     format->hash = 0;
-  if (format->plus && ft_strchr("cps", format->type))
+  if (format->plus && !ft_strchr("di", format->type))
     format->plus = 0;
-  if (format->space && (format->plus || ft_strchr("cps", format->type)))
+  if (format->space && (format->plus || !ft_strchr("di", format->type)))
     format->space = 0;
   if (!ft_strchr("scdoxXiup%", format->type))
     format->type = '\0';
