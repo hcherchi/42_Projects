@@ -15,7 +15,7 @@
 
 void  print_struct(t_format *format)
 {
-  printf("\nConvertor: %c\nWidth: %d\nAccuracy: %d\nAttributs: \n", format->type, format->width, format->accur);
+  printf("\nConvertor: %c\nWidth: %d\nAccuracy: %d\nFlags: %c\nAttributs: \n", format->type, format->width, format->accur, format->flag);
   if (format->hash != 0)
   printf("Hash: %d\n", format->hash);
   if (format->zero != 0)
@@ -26,7 +26,6 @@ void  print_struct(t_format *format)
   printf("MOINS: %d\n", format->moins);
   if (format->space != 0)
   printf("SPACE: %d\n", format->space);
-  printf("Flag:\n%c", format->flag);
 }
 
 int   is_attribut(char c, t_format *format)
@@ -184,7 +183,7 @@ int   handle_convertion(const char *input, va_list ap, int *count)
   format = init_format();
   pass = fill_format(input, format);
   //ft_putendl("AVANT");
-  //print_struct(format);
+  print_struct(format);
   update_format(format);
   //ft_putendl("\nAPRES");
   //print_struct(format);
