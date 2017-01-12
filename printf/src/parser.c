@@ -43,6 +43,7 @@ t_format *init_format(void)
   format->hash = 0;
   format->zero = 0;
   format->plus = 0;
+  format->moins = 0;
   format->minus = 0;
   format->space = 0;
   format->flag = '\0';

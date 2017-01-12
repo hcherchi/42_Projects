@@ -29,6 +29,7 @@ typedef struct	s_format
   int   minus;
   int   plus;
   int   space;
+  int   moins;
 }               t_format;
 
 
@@ -50,5 +51,7 @@ void ft_putstr(const char *str);
 void ft_putendl(const char *str);
 void ft_putnbr(int n);
 char	*ft_strchr(const char *s, int c);
+
+char *ft_attribute(t_format *foramt, char *nbr);
 
 #endif
