@@ -161,9 +161,7 @@ void update_format(t_format *format)
     format->hash = 0;
   if (format->plus && ft_strchr("cps", format->type))
     format->plus = 0;
-  if (format->space && ft_strchr("cps", format->type))
-    format->space = 0;
-  if (format->space && format->plus)
+  if (format->space && (format->plus || ft_strchr("cps", format->type)))
     format->space = 0;
   if (!ft_strchr("scdoxXiup%", format->type))
     format->type = '\0';
