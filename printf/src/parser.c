@@ -163,6 +163,8 @@ void update_format(t_format *format)
     format->plus = 0;
   if (format->space && format->plus)
     format->space = 0;
+  if (!ft_strchr("scdoxXiup", format->type))
+    format->type = '\0';
 }
 
 int   handle_convertion(const char *input, va_list ap, int *count)
@@ -174,7 +176,7 @@ int   handle_convertion(const char *input, va_list ap, int *count)
   format = init_format();
   pass = fill_format(input, format);
   update_format(format);
-  print_struct(format);
+  //print_struct(format);
 
   to_print = choose_convertion(format, ap);
   to_print = ft_attribute(format, to_print);
