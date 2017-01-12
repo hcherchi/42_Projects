@@ -160,7 +160,7 @@ void update_format(t_format *format)
     format->type = 'x';
     format->hash = 1;
   }
-  if (format->zero && (format->moins || format->accur > -1 && !ft_strchr("scp", format->type)))
+  if (format->zero && (format->moins || format->accur > -1 && !ft_strchr("sc", format->type)))
     format->zero = 0;
   if (format->hash && !ft_strchr("oxX", format->type))
     format->hash = 0;
@@ -168,7 +168,7 @@ void update_format(t_format *format)
     format->plus = 0;
   if (format->space && (format->plus || !ft_strchr("di", format->type)))
     format->space = 0;
-  if (!ft_strchr("scdoxXiup%", format->type))
+  if (!ft_strchr("scdoxXiu%", format->type))
     format->type = '\0';
 }
 
