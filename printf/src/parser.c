@@ -91,7 +91,7 @@ t_format *init_format(void)
 
 int   is_convertor(char c)
 {
-  if (ft_strchr("sSpdDioOuUxXcC", c))
+  if (ft_strchr("sSpdDioOuUxXcC%", c))
     return (1);
   return (0);
 }
