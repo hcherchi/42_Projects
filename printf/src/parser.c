@@ -164,13 +164,6 @@ int   handle_convertion(const char *input, va_list ap, int *count)
   char *to_print;
   int pass;
 
-  if (*input == '%')
-  {
-    ft_putchar('%');
-    *count += 2;
-    return (2);
-  }
-
   format = init_format();
   pass = fill_format(input, format);
 
