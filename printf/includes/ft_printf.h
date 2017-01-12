@@ -39,14 +39,24 @@ int   is_convertor(char c);
 t_format *init_format();
 int  fill_format(const char *input, t_format *format);
 
+char *choose_convertion(t_format *format, va_list ap);
+char *convert(t_format *format, va_list ap);
+char *h_convert(t_format *format, va_list ap);
+char *hh_convert(t_format *format, va_list ap);
+char *l_convert(t_format *format, va_list ap);
+char *ll_convert(t_format *format, va_list ap);
+char *j_convert(t_format *format, va_list ap);
+char *z_convert(t_format *format, va_list ap);
+
 int   ft_isdigit(int c);
 int   ft_atoi(const char *str);
-char *ft_itoa_base(int nb, int base);
-char *ft_uitoa_base(unsigned int unb, int base);
+char *ft_sstoa_base(ssize_t nb, int base, int maj);
+char *ft_stoa_base(size_t nb, int base, int maj);
 char *ft_ctoa(unsigned char uc);
+char *ft_strdup(char *str);
 
 int ft_strlen(const char *str);
-int     lennbr(unsigned int unb, int base);
+int     lennbr(size_t unb, int base);
 
 void ft_putchar(const char c);
 void ft_putstr(const char *str);
