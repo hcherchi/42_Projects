@@ -92,7 +92,7 @@ char *no_attribute(t_format *format, char *nbr, char *tmp)
   int zero_nbr = format->width - ft_strlen(nbr);
   int i = 0;
   int x = 0;
-printf("aoeuaoeu\n");
+  
   if (tmp[0] == '+')
     i++;
 
