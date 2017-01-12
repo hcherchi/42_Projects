@@ -18,7 +18,8 @@ void attribute_plus_space(t_format *format, char *nbr, char *tmp)
     x++;
     h++;
   }
-  tmp[h] = '\0';
+  if (format->hash == 0 && format->moins == 0 && format->zero == 0)
+    tmp[h] = '\0';
 }
 
 void attribute_moins(t_format *format, char *nbr, char *tmp)
