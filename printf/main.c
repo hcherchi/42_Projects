@@ -3,11 +3,6 @@
 
 int main(void)
 {
-<<<<<<< HEAD
-  //  ft_printf("salut %c %s %d trop trop trop\n", 'c', "Hugo", 10);
-    return (0);
-=======
-    ft_printf("salut %c %s %d trop trop trop\n", 'c', "Hugo", 10);
+  ft_printf("salut %c %s %d trop trop trop\n", 'c', "Hugo", 10);
 	return (0);
->>>>>>> parser
 }
