@@ -40,56 +40,33 @@ void  print_struct(t_format *format)
 int   is_attribut(char c, t_format *format)
 {
   if (c == '#')
-  {
     format->hash += 1;
-    return (1);
-  }
   else if (c == ' ')
-  {
     format->space += 1;
-    return (1);
-  }
   else if (c == '0')
-  {
     format->zero += 1;
-    return (1);
-  }
   else if (c == '-')
-  {
     format->moins += 1;
-    return (1);
-  }
   else if (c == '+')
-  {
     format->plus += 1;
-    return (1);
-  }
-  return (0);
+  else
+    return (0);
+  return (1);
 }
 
 int   is_flag(char c, t_format *format)
 {
   if (c == 'h')
-  {
     format->h += 1;
-    return (1);
-  }
   else if (c == 'l')
-  {
     format->l += 1;
-    return (1);
-  }
   else if (c == 'j')
-  {
     format->j += 1;
-    return (1);
-  }
   else if (c == 'z')
-  {
     format->z += 1;
-    return (1);
-  }
-  return (0);
+  else
+    return (0);
+  return (1);
 }
 
 t_format *init_format(void)
