@@ -18,6 +18,8 @@ char *choose_convertion(t_format *format, va_list ap)
     return (ft_strdup("%"));
   if (!format->type)
     return (ft_strdup(""));
+  if (format->type == 'p')
+    return (ft_stoa_base((size_t)va_arg(ap, void *), 16, 0));
   if (format->flag == '\0' || (format->flag != 'l' && (format->type == 's' || format->type == 'c')))
     return (convert(format, ap));
   else if (format->flag == 'l')

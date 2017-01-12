@@ -59,15 +59,11 @@ void attribute_hash(t_format *format, char *tmp, char *nbr)
   int x = 0;
   int h = 0;
 
-  if (format->type == 'x' || format->type == 'X')
+  tmp[0] = '0';
+  h++;
+  if (format->type == 'x' || format->type == 'X' || format->type == 'p')
   {
-    tmp[0] = '0';
-    tmp[1] = format->type == 'x' ? 'x' : 'X';
-    h += 2;
-  }
-  if (format->type == 'o' || format->type == 'O')
-  {
-    tmp[0] = '0';
+    tmp[1] = ft_strchr("xp", format->type) ? 'x' : 'X';
     h++;
   }
   while (nbr[x])

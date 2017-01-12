@@ -3,7 +3,12 @@
 
 int main(void)
 {
-  // printf("%ljld", 42);
-  ft_printf("% ++ld",42);
+  char *ptr;
+  char nb;
+
+  nb = 3;
+  *ptr = nb;
+  ft_printf("%p\n", ptr);
+  //printf("%p\n", ptr);
 	return (0);
 }

@@ -158,19 +158,16 @@ void update_format(t_format *format)
     format->hash = 0;
   }
   if (format->type == 'p')
-  {
-    format->type = 'x';
     format->hash = 1;
-  }
   if (format->zero && (format->moins || (format->accur > -1 && !ft_strchr("sc", format->type))))
     format->zero = 0;
-  if (format->hash && !ft_strchr("oxX", format->type))
+  if (format->hash && !ft_strchr("oxXp", format->type))
     format->hash = 0;
   if (format->plus && !ft_strchr("di", format->type))
     format->plus = 0;
   if (format->space && (format->plus || !ft_strchr("di", format->type)))
     format->space = 0;
-  if (!ft_strchr("scdoxXiu%", format->type))
+  if (!ft_strchr("scdoxXipu%", format->type))
     format->type = '\0';
 }
 
@@ -182,11 +179,7 @@ int   handle_convertion(const char *input, va_list ap, int *count)
 
   format = init_format();
   pass = fill_format(input, format);
-  //ft_putendl("AVANT");
-  print_struct(format);
   update_format(format);
-  //ft_putendl("\nAPRES");
-  //print_struct(format);
 
   to_print = choose_convertion(format, ap);
   to_print = ft_attribute(format, to_print);
