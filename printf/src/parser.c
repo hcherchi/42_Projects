@@ -54,16 +54,24 @@ int   is_attribut(char c, t_format *format)
   return (1);
 }
 
-int   is_flag(char c, t_format *format)
+int   is_flag(char c, char d, t_format *format)
 {
   if (c == 'h')
-    format->h += 1;
+  {
+    format->flag = 'h';
+    if (d == 'h')
+      format->flag = 'H';
+  }
   else if (c == 'l')
-    format->l += 1;
+  {
+    format->flag = 'l';
+    if (d == 'l')
+      format->flag = 'L';
+  }
   else if (c == 'j')
-    format->j += 1;
+    format->flag = 'j';
   else if (c == 'z')
-    format->z += 1;
+    format->flag = 'z';
   else
     return (0);
   return (1);
@@ -79,10 +87,7 @@ t_format *init_format(void)
   format->plus = 0;
   format->moins = 0;
   format->space = 0;
-  format->j = 0;
-  format->h = 0;
-  format->z = 0;
-  format->l = 0;
+  format->flag = '\0';
   format->type = '\0';
   format->accur = -1;
   format->width = -1;
@@ -131,7 +136,13 @@ int  fill_format(const char *input, t_format *format)
     if (i > 0)
       format->accur = ft_atoi(tmp2);
   }
-  while (is_flag(input[j], format))
+  if (is_flag(input[j], input[j + 1] format))
+  {
+    j++;
+    if (format->flag == 'H' || format->flag == 'L')
+      j++;
+  }
+  while (strchr("hjlz", input[j]))
     j++;
   if (is_convertor(input[j]))
   {

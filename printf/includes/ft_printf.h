@@ -23,10 +23,6 @@ typedef struct	s_format
   char type;
   int width;
   char  flag;
-  int   h;
-  int   l;
-  int   j;
-  int   z;
   int   hash;
   int   zero;
   int   plus;
