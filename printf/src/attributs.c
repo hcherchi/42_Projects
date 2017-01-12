@@ -121,7 +121,6 @@ char *ft_attribute(t_format *format, char *nbr)
     return(no_attribute(format, nbr, tmp));
   if (format->plus != 0 || format->space != 0)
     attribute_plus_space(format, nbr, tmp);
-
   if (format->hash != 0)
     attribute_hash(format, tmp);
 

@@ -183,7 +183,7 @@ int   handle_convertion(const char *input, va_list ap, int *count)
 
   to_print = choose_convertion(format, ap);
   to_print = ft_attribute(format, to_print);
-  //ft_putstr(to_print);
+  ft_putstr(to_print);
   *count += ft_strlen(to_print);
   return (pass + 1);
 }
