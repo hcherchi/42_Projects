@@ -33,7 +33,7 @@ int ft_strlen(const char *str)
   return (i);
 }
 
-int     lennbr(unsigned long long int unb, int base)
+int     lennbr(size_t unb, int base)
 {
     int c;
 
@@ -48,9 +48,9 @@ int     lennbr(unsigned long long int unb, int base)
     return (c);
 }
 
-char *ft_lltoa_base(long long int nb, int base, int maj)
+char *ft_sstoa_base(ssize_t nb, int base, int maj)
 {
-    unsigned long long int unb;
+    size_t unb;
     int signe;
     int len;
     char    *value;
@@ -86,7 +86,7 @@ char *ft_lltoa_base(long long int nb, int base, int maj)
     return (value);
 }
 
-char *ft_ulltoa_base(unsigned long long int unb, int base, int maj)
+char *ft_stoa_base(size_t unb, int base, int maj)
 {
     int len;
     char    *value;
@@ -109,6 +109,22 @@ char *ft_ulltoa_base(unsigned long long int unb, int base, int maj)
         len--;
     }
     return (value);
+}
+
+char *ft_strdup(char *str)
+{
+	char *newstr;
+	int i;
+
+	i = 0;
+	newstr = malloc(sizeof(char) * (ft_strlen(str) + 1));
+	while (str[i])
+	{
+		newstr[i] = str[i];
+		i++;
+	}
+	newstr[i] = '\0';
+	return (newstr);
 }
 
 char *ft_ctoa(unsigned char uc)

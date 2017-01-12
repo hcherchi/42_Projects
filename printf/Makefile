@@ -14,7 +14,7 @@ INC_DIR = includes
 SRC_DIR = src
 OBJ_DIR = obj
 
-SRCS = src/ft_printf.c src/print.c src/parser.c src/utils.c
+SRCS = src/ft_printf.c src/print.c src/parser.c src/utils.c src/convert.c
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
