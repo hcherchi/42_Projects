@@ -24,16 +24,22 @@ void attribute_plus_space(t_format *format, char *nbr, char *tmp)
 
 void attribute_moins(t_format *format, char *nbr, char *tmp)
 {
-  int space_nbr = format->width - ft_strlen(nbr);
+  int zero_nbr = format->width - ft_strlen(nbr);
   int i = 0;
   int x = 0;
 
-  if (tmp[0] == '+')
+  if ((format->type == 'x' || format->type == 'X') && format->hash != 0)
+    zero_nbr -= 2;
+  if ((format->type == 'o' || format->type == 'O') && format->hash != 0)
+    zero_nbr -= 1;
+
+  if (tmp[i] == '+')
     i++;
-  if (tmp[0] == '0')
+  if (tmp[i] == '0')
     i++;
-  if (tmp[1] == 'x' || tmp[1] == 'X' )
+  if (tmp[i] == 'x' || tmp[i] == 'X')
     i++;
+
 
   while (x <= ft_strlen(nbr))
   {
@@ -41,9 +47,9 @@ void attribute_moins(t_format *format, char *nbr, char *tmp)
     i++;
     x++;
   }
-  i--;
+i--;
   x = 0;
-  while (x < space_nbr)
+  while (x < zero_nbr)
   {
     tmp[i] = ' ';
     i++;
@@ -55,15 +61,30 @@ void attribute_moins(t_format *format, char *nbr, char *tmp)
 
 void attribute_hash(t_format *format, char *tmp, char *nbr)
 {
-
   int x = 0;
   int h = 0;
+  int zero_nbr = format->width - ft_strlen(nbr);
 
-  tmp[0] = '0';
-  h++;
-  if (format->type == 'x' || format->type == 'X' || format->type == 'p')
+  if (format->type == 'x' || format->type == 'X')
+    zero_nbr -= 2;
+  if (format->type == 'o' || format->type == 'O')
+    zero_nbr -= 1;
+
+  while (h < zero_nbr && format->moins == 0)
   {
-    tmp[1] = ft_strchr("xp", format->type) ? 'x' : 'X';
+    tmp[h] = ' ';
+    h++;
+  }
+
+  if ((format->type == 'x' || format->type == 'X' || format->type == 'p') && nbr[0] !='0' )
+  {
+    tmp[h] = '0';
+    tmp[h + 1] = ft_strchr("xp", format->type) ? 'x' : 'X';
+    h+=2;
+  }
+  if (format->type == 'o' || format->type == 'O')
+  {
+    tmp[h] = '0';
     h++;
   }
   while (nbr[x])
@@ -82,9 +103,27 @@ void attribute_zero(t_format *format, char *nbr, char *tmp)
   int i = 0;
   int x = 0;
 
+  if (format->type == 'x' || format->type == 'X' || format->type == 'p')
+  {
+    tmp[i] = '0';
+    tmp[i + 1] = ft_strchr("xp", format->type) ? 'x' : 'X';
+    i+=2;
+  }
+  if (format->type == 'o' || format->type == 'O')
+  {
+    tmp[i] = '0';
+    i++;
+  }
+
   if (tmp[0] == '+')
     i++;
-
+  if (nbr[0] == '-')
+  {
+    tmp[0]= '-';
+    zero_nbr++;
+    i++;
+    x++;
+  }
   while (i < zero_nbr)
   {
     tmp[i] = '0';
@@ -93,7 +132,7 @@ void attribute_zero(t_format *format, char *nbr, char *tmp)
 
   while (x <= ft_strlen(nbr))
   {
-    tmp[i] =  nbr[x];
+    tmp[i] = nbr[x];
     i++;
     x++;
   }
@@ -135,10 +174,8 @@ char *ft_attribute(t_format *format, char *nbr)
     attribute_plus_space(format, nbr, tmp);
   if (format->hash != 0)
     attribute_hash(format, tmp, nbr);
-
   if (format->moins != 0)
     attribute_moins(format, nbr, tmp);
-
   if (format->zero != 0)
     attribute_zero(format, nbr, tmp);
 

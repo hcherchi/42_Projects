@@ -65,4 +65,5 @@ char	*ft_strchr(const char *s, int c);
 
 char *ft_attribute(t_format *foramt, char *nbr);
 
+char	*ft_strsub(char const *s, unsigned int start, size_t len);
 #endif
