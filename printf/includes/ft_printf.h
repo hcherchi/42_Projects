@@ -22,7 +22,11 @@ typedef struct	s_format
   int accur;
   char type;
   int width;
-  char flag;
+  char  flag;
+  int   h;
+  int   l;
+  int   j;
+  int   z;
   int   hash;
   int   zero;
   int   plus;

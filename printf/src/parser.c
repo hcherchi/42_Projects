@@ -15,7 +15,7 @@
 
 void  print_struct(t_format *format)
 {
-  printf("flag: %c\nConvertor: %c\nWidth: %d\nAccuracy: %d\nAttributs: \n", format->flag, format->type, format->width, format->accur);
+  printf("\nConvertor: %c\nWidth: %d\nAccuracy: %d\nAttributs: \n", format->type, format->width, format->accur);
   if (format->hash != 0)
   printf("%d\n", format->hash);
   if (format->zero != 0)
@@ -26,6 +26,15 @@ void  print_struct(t_format *format)
   printf("%d\n", format->moins);
   if (format->space != 0)
   printf("%d\n", format->space);
+  printf("Flag:\n");
+  if (format->j != 0)
+  printf("J: %d\n", format->j);
+  if (format->l != 0)
+  printf("L: %d\n", format->l);
+  if (format->h != 0)
+    printf("H: %d\n", format->h);
+  if (format->z != 0)
+  printf("Z: %d\n", format->z);
 }
 
 int   is_attribut(char c, t_format *format)
@@ -62,22 +71,22 @@ int   is_flag(char c, t_format *format)
 {
   if (c == 'h')
   {
-    format->flag = 'h';
+    format->h += 1;
     return (1);
   }
   else if (c == 'l')
   {
-    format->flag = 'l';
+    format->l += 1;
     return (1);
   }
   else if (c == 'j')
   {
-    format->flag = 'j';
+    format->j += 1;
     return (1);
   }
   else if (c == 'z')
   {
-    format->flag = 'z';
+    format->z += 1;
     return (1);
   }
   return (0);
@@ -93,7 +102,10 @@ t_format *init_format(void)
   format->plus = 0;
   format->moins = 0;
   format->space = 0;
-  format->flag = '\0';
+  format->j = 0;
+  format->h = 0;
+  format->z = 0;
+  format->l = 0;
   format->type = '\0';
   format->accur = -1;
   format->width = -1;
@@ -142,18 +154,8 @@ int  fill_format(const char *input, t_format *format)
     if (i > 0)
       format->accur = ft_atoi(tmp2);
   }
-  if (is_flag(input[j], format))
+  while (is_flag(input[j], format))
     j++;
-  if (input[j] == 'h')
-  {
-    format->flag = 'H';
-    j++;
-  }
-  if (input[j] == 'l')
-  {
-    format->flag = 'L';
-    j++;
-  }
   if (is_convertor(input[j]))
   {
     format->type = input[j];
