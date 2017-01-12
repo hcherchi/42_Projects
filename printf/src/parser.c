@@ -17,43 +17,42 @@ void  print_struct(t_format *format)
 {
   printf("flag: %c\nConvertor: %c\nWidth: %d\nAccuracy: %d\nAttributs: \n", format->flag, format->type, format->width, format->accur);
   if (format->hash != 0)
-    ft_putendl("#");
+  printf("%d\n", format->hash);
   if (format->zero != 0)
-    ft_putendl("0");
+  printf("%d\n", format->zero);
   if (format->plus != 0)
-    ft_putendl("+");
-  if (format->minus != 0)
-    ft_putendl("-");
+    printf("%d\n", format->plus);
+  if (format->moins != 0)
+  printf("%d\n", format->moins);
   if (format->space != 0)
-    ft_putendl("sp");
+  printf("%d\n", format->space);
 }
 
 int   is_attribut(char c, t_format *format)
 {
-  ft_putstr("attribute");
   if (c == '#')
   {
-    format->attribut = '#';
+    format->hash += 1;
     return (1);
   }
   else if (c == ' ')
   {
-    format->attribut = ' ';
+    format->space += 1;
     return (1);
   }
   else if (c == '0')
   {
-    format->attribut = '0';
+    format->zero += 1;
     return (1);
   }
   else if (c == '-')
   {
-    format->attribut = '-';
+    format->moins += 1;
     return (1);
   }
   else if (c == '+')
   {
-    format->attribut = '+';
+    format->plus += 1;
     return (1);
   }
   return (0);
@@ -93,11 +92,9 @@ t_format *init_format(void)
   format->zero = 0;
   format->plus = 0;
   format->moins = 0;
-  format->minus = 0;
   format->space = 0;
   format->flag = '\0';
   format->type = '\0';
-  format->attribut = '\0';
   format->accur = -1;
   format->width = -1;
   return (format);
@@ -122,9 +119,7 @@ int  fill_format(const char *input, t_format *format)
   tmp = malloc(sizeof(*input));
   tmp2 = malloc(sizeof(*input));
 
-  if (is_attribut(input[j], format))
-    j++;
-  while (ft_strchr("# -+", input[j]))
+  while (is_attribut(input[j], format))
     j++;
   while (input[j] >= '0' && input[j] <= '9')
   {
@@ -133,7 +128,7 @@ int  fill_format(const char *input, t_format *format)
     i++;
   }
   if (i > 0)
-    format->minus = ft_atoi(tmp);
+    format->width = ft_atoi(tmp);
   if (input[j] == '.')
   {
     j++;
