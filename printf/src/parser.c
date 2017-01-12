@@ -159,8 +159,10 @@ void update_format(t_format *format)
     format->zero = 0;
   if (format->hash && !ft_strchr("oxX", format->type))
     format->hash = 0;
-  if (format->plus && ft_strchr("cs", format->type))
+  if (format->plus && ft_strchr("cps", format->type))
     format->plus = 0;
+  if (format->space && ft_strchr("cps", format->type))
+    format->space = 0;
   if (format->space && format->plus)
     format->space = 0;
   if (!ft_strchr("scdoxXiup%", format->type))

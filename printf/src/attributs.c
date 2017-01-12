@@ -92,7 +92,7 @@ char *no_attribute(t_format *format, char *nbr, char *tmp)
   int zero_nbr = format->width - ft_strlen(nbr);
   int i = 0;
   int x = 0;
-  
+
   if (tmp[0] == '+')
     i++;
 
@@ -114,7 +114,7 @@ char *no_attribute(t_format *format, char *nbr, char *tmp)
 
 char *ft_attribute(t_format *format, char *nbr)
 {
-  char *tmp =  malloc(sizeof(char) * format->width + 2);
+  char *tmp = malloc(sizeof(char) * format->width + 2);
 
   if (format->plus == 0 && format->space == 0 && format->hash == 0 && format->moins == 0 && format->zero == 0)
     return(no_attribute(format, nbr, tmp));
