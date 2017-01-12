@@ -38,6 +38,8 @@ int   is_convertor(char c);
 t_format *init_format();
 int  fill_format(const char *input, t_format *format);
 
+int   ft_isdigit(int c);
+int   ft_atoi(const char *str);
 char *ft_itoa_base(int nb, int base);
 char *ft_uitoa_base(unsigned int unb, int base);
 char *ft_ctoa(unsigned char uc);

@@ -116,3 +116,39 @@ char *ft_ctoa(unsigned char uc)
   res[1] = '\0';
   return (res);
 }
+
+
+int	ft_atoi(const char *str)
+{
+	int				number;
+	int				neg;
+
+	number = 0;
+	while (*str == ' ' || *str == '\t' || *str == '\n' || *str == '\v'
+	|| *str == '\f' || *str == '\r')
+		str++;
+	if (!str)
+		return (0);
+	neg = 0;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			neg = 1;
+		str++;
+	}
+	while (*str >= 48 && *str <= 57)
+	{
+		number = (number * 10) + ((int)*str - 48);
+		str++;
+	}
+	if (neg == 1)
+		number = -number;
+	return (number);
+}
+
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
