@@ -1,14 +1,14 @@
 #include "ft_printf.h"
 #include <stdio.h>
 
-void attribute_plus_space(char *nbr, char *tmp)
+void attribute_plus_space(t_format *format, char *nbr, char *tmp)
 {
   int x = 0;
   int h = 0;
 
   if (nbr[h] != '-')
   {
-    tmp[h] = '+';
+    tmp[h] = format->plus != 0 ? '+' : ' ';
     h++;
   }
 
@@ -18,6 +18,7 @@ void attribute_plus_space(char *nbr, char *tmp)
     x++;
     h++;
   }
+  tmp[h] = '\0';
 }
 
 void attribute_moins(t_format *format, char *nbr, char *tmp)
@@ -114,20 +115,20 @@ char *no_attribute(t_format *format, char *nbr, char *tmp)
 
 char *ft_attribute(t_format *format, char *nbr)
 {
-  char *tmp = malloc(sizeof(char) * format->width + 2);
+  char *tmp =  malloc(sizeof(char) * (format->width + ft_strlen(nbr) + 4));
 
   if (format->plus == 0 && format->space == 0 && format->hash == 0 && format->moins == 0 && format->zero == 0)
     return(no_attribute(format, nbr, tmp));
-  if (format->plus == 1 || format->space == 1)
-    attribute_plus_space(nbr, tmp);
+  if (format->plus != 0 || format->space != 0)
+    attribute_plus_space(format, nbr, tmp);
 
-  if (format->hash == 1)
+  if (format->hash != 0)
     attribute_hash(format, tmp);
 
-  if (format->moins == 1)
+  if (format->moins != 0)
     attribute_moins(format, nbr, tmp);
 
-  if (format->zero == 1)
+  if (format->zero != 0)
     attribute_zero(format, nbr, tmp);
 
   return(tmp);

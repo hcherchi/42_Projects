@@ -57,7 +57,7 @@ char *ft_sstoa_base(ssize_t nb, int base, int maj);
 char *ft_stoa_base(size_t nb, int base, int maj);
 char *ft_ctoa(unsigned char uc);
 char *ft_strdup(char *str);
-
+void  print_struct(t_format *format);
 int ft_strlen(const char *str);
 int     lennbr(size_t unb, int base);
 

@@ -3,7 +3,6 @@
 
 int main(void)
 {
-  printf("%%salut\n");
-  ft_printf("%%salut\n\n");
+  ft_printf("% ++d",42);
 	return (0);
 }
