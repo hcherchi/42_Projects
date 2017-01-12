@@ -21,12 +21,10 @@ typedef struct	s_format
 {
   int accur;
   char type;
-  char attribut;
   int width;
   char flag;
   int   hash;
   int   zero;
-  int   minus;
   int   plus;
   int   space;
   int   moins;
