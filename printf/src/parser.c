@@ -17,15 +17,15 @@ void  print_struct(t_format *format)
 {
   printf("\nConvertor: %c\nWidth: %d\nAccuracy: %d\nAttributs: \n", format->type, format->width, format->accur);
   if (format->hash != 0)
-  printf("%d\n", format->hash);
+  printf("Hash: %d\n", format->hash);
   if (format->zero != 0)
-  printf("%d\n", format->zero);
+  printf("ZERO: %d\n", format->zero);
   if (format->plus != 0)
-    printf("%d\n", format->plus);
+    printf("PLUS: %d\n", format->plus);
   if (format->moins != 0)
-  printf("%d\n", format->moins);
+  printf("MOINS: %d\n", format->moins);
   if (format->space != 0)
-  printf("%d\n", format->space);
+  printf("SPACE: %d\n", format->space);
   printf("Flag:\n");
   if (format->j != 0)
   printf("J: %d\n", format->j);
