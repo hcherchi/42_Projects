@@ -40,6 +40,7 @@ int   handle_convertion(const char *input, va_list ap, int *count);
 int   is_convertor(char c);
 t_format *init_format();
 int  fill_format(const char *input, t_format *format);
+void update_format(t_format *format);
 
 char *choose_convertion(t_format *format, va_list ap);
 char *convert(t_format *format, va_list ap);

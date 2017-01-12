@@ -164,6 +164,23 @@ int  fill_format(const char *input, t_format *format)
   return (j);
 }
 
+void update_format(t_format *format)
+{
+  if (ft_strchr("DOU", format->type))
+  {
+    format->type = format->type - 32;
+    format->l += 1;
+  }
+  if (format->zero && (format->moins || ft_strchr("scp", format->type)))
+    format->zero = 0;
+  if (format->hash && !ft_strchr("oxX", format->type))
+    format->hash = 0;
+  if (format->plus && ft_strchr("cs", format->type))
+    format->plus = 0;
+  if (format->space && format->plus)
+    format->space = 0;
+}
+
 int   handle_convertion(const char *input, va_list ap, int *count)
 {
   t_format *format;
@@ -172,6 +189,7 @@ int   handle_convertion(const char *input, va_list ap, int *count)
 
   format = init_format();
   pass = fill_format(input, format);
+  update_format(format);
   print_struct(format);
 
   to_print = choose_convertion(format, ap);
