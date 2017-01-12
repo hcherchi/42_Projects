@@ -26,15 +26,7 @@ void  print_struct(t_format *format)
   printf("MOINS: %d\n", format->moins);
   if (format->space != 0)
   printf("SPACE: %d\n", format->space);
-  printf("Flag:\n");
-  if (format->j != 0)
-  printf("J: %d\n", format->j);
-  if (format->l != 0)
-  printf("L: %d\n", format->l);
-  if (format->h != 0)
-    printf("H: %d\n", format->h);
-  if (format->z != 0)
-  printf("Z: %d\n", format->z);
+  printf("Flag:\n%c", format->flag);
 }
 
 int   is_attribut(char c, t_format *format)
@@ -136,7 +128,7 @@ int  fill_format(const char *input, t_format *format)
     if (i > 0)
       format->accur = ft_atoi(tmp2);
   }
-  if (is_flag(input[j], input[j + 1] format))
+  if (is_flag(input[j], input[j + 1], format))
   {
     j++;
     if (format->flag == 'H' || format->flag == 'L')
@@ -157,7 +149,7 @@ void update_format(t_format *format)
   if (ft_strchr("DOU", format->type))
   {
     format->type = format->type - 32;
-    format->l += 1;
+    // format->l += 1;
   }
   if (format->type == '%')
   {
