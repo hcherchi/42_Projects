@@ -56,6 +56,7 @@ t_format *init_format(void)
   format->type = '\0';
   format->accur = -1;
   format->width = -1;
+  format->nullchar = 0;
   return (format);
 }
 
@@ -83,7 +84,7 @@ int fill_precision(const char *input, t_format *format, int count)
     if (format->flag == 'H' || format->flag == 'L')
       count++;
   }
-  while (strchr("hjlz", input[count]))
+  while (ft_strchr("hjlz", input[count]))
     count++;
   return (count);
 }
@@ -101,7 +102,7 @@ int  fill_format(const char *input, t_format *format)
     format->width = ft_atoi(ft_strsub(input, count, ft_iscount(input, count)));
   if (format->width > 0)
     count += ft_strlen(ft_itoa(format->width));
-  count = fill_precision(input, format, count) ;
+  count = fill_precision(input, format, count);
   if (is_convertor(input[count]))
   {
     format->type = input[count];
@@ -113,24 +114,11 @@ int  fill_format(const char *input, t_format *format)
 void update_format(t_format *format)
 {
   if (ft_strchr("DOU", format->type))
-  {
     format->type = format->type + 32;
-  }
-  if (format->type == '%')
-  {
-    format->plus = 0;
-    format->zero = 0;
-    format->space = 0;
-    format->hash = 0;
-  }
   if (format->type == 'p')
     format->hash = 1;
-  if (format->zero && (format->moins || (format->accur > -1 && !ft_strchr("sc", format->type))))
+  if (format->zero && (format->moins || (format->accur > -1 && !ft_strchr("sc%", format->type))))
     format->zero = 0;
-  if (format->hash && !ft_strchr("oxXp", format->type))
-    format->hash = 0;
-  if (format->plus && !ft_strchr("di", format->type))
-    format->plus = 0;
   if (format->space && (format->plus || !ft_strchr("di", format->type)))
     format->space = 0;
   if (!ft_strchr("scdoxXipu%", format->type))

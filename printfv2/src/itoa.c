@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-int     get_len(size_t unb, int base, t_format *format)
+int     get_len(size_t unb, int base, int prefix, t_format *format)
 {
     int c;
     int len;
@@ -14,7 +14,7 @@ int     get_len(size_t unb, int base, t_format *format)
         c++;
     }
     if (format->zero && format->width > format->accur && format->width > c)
-      len = format->width;
+      len = format->width - prefix;
     else if (format->accur > c)
       len = format->accur;
     else
@@ -47,7 +47,7 @@ char *itoa_10(ssize_t nb, t_format *format)
         return (ft_strdup(""));
     sign = get_sign(nb, format);
     unb = (nb < 0) ? -1 * nb : nb;
-    len = get_len(unb, 10, format) + ((sign) ? 1 : 0);
+    len = get_len(unb, 10, 0, format) + ((sign) ? 1 : 0);
     value = (char *)malloc(sizeof(*value) * len + 1);
     value[len] = '\0';
     len--;
@@ -70,9 +70,9 @@ int  get_prefix(size_t unb, t_format *format)
   int prefix;
 
   prefix = 0;
-  if (format->hash && unb != 0)
+  if (format->hash && (unb != 0 || format->type == 'p'))
   {
-    if (format->type == 'x' || format->type == 'x')
+    if (format->type == 'x' || format->type == 'X' || format->type == 'p')
       prefix = 2;
     else if (format->type == 'o')
       prefix = 1;
@@ -87,9 +87,9 @@ char *uitoa_base(size_t unb, int base, int maj, t_format *format)
     int     prefix;
 
     if (unb == 0 && format->accur == 0)
-      return (ft_strdup(""));
+      return ((format->type == 'p') ? ft_strdup("0x") : ft_strdup(""));
     prefix = get_prefix(unb, format);
-    len = get_len(unb, base, format) + prefix;
+    len = get_len(unb, base, prefix, format) + prefix;
 		value = (char *)malloc(sizeof(*value) * len + 1);
     value[len] = '\0';
     len--;

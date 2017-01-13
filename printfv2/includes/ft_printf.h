@@ -28,6 +28,7 @@ typedef struct	s_format
   int   plus;
   int   space;
   int   moins;
+  int   nullchar;
 }               t_format;
 
 
@@ -63,7 +64,7 @@ char *ft_strcat(char *src, char *dest);
 char *ft_strnew(char c, int n);
 
 int  get_prefix(size_t unb, t_format *format);
-int     get_len(size_t unb, int base, t_format *format);
+int     get_len(size_t unb, int base, int prefix, t_format *format);
 char   get_sign(ssize_t nb, t_format *format);
 char *itoa_10(ssize_t nb, t_format *format);
 char *uitoa_base(size_t nb, int base, int maj, t_format *format);
