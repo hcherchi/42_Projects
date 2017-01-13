@@ -22,9 +22,7 @@ int ft_printf(const char *input, ...)
   while (*input)
   {
     if (*input == '%')
-    {
       input += handle_convertion(input + 1, ap, &count);
-    }
     else
     {
       ft_putchar(*input);
