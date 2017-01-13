@@ -108,7 +108,8 @@ int  fill_format(const char *input, t_format *format)
   while (is_attribut(input[j], format))
     j++;
   format->width = ft_atoi(ft_strsub(input, j, ft_iscount(input, j)));
-  j += ft_strlen(ft_itoa(format->width));
+  if (format->width)
+    j += ft_strlen(ft_itoa(format->width));
   j = fill_precision(input, format, j) ;
   if (is_convertor(input[j]))
   {
