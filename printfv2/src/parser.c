@@ -111,7 +111,10 @@ int  fill_format(const char *input, t_format *format)
   count = 0;
   while (is_attribut(input[count], format))
     count++;
-  format->width = ft_atoi(ft_strsub(input, count, ft_iscount(input, count)));
+  if (!ft_atoi(ft_strsub(input, count, ft_iscount(input, count))) && input[count] != '0')
+    format->width = -1;
+  else
+    format->width = ft_atoi(ft_strsub(input, count, ft_iscount(input, count)));
   if (format->width > 0)
     count += ft_strlen(ft_itoa(format->width));
   count = fill_precision(input, format, count) ;
