@@ -82,41 +82,41 @@ int   is_convertor(char c)
   return (0);
 }
 
-int fill_precision(const char *input, t_format *format, int j)
+int fill_precision(const char *input, t_format *format, int count)
 {
-  if (input[j] == '.')
+  if (input[count] == '.')
   {
-    format->accur = ft_atoi(ft_strsub(input, j+ 1, ft_iscount(input, j + 1)));
-    j += ft_strlen(ft_itoa(format->accur)) + 1;
+    format->accur = ft_atoi(ft_strsub(input, count+ 1, ft_iscount(input, count + 1)));
+    count += format->accur ? ft_strlen(ft_itoa(format->accur)) + 1 : 1;
   }
-  if (is_flag(input[j], input[j + 1], format))
+  if (is_flag(input[count], input[count + 1], format))
   {
-    j++;
+    count++;
     if (format->flag == 'H' || format->flag == 'L')
-      j++;
+      count++;
   }
-  while (strchr("hjlz", input[j]))
-    j++;
-  return (j);
+  while (strchr("hjlz", input[count]))
+    count++;
+  return (count);
 }
 
 int  fill_format(const char *input, t_format *format)
 {
-  int j;
+  int count;
 
-  j = 0;
-  while (is_attribut(input[j], format))
-    j++;
-  format->width = ft_atoi(ft_strsub(input, j, ft_iscount(input, j)));
+  count = 0;
+  while (is_attribut(input[count], format))
+    count++;
+  format->width = ft_atoi(ft_strsub(input, count, ft_iscount(input, count)));
   if (format->width)
-    j += ft_strlen(ft_itoa(format->width));
-  j = fill_precision(input, format, j) ;
-  if (is_convertor(input[j]))
+    count += ft_strlen(ft_itoa(format->width));
+  count = fill_precision(input, format, count) ;
+  if (is_convertor(input[count]))
   {
-    format->type = input[j];
-    j++;
+    format->type = input[count];
+    count++;
   }
-  return (j);
+  return (count);
 }
 
 void update_format(t_format *format)
