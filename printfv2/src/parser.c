@@ -84,10 +84,14 @@ int   is_convertor(char c)
 
 int fill_precision(const char *input, t_format *format, int count)
 {
+  size_t nblen;
+
+  nblen = 0;
   if (input[count] == '.')
   {
-    format->accur = ft_atoi(ft_strsub(input, count+ 1, ft_iscount(input, count + 1)));
-    count += format->accur ? ft_strlen(ft_itoa(format->accur)) + 1 : 1;
+    nblen = ft_iscount(input, count + 1);
+    format->accur = ft_atoi(ft_strsub(input, count+ 1, nblen));
+    count += nblen + 1;
   }
   if (is_flag(input[count], input[count + 1], format))
   {
@@ -155,7 +159,7 @@ int   handle_convertion(const char *input, va_list ap, int *count)
 
   format = init_format();
   pass = fill_format(input, format);
-  //print_struct(format);
+  print_struct(format);
   update_format(format);
 
   to_print = choose_convertion(format, ap);
