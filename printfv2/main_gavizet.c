@@ -21,8 +21,8 @@
 int		main(void)
 {
 
-	ft_printf("LE FAUX \n%+425.54lld", 42);
-	printf("\nLE VRAI \n%+425.54lld\n", 42);
+	ft_printf("%d", 42);
+	printf("@moulitest: %.d", 42);
 
 // #ifdef TEST_F
 //
