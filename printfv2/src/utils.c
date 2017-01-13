@@ -97,11 +97,8 @@ char	*ft_strsub(char const *s, int start, size_t len)
 	return (res);
 }
 
-size_t	ft_iscount(const char *input, int j)
+size_t	ft_iscount(const char *input, int count)
 {
-	int	count;
-
-	count = j;
 	while (input[count] >= '0' && input[count] <= '9')
 		count++;
 	return (count);
