@@ -133,14 +133,16 @@ int  fill_format(const char *input, t_format *format)
   tmp = malloc(sizeof(ft_strlen(input)));
   while (is_attribut(input[j], format))
     j++;
-  while (input[j] >= '0' && input[j] <= '9')
-  {
-    tmp[i] = input[j];
-    j++;
-    i++;
-  }
-  if (i > 0)
-    format->width = ft_atoi(tmp);
+  format->width = ft_atoi(ft_strsub(input, j, ft_iscount(&input)));
+  j += ft_itoa(format->width);
+  // while (input[j] >= '0' && input[j] <= '9')
+  // {
+  //   tmp[i] = input[j];
+  //   j++;
+  //   i++;
+  // }
+  // if (i > 0)
+  //   format->width = ft_atoi(tmp);
   j = fill_precision(input, format, j, i);
   if (is_convertor(input[j]))
   {
