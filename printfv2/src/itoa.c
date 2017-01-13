@@ -7,13 +7,12 @@ int     get_len(size_t unb, int base, t_format *format)
 
     c = 0;
     if (unb == 0)
-        return (1);
+        c = 1;
     while (unb != 0)
     {
         unb /= base;
         c++;
     }
-
     if (format->zero && format->width > format->accur && format->width > c)
       len = format->width;
     else if (format->accur > c)
