@@ -60,6 +60,14 @@ char *ft_ctoa(unsigned char uc)
   return (res);
 }
 
+char	ft_toupper(char c)
+{
+	if (c >= 'a' && c <= 'z')
+		return (c - 32);
+	else
+		return (c);
+}
+
 int	ft_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')

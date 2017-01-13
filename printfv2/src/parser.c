@@ -31,15 +31,15 @@ void  print_struct(t_format *format)
 int   is_attribut(char c, t_format *format)
 {
   if (c == '#')
-    format->hash += 1;
+    format->hash = 1;
   else if (c == ' ')
-    format->space += 1;
+    format->space = 1;
   else if (c == '0')
-    format->zero += 1;
+    format->zero = 1;
   else if (c == '-')
-    format->moins += 1;
+    format->moins = 1;
   else if (c == '+')
-    format->plus += 1;
+    format->plus = 1;
   else
     return (0);
   return (1);
@@ -47,22 +47,12 @@ int   is_attribut(char c, t_format *format)
 
 int   is_flag(char c, char d, t_format *format)
 {
-  if (c == 'h')
+  if (ft_strchr("hljz", c))
   {
-    format->flag = 'h';
-    if (d == 'h')
-      format->flag = 'H';
+    format->flag = c;
+    if (ft_strchr("hl", d) && d == format->flag)
+      format->flag = ft_toupper(format->flag);
   }
-  else if (c == 'l')
-  {
-    format->flag = 'l';
-    if (d == 'l')
-      format->flag = 'L';
-  }
-  else if (c == 'j')
-    format->flag = 'j';
-  else if (c == 'z')
-    format->flag = 'z';
   else
     return (0);
   return (1);

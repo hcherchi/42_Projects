@@ -49,6 +49,7 @@ char *j_convert(t_format *format, va_list ap);
 char *z_convert(t_format *format, va_list ap);
 char		*ft_itoa(int nbr);
 
+char	ft_toupper(char c);
 int   ft_isdigit(int c);
 int   ft_atoi(const char *str);
 char *ft_sstoa_base(ssize_t nb, int base, int maj, t_format *format);
