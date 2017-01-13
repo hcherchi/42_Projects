@@ -1,5 +1,4 @@
 #include "ft_printf.h"
-#include <stdio.h>
 
 char *add_prefix(t_format *format, char *buf)
 {
@@ -25,15 +24,13 @@ char *add_prefix(t_format *format, char *buf)
 char *ft_attribute(t_format *format, char *buf)
 {
   char *prefixedbuf;
-  char filler;
   char *finalbuf;
   int   tofill;
 
   prefixedbuf = add_prefix(format, buf);
   tofill = format->width - ft_strlen(prefixedbuf);
-  filler = (format->zero) ? '0' : ' ';
   if (tofill <= 0)
     return (prefixedbuf);
-  finalbuf = (format->moins) ? ft_strcat(prefixedbuf, ft_strnew(filler, tofill)) : ft_strcat(ft_strnew(filler, tofill), prefixedbuf);
+  finalbuf = (format->moins) ? ft_strcat(prefixedbuf, ft_strnew(' ', tofill)) : ft_strcat(ft_strnew(' ', tofill), prefixedbuf);
   return (finalbuf);
 }

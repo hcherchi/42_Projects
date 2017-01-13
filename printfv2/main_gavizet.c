@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#define TEST_X
+#define
 
 
 #include <stdio.h>
@@ -585,8 +585,8 @@ int		main(void)
 	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 51 => \033[0m|%x|", 0));
 	printf("{%d}\n", printf("\033[1;32mTest 52 => \033[0m|%5x|", 0));
 	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 52 => \033[0m|%5x|", 0));
-	printf("{%d}\n", printf("\033[1;32mTest 53 => \033[0m|%#05x|", 42));
-	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 53 => \033[0m|%#05x|",42));
+	printf("{%d}\n", printf("\033[1;32mTest 53 => \033[0m|%#05x|", 4));
+	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 53 => \033[0m|%#05x|",4));
 	printf("{%d}\n", printf("\033[1;32mTest 54 => \033[0m|%#05x|", 0));
 	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 54 => \033[0m|%#05x|", 0));
 	printf("{%d}\n", printf("\033[1;32mTest 55 => \033[0m|%#5x|", 0));
@@ -941,6 +941,8 @@ int		main(void)
 	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 24 => \033[0m|%+.5d|", -42));
 	printf("{%d}\n", printf("\033[1;32mTest 25 => \033[0m|%d|", 0));
 	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 25 => \033[0m|%d|", 0));
+	printf("{%d}\n", printf("\033[1;32mTest 25 => \033[0m|%05d|", -42));
+	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 25 => \033[0m|%05d|", -42));
 	printf("{%d}\n", printf("\033[1;32mTest 26 => \033[0m|%+d|", +42));
 	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 26 => \033[0m|%+d|", +42));
 	printf("{%d}\n", printf("\033[1;32mTest 27 => \033[0m|%.5hhd|", (char)42));

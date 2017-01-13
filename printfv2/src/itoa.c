@@ -1,8 +1,9 @@
 #include "ft_printf.h"
 
-int     lennbr(size_t unb, int base)
+int     get_len(size_t unb, int base, t_format *format)
 {
     int c;
+    int len;
 
     c = 0;
     if (unb == 0)
@@ -12,37 +13,51 @@ int     lennbr(size_t unb, int base)
         unb /= base;
         c++;
     }
-    return (c);
+
+    if (format->zero && format->width > format->accur && format->width > c)
+      len = format->width;
+    else if (format->accur > c)
+      len = format->accur;
+    else
+      len = c;
+    return (len);
 }
 
-char *ft_sstoa_base(ssize_t nb, int base, int maj, t_format *format)
+size_t   get_sign(ssize_t nb, int *sign, int base)
+{
+  size_t unb;
+
+  *sign = 0;
+  if (nb >= 0)
+      unb = (size_t)nb;
+  else
+  {
+      if (base == 10)
+          *sign = 1;
+      unb = -1 * (size_t)nb;
+  }
+  return (unb);
+}
+
+char *ft_itoa_base(ssize_t nb, int base, int maj, t_format *format)
 {
     size_t unb;
-    int signe;
+    int sign;
     int len;
     char    *value;
 
-		if (nb == 0 && format->accur == 0)
-			return (ft_strdup(""));
-    signe = 0;
-    if (nb >= 0)
-        unb = nb;
-    else
+		if (nb == 0)
     {
-        if (base == 10)
-            signe = 1;
-        unb = -1 * nb;
+      if (format->accur == 0)
+        return (ft_strdup(""));
+      format->hash = 0;
     }
-    len = lennbr(unb, base);
-		len = (len < format->accur) ? format->accur + signe : len + signe;
+
+    unb = get_sign(nb, &sign, base);
+    len = get_len(unb, base, format) + sign;
     value = (char *)malloc(sizeof(*value) * len + 1);
     value[len] = '\0';
     len--;
-    if (unb == 0)
-		{
-			format->hash = 0;
-        value[len] = '0';
-		}
     while (unb != 0)
     {
         if (unb % base <= 9)
@@ -56,29 +71,27 @@ char *ft_sstoa_base(ssize_t nb, int base, int maj, t_format *format)
     }
 		while (len >= 0)
 		{
-			value[len] = (signe == 1 && len == 0) ? '-' : '0';
+			value[len] = (sign == 1 && len == 0) ? '-' : '0';
 			len--;
 		}
     return (value);
 }
 
-char *ft_stoa_base(size_t unb, int base, int maj, t_format *format)
+char *ft_uitoa_base(size_t unb, int base, int maj, t_format *format)
 {
     int len;
     char    *value;
 
-		if (unb == 0 && format->accur == 0)
-			return (ft_strdup(""));
-    len = lennbr(unb, base);
-		len = (len < format->accur) ? format->accur : len;
+    if (unb == 0)
+    {
+      if (format->accur == 0)
+        return (ft_strdup(""));
+      format->hash = 0;
+    }
+    len = get_len(unb, base, format);
 		value = (char *)malloc(sizeof(*value) * len + 1);
     value[len] = '\0';
     len--;
-    if (unb == 0)
-		{
-			format->hash = 0;
-        value[len] = '0';
-		}
     while (unb != 0)
     {
         if (unb % base <= 9)
