@@ -128,7 +128,6 @@ void update_format(t_format *format)
   if (ft_strchr("DOU", format->type))
   {
     format->type = format->type + 32;
-    // format->l += 1;
   }
   if (format->type == '%')
   {
@@ -149,22 +148,4 @@ void update_format(t_format *format)
     format->space = 0;
   if (!ft_strchr("scdoxXipu%", format->type))
     format->type = '\0';
-}
-
-int   handle_convertion(const char *input, va_list ap, int *count)
-{
-  t_format *format;
-  char *to_print;
-  int pass;
-
-  format = init_format();
-  pass = fill_format(input, format);
-  update_format(format);
-  //print_struct(format);
-
-  to_print = choose_convertion(format, ap);
-  to_print = ft_attribute(format, to_print);
-  ft_putstr(to_print);
-  *count += ft_strlen(to_print);
-  return (pass + 1);
 }

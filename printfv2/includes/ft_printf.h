@@ -33,6 +33,8 @@ typedef struct	s_format
 
 int   ft_printf(const char *restrict format, ...);
 int   handle_convertion(const char *input, va_list ap, int *count);
+char *ajust_buffer(t_format *format, char *buf);
+
 int   is_convertor(char c);
 t_format *init_format();
 int  fill_format(const char *input, t_format *format);
@@ -52,18 +54,19 @@ char		*ft_itoa(int nbr);
 char	ft_toupper(char c);
 int   ft_isdigit(int c);
 int   ft_atoi(const char *str);
-char *ft_itoa_base(ssize_t nb, int base, int maj, t_format *format);
-char *ft_uitoa_base(size_t nb, int base, int maj, t_format *format);
-char *ft_ctoa(unsigned char uc);
 char *ft_strdup(char *str);
 char	*ft_strsub(char const *s, int start, size_t len);
 size_t	ft_iscount(const char *input, int j);
 void  print_struct(t_format *format);
 int ft_strlen(const char *str);
-int     get_len(size_t unb, int base, t_format *format);
 char *ft_strcat(char *src, char *dest);
 char *ft_strnew(char c, int n);
-int		ft_max(int a, int b, int c);
+
+int  get_prefix(size_t unb, t_format *format);
+int     get_len(size_t unb, int base, t_format *format);
+char   get_sign(ssize_t nb, t_format *format);
+char *itoa_10(ssize_t nb, t_format *format);
+char *uitoa_base(size_t nb, int base, int maj, t_format *format);
 
 void ft_putchar(const char c);
 void ft_putstr(const char *str);

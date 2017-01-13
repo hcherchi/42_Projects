@@ -22,72 +22,74 @@ int     get_len(size_t unb, int base, t_format *format)
     return (len);
 }
 
-size_t   get_sign(ssize_t nb, int *sign, int base)
+char   get_sign(ssize_t nb, t_format *format)
 {
-  size_t unb;
-
-  *sign = 0;
   if (nb >= 0)
-      unb = (size_t)nb;
-  else
   {
-      if (base == 10)
-          *sign = 1;
-      unb = -1 * (size_t)nb;
+    if (format->space)
+      return (' ');
+    else if (format->plus)
+      return ('+');
   }
-  return (unb);
+  else
+      return ('-');
+  return ('\0');
 }
 
-char *ft_itoa_base(ssize_t nb, int base, int maj, t_format *format)
+char *itoa_10(ssize_t nb, t_format *format)
 {
     size_t unb;
-    int sign;
+    char sign;
     int len;
     char    *value;
 
-		if (nb == 0)
-    {
-      if (format->accur == 0)
+		if (nb == 0 && format->accur == 0)
         return (ft_strdup(""));
-      format->hash = 0;
-    }
-
-    unb = get_sign(nb, &sign, base);
-    len = get_len(unb, base, format) + sign;
+    sign = get_sign(nb, format);
+    unb = (nb < 0) ? -1 * nb : nb;
+    len = get_len(unb, 10, format) + (sign) ? 1 : 0;
     value = (char *)malloc(sizeof(*value) * len + 1);
     value[len] = '\0';
     len--;
     while (unb != 0)
     {
-        if (unb % base <= 9)
-            value[len] = unb % base + '0';
-        else if (maj)
-            value[len] = unb % base + 'A' - 10;
-				else
-						value[len] = unb % base + 'a' - 10;
-        unb /= base;
+        value[len] = unb % 10 + '0';
+        unb /= 10;
         len--;
     }
 		while (len >= 0)
 		{
-			value[len] = (sign == 1 && len == 0) ? '-' : '0';
+			value[len] = (sign != 0 && len == 0) ? sign : '0';
 			len--;
 		}
     return (value);
 }
 
-char *ft_uitoa_base(size_t unb, int base, int maj, t_format *format)
+int  get_prefix(size_t unb, t_format *format)
+{
+  int prefix;
+
+  prefix = 0;
+  if (format->hash && unb != 0)
+  {
+    if (format->type == 'x' || format->type == 'x')
+      prefix = 2;
+    else if (format->type == 'o')
+      prefix = 1;
+  }
+  return (prefix);
+}
+
+char *uitoa_base(size_t unb, int base, int maj, t_format *format)
 {
     int len;
     char    *value;
+    int     prefix;
 
-    if (unb == 0)
-    {
-      if (format->accur == 0)
-        return (ft_strdup(""));
-      format->hash = 0;
-    }
-    len = get_len(unb, base, format);
+    if (unb == 0 && format->accur == 0)
+      return (ft_strdup(""));
+    prefix = get_prefix(unb, format);
+    len = get_len(unb, base, format) + prefix;
 		value = (char *)malloc(sizeof(*value) * len + 1);
     value[len] = '\0';
     len--;
@@ -95,16 +97,20 @@ char *ft_uitoa_base(size_t unb, int base, int maj, t_format *format)
     {
         if (unb % base <= 9)
             value[len] = unb % base + '0';
-        else if (maj)
-            value[len] = unb % base + 'A' - 10;
-				else
-						value[len] = unb % base + 'a' - 10;
+        else
+            value[len] = (maj) ? unb % base + 'A' - 10 : unb % base + 'a' - 10;
         unb /= base;
         len--;
     }
 		while (len >= 0)
 		{
-			value[len] = '0';
+      if (len == 1 && prefix == 2)
+      {
+			   value[len] = (maj) ? 'X' : 'x';
+         prefix--;
+      }
+      else if (len == 0 && prefix == 1)
+        value[len] = '0';
 			len--;
 		}
     return (value);
