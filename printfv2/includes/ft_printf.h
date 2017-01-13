@@ -47,6 +47,7 @@ char *l_convert(t_format *format, va_list ap);
 char *ll_convert(t_format *format, va_list ap);
 char *j_convert(t_format *format, va_list ap);
 char *z_convert(t_format *format, va_list ap);
+char		*ft_itoa(int nbr);
 
 int   ft_isdigit(int c);
 int   ft_atoi(const char *str);
@@ -54,8 +55,8 @@ char *ft_sstoa_base(ssize_t nb, int base, int maj, t_format *format);
 char *ft_stoa_base(size_t nb, int base, int maj, t_format *format);
 char *ft_ctoa(unsigned char uc);
 char *ft_strdup(char *str);
-char	*ft_strsub(char const *s, unsigned int start, size_t len);
-size_t	ft_iscount(const char **input);
+char	*ft_strsub(char const *s, int start, size_t len);
+size_t	ft_iscount(const char *input, int j);
 void  print_struct(t_format *format);
 int ft_strlen(const char *str);
 int     lennbr(size_t unb, int base);

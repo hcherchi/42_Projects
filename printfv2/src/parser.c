@@ -92,24 +92,12 @@ int   is_convertor(char c)
   return (0);
 }
 
-int fill_precision(const char *input, t_format *format, int j, int i)
+int fill_precision(const char *input, t_format *format, int j)
 {
-  char *tmp2;
-
-  tmp2 = malloc(sizeof(ft_strlen(input)));
   if (input[j] == '.')
   {
-    j++;
-    i = 0;
-    while (input[j] >= '0' && input[j] <= '9')
-    {
-      tmp2[i] = input[j];
-      j++;
-      i++;
-    }
-    if (i == 0)
-      tmp2[i] = '0';
-    format->accur = ft_atoi(tmp2);
+    format->accur = ft_atoi(ft_strsub(input, j+ 1, ft_iscount(input, j + 1)));
+    j += ft_strlen(ft_itoa(format->accur));
   }
   if (is_flag(input[j], input[j + 1], format))
   {
@@ -124,26 +112,14 @@ int fill_precision(const char *input, t_format *format, int j, int i)
 
 int  fill_format(const char *input, t_format *format)
 {
-  char *tmp;
-  int i;
   int j;
 
-  i = 0;
   j = 0;
-  tmp = malloc(sizeof(ft_strlen(input)));
   while (is_attribut(input[j], format))
     j++;
-  format->width = ft_atoi(ft_strsub(input, j, ft_iscount(&input)));
-  j += ft_itoa(format->width);
-  // while (input[j] >= '0' && input[j] <= '9')
-  // {
-  //   tmp[i] = input[j];
-  //   j++;
-  //   i++;
-  // }
-  // if (i > 0)
-  //   format->width = ft_atoi(tmp);
-  j = fill_precision(input, format, j, i);
+  format->width = ft_atoi(ft_strsub(input, j, ft_iscount(input, j)));
+  j += ft_strlen(ft_itoa(format->width));
+  j = fill_precision(input, format, j);
   if (is_convertor(input[j]))
   {
     format->type = input[j];
@@ -188,6 +164,7 @@ int   handle_convertion(const char *input, va_list ap, int *count)
 
   format = init_format();
   pass = fill_format(input, format);
+  print_struct(format);
   update_format(format);
 
   to_print = choose_convertion(format, ap);

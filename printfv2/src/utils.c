@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -65,25 +66,8 @@ int	ft_isdigit(int c)
 		return (1);
 	return (0);
 }
-<<<<<<< HEAD
 
-char *ft_strnew(char c, int n)
-{
-	char *str;
-	int i;
-
-	i = 0;
-	str = malloc(sizeof(char) * (n + 1));
-	while (i < n)
-	{
-		str[i] = c;
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
-}
-
-char	*ft_strsub(char const *s, unsigned int start, size_t len)
+char	*ft_strsub(char const *s, int start, size_t len)
 {
 	char	*res;
 	size_t	i;
@@ -105,39 +89,12 @@ char	*ft_strsub(char const *s, unsigned int start, size_t len)
 	return (res);
 }
 
-size_t	ft_iscount(const char **input)
+size_t	ft_iscount(const char *input, int j)
 {
 	int	count;
 
-	count = 0;
-	while (**input >= '0' && **input <= '9')
-	{
-		**input++;
+	count = j;
+	while (input[count] >= '0' && input[count] <= '9')
 		count++;
-	}
 	return (count);
-}
-
-char *ft_strcat(char *dest, char *src)
-{
-	int i;
-	int j;
-	char *newstr;
-
-	j = 0;
-	i = 0;
-	newstr = malloc(sizeof(char) * (ft_strlen(src) + ft_strlen(dest)) + 1);
-	while (dest[i])
-	{
-		newstr[i] = dest[i];
-		i++;
-	}
-	while (src[j])
-	{
-		newstr[i] = src[j];
-		j++;
-		i++;
-	}
-	newstr[i] = '\0';
-	return (newstr);
 }
