@@ -50,29 +50,12 @@ char *ft_strdup(char *str)
 	return (newstr);
 }
 
-char *ft_ctoa(unsigned char uc)
-{
-  char *res;
-
-  res = malloc(sizeof(char *) + 1);
-  res[0] = (char)uc;
-  res[1] = '\0';
-  return (res);
-}
-
 char	ft_toupper(char c)
 {
 	if (c >= 'a' && c <= 'z')
 		return (c - 32);
 	else
 		return (c);
-}
-
-int	ft_isdigit(int c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
 }
 
 char	*ft_strsub(char const *s, int start, size_t len)
@@ -95,11 +78,4 @@ char	*ft_strsub(char const *s, int start, size_t len)
 	}
 	res[i] = '\0';
 	return (res);
-}
-
-size_t	ft_iscount(const char *input, int count)
-{
-	while (input[count] >= '0' && input[count] <= '9')
-		count++;
-	return (count);
 }

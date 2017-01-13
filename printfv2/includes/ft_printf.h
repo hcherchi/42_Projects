@@ -36,11 +36,15 @@ int   ft_printf(const char *restrict format, ...);
 int   handle_convertion(const char *input, va_list ap, int *count);
 char *ajust_buffer(t_format *format, char *buf);
 
-int   is_convertor(char c);
-t_format *init_format();
+int   fill_attribut(const char *input, int count, t_format *format);
+int   fill_type(const char *input, int count, t_format *format);
+int   fill_flag(const char *input, int count, t_format *format);
+int   fill_width(const char *input, int count, t_format *format);
+int   fill_accur(const char *input, int count, t_format *format);
+
+t_format *init_format(void);
 int  fill_format(const char *input, t_format *format);
 void update_format(t_format *format);
-char *add_prefix(t_format *format, char *buf);
 
 char *choose_convertion(t_format *format, va_list ap);
 char *convert(t_format *format, va_list ap);
@@ -50,18 +54,16 @@ char *l_convert(t_format *format, va_list ap);
 char *ll_convert(t_format *format, va_list ap);
 char *j_convert(t_format *format, va_list ap);
 char *z_convert(t_format *format, va_list ap);
-char		*ft_itoa(int nbr);
 
 char	ft_toupper(char c);
-int   ft_isdigit(int c);
 int   ft_atoi(const char *str);
 char *ft_strdup(char *str);
 char	*ft_strsub(char const *s, int start, size_t len);
-size_t	ft_iscount(const char *input, int j);
-void  print_struct(t_format *format);
 int ft_strlen(const char *str);
 char *ft_strcat(char *src, char *dest);
 char *ft_strnew(char c, int n);
+int   ft_isdigit(char c);
+char	*ft_strchr(const char *s, int c);
 
 int  get_prefix(size_t unb, t_format *format);
 int     get_len(size_t unb, int base, int prefix, t_format *format);
@@ -73,8 +75,6 @@ void ft_putchar(const char c);
 void ft_putstr(const char *str);
 void ft_putendl(const char *str);
 void ft_putnbr(int n);
-char	*ft_strchr(const char *s, int c);
-
-char *ft_attribute(t_format *format, char *nbr);
+void  print_struct(t_format *format);
 
 #endif

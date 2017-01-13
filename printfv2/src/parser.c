@@ -12,35 +12,6 @@
 
 #include "ft_printf.h"
 
-int   is_attribut(char c, t_format *format)
-{
-  if (c == '#')
-    format->hash = 1;
-  else if (c == ' ')
-    format->space = 1;
-  else if (c == '0')
-    format->zero = 1;
-  else if (c == '-')
-    format->moins = 1;
-  else if (c == '+')
-    format->plus = 1;
-  else
-    return (0);
-  return (1);
-}
-
-int   is_flag(char c, char d, t_format *format)
-{
-  if (ft_strchr("hljz", c))
-  {
-    format->flag = c;
-    if (ft_strchr("hl", d) && d == format->flag)
-      format->flag = ft_toupper(format->flag);
-  }
-  else
-    return (0);
-  return (1);
-}
 
 t_format *init_format(void)
 {
@@ -60,54 +31,16 @@ t_format *init_format(void)
   return (format);
 }
 
-int   is_convertor(char c)
-{
-  if (ft_strchr("sSpdDioOuUxXcC%", c))
-    return (1);
-  return (0);
-}
-
-int fill_precision(const char *input, t_format *format, int count)
-{
-  size_t nblen;
-
-  nblen = 0;
-  if (input[count] == '.')
-  {
-    nblen = ft_iscount(input, count + 1) - count - 1;
-    format->accur = ft_atoi(ft_strsub(input, count+ 1, nblen));
-    count += nblen + 1;
-  }
-  if (is_flag(input[count], input[count + 1], format))
-  {
-    count++;
-    if (format->flag == 'H' || format->flag == 'L')
-      count++;
-  }
-  while (ft_strchr("hjlz", input[count]))
-    count++;
-  return (count);
-}
-
 int  fill_format(const char *input, t_format *format)
 {
   int count;
 
   count = 0;
-  while (is_attribut(input[count], format))
-    count++;
-  if (!ft_atoi(ft_strsub(input, count, ft_iscount(input, count))) && input[count] != '0')
-    format->width = -1;
-  else
-    format->width = ft_atoi(ft_strsub(input, count, ft_iscount(input, count)));
-  if (format->width > 0)
-    count += ft_strlen(ft_itoa(format->width));
-  count = fill_precision(input, format, count);
-  if (is_convertor(input[count]))
-  {
-    format->type = input[count];
-    count++;
-  }
+  count += fill_attribut(input, count, format);
+  count += fill_width(input, count, format);
+  count += fill_accur(input, count, format);
+  count += fill_flag(input, count, format);
+  count += fill_type(input, count, format);
   return (count);
 }
 
@@ -119,8 +52,6 @@ void update_format(t_format *format)
     format->hash = 1;
   if (format->zero && (format->moins || (format->accur > -1 && !ft_strchr("sc%", format->type))))
     format->zero = 0;
-  if (format->space && (format->plus || !ft_strchr("di", format->type)))
+  if (format->space && format->plus)
     format->space = 0;
-  if (!ft_strchr("scdoxXipu%", format->type))
-    format->type = '\0';
 }
