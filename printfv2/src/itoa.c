@@ -65,7 +65,7 @@ char *itoa_10(ssize_t nb, t_format *format)
     return (value);
 }
 
-int  get_prefix(t_format *format)
+int  get_prefix(size_t unb, t_format *format)
 {
   int prefix;
 
@@ -74,7 +74,7 @@ int  get_prefix(t_format *format)
   {
     if (((format->type == 'x' || format->type == 'X') && unb != 0) || format->type == 'p')
       prefix = 2;
-    else if (format->type == 'o')
+    else if (format->type == 'o' && unb != 0)
       prefix = 1;
   }
   return (prefix);
