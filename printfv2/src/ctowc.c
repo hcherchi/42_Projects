@@ -1,80 +1,98 @@
-#include "libft.h"
+#include "ft_printf.h"
 
-unsigned char	ctowc1(unsigned int letter)
+int		count_significant_bit(int value)
 {
-	unsigned int	mask;
-	unsigned char	octet;
+	int bit;
 
-	mask = 0;
-	octet = letter;
-	return (octet);
+	bit = 31;
+	while (bit >= 0)
+	{
+		if (value & (1 << bit))
+			return (bit + 1);
+		bit--;
+	}
+	return (0);
 }
 
-unsigned char	ctowc2(unsigned int letter)
+int	ctowc1(wchar_t letter, char *res)
 {
 	unsigned int	mask;
-	unsigned char	octet;
-	unsigned char	b_octet;
 
+  res = malloc(sizeof(char) * 2);
+	mask = 0;
+	*res = letter;
+  ft_putnbr(*res);
+  *(res + 1) = '\0';
+	return (1);
+}
+
+int	ctowc2(wchar_t letter, char *res)
+{
+	unsigned int	mask;
+	char	b_octet;
+
+  res = malloc(sizeof(char) * 3);
 	mask = 49280;
 	b_octet = ((letter >> 6) << 27) >> 27;
-	octet = (mask >> 8) | b_octet;
-	write(1, &octet, 1);
+	*res = (mask >> 8) | b_octet;
+  ft_putnbr(*res);
 	b_octet = (letter << 26) >> 26;
-	octet = ((mask << 24) >> 24) | b_octet;
-	return (octet);
+	*(res + 1) = ((mask << 24) >> 24) | b_octet;
+  *(res + 2) = '\0';
+	return (2);
 }
 
-unsigned char	ctowc3(unsigned int letter)
+int	ctowc3(wchar_t letter, char *res)
 {
 	unsigned int	mask;
-	unsigned char	octet;
-	unsigned char	b_octet;
+	char	b_octet;
 
+  res = malloc(sizeof(char) * 4);
 	mask = 14712960;
 	b_octet = ((letter >> 12) << 28) >> 28;
-	octet = (mask >> 16) | b_octet;
-	write(1, &octet, 1);
+	*res = (mask >> 16) | b_octet;
+  ft_putnbr(*res);
 	b_octet = ((letter >> 6) << 26) >> 26;
-	octet = ((mask << 16) >> 24) | b_octet;
-	write(1, &octet, 1);
+	*(res + 1) = ((mask << 16) >> 24) | b_octet;
 	b_octet = (letter << 26) >> 26;
-	octet = ((mask << 24) >> 24) | b_octet;
-	return (octet);
+	*(res + 2) = ((mask << 24) >> 24) | b_octet;
+  *(res + 3) = '\0';
+  return (3);
 }
 
-unsigned char	ctowc4(unsigned int letter)
+int ctowc4(wchar_t letter, char *res)
 {
 	unsigned int	mask;
-	unsigned char	octet;
-	unsigned char	b_octet;
+	char	b_octet;
 
+  res = malloc(sizeof(char) * 5);
 	mask = 4034953344;
 	b_octet = ((letter >> 18) << 29) >> 29;
-	octet = (mask >> 24) | b_octet;
-	write(1, &octet, 1);
+	*res = (mask >> 24) | b_octet;
+  ft_putnbr(*res);
 	b_octet = ((letter >> 12) << 26) >> 26;
-	octet = ((mask << 8) >> 24) | b_octet;
-	write(1, &octet, 1);
+	*(res + 1) = ((mask << 8) >> 24) | b_octet;
 	b_octet = ((letter >> 6) << 26) >> 26;
-	octet = ((mask << 16) >> 24) | b_octet;
-	write(1, &octet, 1);
+	*(res + 2) = ((mask << 16) >> 24) | b_octet;
 	b_octet = (letter << 26) >> 26;
-	octet = ((mask << 24) >> 24) | b_octet;
-	return (octet);
+	*(res + 3) = ((mask << 24) >> 24) | b_octet;
+  *(res + 4) = '\0';
+	return (4);
 }
 
-unsigned char	ctowc(wchar_t letter)
+int ctowc(wchar_t letter, char *res)
 {
 	int nb_bit;
+  int count;
 
 	nb_bit = count_significant_bit(letter);
 	if (nb_bit <= 7)
-		return (print_wchar1(letter));
+		count = ctowc1(letter, res);
 	else if (nb_bit <= 11)
-		return (print_wchar2(letter));
+		count = ctowc2(letter, res);
 	else if (nb_bit <= 16)
-		return (print_wchar3(letter));
+		count = ctowc3(letter, res);
 	else
-		return (print_wchar4(letter));
+		count = ctowc4(letter, res);
+  return (count);
 }

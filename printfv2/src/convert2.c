@@ -4,6 +4,7 @@ char *l_convert(t_format *format, va_list ap)
 {
   char *converted_arg;
 
+  converted_arg = NULL;
   if (format->type == 'd' || format->type == 'i')
     converted_arg = itoa_10(va_arg(ap, long int), format);
   else if (format->type == 'o')

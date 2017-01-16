@@ -46,7 +46,7 @@ int  fill_format(const char *input, t_format *format)
 
 void update_format(t_format *format)
 {
-  if (ft_strchr("DOU", format->type))
+  if (ft_strchr("DOUCS", format->type))
   {
     format->type = format->type + 32;
     if (format->flag == 'l')

@@ -65,6 +65,9 @@ char *ft_strnew(char c, int n);
 int   ft_isdigit(char c);
 char	*ft_strchr(const char *s, int c);
 
+
+int ctowc(wchar_t letter, char *res);
+
 int  get_prefix(size_t unb, t_format *format);
 void put_prefix(char *value, int len, int prefix, int maj);
 int     get_len(size_t unb, int base, int prefix, t_format *format);
@@ -75,6 +78,7 @@ char *uitoa_base(size_t nb, int base, int maj, t_format *format);
 void ft_putchar(const char c);
 void ft_putstr(const char *str);
 void ft_putendl(const char *str);
+void ft_putnbr(int nb);
 void  print_struct(t_format *format);
 
 #endif
