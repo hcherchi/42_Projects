@@ -53,18 +53,18 @@ char *ajust_buffer(t_format *format, char *buf)
 int   handle_convertion(const char *input, va_list ap, int *count)
 {
   t_format *format;
-  char *converted;
+  char *convert;
   char *to_print;
   int pass;
 
   format = init_format();
   pass = fill_format(input, format);
   update_format(format);
-  converted = choose_convertion(format, ap);
-  to_print = ajust_buffer(format, (converted) ? converted : ft_strdup("(null)"));
+  convert = choose_convertion(format, ap);
+  to_print = ajust_buffer(format, (convert) ? convert : ft_strdup("(null)"));
   ft_putstr(to_print);
   *count += ft_strlen(to_print) + format->nullchar;
-  free(converted);
+  free(convert);
   free(format);
   free(to_print);
   return (pass + 1);

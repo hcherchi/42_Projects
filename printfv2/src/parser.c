@@ -47,7 +47,13 @@ int  fill_format(const char *input, t_format *format)
 void update_format(t_format *format)
 {
   if (ft_strchr("DOU", format->type))
+  {
     format->type = format->type + 32;
+    if (format->flag == 'l')
+      format->flag = 'L';
+    else if (!format->flag)
+      format->flag = 'l';
+  }
   if (format->type == 'p')
     format->hash = 1;
   if (format->zero && (format->moins || (format->accur > -1 && !ft_strchr("sc%", format->type))))
