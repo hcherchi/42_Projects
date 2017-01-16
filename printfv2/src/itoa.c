@@ -47,7 +47,7 @@ char *itoa_10(ssize_t nb, t_format *format)
         return (ft_strdup(""));
     sign = get_sign(nb, format);
     unb = (nb < 0) ? -1 * nb : nb;
-    len = get_len(unb, 10, sign, format) + ((sign) ? 1 : 0);
+    len = get_len(unb, 10, ((sign) ? 1 : 0), format) + ((sign) ? 1 : 0);
     value = (char *)malloc(sizeof(*value) * len + 1);
     value[len] = '\0';
     len--;
