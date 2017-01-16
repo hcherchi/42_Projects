@@ -72,7 +72,7 @@ int  get_prefix(t_format *format)
   prefix = 0;
   if (format->hash)
   {
-    if (format->type == 'x' || format->type == 'X' || format->type == 'p')
+    if (((format->type == 'x' || format->type == 'X') && unb != 0) || format->type == 'p')
       prefix = 2;
     else if (format->type == 'o')
       prefix = 1;
