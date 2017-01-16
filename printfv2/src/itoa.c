@@ -70,7 +70,7 @@ int  get_prefix(size_t unb, t_format *format)
   int prefix;
 
   prefix = 0;
-  if (format->hash && (unb != 0 || format->type == 'p'))
+  if (format->hash)
   {
     if (format->type == 'x' || format->type == 'X' || format->type == 'p')
       prefix = 2;
