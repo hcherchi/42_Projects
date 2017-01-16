@@ -80,6 +80,21 @@ int  get_prefix(size_t unb, t_format *format)
   return (prefix);
 }
 
+void put_prefix(char *value, int len, int prefix, int maj)
+{
+  while (len >= 0)
+  {
+    if (len == 1 && prefix == 2)
+    {
+       value[len] = (maj) ? 'X' : 'x';
+       prefix--;
+    }
+    else
+      value[len] = '0';
+    len--;
+  }
+}
+
 char *uitoa_base(size_t unb, int base, int maj, t_format *format)
 {
     int len;
@@ -102,16 +117,6 @@ char *uitoa_base(size_t unb, int base, int maj, t_format *format)
         unb /= base;
         len--;
     }
-		while (len >= 0)
-		{
-      if (len == 1 && prefix == 2)
-      {
-			   value[len] = (maj) ? 'X' : 'x';
-         prefix--;
-      }
-      else
-        value[len] = '0';
-			len--;
-		}
+    put_prefix(value, len, prefix, maj);
     return (value);
 }
