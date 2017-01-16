@@ -65,7 +65,7 @@ char *itoa_10(ssize_t nb, t_format *format)
     return (value);
 }
 
-int  get_prefix(t_format *format)
+int  get_prefix(size_t unb, t_format *format)
 {
   int prefix;
 
@@ -103,7 +103,7 @@ char *uitoa_base(size_t unb, int base, int maj, t_format *format)
 
     if (unb == 0 && format->accur == 0 && format->type != 'o' && format->type != 'p')
       return (ft_strdup(""));
-    prefix = get_prefix(format);
+    prefix = get_prefix(unb, format);
     len = get_len(unb, base, prefix, format) + prefix;
 		value = (char *)malloc(sizeof(*value) * len + 1);
     value[len] = '\0';

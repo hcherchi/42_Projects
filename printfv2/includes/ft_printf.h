@@ -68,7 +68,7 @@ char	*ft_strchr(const char *s, int c);
 
 int ctowc(wchar_t letter, char *res);
 
-int  get_prefix(t_format *format);
+int  get_prefix(size_t unb, t_format *format);
 void put_prefix(char *value, int len, int prefix, int maj);
 int     get_len(size_t unb, int base, int prefix, t_format *format);
 char   get_sign(ssize_t nb, t_format *format);

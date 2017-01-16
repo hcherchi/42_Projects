@@ -23,8 +23,8 @@ int		main(void)
 
 // #ifdef TEST_F
 
-	printf("\n@moulitestO: %0#5.0o %#.0o", 0, 0);
-	printf("\n@moulitestP: %#.p %#.0p", 0, 0);
+	printf("\n@moulitestO: %#p", 0);
+	printf("\n@moulitestP: %#.o %#.0o", 0, 0);
 	printf("\n@moulitestX: %#.x %#.0x", 0, 0);
 
 	// ft_printf("\n@moulitest: %#.x %#.0x", 0, 0);
