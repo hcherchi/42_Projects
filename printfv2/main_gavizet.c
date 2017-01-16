@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// #define TEST_X
+ #define TEST_S
 
 
 #include <stdio.h>
@@ -21,14 +21,21 @@
 int		main(void)
 {
 
+	printf("V: % ", CHAR_MAX + 42);
+	ft_printf("F: % ", CHAR_MAX + 42);
+	//test_modulo_without_valid_specifier -> (null)
+	// printf("V: %#o\n", 0);
+	// ft_printf("F: %#o\n\n", 0);
+	// printf("V: %hhd - %hhd\n", SHRT_MAX - 42, SHRT_MAX - 4200);
+	// ft_printf("F: %hhd - %hhd\n\n", SHRT_MAX - 42, SHRT_MAX - 4200);
+	// printf("V: %hhu / %hhu\n", SHRT_MAX - 42, SHRT_MAX - 4200);
+	// ft_printf("F: %hhu / %hhu\n\n", SHRT_MAX - 42, SHRT_MAX - 4200);
+	// printf("V: %o, %ho, %hho\n", -42, -42, -42);
+	// ft_printf("F%o, %ho, %hho\n\n", -42, -42, -42);
 // #ifdef TEST_F
-
-	printf("\n@moulitestO: %#p", 0);
-	printf("\n@moulitestP: %#.o %#.0o", 0, 0);
-	printf("\n@moulitestX: %#.x %#.0x", 0, 0);
-
-	// ft_printf("\n@moulitest: %#.x %#.0x", 0, 0);
-
+//
+//
+//
 // 	printf("\033[1;41m|----------------------------| (Lancement du test f en cours...) |----------------------------|\033[0m\n");
 // 	printf("\033[1;32m|-----| LE VRAI |-----|\033[0m\n");
 // 	printf("{%d}\n", printf("\033[1;32mTest 1 => \033[0m|%f||%F|", 1.42, 1.42));

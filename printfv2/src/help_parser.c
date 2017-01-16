@@ -9,11 +9,14 @@ int   fill_width(const char *input, int count, t_format *format)
   save = count;
   while (ft_isdigit(input[count]))
     count++;
-  nbr = ft_strsub(input, save, count - save);
-  value = ft_atoi(nbr);
-  if (ft_strlen(nbr))
-    format->width = value;
-  free(nbr);
+  if (count - save)
+  {
+    nbr = ft_strsub(input, save, count - save);
+    value = ft_atoi(nbr);
+    if (ft_strlen(nbr))
+      format->width = value;
+    free(nbr);
+  }
   return (count - save);
 }
 
@@ -44,7 +47,7 @@ int   fill_flag(const char *input, int count, t_format *format)
   int save;
 
   save = count;
-  while (ft_strchr("hjlz", input[count]))
+  while (input[count] && ft_strchr("hjlz", input[count]))
   {
     if (!format->flag)
     {
@@ -65,7 +68,7 @@ int   fill_attribut(const char *input, int count, t_format *format)
   int save;
 
   save = count;
-  while (ft_strchr("# 0-+", input[count]))
+  while (input[count] && ft_strchr("# 0-+", input[count]))
   {
     if (input[count] == '#')
       format->hash = 1;
@@ -84,7 +87,7 @@ int   fill_attribut(const char *input, int count, t_format *format)
 
 int   fill_type(const char *input, int count, t_format *format)
 {
-  if (ft_strchr("sSpdDioOuUxXcC%", input[count]))
+  if (input[count] && ft_strchr("sSpdDioOuUxXcC%", input[count]))
   {
     format->type = input[count];
     return (1);

@@ -74,7 +74,7 @@ int  get_prefix(size_t unb, t_format *format)
   {
     if (((format->type == 'x' || format->type == 'X') && unb != 0) || format->type == 'p')
       prefix = 2;
-    else if (format->type == 'o' && unb != 0)
+    else if (format->type == 'o' && ((unb == 0 && format->accur == 0) || unb != 0))
       prefix = 1;
   }
   return (prefix);

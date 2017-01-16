@@ -51,7 +51,7 @@ void update_format(t_format *format)
     format->type = format->type + 32;
     if (format->flag == 'l')
       format->flag = 'L';
-    else if (!format->flag)
+    else
       format->flag = 'l';
   }
   if (format->type == 'p')
@@ -60,4 +60,6 @@ void update_format(t_format *format)
     format->zero = 0;
   if (format->space && format->plus)
     format->space = 0;
+  if (!ft_strchr("psicdouxX%", format->type))
+    format->type = '\0';
 }
