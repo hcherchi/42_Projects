@@ -7,7 +7,7 @@ int     get_len(size_t unb, int base, int prefix, t_format *format)
 
     c = 0;
     if (unb == 0)
-        c = 1;
+        c = (format->accur == 0) ? 0 : 1;
     while (unb != 0)
     {
         unb /= base;
@@ -101,15 +101,8 @@ char *uitoa_base(size_t unb, int base, int maj, t_format *format)
     char    *value;
     int     prefix;
 
-    if (unb == 0 && format->accur == 0)
-    {
-      if (format->type == 'p')
-        return (ft_strdup("0x"));
-      else if (format->type == 'o')
-        return (ft_strdup("0"));
-      else
-        return (ft_strdup(""));
-    }
+    if (unb == 0 && format->accur == 0 && format->type != 'o' && format->type != 'p')
+      return (ft_strdup(""));
     prefix = get_prefix(unb, format);
     len = get_len(unb, base, prefix, format) + prefix;
 		value = (char *)malloc(sizeof(*value) * len + 1);
