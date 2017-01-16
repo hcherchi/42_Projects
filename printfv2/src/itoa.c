@@ -103,7 +103,7 @@ char *uitoa_base(size_t unb, int base, int maj, t_format *format)
 
     if (unb == 0 && format->accur == 0 && format->type != 'o' && format->type != 'p')
       return (ft_strdup(""));
-    prefix = get_prefix(format);
+    prefix = get_prefix(unb, format);
     len = get_len(unb, base, prefix, format) + prefix;
 		value = (char *)malloc(sizeof(*value) * len + 1);
     value[len] = '\0';
