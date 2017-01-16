@@ -39,6 +39,8 @@ char *ft_strdup(char *str)
 	int i;
 
 	i = 0;
+	if (str == NULL)
+		return (NULL);
 	newstr = malloc(sizeof(char) * (ft_strlen(str) + 1));
 	while (str[i])
 	{

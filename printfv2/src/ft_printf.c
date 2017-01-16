@@ -28,6 +28,19 @@ void  print_struct(t_format *format)
   printf("SPACE: %d\n", format->space);
 }
 
+char *cut_string(t_format *format, char *buf)
+{
+  char *cut;
+
+  if (format->type == 's' && format->accur != -1 && format->accur < ft_strlen(buf))
+  {
+    cut = ft_strsub(buf, 0, format->accur);
+    free(buf);
+    buf = cut;
+  }
+  return (buf);
+}
+
 char *ajust_buffer(t_format *format, char *buf)
 {
   char *finalbuf;
@@ -37,9 +50,6 @@ char *ajust_buffer(t_format *format, char *buf)
 
   if (format->type == 'c' && ft_strlen(buf) == 0)
     format->nullchar = 1;
-  if (format->type == 's' && format->accur < ft_strlen(buf))
-    buf = ft_strsub(buf, 0, format->accur);
-  // THE ONLY MISSING THING TO FREE: buf up here
   filler = (ft_strchr("%cs", format->type) && format->zero) ? '0' : ' ';
   tofill = format->width - ((format->type == 'c') ? 1 : ft_strlen(buf));
   if (tofill <= 0)
@@ -61,7 +71,8 @@ int   handle_convertion(const char *input, va_list ap, int *count)
   pass = fill_format(input, format);
   update_format(format);
   convert = choose_convertion(format, ap);
-  to_print = ajust_buffer(format, (convert) ? convert : ft_strdup("(null)"));
+  convert = cut_string(format, convert);
+  to_print = ajust_buffer(format, convert);
   ft_putstr(to_print);
   *count += ft_strlen(to_print) + format->nullchar;
   free(convert);

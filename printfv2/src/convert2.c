@@ -17,7 +17,7 @@ char *l_convert(t_format *format, va_list ap)
     converted_arg = uitoa_base(va_arg(ap, unsigned long int), 16, 1, format);
   else
     converted_arg = ft_strdup("cas non gere");
-  return (converted_arg);
+  return (converted_arg ? converted_arg : ft_strdup("(null)"));
 }
 
 char *ll_convert(t_format *format, va_list ap)
@@ -36,7 +36,7 @@ char *ll_convert(t_format *format, va_list ap)
     converted_arg = uitoa_base(va_arg(ap, unsigned long long int), 16, 1, format);
   else
     converted_arg = ft_strdup("cas non gere");
-  return (converted_arg);
+  return (converted_arg ? converted_arg : ft_strdup("(null)"));
 }
 
 char *j_convert(t_format *format, va_list ap)
@@ -55,7 +55,7 @@ char *j_convert(t_format *format, va_list ap)
     converted_arg = uitoa_base(va_arg(ap, uintmax_t), 16, 1, format);
   else
     converted_arg = ft_strdup("cas non gere");
-  return (converted_arg);
+  return (converted_arg ? converted_arg : ft_strdup("(null)"));
 }
 
 char *z_convert(t_format *format, va_list ap)
@@ -74,5 +74,5 @@ char *z_convert(t_format *format, va_list ap)
     converted_arg = uitoa_base(va_arg(ap, size_t), 16, 1, format);
   else
     converted_arg = ft_strdup("cas non gere");
-  return (converted_arg);
+  return (converted_arg ? converted_arg : ft_strdup("(null)"));
 }

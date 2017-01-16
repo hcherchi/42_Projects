@@ -44,7 +44,7 @@ char *convert(t_format *format, va_list ap)
   char *converted_arg;
 
   if (format->type == 's')
-    converted_arg = va_arg(ap, char*);
+    converted_arg = ft_strdup(va_arg(ap, char*));
   else if (format->type == 'c')
     converted_arg = ft_strnew((unsigned char)va_arg(ap, int), 1);
   else if (format->type == 'd' || format->type == 'i')
@@ -59,7 +59,7 @@ char *convert(t_format *format, va_list ap)
     converted_arg = uitoa_base(va_arg(ap, unsigned int), 16, 1, format);
   else
     converted_arg = ft_strdup("cas non gere");
-  return (converted_arg);
+  return (converted_arg ? converted_arg : ft_strdup("(null)"));
 }
 
 char *hh_convert(t_format *format, va_list ap)
@@ -78,7 +78,7 @@ char *hh_convert(t_format *format, va_list ap)
     converted_arg = uitoa_base((unsigned char)va_arg(ap, int), 16, 1, format);
   else
     converted_arg = ft_strdup("cas non gere");
-  return (converted_arg);
+  return (converted_arg ? converted_arg : ft_strdup("(null)"));
 }
 
 char *h_convert(t_format *format, va_list ap)
@@ -97,5 +97,5 @@ char *h_convert(t_format *format, va_list ap)
     converted_arg = uitoa_base((unsigned short int)va_arg(ap, int), 16, 1, format);
   else
     converted_arg = ft_strdup("cas non gere");
-  return (converted_arg);
+  return (converted_arg ? converted_arg : ft_strdup("(null)"));
 }
