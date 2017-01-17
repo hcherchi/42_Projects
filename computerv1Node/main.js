@@ -1,8 +1,22 @@
 const _ = require('lodash')
 
-const getParams = function (input) {
+const fillDatas = function (piece, datas, k) {
+  const subsplit = piece.split(/[∗|\*]X\^/)
+  if (subsplit.length !== 2) { return true }
 
-  // Separate in two parts
+  const coef = !isNaN(Number(subsplit[0])) ? k * Number(subsplit[0]) : null
+  const pow = /[0-9]+/.test(subsplit[1]) ? parseInt(subsplit[1]) : null
+  if (coef == null || pow == null) { return true }
+
+  samePow = _.find(datas, data => data.pow === pow)
+  if (samePow) {
+    samePow.coef += coef
+  } else {
+    datas.push({ coef, pow })
+  }
+}
+
+const getParams = function (input) {
   const clean = input.replace(/ /g, '').replace(/-/g, '+-')
   const split = clean.split('=')
 
@@ -14,40 +28,8 @@ const getParams = function (input) {
   const datas = []
   let error = false
 
-  splitright.forEach(piece => {
-    const subsplit = piece.split(/\*X\^/)
-    if (subsplit.length !== 2) { return error = true }
-
-    const coef = !isNaN(Number(subsplit[0])) ? Number(subsplit[0]) : null
-    const pow = /[0-9]+/.test(subsplit[1]) ? parseInt(subsplit[1]) : null
-
-    if (coef == null || pow == null) { return error = true }
-console.log(piece)
-    samePow = _.find(datas, data => data.pow === pow)
-    if (samePow) {
-      samePow.coef += coef
-    } else {
-      datas.push({ coef, pow })
-    }
-  })
-
-  splitleft.forEach(piece => {
-    const subsplit = piece.split(/\*X\^/)
-
-    if (subsplit.length !== 2) { return error = true }
-
-    const coef = !isNaN(Number(subsplit[0])) ? - Number(subsplit[0]) : null
-    const pow = /[0-2]/.test(subsplit[1]) ? parseInt(subsplit[1]) : null
-
-    if (coef == null || pow == null) { return error = true }
-console.log(piece)
-    samePow = _.find(datas, data => data.pow === pow)
-    if (samePow) {
-      samePow.coef += coef
-    } else {
-      datas.push({ coef, pow })
-    }
-  })
+  splitright.forEach(piece => error = fillDatas(piece, datas, 1))
+  splitleft.forEach(piece => error = fillDatas(piece, datas, -1))
 
   if (error) { return console.log('Bad format') }
 
@@ -81,8 +63,23 @@ const resolve1 = function (datas) {
   a = a ? a.coef : 0
   b = b ? b.coef : 0
 
-  const s = - b / a
+  const s = strip(- b / a)
   console.log(`X = ${s}`)
+}
+
+const sqrt = function(nb) {
+    const precision = 0.00001;
+    let Un = nb;
+
+    while ((Un * Un >= nb + precision) || (Un * Un <= nb - precision))
+    {
+        Un = ( Un + nb / Un ) / 2 ;
+    }
+    return Un;
+}
+
+const strip = function (number) {
+    return (parseFloat(number).toPrecision(4));
 }
 
 const resolve2 = function (datas) {
@@ -100,12 +97,12 @@ const resolve2 = function (datas) {
     console.log('Delta < 0: No solutions')
   } else if (delta === 0) {
     console.log('Delta = 0: One solution')
-    const s = - b / (2 * a)
+    const s = strip(- b / (2 * a))
     console.log(`X = ${s}`)
   } else {
     console.log('Delta > 0: Two solutions')
-    const s1 = (- b - Math.sqrt(delta)) / (2 * a)
-    const s2 = (- b + Math.sqrt(delta)) / (2 * a)
+    const s1 = strip((- b - sqrt(delta)) / (2 * a))
+    const s2 = strip((- b + sqrt(delta)) / (2 * a))
     console.log(`X1 = ${s1}`)
     console.log(`X2 = ${s2}`)
   }
