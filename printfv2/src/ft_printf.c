@@ -13,20 +13,20 @@
 #include "ft_printf.h"
 #include <stdio.h>
 
-// void  print_struct(t_format *format)
-// {
-//   printf("\nConvertor: %c\nWidth: %d\nAccuracy: %d\nFlags: %c\nAttributs: \n", format->type, format->width, format->accur, format->flag);
-//   if (format->hash != 0)
-//   printf("Hash: %d\n", format->hash);
-//   if (format->zero != 0)
-//   printf("ZERO: %d\n", format->zero);
-//   if (format->plus != 0)
-//     printf("PLUS: %d\n", format->plus);
-//   if (format->moins != 0)
-//   printf("MOINS: %d\n", format->moins);
-//   if (format->space != 0)
-//   printf("SPACE: %d\n", format->space);
-// }
+void  print_struct(t_format *format)
+{
+  printf("\nConvertor: %c\nWidth: %d\nAccuracy: %d\nFlags: %c\nAttributs: \n", format->type, format->width, format->accur, format->flag);
+  if (format->hash != 0)
+  printf("Hash: %d\n", format->hash);
+  if (format->zero != 0)
+  printf("ZERO: %d\n", format->zero);
+  if (format->plus != 0)
+    printf("PLUS: %d\n", format->plus);
+  if (format->moins != 0)
+  printf("MOINS: %d\n", format->moins);
+  if (format->space != 0)
+  printf("SPACE: %d\n", format->space);
+}
 
 char *cut_string(t_format *format, char *buf)
 {

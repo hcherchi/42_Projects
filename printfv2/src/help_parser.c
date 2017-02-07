@@ -54,11 +54,16 @@ int   fill_flag(const char *input, int count, t_format *format)
       if (ft_strchr("hl", input[count]) && input[count + 1] == input[count])
       {
         format->flag = ft_toupper(input[count]);
+        count += 2;
+      }
+      else
+      {
+        format->flag = input[count];
         count++;
       }
-      format->flag = input[count];
     }
-    count++;
+    else
+      count++;
   }
   return (count - save);
 }
