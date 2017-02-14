@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#define TEST_X
+ #define TEST_D
 
 
 #include <stdio.h>
@@ -20,8 +20,9 @@
 
 int		main(void)
 {
-
 #ifdef TEST_F
+
+
 
 	printf("\033[1;41m|----------------------------| (Lancement du test f en cours...) |----------------------------|\033[0m\n");
 	printf("\033[1;32m|-----| LE VRAI |-----|\033[0m\n");
@@ -889,8 +890,8 @@ int		main(void)
 	printf("\033[1;41m|-------------------------| (Lancement du test SIGNED DECIMAL en cours...) |-------------------------|\033[0m\n");
 	printf("\033[1;32m|-----| LE VRAI |-----|\033[0m\n");
 	ft_printf("\033[1;31m|-----| LE NOTRE |-----|\033[0m\n");
-	printf("{%d}\n", printf("\033[1;32mTest 1 => \033[0m|%ld|", LONG_MAX));
-	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 1 => \033[0m|%ld|", LONG_MAX));
+  printf("{%d}\n", printf("\033[1;32mTest 2 => \033[0m|%5.0x %5.x|", 0, 0));
+	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 2 => \033[0m|%5.0x %5.x|", 0, 0));
 	printf("{%d}\n", printf("\033[1;32mTest 2 => \033[0m|%ld|", LONG_MIN));
 	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 2 => \033[0m|%ld|", LONG_MIN));
 	printf("{%d}\n", printf("\033[1;32mTest 3 => \033[0m|%4.3i|", 42));

@@ -52,7 +52,7 @@ t_point	*create_point(t_tool *t, int i, int j)
 		point->x += 1280 - t->wmax->x + (t->wmax->x - t->wmin->x) / 2;
 	}
 	point->z = t->tab[i][j];
-	point->y -= t->tab[i][j] * t->coef_alti;
+	point->y -= t->tab[i][j] * t->coef_alti / 4;
 	return (point);
 }
 

@@ -6,7 +6,7 @@
 #    By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/04 18:24:56 by hcherchi          #+#    #+#              #
-#    Updated: 2016/02/01 12:11:00 by hcherchi         ###   ########.fr        #
+#    Updated: 2017/02/09 16:11:37 by hcherchi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRCS = src/draw.c src/error.c src/main.c src/point_handling.c src/set_fdf.c
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-IFLAGS = -I $(INC_DIR) -I ../libft/includes
+IFLAGS = -I $(INC_DIR) -I ../libft/includes -I ../mlx
 FLAGS = -Wall -Werror -Wextra
 
 CC = gcc $(FLAGS)
