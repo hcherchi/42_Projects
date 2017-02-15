@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils2.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/15 14:41:53 by hcherchi          #+#    #+#             */
+/*   Updated: 2017/02/15 14:42:12 by hcherchi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 int		ft_isdigit(char c)
@@ -7,10 +19,10 @@ int		ft_isdigit(char c)
 	return (0);
 }
 
-char *ft_strnew(char c, int n)
+char	*ft_strnew(char c, int n)
 {
-	char *str;
-	int i;
+	char	*str;
+	int		i;
 
 	i = 0;
 	str = malloc(sizeof(char) * (n + 1));
@@ -37,11 +49,11 @@ char	*ft_strcpy(char *dst, const char *src)
 	return (dst);
 }
 
-char *ft_strcat(char *dest, char *src)
+char	*ft_strcat(char *dest, char *src)
 {
-	int i;
-	int j;
-	char *newstr;
+	int		i;
+	int		j;
+	char	*newstr;
 
 	j = 0;
 	i = 0;
@@ -61,14 +73,14 @@ char *ft_strcat(char *dest, char *src)
 	return (newstr);
 }
 
-int	ft_atoi(const char *str)
+int		ft_atoi(const char *str)
 {
-	int				number;
-	int				neg;
+	int	number;
+	int	neg;
 
 	number = 0;
 	while (*str == ' ' || *str == '\t' || *str == '\n' || *str == '\v'
-	|| *str == '\f' || *str == '\r')
+			|| *str == '\f' || *str == '\r')
 		str++;
 	if (!str)
 		return (0);

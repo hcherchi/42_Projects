@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:43:57 by hcherchi          #+#    #+#             */
-/*   Updated: 2017/01/03 16:43:59 by hcherchi         ###   ########.fr       */
+/*   Updated: 2017/02/15 14:40:51 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,22 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-int ft_strlen(const char *str)
+int		ft_strlen(const char *str)
 {
-  int i;
+	int i;
 
-  i = 0;
-  while (str[i])
-  {
-    i++;
-  }
-  return (i);
+	i = 0;
+	while (str[i])
+	{
+		i++;
+	}
+	return (i);
 }
 
-char *ft_strdup(char *str)
+char	*ft_strdup(char *str)
 {
-	char *newstr;
-	int i;
+	char	*newstr;
+	int		i;
 
 	i = 0;
 	if (str == NULL)

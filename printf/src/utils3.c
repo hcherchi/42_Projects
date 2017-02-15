@@ -6,26 +6,26 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:44:11 by hcherchi          #+#    #+#             */
-/*   Updated: 2017/01/03 16:44:13 by hcherchi         ###   ########.fr       */
+/*   Updated: 2017/02/15 14:42:51 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void ft_putchar(const char c)
+void	ft_putchar(const char c)
 {
-  write(1, &c, 1);
+	write(1, &c, 1);
 }
 
-void ft_putstr(const char *str)
+void	ft_putstr(const char *str)
 {
-  write(1, str, ft_strlen(str));
+	write(1, str, ft_strlen(str));
 }
 
-void ft_putendl(const char *str)
+void	ft_putendl(const char *str)
 {
-  ft_putstr(str);
-  ft_putchar('\n');
+	ft_putstr(str);
+	ft_putchar('\n');
 }
 
 void	ft_putnbr(int n)

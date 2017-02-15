@@ -6,7 +6,7 @@
 #    By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/03 14:53:02 by hcherchi          #+#    #+#              #
-#    Updated: 2017/01/03 14:56:22 by hcherchi         ###   ########.fr        #
+#    Updated: 2017/02/15 15:00:35 by hcherchi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME = libftprintf.a
@@ -14,7 +14,7 @@ INC_DIR = includes
 SRC_DIR = src
 OBJ_DIR = obj
 
-SRCS = src/convert2.c src/ft_printf.c src/utils3.c src/parser.c src/utils.c src/convert.c src/utils2.c src/itoa.c src/help_parser.c src/ctowc.c
+SRCS = src/convert2.c src/ft_printf.c src/utils3.c src/parser.c src/utils.c src/convert.c src/utils2.c src/itoa.c src/help_parser.c
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
