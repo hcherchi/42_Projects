@@ -1,7 +1,0 @@
-[package]
-
-name = "my_first_project_rust"
-version = "0.0.1"
-authors = [ "Hugo Cherchi" ]
-
-[dependencies]
