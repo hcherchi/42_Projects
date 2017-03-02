@@ -1,0 +1,42 @@
+.name {
+  margin-bottom: 1vh;
+  margin-top: 2vh;
+}
+
+.Sline {
+  border-top: solid 0.1vh #ddd;
+  border-left: solid 0.1vh #ddd;
+  display: flex;
+  flex-direction: row;
+}
+.Sbloc {
+  width: 1.3vh;
+  height: 1.3vh;
+  border-bottom: solid 0.1vh #ddd;
+  border-right: solid 0.1vh #ddd;
+}
+
+.spectre {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.gold {
+  background-color: #daa520;
+}
+
+.Smessage {
+  -ms-transform: rotate(-5deg); /* IE 9 */
+  -webkit-transform: rotate(-5deg); /* Safari */
+  transform: rotate(-5deg);
+  font-size: 3vh;
+  font-weight: bold;
+  color: #8B0000;
+  margin: 20px 0px;
+  position: absolute;
+  padding: 5px 10px;
+  border: double 5px #8B0000;
+  border-radius: 3px;
+}

@@ -1,0 +1,98 @@
+.board {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-top: solid 0.1vh #ddd;
+  border-left: solid 0.1vh #ddd;
+  outline-color: #DAA520;
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 45vh;
+}
+
+.line {
+  display: flex;
+  flex-direction: row;
+}
+
+.blur {
+  filter: blur(2px);
+}
+
+.bloc {
+  width: 3vh;
+  height: 3vh;
+  border-bottom: solid 0.1vh #ddd;
+  border-right: solid 0.1vh #ddd;
+}
+
+.sbloc {
+  width: 1.8vh;
+  height: 1.8vh;
+  border-bottom: solid 0.1vh #ddd;
+  border-right: solid 0.1vh #ddd;
+}
+
+.white {
+  background-color: white;
+}
+
+.pink {
+  background-color: pink;
+}
+
+.red {
+  background-color: red;
+}
+
+.green {
+  background-color: green;
+}
+
+.black {
+  background-color: black;
+}
+
+.gold {
+  background-color: gold;
+}
+
+.purple {
+  background-color: purple;
+}
+
+.blue {
+  background-color: blue;
+}
+
+.grey {
+  background-color: grey;
+}
+
+.message {
+  -ms-transform: rotate(-5deg); /* IE 9 */
+-webkit-transform: rotate(-5deg); /* Safari */
+transform: rotate(-5deg);
+  font-size: 8vh;
+  font-weight: bold;
+  color: #8B0000;
+  margin: 20px 0px;
+  position: absolute;
+  padding: 15px 20px;
+  border: double 10px #8B0000;
+  border-radius: 5px;
+}
+
+.space {
+  height: 8vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
