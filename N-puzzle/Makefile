@@ -13,7 +13,7 @@
 NAME = npuzzle
 INC_DIR = includes
 C_DIRS = $(shell find src -type d -follow -print)
-C_FILES = $(shell find src -type f -follow -print | grep "\.c")
+C_FILES = $(shell find src -type f -follow -print)
 
 O_DIR =	obj
 O_DIRS = $(C_DIRS:src%=$(O_DIR)%)

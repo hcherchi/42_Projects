@@ -12,27 +12,39 @@
 
 #include "npuzzle.h"
 
-int main(int ac, char **av)
+int *new_tab(int size, int nb)
 {
-  t_param *params;
-  int **start_grid;
-  int **end_grid;
+  int *tab;
+  int i;
 
-  srand(time(NULL));
-  params = get_params(ac, av);
-  params->end = NULL;
-  start_grid = (params->input) ? get_grid(params->input, params->size) : get_random_grid(params->size);
-  end_grid = get_final_grid(params->size);
-  params->end = new_state(end_grid, NULL, params);
-  params->start = new_state(start_grid, NULL, params);
-  ft_putendl("START STATE");
-  print_state(params->start, params->size);
-  ft_putendl("END STATE");
-  print_state(params->end, params->size);
-  //if (is_solvable(params))
-    resolve(params);
-  //else
-    //ft_exit("Grid unsolvable.");
-  clean_params(params);
-  return (0);
+  i = 0;
+  tab = malloc(sizeof(int) * size * size);
+  while (i < size * size)
+  {
+    tab[i] = nb;
+    i++;
+  }
+  return (tab);
+}
+
+int **new_grid(int size)
+{
+  int **grid;
+  int i;
+  int j;
+
+  i = 0;
+  grid = malloc(sizeof(int *) * size);
+  while (i < size)
+  {
+    j = 0;
+    grid[i] = malloc(sizeof(int *) * size);
+    while (j < size)
+    {
+      grid[i][j] = 0;
+      j++;
+    }
+    i++;
+  }
+  return (grid);
 }

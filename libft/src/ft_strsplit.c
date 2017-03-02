@@ -6,7 +6,7 @@
 /*   By: hcherchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/28 18:38:18 by hcherchi          #+#    #+#             */
-/*   Updated: 2016/03/23 21:55:49 by hcherchi         ###   ########.fr       */
+/*   Updated: 2017/03/02 14:04:31 by hcherchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char		**ft_strsplit(char const *str, char c)
 	nbcur = 0;
 	nbrest = ft_nbwords(str, c);
 	i = 0;
-	split = (char **)malloc(sizeof(*split) * nbrest + 1);
+	split = malloc(sizeof(char *) * (nbrest + 1));
 	if (split == NULL)
 		return (NULL);
 	while (nbrest > 0)

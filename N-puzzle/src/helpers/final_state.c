@@ -12,27 +12,44 @@
 
 #include "npuzzle.h"
 
-int main(int ac, char **av)
+int **get_final_grid(int size)
 {
-  t_param *params;
-  int **start_grid;
-  int **end_grid;
+  int curnb;
+  int **grid;
+  int depth;
+  int j;
+  int count;
 
-  srand(time(NULL));
-  params = get_params(ac, av);
-  params->end = NULL;
-  start_grid = (params->input) ? get_grid(params->input, params->size) : get_random_grid(params->size);
-  end_grid = get_final_grid(params->size);
-  params->end = new_state(end_grid, NULL, params);
-  params->start = new_state(start_grid, NULL, params);
-  ft_putendl("START STATE");
-  print_state(params->start, params->size);
-  ft_putendl("END STATE");
-  print_state(params->end, params->size);
-  //if (is_solvable(params))
-    resolve(params);
-  //else
-    //ft_exit("Grid unsolvable.");
-  clean_params(params);
-  return (0);
+  count = 0;
+  grid = new_grid(size);
+  curnb = 1;
+  depth = 0;
+  j = 0;
+  while (curnb < size * size)
+  {
+    if (j + depth < size && grid[depth][j] == 0)
+    {
+      grid[depth][j] = curnb;
+      curnb++;
+      j++;
+    }
+    else
+    {
+      if (j + depth < size)
+      {
+        depth++;
+        j = depth;
+      }
+      else
+        j = depth + 1;
+      grid = rotate(grid, size);
+      count++;
+    }
+  }
+  while (count % 4 != 0)
+  {
+    grid = rotate(grid, size);
+    count++;
+  }
+  return (grid);
 }

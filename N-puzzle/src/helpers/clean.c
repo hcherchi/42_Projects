@@ -12,27 +12,55 @@
 
 #include "npuzzle.h"
 
-int main(int ac, char **av)
+void clean_tab(char **tab)
 {
-  t_param *params;
-  int **start_grid;
-  int **end_grid;
+  int i;
 
-  srand(time(NULL));
-  params = get_params(ac, av);
-  params->end = NULL;
-  start_grid = (params->input) ? get_grid(params->input, params->size) : get_random_grid(params->size);
-  end_grid = get_final_grid(params->size);
-  params->end = new_state(end_grid, NULL, params);
-  params->start = new_state(start_grid, NULL, params);
-  ft_putendl("START STATE");
-  print_state(params->start, params->size);
-  ft_putendl("END STATE");
-  print_state(params->end, params->size);
-  //if (is_solvable(params))
-    resolve(params);
-  //else
-    //ft_exit("Grid unsolvable.");
-  clean_params(params);
-  return (0);
+  i = 0;
+  while (tab[i])
+  {
+    free(tab[i]);
+    i++;
+  }
+  free(tab);
+}
+
+void clean_grid(int **grid, int size)
+{
+  int i;
+
+  i = 0;
+  while (i < size)
+  {
+    free(grid[i]);
+    i++;
+  }
+  free(grid);
+}
+
+void clean_state(t_state *state, int size)
+{
+  clean_grid(state->grid, size);
+  free(state->pos);
+  free(state);
+}
+
+void clean_list(t_state *l_state, int size)
+{
+  t_state *tmp;
+
+  while (l_state)
+  {
+    tmp = l_state;
+    l_state = l_state->next;
+    clean_state(tmp, size);
+  }
+}
+
+void clean_params(t_param *params)
+{
+    clean_state(params->end, params->size);
+    if (params->input)
+      clean_tab(params->input);
+    free(params);
 }

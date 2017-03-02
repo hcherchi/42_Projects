@@ -12,27 +12,51 @@
 
 #include "npuzzle.h"
 
-int main(int ac, char **av)
+int *get_line(char *line, int size, int *tab)
 {
-  t_param *params;
-  int **start_grid;
-  int **end_grid;
+  int j;
+  char **split;
+  char **subsplit;
+  int *grid_line;
+  int nb;
 
-  srand(time(NULL));
-  params = get_params(ac, av);
-  params->end = NULL;
-  start_grid = (params->input) ? get_grid(params->input, params->size) : get_random_grid(params->size);
-  end_grid = get_final_grid(params->size);
-  params->end = new_state(end_grid, NULL, params);
-  params->start = new_state(start_grid, NULL, params);
-  ft_putendl("START STATE");
-  print_state(params->start, params->size);
-  ft_putendl("END STATE");
-  print_state(params->end, params->size);
-  //if (is_solvable(params))
-    resolve(params);
-  //else
-    //ft_exit("Grid unsolvable.");
-  clean_params(params);
-  return (0);
+  grid_line = malloc(sizeof(int) * size);
+  split = ft_strsplit(line, '#');
+  subsplit = ft_strsplit(split[0], ' ');
+  if (ft_tablen(subsplit) != size)
+    ft_exit("Invalid input");
+  j = 0;
+  while (j < size)
+  {
+    nb = ft_atoi(subsplit[j]);
+    if (tab[nb])
+      ft_exit("invalid input");
+    tab[nb] = 1;
+    grid_line[j] = nb;
+    j++;
+  }
+  clean_tab(subsplit);
+  clean_tab(split);
+  return (grid_line);
+}
+
+int **get_grid(char **input, int size)
+{
+  int **grid;
+  int i;
+  int *tab;
+
+  tab = new_tab(size * size, 0);
+
+  if (ft_tablen(input) != size)
+    ft_exit("Invalid input");
+  grid = malloc(sizeof(int *) * size);
+  i = 0;
+  while (i < size)
+  {
+    grid[i] = get_line(input[i], size, tab);
+    i++;
+  }
+  free(tab);
+  return (grid);
 }

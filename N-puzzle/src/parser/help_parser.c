@@ -12,27 +12,57 @@
 
 #include "npuzzle.h"
 
-int main(int ac, char **av)
+int is_number(char *nbr)
 {
-  t_param *params;
-  int **start_grid;
-  int **end_grid;
+  while (*nbr)
+  {
+    if (*nbr < '0' || *nbr > '9')
+      return (0);
+    nbr++;
+  }
+  return (1);
+}
 
-  srand(time(NULL));
-  params = get_params(ac, av);
-  params->end = NULL;
-  start_grid = (params->input) ? get_grid(params->input, params->size) : get_random_grid(params->size);
-  end_grid = get_final_grid(params->size);
-  params->end = new_state(end_grid, NULL, params);
-  params->start = new_state(start_grid, NULL, params);
-  ft_putendl("START STATE");
-  print_state(params->start, params->size);
-  ft_putendl("END STATE");
-  print_state(params->end, params->size);
-  //if (is_solvable(params))
-    resolve(params);
-  //else
-    //ft_exit("Grid unsolvable.");
-  clean_params(params);
+int is_comment(char *str)
+{
+  if (str && str[0] == '#')
+    return (1);
   return (0);
+}
+
+void ft_exit(char *str)
+{
+  ft_putendl(str);
+  exit(1);
+}
+
+int is_good_number(int nb, int *tab, int size)
+{
+  if (nb >= 0 && nb < size * size && tab[nb] == 0)
+  {
+    tab[nb] = 1;
+    return (1);
+  }
+  return (0);
+}
+
+
+void add_to_tab(char ***tab, char *to_add)
+{
+  char **newtab;
+  int i;
+  int len;
+
+  len = ft_tablen(*tab);
+  newtab = malloc(sizeof(char *) * (len + 2));
+  i = 0;
+  while (i < len)
+  {
+    newtab[i] = (*tab)[i];
+    i++;
+  }
+  newtab[i] = to_add;
+  newtab[i + 1] = NULL;
+  free(*tab);
+  *tab = newtab;
 }
