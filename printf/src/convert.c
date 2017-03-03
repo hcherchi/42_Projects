@@ -20,7 +20,7 @@ char	*choose_convertion(t_format *format, va_list ap)
 		return (ft_strdup(""));
 	if (format->type == 'p')
 		return (uitoa_base((size_t)va_arg(ap, void *), 16, 0, format));
-	if (format->flag == '\0')
+	if (format->flag == '\0' || (format->type == 's' || format->type == 'c'))
 		return (convert(format, ap));
 	else if (format->flag == 'l')
 		return (l_convert(format, ap));
