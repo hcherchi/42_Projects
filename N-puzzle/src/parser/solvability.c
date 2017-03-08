@@ -12,30 +12,45 @@
 
 #include "npuzzle.h"
 
-int is_solvable(t_param *params)
+int count_inversions(int **grid, int size)
 {
-  int *start;
+  int *flat_grid;
   int i;
   int count;
 
-  count = 0;
   i = 0;
-  start = get_flat_grid(params->start->grid, params->size);
-  while (i < params->size * params->size - 1)
+  count = 0;
+  flat_grid = get_flat_grid(grid, size);
+  while (i < size * size - 1)
   {
-    if ((start[i] > start[i + 1] && start[i + 1] != 0) || start[i] == 0)
+    if (flat_grid[i] > flat_grid[i + 1])
     {
-      swap(start, i, i + 1);
+      swap(flat_grid, i, i + 1);
       i = 0;
       count++;
     }
     else
       i++;
   }
-  free(start);
-  ft_putnbr(count);
-  if (count % 2 == 1)
-    return (0);
-  else
+  return (count);
+}
+
+int is_solvable(int **start, int **end, int size)
+{
+  int start_invertions;
+  int end_invertions;
+
+  start_invertions = count_inversions(start, size);
+  end_invertions = count_inversions(end, size);
+
+  if (!size % 2)
+  {
+    start_invertions += start_invertions / size;
+    end_invertions += end_invertions / size;
+  }
+
+  if  (start_invertions % 2 == end_invertions % 2)
     return (1);
+  else
+    return (0);
 }

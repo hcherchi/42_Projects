@@ -56,7 +56,7 @@ int extract_size(char ***input);
 
 int **get_grid(char **input, int size);
 int *get_line(char *line, int size, int *tab);
-int is_solvable(t_param *params);
+int is_solvable(int **start, int **end, int size);
 
 /* ALGO */
 
@@ -113,7 +113,8 @@ void clean_state(t_state *state, int size);
 t_state *new_state(int **grid, t_state *parent, t_param *params);
 int list_size(t_state *l_states);
 void add_state(t_state **l_states, t_state *to_add);
-void remove_state(t_state **l_states, int index);
+int remove_state(t_state **l_states, int index);
+void add_state_to_begin(t_state **l_states, t_state *to_add);
 
 /* HELPERS */
 

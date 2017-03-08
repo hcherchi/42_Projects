@@ -71,39 +71,28 @@ int in_tab(int *tab, int size, int nb)
 
 int *get_flat_grid(int **grid, int size)
 {
-  int *res;
-  int curnb;
+  int i;
   int j;
-  int depth;
-  int **tmp;
+  int tmp;
+  int *res;
 
-  curnb = 0;
-  res = new_tab(size * size, -1);
-  tmp = grid_copy(grid, size);
-
-  depth = 0;
-  j = 0;
-  while (curnb < size * size)
+  res = new_tab(size * size - 1, 0);
+  tmp = 0;
+  i = 0;
+  while (i < size)
   {
-    if (j + depth < size && !in_tab(res, size * size, tmp[depth][j]))
+    j = 0;
+    while (j < size)
     {
-      res[curnb] = tmp[depth][j];
-      curnb++;
+      if (grid[i][j] != 0)
+      {
+        res[tmp] = grid[i][j];
+        tmp++;
+      }
       j++;
     }
-    else
-    {
-      if (j + depth < size)
-      {
-        depth++;
-        j = depth;
-      }
-      else
-        j = depth + 1;
-      tmp = rotate(tmp, size);
-    }
+    i++;
   }
-  clean_grid(tmp, size);
   return (res);
 }
 
