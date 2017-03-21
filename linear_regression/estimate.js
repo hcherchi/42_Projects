@@ -10,10 +10,13 @@ rl.question('What is the mileage of your car? ', (answer) => {
 
   const {
     teta0,
-    teta1
+    teta1,
+    max,
+    min
   } = params
 
-  const estimation = teta0 + teta1 * parseInt(answer)
+  const normalData = (parseInt(answer) - min) / (max - min)
+  const estimation = teta0 + teta1 * normalData
   console.log(`Estimated price: ${estimation}$`)
   rl.close()
 })

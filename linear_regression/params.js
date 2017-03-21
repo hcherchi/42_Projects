@@ -1,4 +1,1 @@
-export default {
-  teta0: 3,
-  teta1: 4,
-}
+export default {teta0: 8008.439832646547,teta1: -4656.591444721427,min: 22899, max: 240000}
