@@ -26,7 +26,7 @@ const configureStore = (reducer, socket) => createStore(
   )),
 )
 
-const socket = io('localhost:5000')
+const socket = io('https://c2d51ab1.ngrok.io')
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = configureStore(reducer, socket)
 const history = syncHistoryWithStore(browserHistory, store)

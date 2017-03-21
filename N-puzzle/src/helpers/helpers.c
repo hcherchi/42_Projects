@@ -76,7 +76,7 @@ int *get_flat_grid(int **grid, int size)
   int tmp;
   int *res;
 
-  res = new_tab(size * size - 1, 0);
+  res = new_tab(size * size, 0);
   tmp = 0;
   i = 0;
   while (i < size)
@@ -84,11 +84,8 @@ int *get_flat_grid(int **grid, int size)
     j = 0;
     while (j < size)
     {
-      if (grid[i][j] != 0)
-      {
-        res[tmp] = grid[i][j];
-        tmp++;
-      }
+      res[tmp] = grid[i][j];
+      tmp++;
       j++;
     }
     i++;

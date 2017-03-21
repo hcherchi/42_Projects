@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
- #define TEST_D
+ //#define TEST_D
 
 
 #include <stdio.h>
@@ -20,7 +20,7 @@
 
 int		main(void)
 {
-#ifdef TEST_F
+// #ifdef TEST_F
 
 
 
@@ -70,8 +70,8 @@ int		main(void)
 	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 20 => \033[0m|%jf||%jF|", 42424242.4242424242424242, 424242424242.424242424242));
 	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 21 => \033[0m|%zf||%zF|", 42424242.4242424242424242, 424242424242.424242424242));
 
-#endif
-#ifdef TEST_BONUS
+//#endif
+//#ifdef TEST_BONUS
 
 	printf("\033[1;41m|----------------------------| (Lancement du test * en cours...) |----------------------------|\033[0m\n");
 	printf("\033[1;32m|-----| LE VRAI |-----|\033[0m\n");
@@ -112,9 +112,9 @@ int		main(void)
 	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 16 => \033[0m|%*3d|", 0, 0));
 	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 17 => \033[0m|%*3d|", 5, 0));
 	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 18 => \033[0m|%05.*d|", -15, 42));
-
-#endif
-#ifdef UNDEFINED
+//
+// #endif
+// #ifdef UNDEFINED
 
 	printf("\033[1;41m|----------------------------| (Lancement du test bullshit en cours...) |----------------------------|\033[0m\n");
 	printf("\033[1;32m|-----| LE VRAI |-----|\033[0m\n");
@@ -154,8 +154,8 @@ int		main(void)
 	printf("{%d}\n", printf("\033[1;32mTest 34 => \033[0m@main_ftprintf: |%-+33d|", 256));
 	printf("{%d}\n", printf("\033[1;32mTest 35 => \033[0m@main_ftprintf: |%-+33.d|", 256));
 
-#endif
-#ifdef TEST
+// #endif
+// #ifdef TEST
 
 	static int	i = 42;
 
@@ -192,8 +192,8 @@ int		main(void)
 	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 14 => \033[0m@moulitest: |%.x %.0x|", 0, 0));
 	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 15 => \033[0m@moulitest: |%5.x %5.0x|", 0, 0));
 
-#endif
-#ifdef TEST_C
+// #endif
+// #ifdef TEST_C
 
 	printf("\033[1;41m|-------------------------| (Lancement du test LETTRE en cours...) |-------------------------|\033[0m\n");
 	printf("\033[1;32m|-----| LE VRAI |-----|\033[0m\n");
@@ -303,8 +303,8 @@ int		main(void)
 	printf("{%d}\n", printf("\033[1;32mTest 52 => \033[0m|%15c|", "bonjour"));
 	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 52 => \033[0m|%15c|", "bonjour"));
 
-#endif
-#ifdef TEST_S
+// #endif
+// #ifdef TEST_S
 
 	printf("\033[1;41m|-------------------------| (Lancement du test STRING en cours...) |-------------------------|\033[0m\n");
 	printf("\033[1;32m|-----| LE VRAI |-----|\033[0m\n");
@@ -412,8 +412,8 @@ int		main(void)
 	printf("{%d}\n", printf("\033[1;32mTest 47 => \033[0m|%.2s|", "salut"));
 	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 47 => \033[0m|%.2s|", "salut"));
 
-#endif
-#ifdef TEST_P
+// #endif
+// #ifdef TEST_P
 
 	printf("\033[1;41m|-----------------------| (Lancement du test POINTEUR en cours...) |-----------------------|\033[0m\n");
 	int		i = 42;
@@ -475,9 +475,9 @@ int		main(void)
 	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 25 => \033[0m|%#5p|", 0));
 	printf("{%d}\n", printf("\033[1;32mTest 26 => \033[0m|%#-5p|", 0));
 	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 26 => \033[0m|%-#5p|", 0));
-
-#endif
-#ifdef TEST_X
+//
+// #endif
+// #ifdef TEST_X
 
 	printf("\033[1;41m|-----------------------| (Lancement du test HEXADECIMAL en cours...) |-----------------------|\033[0m\n");
 	printf("\033[1;32m|-----| LE VRAI |-----|\033[0m\n");
@@ -594,9 +594,9 @@ int		main(void)
 	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 55 => \033[0m|%#5x|", 0));
 	printf("{%d}\n", printf("\033[1;32mTest 56 => \033[0m|%-#5x|", 0));
 	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 56 => \033[0m|%-#5x|", 0));
-
-#endif
-#ifdef TEST_O
+//
+// #endif
+// #ifdef TEST_O
 
 	printf("\033[1;41m|-----------------------| (Lancement du test OCTAL en cours...) |-----------------------|\033[0m\n");
 	printf("\033[1;32m|-----| LE VRAI |-----|\033[0m\n");
@@ -715,9 +715,9 @@ int		main(void)
 	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 55 => \033[0m|%#5o|", 0));
 	printf("{%d}\n", printf("\033[1;32mTest 56 => \033[0m|%-#5o|", 0));
 	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 56 => \033[0m|%-#5o|", 0));
-
-#endif
-#ifdef TEST_U
+//
+// #endif
+// #ifdef TEST_U
 
 	printf("\033[1;41m|-----------------------| (Lancement du test UNSIGNED DECIMAL en cours...) |-----------------------|\033[0m\n");
 	printf("\033[1;32m|-----| LE VRAI |-----|\033[0m\n");
@@ -845,8 +845,8 @@ int		main(void)
 	printf("{%d}\n", printf("\033[1;32mTest 61 => \033[0m|%lu|", LONG_MIN + 1));
 	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 61 => \033[0m|%lu|", LONG_MIN + 1));
 
-#endif
-#ifdef TEST_POUR
+// #endif
+// #ifdef TEST_POUR
 
 	printf("\033[1;41m|-------------------------| (Lancement du test POURCENTAGE en cours...) |-------------------------|\033[0m\n");
 	printf("\033[1;32m|-----| LE VRAI |-----|\033[0m\n");
@@ -883,9 +883,9 @@ int		main(void)
 	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 14 => \033[0m|%+010.2z%|"));
 	printf("{%d}\n", printf("\033[1;32mTest 15 => \033[0m|%+010.2%z%d|", 42));
 	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 15 => \033[0m|%+010.2%z%d|", 42));
-
-#endif
-#ifdef TEST_D
+//
+// #endif
+// #ifdef TEST_D
 
 	printf("\033[1;41m|-------------------------| (Lancement du test SIGNED DECIMAL en cours...) |-------------------------|\033[0m\n");
 	printf("\033[1;32m|-----| LE VRAI |-----|\033[0m\n");
@@ -1059,8 +1059,8 @@ int		main(void)
 	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 81 => \033[0m|%.d, %.2d|", 42, 42));
 	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 82 => \033[0m|%d, %d, %d|", 0, -02, 02));*/
 
-#endif
-#ifdef TEST_WS
+// #endif
+// #ifdef TEST_WS
 
 	printf("\033[1;41m|-------------------------| (Lancement du test UNICODE S en cours...) |-------------------------|\033[0m\n");
 	setlocale(LC_ALL, "");
@@ -1147,8 +1147,8 @@ int		main(void)
 	printf("{%d}\n", printf("\033[1;32mTest 34 => \033[0m|%-8.2S|", NULL));
 	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 34 => \033[0m|%-8.2S|", NULL));
 
-#endif
-#ifdef TEST_WC
+// #endif
+// #ifdef TEST_WC
 
 
 	printf("\033[1;41m|-------------------------| (Lancement du test UNICODE C en cours...) |-------------------------|\033[0m\n");
@@ -1229,6 +1229,6 @@ int		main(void)
 	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 29 => \033[0m|%5.12C|", NULL));
 	printf("{%d}\n", printf("\033[1;32mTest 30 => \033[0m|%5C|", NULL));
 	ft_printf("{%d}\n", ft_printf("\033[1;31mTest 30 => \033[0m|%5C|", NULL));
-#endif
+//#endif
 	return (0);
 }
