@@ -70,6 +70,10 @@ int is_solvable(int **start, int **end, int size)
   end_invertions = count_inversions(end, size, &blank_end);
   ft_putnbr(blank_end);
   ft_putnbr(blank_start);
+  ft_putchar('\n');
+  ft_putnbr(end_invertions);
+  ft_putchar(' ');
+  ft_putnbr(start_invertions);
 
   if (!size % 2)
   {
