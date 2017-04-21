@@ -23,11 +23,11 @@ int main(int ac, char **av)
   params->end = NULL;
   end_grid = get_final_grid(params->size);
   start_grid = (params->input) ? get_grid(params->input, params->size) : get_random_grid(params->size);
-  // while (!is_solvable(start_grid, end_grid, params->size) && !params->input)
-  // {
-  //   clean_grid(start_grid, params->size);
-  //   start_grid = get_random_grid(params->size);
-  // }
+  while (!is_solvable(start_grid, end_grid, params->size) && !params->input)
+  {
+    clean_grid(start_grid, params->size);
+    start_grid = get_random_grid(params->size);
+  }
   params->end = new_state(end_grid, NULL, params);
   params->start = new_state(start_grid, NULL, params);
   ft_putendl("START STATE");
