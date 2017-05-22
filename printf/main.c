@@ -416,7 +416,6 @@ int		main(void)
 // #ifdef TEST_P
 
 	printf("\033[1;41m|-----------------------| (Lancement du test POINTEUR en cours...) |-----------------------|\033[0m\n");
-	int		i = 42;
 	printf("\033[1;32m|-----| LE VRAI |-----|\033[0m\n");
 	ft_printf("\033[1;31m|-----| LE NOTRE |-----|\033[0m\n");
 	printf("{%d}\n", printf("\033[1;32mTest 1 => \033[0m|%05p|", 0));
