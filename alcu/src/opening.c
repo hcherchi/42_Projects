@@ -23,9 +23,7 @@ char		*read_file(ssize_t buf_size, char *av)
 	if (!buf)
 		return (NULL);
 	if ((read(fd, buf, buf_size)) < 1)
-	{
 		return (NULL);
-	}
 	else
 		buf[buf_size] = '\0';
 	return (buf);

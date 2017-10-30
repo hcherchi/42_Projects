@@ -39,8 +39,6 @@ int		launch(int ac, char **av)
 int		main(int ac, char **av)
 {
 	if (ft_menu())
-	{
 		launch(ac, av);
-	}
 	return (0);
 }
